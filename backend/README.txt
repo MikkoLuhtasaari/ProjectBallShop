@@ -1,4 +1,6 @@
 To run the server navigate to ProjectBallShop\ProjectBallShop\backend\ProjectBallShop and type mvn compile. After compiling type mvn spring-boot:run
+Port is http://localhost:8080/
+
 
 AT THE START /populate
 
