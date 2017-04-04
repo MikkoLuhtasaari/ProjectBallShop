@@ -15,4 +15,33 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.0.2</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>fi.tamk.tiko.App</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+        
+
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.5.0</version>
+            <configuration>
+                <mainClass>fi.tamk.tiko.App</mainClass>
+            </configuration>
+        </plugin>
+   </plugins>
+  </build>
+  
 </project>
