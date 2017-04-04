@@ -16,6 +16,7 @@ public class Football
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    public int test;
     
     public Football(){};
     
