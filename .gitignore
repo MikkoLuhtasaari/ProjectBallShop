@@ -1,7 +1,7 @@
 # Generated sources
 backend/ProjectBallShop/target/
-.class
-.lst
+*.class
+*.lst
 
 # Windows image file caches
 Thumbs.db
@@ -50,3 +50,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.class
+backend/ProjectBallShop/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+*.lst
