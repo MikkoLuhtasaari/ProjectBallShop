@@ -8,6 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Football 
 {
+    private String name;
     private String color;
     private int diameter;
     private int weight;
@@ -19,7 +20,8 @@ public class Football
     
     public Football(){};
     
-    public Football(String color, int diameter, int weigth, String details, String material, long id) {
+    public Football(String name, String color, int diameter, int weigth, String details, String material, long id) {
+        setName(name);
         setColor(color);
         setDiameter(diameter);
         setWeight(weight);
@@ -28,6 +30,9 @@ public class Football
         setId(id);
     }
     
+    public void setName(String name) {
+        this.name = name;
+    }
     public void setColor(String color) {
         this.color = color;
     }
@@ -47,6 +52,9 @@ public class Football
         this.id = id;
     }
     
+    public String getName() {
+        return name;
+    }
     public String getColor() {
         return color;
     }
