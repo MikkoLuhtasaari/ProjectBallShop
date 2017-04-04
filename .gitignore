@@ -1,5 +1,7 @@
 # Generated sources
 backend/ProjectBallShop/target/
+.class
+.lst
 
 # Windows image file caches
 Thumbs.db
