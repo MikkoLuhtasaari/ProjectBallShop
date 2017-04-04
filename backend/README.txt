@@ -1,1 +1,3 @@
-Spring code goes here
+POST football/ curl -H "Content-Type: application/json" -X POST -d "{\"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\"}" http://localhost:8080/football/
+GET footballs/
+GET football/{id}/
