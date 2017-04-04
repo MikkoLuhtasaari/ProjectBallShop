@@ -17,6 +17,6 @@ public class MyController {
     // The return value will be the HTTP Body
     @ResponseBody
     public String greeting() {
-        return "Hello World";
+        return "Test";
     }
 }
