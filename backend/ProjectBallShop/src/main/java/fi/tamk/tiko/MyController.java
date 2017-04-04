@@ -17,6 +17,11 @@ public class MyController {
     @Autowired
     FootballRepository fbRepository;
     
+    @RequestMapping(value = "/",  method=RequestMethod.GET)
+    public String getStuff() {
+        return "something";
+    }
+    
     
     @RequestMapping(value = "/football",  method=RequestMethod.POST)
     public void saveLocations(@RequestBody Football football) {
