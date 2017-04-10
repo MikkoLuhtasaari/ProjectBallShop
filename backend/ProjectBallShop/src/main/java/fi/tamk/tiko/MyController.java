@@ -57,12 +57,17 @@ public class MyController {
     }
     
     @RequestMapping(value = "/football/color/{footballColor}",  method=RequestMethod.GET)
-    public List<Football> fetchFootballByColor(@PathVariable String footballColor) {
+    public List<Football> fetchFootballsByColor(@PathVariable String footballColor) {
         return fbRepository.findByColor(footballColor);
     }
     
     @RequestMapping(value = "/football/material/{footballMaterial}",  method=RequestMethod.GET)
-    public List<Football> fetchFootballByMaterial(@PathVariable String footballMaterial) {
+    public List<Football> fetchFootballsByMaterial(@PathVariable String footballMaterial) {
         return fbRepository.findByMaterial(footballMaterial);
+    }
+    
+    @RequestMapping(value = "/football/name/{footballMaterial}",  method=RequestMethod.GET)
+    public Football fetchFootballByName(@PathVariable String footballName) {
+        return fbRepository.findByName(footballName);
     }
 }
