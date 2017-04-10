@@ -61,6 +61,11 @@ public class MyController {
         return cbRepository.findAll();
     }
     
+    @RequestMapping(value = "/chocolateball/{chocolateballId}",  method=RequestMethod.GET)
+    public Chocolateball fetchChocolateball(@PathVariable long chocolateballId) {
+        return cbRepository.findOne(chocolateballId);
+    }
+    
     
     
     
