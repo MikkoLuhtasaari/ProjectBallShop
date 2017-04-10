@@ -20,9 +20,9 @@ public class Bowlingball
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
-    public Football(){};
+    public Bowlingball(){};
     
-    public Football(String name, String color, int diameter, int weigth, String details, String material, int amount, long id) {
+    public Bowlingball(String name, String color, int diameter, int weigth, String details, String material, int amount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
