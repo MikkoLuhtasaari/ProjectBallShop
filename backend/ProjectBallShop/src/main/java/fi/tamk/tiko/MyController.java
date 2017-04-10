@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MyController {
     @Autowired
     FootballRepository fbRepository;
-    
+  
     @Autowired
     BowlingballRepository bbRepository;
     
