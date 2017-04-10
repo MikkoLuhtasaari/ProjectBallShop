@@ -98,7 +98,7 @@ public class MyController {
     }
     
     @RequestMapping(value = "/golfball/{golfballId}",  method=RequestMethod.DELETE)
-    public Bowlingball deleteGolfball(@PathVariable long golfballId) {
+    public Golfball deleteGolfball(@PathVariable long golfballId) {
         Golfball temp = gbRepository.findOne(golfballId);
         gbRepository.delete(gbRepository.findOne(golfballId));
         return temp;
