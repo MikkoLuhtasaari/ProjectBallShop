@@ -72,6 +72,11 @@ public class MyController {
     public Bowlingball fetchBowlingballByName(@PathVariable String bowlingballName) {
         return bbRepository.findByName(bowlingballName);
     }
+     
+    @RequestMapping(value = "/bowlingball/holeamount/{holeamount}",  method=RequestMethod.GET)
+    public List<Bowlingball> fetchBowlingballsByHoleAmount(@PathVariable int holeamount) {
+        return bbRepository.findByHoleAmount(holeamount);
+    }
     
     
     
