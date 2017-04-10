@@ -14,19 +14,21 @@ public class Football
     private int weight;
     private String details;
     private String material;
+    private int amount;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
     public Football(){};
     
-    public Football(String name, String color, int diameter, int weigth, String details, String material, long id) {
+    public Football(String name, String color, int diameter, int weigth, String details, String material, int amount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
         setWeight(weight);
         setDetails(details);
         setMaterial(material);
+        setAmount(amount);
         setId(id);
     }
     
@@ -47,6 +49,9 @@ public class Football
     }
     public void setMaterial(String material) {
         this.material = material;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
     public void setId(long id) {
         this.id = id;
@@ -69,6 +74,9 @@ public class Football
     }
     public String getMaterial() {
         return material;
+    }
+    public int getAmount() {
+        return amount;
     }
     public long getId() {
         return id;
