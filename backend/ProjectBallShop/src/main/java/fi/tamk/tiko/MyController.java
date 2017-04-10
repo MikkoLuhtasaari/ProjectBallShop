@@ -17,6 +17,9 @@ public class MyController {
     @Autowired
     FootballRepository fbRepository;
     
+    @Autowired
+    BowlingballRepository bbRepository;
+    
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
         Football football1 = new Football("Placeholder1", "Red", 12, 500, "None", "Rubber", 1, 1);
@@ -32,9 +35,24 @@ public class MyController {
         return "Populate succesfull";
     }
     
+    // Bowlingball related stuff
+    @RequestMapping(value = "/bowlingball",  method=RequestMethod.POST)
+    public void saveBowlingball(@RequestBody Bowlingball bowlingball) {
+        bbRepository.save(bowlingball);
+    }
     
+    @RequestMapping(value = "/bowlingballs",  method=RequestMethod.GET)
+    public Iterable<Bowlingball> fetchBowlingballs() {
+        return bbRepository.findAll();
+    }
+    
+    
+    
+    
+    
+    // Football related stuff
     @RequestMapping(value = "/football",  method=RequestMethod.POST)
-    public void saveLocations(@RequestBody Football football) {
+    public void saveFootball(@RequestBody Football football) {
         fbRepository.save(football);
     }
     
