@@ -8,6 +8,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
+@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
 public class Bowlingball 
 {
     private String name;
