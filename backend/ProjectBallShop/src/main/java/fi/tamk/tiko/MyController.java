@@ -45,7 +45,14 @@ public class MyController {
     }
     
     @RequestMapping(value = "/football/{footballId}",  method=RequestMethod.GET)
-    public Football fetchFootballs(@PathVariable long footballId) {
+    public Football fetchFootball(@PathVariable long footballId) {
         return fbRepository.findOne(footballId);
+    }
+    
+    @RequestMapping(value = "/football/{footballId}",  method=RequestMethod.DELETE)
+    public Football deleteFootball(@PathVariable long footballId) {
+        Football temp = fbRepository.findOne(footballId);
+        fbRepository.delete(fbRepository.findOne(footballId));
+        return temp;
     }
 }
