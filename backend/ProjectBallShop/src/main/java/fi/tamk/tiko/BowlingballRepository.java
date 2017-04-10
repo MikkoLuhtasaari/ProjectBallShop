@@ -8,4 +8,5 @@ public interface BowlingballRepository extends CrudRepository<Bowlingball, Long>
     List<Bowlingball> findByColor(String color);
     List<Bowlingball> findByMaterial(String material);
     Bowlingball findByName(String name);
+    List<Bowlingball> findByHoleAmount(int holeAmount);
 }
