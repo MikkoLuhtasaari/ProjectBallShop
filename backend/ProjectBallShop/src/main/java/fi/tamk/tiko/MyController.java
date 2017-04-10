@@ -59,6 +59,14 @@ public class MyController {
         cbRepository.save(chocolateball2);
         cbRepository.save(chocolateball3);
         
+        Golfball golfball1 = new Golfball("gb1", 5, 50, "Basic ball", "Elastic rubber", 5, 1);
+        Golfball golfball2 = new Golfball("gb2", 4, 40, "Basic ball vol 2", "Duck skin", 8, 2);
+        Golfball golfball3 = new Golfball("gb3", 5, 500, "Prototype", "Goat stomach", 1, 3);
+        
+        gbRepository.save(golfball1);
+        gbRepository.save(golfball2);
+        gbRepository.save(golfball3);
+
         return "Populate succesfull";
     }
     
