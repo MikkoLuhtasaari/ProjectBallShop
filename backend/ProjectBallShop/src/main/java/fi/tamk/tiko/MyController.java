@@ -106,7 +106,7 @@ public class MyController {
         return fbRepository.findByMaterial(footballMaterial);
     }
     
-    @RequestMapping(value = "/football/name/{footballMaterial}",  method=RequestMethod.GET)
+    @RequestMapping(value = "/football/name/{footballName}",  method=RequestMethod.GET)
     public Football fetchFootballByName(@PathVariable String footballName) {
         return fbRepository.findByName(footballName);
     }
