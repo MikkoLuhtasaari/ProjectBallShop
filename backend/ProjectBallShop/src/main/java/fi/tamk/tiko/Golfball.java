@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Table(indexes = {@Index(columnList="name"), @Index(columnList="material")})
 public class Golfball 
 {
     private String name;
