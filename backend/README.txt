@@ -32,3 +32,12 @@ Chocolateball related requests
 POST chocolateball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Chocolate1\", \"color\" : \"Brown\", \"diameter\" : 5, \"weigth\" : 20, \"details\" : \"none\", \"amount\" : 1, \"calories\" : 150}" http://localhost:8080/chocolateball/
 GET chocolateballs/
 
+
+Golfball related requests
+-------------------------
+POST golfball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"amount\" : 1}" http://localhost:8080/golfball/
+GET golfballs/
+GET golfball/{id}
+GET golfball/name/{name}
+GET golfball/material/{material}
+

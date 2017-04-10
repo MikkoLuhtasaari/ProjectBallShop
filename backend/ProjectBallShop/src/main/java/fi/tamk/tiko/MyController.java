@@ -23,6 +23,9 @@ public class MyController {
     @Autowired
     ChocolateballRepository cbRepository;
     
+    @Autowired
+    GolfballRepository gbRepository;
+    
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
         //FOOTBALLS
@@ -56,8 +59,44 @@ public class MyController {
         cbRepository.save(chocolateball2);
         cbRepository.save(chocolateball3);
         
+        //GOLFBALLS
+        Golfball golfball1 = new Golfball("gb1", 5, 50, "Basic ball", "Elastic rubber", 5, 1);
+        Golfball golfball2 = new Golfball("gb2", 4, 40, "Basic ball vol 2", "Duck skin", 8, 2);
+        Golfball golfball3 = new Golfball("gb3", 5, 500, "Prototype", "Goat stomach", 1, 3);
+        
+        gbRepository.save(golfball1);
+        gbRepository.save(golfball2);
+        gbRepository.save(golfball3);
+
         return "Populate succesfull";
     }
+    
+    //Golfball related stuff
+    @RequestMapping(value = "/golfball",  method=RequestMethod.POST)
+    public void saveGolfball(@RequestBody Golfball golfball) {
+        gbRepository.save(golfball);
+    }
+    
+    @RequestMapping(value = "/golfballs",  method=RequestMethod.GET)
+    public Iterable<Golfball> fetchGolfballs() {
+        return gbRepository.findAll();
+    }
+    
+    @RequestMapping(value = "/golfball/{golfballId}",  method=RequestMethod.GET)
+    public Golfball fetchgolfball(@PathVariable long golfballId) {
+        return gbRepository.findOne(golfballId);
+    }
+    
+    @RequestMapping(value = "/golfball/material/{footballMaterial}",  method=RequestMethod.GET)
+    public List<Golfball> fetchGolfballsByMaterial(@PathVariable String golfballMaterial) {
+        return gbRepository.findByMaterial(golfballMaterial);
+    }
+    
+    @RequestMapping(value = "/golfball/name/{golfballName}",  method=RequestMethod.GET)
+    public Golfball fetchGolfballByName(@PathVariable String golfballName) {
+        return gbRepository.findByName(golfballName);
+    }
+    
     
     //Chocolateball related stuff
     @RequestMapping(value = "/chocolateball",  method=RequestMethod.POST)
@@ -80,10 +119,7 @@ public class MyController {
         return cbRepository.findByName(chocolateballName);
     }
     
-    
-    
-    
-    
+
     // Bowlingball related stuff
     @RequestMapping(value = "/bowlingball",  method=RequestMethod.POST)
     public void saveBowlingball(@RequestBody Bowlingball bowlingball) {
@@ -127,10 +163,7 @@ public class MyController {
         return bbRepository.findByHoleAmount(holeamount);
     }
     
-    
-    
-    
-    
+  
     // Football related stuff
     @RequestMapping(value = "/football",  method=RequestMethod.POST)
     public void saveFootball(@RequestBody Football football) {
