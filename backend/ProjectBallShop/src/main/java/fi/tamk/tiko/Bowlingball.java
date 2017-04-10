@@ -11,7 +11,7 @@ public class Bowlingball
     private String name;
     private String color;
     private int diameter;
-    private int weight;
+    private int weigth;
     private String details;
     private String material;
     private int amount;
@@ -22,11 +22,11 @@ public class Bowlingball
     
     public Bowlingball(){};
     
-    public Bowlingball(String name, String color, int diameter, int weigth, String details, String material, int amount, long id) {
+    public Bowlingball(String name, String color, int diameter, int weigth, String details, String material, int amount, int holeAmount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
-        setWeight(weight);
+        setWeight(weigth);
         setDetails(details);
         setMaterial(material);
         setAmount(amount);
@@ -43,8 +43,8 @@ public class Bowlingball
     public void setDiameter(int diameter) {
         this.diameter = diameter;
     }
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setWeight(int weigth) {
+        this.weigth = weigth;
     }
     public void setDetails(String details) {
         this.details = details;
@@ -72,7 +72,7 @@ public class Bowlingball
         return diameter;
     }
     public int getWeigth() {
-        return weight;
+        return weigth;
     }
     public String getDetails() {
         return details;
