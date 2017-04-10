@@ -55,4 +55,9 @@ public class MyController {
         fbRepository.delete(fbRepository.findOne(footballId));
         return temp;
     }
+    
+    @RequestMapping(value = "/football/color/{footballColor}",  method=RequestMethod.GET)
+    public List<Football> fetchFootballByColor(@PathVariable String footballColor) {
+        return fbRepository.findByColor(footballColor);
+    }
 }
