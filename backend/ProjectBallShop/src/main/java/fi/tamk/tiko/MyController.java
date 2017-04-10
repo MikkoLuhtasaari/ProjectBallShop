@@ -60,4 +60,9 @@ public class MyController {
     public List<Football> fetchFootballByColor(@PathVariable String footballColor) {
         return fbRepository.findByColor(footballColor);
     }
+    
+    @RequestMapping(value = "/football/material/{footballMaterial}",  method=RequestMethod.GET)
+    public List<Football> fetchFootballByMaterial(@PathVariable String footballMaterial) {
+        return fbRepository.findByMaterial(footballMaterial);
+    }
 }
