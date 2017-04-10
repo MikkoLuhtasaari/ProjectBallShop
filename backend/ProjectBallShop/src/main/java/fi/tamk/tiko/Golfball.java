@@ -8,11 +8,10 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material")})
-public class Football 
+@Table(indexes = {@Index(columnList="name"), @Index(columnList="material")})
+public class Golfball 
 {
     private String name;
-    private String color;
     private int diameter;
     private int weight;
     private String details;
@@ -22,11 +21,10 @@ public class Football
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
-    public Football(){};
+    public Golfball(){};
     
-    public Football(String name, String color, int diameter, int weigth, String details, String material, int amount, long id) {
+    public Golfball(String name, int diameter, int weigth, String details, String material, int amount, long id) {
         setName(name);
-        setColor(color);
         setDiameter(diameter);
         setWeight(weight);
         setDetails(details);
@@ -37,9 +35,6 @@ public class Football
     
     public void setName(String name) {
         this.name = name;
-    }
-    public void setColor(String color) {
-        this.color = color;
     }
     public void setDiameter(int diameter) {
         this.diameter = diameter;
@@ -62,9 +57,6 @@ public class Football
     
     public String getName() {
         return name;
-    }
-    public String getColor() {
-        return color;
     }
     public int getDiameter() {
         return diameter;
