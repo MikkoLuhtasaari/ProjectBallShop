@@ -51,6 +51,13 @@ public class MyController {
         return bbRepository.findOne(bowlingballId);
     }
     
+    @RequestMapping(value = "/bowlingball/{bowlingballId}",  method=RequestMethod.DELETE)
+    public Bowlingball deleteBowlingball(@PathVariable long bowlingballId) {
+        Bowlingball temp = bbRepository.findOne(bowlingballId);
+        bbRepository.delete(bbRepository.findOne(bowlingballId));
+        return temp;
+    }
+    
     
     
     
