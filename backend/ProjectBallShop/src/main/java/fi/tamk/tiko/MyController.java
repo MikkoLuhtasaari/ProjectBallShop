@@ -23,6 +23,9 @@ public class MyController {
     @Autowired
     ChocolateballRepository cbRepository;
     
+    @Autowired
+    GolfballRepository gbRepository;
+    
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
         //FOOTBALLS
@@ -58,6 +61,21 @@ public class MyController {
         
         return "Populate succesfull";
     }
+    
+    //Golfball related stuff
+    @RequestMapping(value = "/golfball",  method=RequestMethod.POST)
+    public void saveGolfball(@RequestBody Golfball golfball) {
+        gbRepository.save(golfball);
+    }
+    
+    @RequestMapping(value = "/golfballs",  method=RequestMethod.GET)
+    public Iterable<Golfball> fetchGolfballs() {
+        return gbRepository.findAll();
+    }
+    
+    
+    
+    
     
     //Chocolateball related stuff
     @RequestMapping(value = "/chocolateball",  method=RequestMethod.POST)
