@@ -32,6 +32,7 @@ Chocolateball related requests
 POST chocolateball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Chocolate1\", \"color\" : \"Brown\", \"diameter\" : 5, \"weigth\" : 20, \"details\" : \"none\", \"amount\" : 1, \"calories\" : 150}" http://localhost:8080/chocolateball/
 GET chocolateballs/
 GET chocolateball/name/{name}
+DELETE curl -X DELETE "localhost:8080/chocolateball/{id}"
 
 
 Golfball related requests
@@ -41,4 +42,5 @@ GET golfballs/
 GET golfball/{id}
 GET golfball/name/{name}
 GET golfball/material/{material}
+DELETE curl -X DELETE "localhost:8080/golfball/{id}"
 
