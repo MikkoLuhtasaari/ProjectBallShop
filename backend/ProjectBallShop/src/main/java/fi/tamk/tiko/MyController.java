@@ -46,6 +46,11 @@ public class MyController {
         return bbRepository.findAll();
     }
     
+    @RequestMapping(value = "/bowlingball/{bowlingballId}",  method=RequestMethod.GET)
+    public Bowlingball fetchBowlingball(@PathVariable long bowlingballId) {
+        return bbRepository.findOne(bowlingballId);
+    }
+    
     
     
     
