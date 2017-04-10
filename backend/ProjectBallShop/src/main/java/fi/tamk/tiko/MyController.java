@@ -22,6 +22,7 @@ public class MyController {
     
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
+        //FOOTBALLS
         Football football1 = new Football("Placeholder1", "Red", 12, 500, "None", "Rubber", 1, 1);
         Football football2 = new Football("Placeholder2", "Green", 15, 1000, "Some details", "Rubber", 2, 2);
         Football football3 = new Football("Placeholder3", "Yellow", 13, 3000, "Crappy ball", "Duck skin", 1, 3);
@@ -32,6 +33,18 @@ public class MyController {
         fbRepository.save(football3);
         fbRepository.save(football4);
         fbRepository.save(football5);
+        
+        //BOWLINGBALLS
+        Bowlingball bowlingball1 = new Bowlingball("bb1", "Black", 40, 3030, "Somethingsomething", "Steel", 1, 3, 1);
+        Bowlingball bowlingball2 = new Bowlingball("bb2", "Orange", 40, 200, "", "Rubber", 6, 4, 2);
+        Bowlingball bowlingball3 = new Bowlingball("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", 22, 5, 3);
+        
+        bbRepository.save(bowlingball1);
+        bbRepository.save(bowlingball2);
+        bbRepository.save(bowlingball3);
+        
+        
+        
         return "Populate succesfull";
     }
     
