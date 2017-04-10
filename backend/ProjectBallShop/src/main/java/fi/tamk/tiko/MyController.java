@@ -47,6 +47,15 @@ public class MyController {
         bbRepository.save(bowlingball2);
         bbRepository.save(bowlingball3);
         
+        //CHOCOLATEBALLS
+        Chocolateball chocolateball1 = new Chocolateball("cb1", "brown", 10, 30, "Something..", 5, 150, 1);
+        Chocolateball chocolateball2 = new Chocolateball("cb2", "Green", 15, 50, "Something else..", 1, 400, 2);
+        Chocolateball chocolateball3 = new Chocolateball("cb3", "Yellow", 20, 80, "Something..", 50, 3000, 3);
+        
+        cbRepository.save(chocolateball1);
+        cbRepository.save(chocolateball2);
+        cbRepository.save(chocolateball3);
+        
         return "Populate succesfull";
     }
     
