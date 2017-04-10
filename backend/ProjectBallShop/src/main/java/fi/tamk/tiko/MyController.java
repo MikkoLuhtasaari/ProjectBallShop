@@ -97,7 +97,7 @@ public class MyController {
         return gbRepository.findByName(golfballName);
     }
     
-    @RequestMapping(value = "/golfball/{bowlingballId}",  method=RequestMethod.DELETE)
+    @RequestMapping(value = "/golfball/{golfballId}",  method=RequestMethod.DELETE)
     public Bowlingball deleteGolfball(@PathVariable long golfballId) {
         Golfball temp = gbRepository.findOne(golfballId);
         gbRepository.delete(gbRepository.findOne(golfballId));
@@ -124,6 +124,13 @@ public class MyController {
     @RequestMapping(value = "/chocolateball/name/{chocolateballName}",  method=RequestMethod.GET)
     public Chocolateball fetchChocolateballByName(@PathVariable String chocolateballName) {
         return cbRepository.findByName(chocolateballName);
+    }
+    
+    @RequestMapping(value = "/chocolateball/{chocolateballId}",  method=RequestMethod.DELETE)
+    public Chocolateball deleteChocolateball(@PathVariable long chocolateballId) {
+        Chocolateball temp = cbRepository.findOne(chocolateballId);
+        cbRepository.delete(cbRepository.findOne(chocolateballId));
+        return temp;
     }
     
 
