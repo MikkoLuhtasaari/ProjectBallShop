@@ -73,6 +73,11 @@ public class MyController {
         return gbRepository.findAll();
     }
     
+    @RequestMapping(value = "/golfball/{golfballId}",  method=RequestMethod.GET)
+    public Golfball fetchgolfball(@PathVariable long golfballId) {
+        return gbRepository.findOne(golfballId);
+    }
+    
     
     
     
