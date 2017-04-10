@@ -58,6 +58,11 @@ public class MyController {
         return temp;
     }
     
+    @RequestMapping(value = "/bowlingball/color/{bowlingballColor}",  method=RequestMethod.GET)
+    public List<Bowlingball> fetchBowlingballsByColor(@PathVariable String bowlingballColor) {
+        return bbRepository.findByColor(bowlingballColor);
+    }
+    
     
     
     
