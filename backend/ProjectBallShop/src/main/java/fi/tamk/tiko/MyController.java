@@ -20,6 +20,9 @@ public class MyController {
     @Autowired
     BowlingballRepository bbRepository;
     
+    @Autowired
+    ChocolateballRepository cbRepository;
+    
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
         //FOOTBALLS
@@ -28,6 +31,7 @@ public class MyController {
         Football football3 = new Football("Placeholder3", "Yellow", 13, 3000, "Crappy ball", "Duck skin", 1, 3);
         Football football4 = new Football("Placeholder4", "Red", 22, 2000, "None", "Lamb skin", 3, 4);
         Football football5 = new Football("Placeholder5", "Red", 25, 1000, "None", "Plastic", 1, 5);
+        
         fbRepository.save(football1);
         fbRepository.save(football2);
         fbRepository.save(football3);
@@ -43,10 +47,33 @@ public class MyController {
         bbRepository.save(bowlingball2);
         bbRepository.save(bowlingball3);
         
-        
-        
         return "Populate succesfull";
     }
+    
+    //Chocolateball related stuff
+    @RequestMapping(value = "/chocolateball",  method=RequestMethod.POST)
+    public void saveChocolateball(@RequestBody Chocolateball chocolateball) {
+        cbRepository.save(chocolateball);
+    }
+    
+    @RequestMapping(value = "/chocolateballs",  method=RequestMethod.GET)
+    public Iterable<Chocolateball> fetchChocolateballs() {
+        return cbRepository.findAll();
+    }
+    
+    @RequestMapping(value = "/chocolateball/{chocolateballId}",  method=RequestMethod.GET)
+    public Chocolateball fetchChocolateball(@PathVariable long chocolateballId) {
+        return cbRepository.findOne(chocolateballId);
+    }
+    
+    @RequestMapping(value = "/chocolateball/{chocolateballName}",  method=RequestMethod.GET)
+    public Chocolateball fetchChocolateballByName(@PathVariable String chocolateballName) {
+        return cbRepository.findByName(chocolateballName);
+    }
+    
+    
+    
+    
     
     // Bowlingball related stuff
     @RequestMapping(value = "/bowlingball",  method=RequestMethod.POST)
