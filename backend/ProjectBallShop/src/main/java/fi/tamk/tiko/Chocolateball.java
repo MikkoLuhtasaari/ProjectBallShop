@@ -9,13 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount")})
-public class Chocolateball 
+public class Chocolateball
 {
+    //Index
     private String name;
+    //Index
     private String color;
     private int diameter;
     private int weigth;
     private String details;
+    //Index
     private int amount;
     private int calories;
     @Id
