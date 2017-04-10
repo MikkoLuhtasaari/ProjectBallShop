@@ -17,8 +17,12 @@ public class MyController {
     @Autowired
     FootballRepository fbRepository;
     
+    @Autowired
+    BowlingballRepository bbRepository;
+    
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
+        //FOOTBALLS
         Football football1 = new Football("Placeholder1", "Red", 12, 500, "None", "Rubber", 1, 1);
         Football football2 = new Football("Placeholder2", "Green", 15, 1000, "Some details", "Rubber", 2, 2);
         Football football3 = new Football("Placeholder3", "Yellow", 13, 3000, "Crappy ball", "Duck skin", 1, 3);
@@ -29,12 +33,71 @@ public class MyController {
         fbRepository.save(football3);
         fbRepository.save(football4);
         fbRepository.save(football5);
+        
+        //BOWLINGBALLS
+        Bowlingball bowlingball1 = new Bowlingball("bb1", "Black", 40, 3030, "Somethingsomething", "Steel", 1, 3, 1);
+        Bowlingball bowlingball2 = new Bowlingball("bb2", "Orange", 40, 200, "", "Rubber", 6, 4, 2);
+        Bowlingball bowlingball3 = new Bowlingball("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", 22, 5, 3);
+        
+        bbRepository.save(bowlingball1);
+        bbRepository.save(bowlingball2);
+        bbRepository.save(bowlingball3);
+        
+        
+        
         return "Populate succesfull";
     }
     
+    // Bowlingball related stuff
+    @RequestMapping(value = "/bowlingball",  method=RequestMethod.POST)
+    public void saveBowlingball(@RequestBody Bowlingball bowlingball) {
+        bbRepository.save(bowlingball);
+    }
     
+    @RequestMapping(value = "/bowlingballs",  method=RequestMethod.GET)
+    public Iterable<Bowlingball> fetchBowlingballs() {
+        return bbRepository.findAll();
+    }
+    
+    @RequestMapping(value = "/bowlingball/{bowlingballId}",  method=RequestMethod.GET)
+    public Bowlingball fetchBowlingball(@PathVariable long bowlingballId) {
+        return bbRepository.findOne(bowlingballId);
+    }
+    
+    @RequestMapping(value = "/bowlingball/{bowlingballId}",  method=RequestMethod.DELETE)
+    public Bowlingball deleteBowlingball(@PathVariable long bowlingballId) {
+        Bowlingball temp = bbRepository.findOne(bowlingballId);
+        bbRepository.delete(bbRepository.findOne(bowlingballId));
+        return temp;
+    }
+    
+    @RequestMapping(value = "/bowlingball/color/{bowlingballColor}",  method=RequestMethod.GET)
+    public List<Bowlingball> fetchBowlingballsByColor(@PathVariable String bowlingballColor) {
+        return bbRepository.findByColor(bowlingballColor);
+    }
+    
+    @RequestMapping(value = "/bowlingball/material/{bowlingballMaterial}",  method=RequestMethod.GET)
+    public List<Bowlingball> fetchBowlingballsByMaterial(@PathVariable String bowlingballMaterial) {
+        return bbRepository.findByMaterial(bowlingballMaterial);
+    }
+    
+    @RequestMapping(value = "/bowlingball/name/{bowlingballName}",  method=RequestMethod.GET)
+    public Bowlingball fetchBowlingballByName(@PathVariable String bowlingballName) {
+        return bbRepository.findByName(bowlingballName);
+    }
+     
+    @RequestMapping(value = "/bowlingball/holeamount/{holeamount}",  method=RequestMethod.GET)
+    public List<Bowlingball> fetchBowlingballsByHoleAmount(@PathVariable int holeamount) {
+        return bbRepository.findByHoleAmount(holeamount);
+    }
+    
+    
+    
+    
+    
+    // Football related stuff
     @RequestMapping(value = "/football",  method=RequestMethod.POST)
-    public void saveLocations(@RequestBody Football football) {
+    public void saveFootball(@RequestBody Football football) {
         fbRepository.save(football);
     }
     
@@ -66,7 +129,7 @@ public class MyController {
         return fbRepository.findByMaterial(footballMaterial);
     }
     
-    @RequestMapping(value = "/football/name/{footballMaterial}",  method=RequestMethod.GET)
+    @RequestMapping(value = "/football/name/{footballName}",  method=RequestMethod.GET)
     public Football fetchFootballByName(@PathVariable String footballName) {
         return fbRepository.findByName(footballName);
     }
