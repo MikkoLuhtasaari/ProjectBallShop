@@ -78,6 +78,16 @@ public class MyController {
         return gbRepository.findOne(golfballId);
     }
     
+    @RequestMapping(value = "/golfball/material/{footballMaterial}",  method=RequestMethod.GET)
+    public List<Golfball> fetchGolfballsByMaterial(@PathVariable String golfballMaterial) {
+        return gbRepository.findByMaterial(golfballMaterial);
+    }
+    
+    @RequestMapping(value = "/golfball/name/{golfballName}",  method=RequestMethod.GET)
+    public Golfball fetchGolfballByName(@PathVariable String golfballName) {
+        return gbRepository.findByName(golfballName);
+    }
+    
     
     
     
@@ -102,6 +112,7 @@ public class MyController {
     public Chocolateball fetchChocolateballByName(@PathVariable String chocolateballName) {
         return cbRepository.findByName(chocolateballName);
     }
+    
     
     
     
