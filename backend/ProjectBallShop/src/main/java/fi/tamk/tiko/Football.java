@@ -70,7 +70,7 @@ public class Football
     public void setType(String type) {
         this.type = type;
     }
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     public void setAmount(int amount) {
