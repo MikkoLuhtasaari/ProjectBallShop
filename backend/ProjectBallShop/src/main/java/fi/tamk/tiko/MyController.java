@@ -23,6 +23,9 @@ public class MyController {
     @Autowired
     BatAndRaquetsGamesRepository brRepository;
     
+    @Autowired
+    NetSportsBallRepository nsRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -56,6 +59,15 @@ public class MyController {
         brRepository.save(tempBat1);
         brRepository.save(tempBat2);
         brRepository.save(tempBat3);
+        
+        // VOLLEYBALL & HANDBALL
+        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 3, 1);
+        NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
+        NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
+        
+        nsRepository.save(tempNS1);
+        nsRepository.save(tempNS2);
+        nsRepository.save(tempNS3);
         
         return "Populate succesfull";
     }
