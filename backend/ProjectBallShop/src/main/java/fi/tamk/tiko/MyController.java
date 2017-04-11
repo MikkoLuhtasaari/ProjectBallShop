@@ -27,7 +27,7 @@ public class MyController {
     
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
-        //FOOTBALLS
+        //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
         GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
         GoalSportsBall tempGoal3 = new GoalSportsBall("Bad Basketball", "White", 40, 20000, "LongDetails", "Concrete", "AnotherDas", "A ball to throw", "Basketball", 19.95, 4, 3);
@@ -48,47 +48,47 @@ public class MyController {
         return "Populate succesfull";
     }
     
-    // Football related stuff
-    @RequestMapping(value = "/targetsportsball",  method=RequestMethod.POST)
-    public void saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
-        tsbRepository.save(targetsportsball);
+    // Football and Basketball related stuff
+    @RequestMapping(value = "/goalsportsball",  method=RequestMethod.POST)
+    public void saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
+        gsbRepository.save(goalsportsball);
     }
     
-    @RequestMapping(value = "/targetsportsballs",  method=RequestMethod.GET)
-    public Iterable<TargetSportsBall> fetchTargetSportsBalls() {
-        return tsbRepository.findAll();
+    @RequestMapping(value = "/goalsportsballs",  method=RequestMethod.GET)
+    public Iterable<GoalSportsBall> fetchGoalSportsBalls() {
+        return gsbRepository.findAll();
     }
     
-    @RequestMapping(value = "/targetsportsball/{targetsportsballId}",  method=RequestMethod.GET)
-    public TargetSportsBall fetchTargetSportsBall(@PathVariable long targetsportsballId) {
-        return tsbRepository.findOne(targetsportsballId);
+    @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.GET)
+    public GoalSportsBall fetchGoalSportsBall(@PathVariable long goalsportsballId) {
+        return gsbRepository.findOne(goalsportsballId);
     }
     
-    @RequestMapping(value = "/targetsportsball/{targetsportsballId}",  method=RequestMethod.DELETE)
-    public TargetSportsBall deleteTargetSportsBall(@PathVariable long targetsportsballId) {
-        TargetSportsBall temp = tsbRepository.findOne(targetsportsballId);
-        tsbRepository.delete(tsbRepository.findOne(targetsportsballId));
+    @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.DELETE)
+    public GoalSportsBall deleteGoalSportsBall(@PathVariable long goalsportsballId) {
+        GoalSportsBall temp = gsbRepository.findOne(goalsportsballId);
+        gsbRepository.delete(gsbRepository.findOne(goalsportsballId));
         return temp;
     }
     
-    @RequestMapping(value = "/targetsportsball/color/{targetsportsballColor}",  method=RequestMethod.GET)
-    public List<TargetSportsBall> fetchTargetSportsBallsByColor(@PathVariable String targetsportsballColor) {
-        return tsbRepository.findByColor(targetsportsballColor);
+    @RequestMapping(value = "/goalsportsball/color/{goalsportsballColor}",  method=RequestMethod.GET)
+    public List<GoalSportsBall> fetchGoalSportsBallsByColor(@PathVariable String goalsportsballColor) {
+        return gsbRepository.findByColor(goalsportsballColor);
     }
     
-    @RequestMapping(value = "/targetsportsball/material/{targetsportsballMaterial}",  method=RequestMethod.GET)
-    public List<TargetSportsBall> fetchTargetSportsBallsByMaterial(@PathVariable String targetsportsballMaterial) {
-        return tsbRepository.findByMaterial(targetsportsballMaterial);
+    @RequestMapping(value = "/goalsportsball/material/{goalsportsballMaterial}",  method=RequestMethod.GET)
+    public List<GoalSportsBall> fetchGoalSportsBallsByMaterial(@PathVariable String goalsportsballMaterial) {
+        return gsbRepository.findByMaterial(goalsportsballMaterial);
     }
     
-    @RequestMapping(value = "/targetsportsball/name/{bowlingballName}",  method=RequestMethod.GET)
-    public TargetSportsBall fetchTargetSportsBallByName(@PathVariable String targetsportsballName) {
-        return tsbRepository.findByName(targetsportsballName);
+    @RequestMapping(value = "/goalsportsball/name/{goalsportsballName}",  method=RequestMethod.GET)
+    public GoalSportsBall fetchGoalSportsBallByName(@PathVariable String goalsportsballName) {
+        return gsbRepository.findByName(goalsportsballName);
     }
      
-    @RequestMapping(value = "/targetsportsball/type/{type}",  method=RequestMethod.GET)
-    public List<TargetSportsBall> fetchTargetSportsBallsByType(@PathVariable String type) {
-        return tsbRepository.findByType(type);
+    @RequestMapping(value = "/goalsportsball/type/{type}",  method=RequestMethod.GET)
+    public List<GoalSportsBall> fetchGoalSportsBallsByType(@PathVariable String type) {
+        return gsbRepository.findByType(type);
     }
     
 
@@ -125,7 +125,7 @@ public class MyController {
         return tsbRepository.findByMaterial(targetsportsballMaterial);
     }
     
-    @RequestMapping(value = "/targetsportsball/name/{bowlingballName}",  method=RequestMethod.GET)
+    @RequestMapping(value = "/targetsportsball/name/{targetsportsballName}",  method=RequestMethod.GET)
     public TargetSportsBall fetchTargetSportsBallByName(@PathVariable String targetsportsballName) {
         return tsbRepository.findByName(targetsportsballName);
     }
