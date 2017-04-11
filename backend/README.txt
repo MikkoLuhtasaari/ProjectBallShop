@@ -37,7 +37,7 @@ DELETE curl -X DELETE "localhost:8080/chocolateball/{id}"
 
 Golfball related requests
 -------------------------
-POST golfball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"amount\" : 1}" http://localhost:8080/golfball/
+POST golfball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Bad ball\", \"type\" : \"Golfball\", \"price\" : 0.95, \"amount\" : 1}" http://localhost:8080/golfball/
 GET golfballs/
 GET golfball/{id}
 GET golfball/name/{name}
