@@ -21,9 +21,6 @@ public class MyController {
     BowlingballRepository bbRepository;
     
     @Autowired
-    ChocolateballRepository cbRepository;
-    
-    @Autowired
     GolfballRepository gbRepository;
     
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
@@ -54,15 +51,6 @@ public class MyController {
         bbRepository.save(bowlingball1);
         bbRepository.save(bowlingball2);
         bbRepository.save(bowlingball3);
-        
-        //CHOCOLATEBALLS
-        Chocolateball chocolateball1 = new Chocolateball("cb1", "brown", 10, 30, "Something..", 5, 150, 1);
-        Chocolateball chocolateball2 = new Chocolateball("cb2", "Green", 15, 50, "Something else..", 1, 400, 2);
-        Chocolateball chocolateball3 = new Chocolateball("cb3", "Yellow", 20, 80, "Something..", 50, 3000, 3);
-        
-        cbRepository.save(chocolateball1);
-        cbRepository.save(chocolateball2);
-        cbRepository.save(chocolateball3);
         
         //GOLFBALLS
         Golfball golfball1 = new Golfball("gb1", 5, 50, "Basic ball", "Elastic rubber", "Adidas", "Golfball", "Golfball", 0.95, 5, 1);
@@ -106,35 +94,6 @@ public class MyController {
     public Golfball deleteGolfball(@PathVariable long golfballId) {
         Golfball temp = gbRepository.findOne(golfballId);
         gbRepository.delete(gbRepository.findOne(golfballId));
-        return temp;
-    }
-    
-    
-    //Chocolateball related stuff
-    @RequestMapping(value = "/chocolateball",  method=RequestMethod.POST)
-    public void saveChocolateball(@RequestBody Chocolateball chocolateball) {
-        cbRepository.save(chocolateball);
-    }
-    
-    @RequestMapping(value = "/chocolateballs",  method=RequestMethod.GET)
-    public Iterable<Chocolateball> fetchChocolateballs() {
-        return cbRepository.findAll();
-    }
-    
-    @RequestMapping(value = "/chocolateball/{chocolateballId}",  method=RequestMethod.GET)
-    public Chocolateball fetchChocolateball(@PathVariable long chocolateballId) {
-        return cbRepository.findOne(chocolateballId);
-    }
-    
-    @RequestMapping(value = "/chocolateball/name/{chocolateballName}",  method=RequestMethod.GET)
-    public Chocolateball fetchChocolateballByName(@PathVariable String chocolateballName) {
-        return cbRepository.findByName(chocolateballName);
-    }
-    
-    @RequestMapping(value = "/chocolateball/{chocolateballId}",  method=RequestMethod.DELETE)
-    public Chocolateball deleteChocolateball(@PathVariable long chocolateballId) {
-        Chocolateball temp = cbRepository.findOne(chocolateballId);
-        cbRepository.delete(cbRepository.findOne(chocolateballId));
         return temp;
     }
     
