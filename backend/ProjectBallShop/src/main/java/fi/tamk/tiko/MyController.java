@@ -26,6 +26,11 @@ public class MyController {
     @Autowired
     GolfballRepository gbRepository;
     
+    @RequestMapping(value= "/categories", method=RequestMethod.GET)
+    public String getCategories() {
+        return "Bat and Racquet games, Goal sports, Net sports, Target sports";
+    }
+    
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
         //FOOTBALLS
