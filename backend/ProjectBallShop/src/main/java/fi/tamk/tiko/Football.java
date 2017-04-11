@@ -20,7 +20,7 @@ public class Football
     private String manufacturer;
     private String shortDetails;
     private String type;
-    private int price;
+    private double price;
     private int amount;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -28,7 +28,7 @@ public class Football
     
     public Football(){};
     
-    public Football(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, int price, int amount, long id) {
+    public Football(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
@@ -107,7 +107,7 @@ public class Football
     public String getType() {
         return type;
     }
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
     public int getAmount() {
