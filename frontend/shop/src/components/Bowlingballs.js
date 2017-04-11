@@ -24,7 +24,7 @@ export default class Bowlingballs extends React.Component{
         const div_style = {
             float: "left",
             display: "inline-block",
-            padding: 20,
+            padding: 30,
             width: "20%",
             textAlign: "center"
         };
