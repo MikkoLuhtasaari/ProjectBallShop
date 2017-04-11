@@ -6,3 +6,4 @@ cd <project name>
 npm start
 
 REMEMBER to add 'Access-Control-Allow-Origin' plugin if using Chrome
+REMEMBER to add 'CORS' plugin
