@@ -23,10 +23,14 @@ public class MyController {
     @Autowired
     BatAndRaquetsGamesRepository brRepository;
     
+    @Autowired
+    NetSportsBallRepository nsRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
     }
+    
     
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
@@ -57,8 +61,61 @@ public class MyController {
         brRepository.save(tempBat2);
         brRepository.save(tempBat3);
         
+        // VOLLEYBALL & HANDBALL
+        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 3, 1);
+        NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
+        NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
+        
+        nsRepository.save(tempNS1);
+        nsRepository.save(tempNS2);
+        nsRepository.save(tempNS3);
+        
         return "Populate succesfull";
     }
+    
+    // Volleyball and Handball related stuff
+    @RequestMapping(value = "/netsportsball",  method=RequestMethod.POST)
+    public void saveNetSportsBall(@RequestBody NetSportsBall netsportsball) {
+        nsRepository.save(netsportsball);
+    }
+   
+    @RequestMapping(value = "/netsportsballs",  method=RequestMethod.GET)
+    public Iterable<NetSportsBall> fetchNetSportsBalls() {
+        return nsRepository.findAll();
+    }
+    
+    @RequestMapping(value = "/netsportsball/{netsportsballId}",  method=RequestMethod.GET)
+    public NetSportsBall fetchNetSportsBall(@PathVariable long netsportsballId) {
+        return nsRepository.findOne(netsportsballId);
+    }
+    
+    @RequestMapping(value = "/netsportsball/{netsportsballId}",  method=RequestMethod.DELETE)
+    public NetSportsBall deleteNetSportsBall(@PathVariable long netsportsballId) {
+        NetSportsBall temp = nsRepository.findOne(netsportsballId);
+        nsRepository.delete(nsRepository.findOne(netsportsballId));
+        return temp;
+    }
+    
+    @RequestMapping(value = "/netsportsball/color/{netsportsballColor}",  method=RequestMethod.GET)
+    public List<NetSportsBall> fetchNetSportsBall(@PathVariable String netsportsballColor) {
+        return nsRepository.findByColor(netsportsballColor);
+    }
+    
+    @RequestMapping(value = "/netsportsball/material/{netsportsballMaterial}",  method=RequestMethod.GET)
+    public List<NetSportsBall> fetchNetSportsBallByMaterial(@PathVariable String netsportsballMaterial) {
+        return nsRepository.findByMaterial(netsportsballMaterial);
+    }
+    
+    @RequestMapping(value = "/netsportsball/name/{batandraquetsgameName}",  method=RequestMethod.GET)
+    public NetSportsBall fetchNetSportsBallByName(@PathVariable String netsportsballName) {
+        return nsRepository.findByName(netsportsballName);
+    }
+     
+    @RequestMapping(value = "/netsportsball/type/{type}",  method=RequestMethod.GET)
+    public List<NetSportsBall> fetchNetSportsBallByType(@PathVariable String type) {
+        return nsRepository.findByType(type);
+    }
+    
     
     // Baseball and Tennisball related stuff
     @RequestMapping(value = "/batandraquetsgame",  method=RequestMethod.POST)
@@ -99,9 +156,11 @@ public class MyController {
     }
      
     @RequestMapping(value = "/batandraquetsgame/type/{type}",  method=RequestMethod.GET)
-    public List<BatAndRaquetsGames> fetchBatAndRaquetsGamesByType(@PathVariable String type) {
+    public List<BatAndRaquetsGames> fetchByType(@PathVariable String type) {
         return brRepository.findByType(type);
     }
+    
+    
     
     // Football and Basketball related stuff
     @RequestMapping(value = "/goalsportsball",  method=RequestMethod.POST)
