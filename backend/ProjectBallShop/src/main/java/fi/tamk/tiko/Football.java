@@ -19,6 +19,7 @@ public class Football
     private String material;
     private String manufacturer;
     private String shortDetails;
+    private String type;
     private int price;
     private int amount;
     @Id
@@ -27,7 +28,7 @@ public class Football
     
     public Football(){};
     
-    public Football(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, int price, int amount, long id) {
+    public Football(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, int price, int amount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
@@ -36,6 +37,7 @@ public class Football
         setMaterial(material);
         setManufacturer(manufacturer);
         setShortDetails(shortDetails);
+        setType(type);
         setPrice(price);
         setAmount(amount);
         setId(id);
@@ -64,6 +66,9 @@ public class Football
     }
     public void setShortDetails(String shortDetails) {
         this.shortDetails = shortDetails;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
     public void setPrice(int price) {
         this.price = price;
@@ -98,6 +103,9 @@ public class Football
     }
     public String getShortDetails() {
         return shortDetails;
+    }
+    public String getType() {
+        return type;
     }
     public int getPrice() {
         return price;
