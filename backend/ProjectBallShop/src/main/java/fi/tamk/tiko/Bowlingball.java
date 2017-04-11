@@ -26,6 +26,7 @@ public class Bowlingball
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    private String category;
     
     public Bowlingball(){};
     
@@ -43,6 +44,7 @@ public class Bowlingball
         setAmount(amount);
         setHoleAmount(holeAmount);
         setId(id);
+        category = "Target sports";
     }
     
     public void setName(String name) {
@@ -123,6 +125,9 @@ public class Bowlingball
     }
     public long getId() {
         return id;
+    }
+    public String getCategory() {
+        return category;
     }
     
 }
