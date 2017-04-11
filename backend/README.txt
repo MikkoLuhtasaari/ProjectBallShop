@@ -6,7 +6,7 @@ AT THE START /populate
 
 Football related requests
 ----------------------------
-POST football/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"amount\" : 1}" http://localhost:8080/football/
+POST football/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDescription\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15, \"amount\" : 1}" http://localhost:8080/football/
 GET footballs/
 GET football/{id}/
 GET football/name/{name}
