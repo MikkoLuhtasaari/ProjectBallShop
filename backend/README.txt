@@ -5,6 +5,17 @@ Port is http://localhost:8080/
 AT THE START /populate
 
 
+Volleyball and Handball related requests
+----------------------------------------
+POST netsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/netsportsball/
+GET netsportsballs/
+GET netsportsball/{id}/
+GET netsportsball/{name}
+GET netsportsball/material/{material}
+GET netsportsball/color/{color}
+GET netsportsball/type/{Volleyball | Handball}
+DELETE curl -X DELETE "localhost:8080/netsportsball/{id}
+
 Baseball and Tennisball related requests
 ----------------------------------------
 POST batandraquetsgame/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/batandraquetsgame/
@@ -13,7 +24,7 @@ GET batandraquetsgame/{id}/
 GET batandraquetsgame/{name}
 GET batandraquetsgame/material/{material}
 GET batandraquetsgame/color/{color}
-GET batandraquetsgame/type/{Football | Basketball}
+GET batandraquetsgame/type/{Baseball | Tennisball}
 DELETE curl -X DELETE "localhost:8080/batandraquetsgame/{id}
 
 
