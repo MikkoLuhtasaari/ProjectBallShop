@@ -14,7 +14,7 @@ public class Football
     private String name;
     private String color;
     private int diameter;
-    private int weight;
+    private int weigth;
     private String details;
     private String material;
     private String manufacturer;
@@ -32,7 +32,7 @@ public class Football
         setName(name);
         setColor(color);
         setDiameter(diameter);
-        setWeight(weight);
+        setWeigth(weigth);
         setDetails(details);
         setMaterial(material);
         setManufacturer(manufacturer);
@@ -52,8 +52,8 @@ public class Football
     public void setDiameter(int diameter) {
         this.diameter = diameter;
     }
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setWeigth(int weigth) {
+        this.weigth = weigth;
     }
     public void setDetails(String details) {
         this.details = details;
@@ -90,7 +90,7 @@ public class Football
         return diameter;
     }
     public int getWeigth() {
-        return weight;
+        return weigth;
     }
     public String getDetails() {
         return details;
