@@ -7,5 +7,5 @@ public interface TargetSportsBallRepository extends CrudRepository<TargetSportsB
     List<TargetSportsBall> findByColor(String color);
     List<TargetSportsBall> findByMaterial(String material);
     TargetSportsBall findByName(String name);
-    List<TargetSportsBall> findByType();
+    List<TargetSportsBall> findByType(String type);
 }
