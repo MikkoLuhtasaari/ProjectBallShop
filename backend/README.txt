@@ -4,43 +4,39 @@ Port is http://localhost:8080/
 
 AT THE START /populate
 
-Football related requests
+
+Baseball and Tennisball related requests
+----------------------------------------
+POST batandraquetsgame/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/batandraquetsgame/
+GET batandraquetsgames/
+GET batandraquetsgame/{id}/
+GET batandraquetsgame/{name}
+GET batandraquetsgame/material/{material}
+GET batandraquetsgame/color/{color}
+GET batandraquetsgame/type/{Football | Basketball}
+DELETE curl -X DELETE "localhost:8080/batandraquetsgame/{id}
+
+
+Football and Basketball related requests
 ----------------------------
-POST football/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/football/
-GET footballs/
-GET football/{id}/
-GET football/name/{name}
-GET football/material/{material}
-GET football/color/{color}
-DELETE curl -X DELETE "localhost:8080/football/{id}
+POST goalsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/goalsportsball/
+GET goalsportsballs/
+GET goalsportsball/{id}/
+GET goalsportsball/{name}
+GET goalsportsball/material/{material}
+GET goalsportsball/color/{color}
+GET goalsportsball/type/{Football | Basketball}
+DELETE curl -X DELETE "localhost:8080/goalsportsball/{id}
 
 
-Bowlingball related requests
+Bowlingball and Golfball related requests
 ------------------------------
-POST bowlingball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 109.95, \"amount\" : 1, \"holeAmount\" : 3}" http://localhost:8080/bowlingball/
-GET bowlingballs/
-GET bowlingball/{id}/
-GET bowlingball/name/{name}
-GET bowlingball/material/{material}
-GET bowlingball/color/{color}
-GET bowlingball/holeamount/{holeamount}
-DELETE curl -X DELETE "localhost:8080/bowlingball/{id}
-
-
-Chocolateball related requests
-------------------------------
-POST chocolateball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Chocolate1\", \"color\" : \"Brown\", \"diameter\" : 5, \"weigth\" : 20, \"details\" : \"none\", \"amount\" : 1, \"calories\" : 150}" http://localhost:8080/chocolateball/
-GET chocolateballs/
-GET chocolateball/name/{name}
-DELETE curl -X DELETE "localhost:8080/chocolateball/{id}"
-
-
-Golfball related requests
--------------------------
-POST golfball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Bad ball\", \"type\" : \"Golfball\", \"price\" : 0.95, \"amount\" : 1}" http://localhost:8080/golfball/
-GET golfballs/
-GET golfball/{id}
-GET golfball/name/{name}
-GET golfball/material/{material}
-DELETE curl -X DELETE "localhost:8080/golfball/{id}"
+POST targetsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 109.95, \"amount\" : 1}" http://localhost:8080/targetsportsball/
+GET targetsportsballs/
+GET targetsportsball/{id}/
+GET targetsportsball/name/{name}
+GET targetsportsball/material/{material}
+GET targetsportsball/color/{color}
+GET targetsportsball/type/{Bowlingball | Golfball}
+DELETE curl -X DELETE "localhost:8080/targetsportsball/{id}
 
