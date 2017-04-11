@@ -8,30 +8,32 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material")})
-public class Football 
+@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
+public class Bowlingball 
 {
     private String name;
     private String color;
     private int diameter;
-    private int weight;
+    private int weigth;
     private String details;
     private String material;
     private int amount;
+    private int holeAmount;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
-    public Football(){};
+    public Bowlingball(){};
     
-    public Football(String name, String color, int diameter, int weigth, String details, String material, int amount, long id) {
+    public Bowlingball(String name, String color, int diameter, int weigth, String details, String material, int amount, int holeAmount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
-        setWeight(weight);
+        setWeight(weigth);
         setDetails(details);
         setMaterial(material);
         setAmount(amount);
+        setHoleAmount(holeAmount);
         setId(id);
     }
     
@@ -44,8 +46,8 @@ public class Football
     public void setDiameter(int diameter) {
         this.diameter = diameter;
     }
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setWeight(int weigth) {
+        this.weigth = weigth;
     }
     public void setDetails(String details) {
         this.details = details;
@@ -55,6 +57,9 @@ public class Football
     }
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+    public void setHoleAmount(int holeAmount) {
+        this.holeAmount = holeAmount;
     }
     public void setId(long id) {
         this.id = id;
@@ -70,7 +75,7 @@ public class Football
         return diameter;
     }
     public int getWeigth() {
-        return weight;
+        return weigth;
     }
     public String getDetails() {
         return details;
@@ -80,6 +85,9 @@ public class Football
     }
     public int getAmount() {
         return amount;
+    }
+    public int getHoleAmount() {
+        return holeAmount;
     }
     public long getId() {
         return id;

@@ -8,30 +8,33 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material")})
-public class Football 
+@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount")})
+public class Chocolateball
 {
+    //Index
     private String name;
+    //Index
     private String color;
     private int diameter;
-    private int weight;
+    private int weigth;
     private String details;
-    private String material;
+    //Index
     private int amount;
+    private int calories;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
-    public Football(){};
+    public Chocolateball(){};
     
-    public Football(String name, String color, int diameter, int weigth, String details, String material, int amount, long id) {
+    public Chocolateball(String name, String color, int diameter, int weigth, String details, int amount, int calories, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
-        setWeight(weight);
+        setWeight(weigth);
         setDetails(details);
-        setMaterial(material);
         setAmount(amount);
+        setCalories(calories);
         setId(id);
     }
     
@@ -44,17 +47,17 @@ public class Football
     public void setDiameter(int diameter) {
         this.diameter = diameter;
     }
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setWeight(int weigth) {
+        this.weigth = weigth;
     }
     public void setDetails(String details) {
         this.details = details;
     }
-    public void setMaterial(String material) {
-        this.material = material;
-    }
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
     public void setId(long id) {
         this.id = id;
@@ -70,16 +73,16 @@ public class Football
         return diameter;
     }
     public int getWeigth() {
-        return weight;
+        return weigth;
     }
     public String getDetails() {
         return details;
     }
-    public String getMaterial() {
-        return material;
-    }
     public int getAmount() {
         return amount;
+    }
+    public int getCalories() {
+        return calories;
     }
     public long getId() {
         return id;
