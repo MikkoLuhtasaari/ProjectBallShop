@@ -60,9 +60,9 @@ public class MyController {
         cbRepository.save(chocolateball3);
         
         //GOLFBALLS
-        Golfball golfball1 = new Golfball("gb1", 5, 50, "Basic ball", "Elastic rubber", 5, 1);
-        Golfball golfball2 = new Golfball("gb2", 4, 40, "Basic ball vol 2", "Duck skin", 8, 2);
-        Golfball golfball3 = new Golfball("gb3", 5, 500, "Prototype", "Goat stomach", 1, 3);
+        Golfball golfball1 = new Golfball("gb1", 5, 50, "Basic ball", "Elastic rubber", "Adidas", "Golfball", "Golfball", 0.95, 5, 1);
+        Golfball golfball2 = new Golfball("gb2", 4, 40, "Basic ball vol 2", "Duck skin", "SecondDas", "Golffibals", "Golfball", 0.65, 8, 2);
+        Golfball golfball3 = new Golfball("gb3", 5, 500, "Prototype", "Goat stomach", "Nike", "A ball to hit", "Golfball", 0.45, 1, 3);
         
         gbRepository.save(golfball1);
         gbRepository.save(golfball2);
