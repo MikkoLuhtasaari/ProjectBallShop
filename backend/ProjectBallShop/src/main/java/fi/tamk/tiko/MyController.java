@@ -42,9 +42,9 @@ public class MyController {
         fbRepository.save(football5);
         
         //BOWLINGBALLS
-        Bowlingball bowlingball1 = new Bowlingball("bb1", "Black", 40, 3030, "Somethingsomething", "Steel", 1, 3, 1);
-        Bowlingball bowlingball2 = new Bowlingball("bb2", "Orange", 40, 200, "", "Rubber", 6, 4, 2);
-        Bowlingball bowlingball3 = new Bowlingball("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", 22, 5, 3);
+        Bowlingball bowlingball1 = new Bowlingball("bb1", "Black", 40, 3030, "Somethingsomething", "Steel", "Adidas", "A ball not to kick", "Bowlingball", 109.95, 1, 3, 1);
+        Bowlingball bowlingball2 = new Bowlingball("bb2", "Orange", 40, 200, "", "Rubber", "AnotherDas", "A ball not to kick", "Bowlingball", 105.95, 6, 4, 2);
+        Bowlingball bowlingball3 = new Bowlingball("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 22, 5, 3);
         
         bbRepository.save(bowlingball1);
         bbRepository.save(bowlingball2);
