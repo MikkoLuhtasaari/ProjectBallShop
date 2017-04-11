@@ -17,7 +17,7 @@ DELETE curl -X DELETE "localhost:8080/football/{id}
 
 Bowlingball related requests
 ------------------------------
-POST bowlingball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"amount\" : 1, \"holeAmount\" : 3}" http://localhost:8080/bowlingball/
+POST bowlingball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 109.95, \"amount\" : 1, \"holeAmount\" : 3}" http://localhost:8080/bowlingball/
 GET bowlingballs/
 GET bowlingball/{id}/
 GET bowlingball/name/{name}
