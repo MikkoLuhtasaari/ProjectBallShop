@@ -20,6 +20,9 @@ public class MyController {
     @Autowired
     TargetSportsBallRepository tsbRepository;
     
+    @Autowired
+    BatAndRaquetsGamesRepository brRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -44,8 +47,60 @@ public class MyController {
         tsbRepository.save(tempTarget1);
         tsbRepository.save(tempTarget2);
         tsbRepository.save(tempTarget3);
+        
+        //BASEBALLS & TENNISBALLS
+        BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 3, 1);
+        BatAndRaquetsGames tempBat2 = new BatAndRaquetsGames("Baseball2", "White", 6, 35, "Somethingsomething", "Elastic rubber", "Adidas", "A ball to throw2", "Baseball", 4.95, 3, 2);
+        BatAndRaquetsGames tempBat3 = new BatAndRaquetsGames("Tennisball1", "Yellow", 5, 336, "Somethingsomething", "Rubber", "Adidas", "A ball to smash", "Tennisball", 2.95, 3, 3);
 
+        brRepository.save(tempBat1);
+        brRepository.save(tempBat2);
+        brRepository.save(tempBat3);
+        
         return "Populate succesfull";
+    }
+    
+    // Baseball and Tennisball related stuff
+    @RequestMapping(value = "/batandraquetsgame",  method=RequestMethod.POST)
+    public void saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
+        brRepository.save(batandraquetsgame);
+    }
+    
+    @RequestMapping(value = "/batandraquetsgames",  method=RequestMethod.GET)
+    public Iterable<BatAndRaquetsGames> fetchBatAndRaquetsGames() {
+        return brRepository.findAll();
+    }
+    
+    @RequestMapping(value = "/batandraquetsgame/{batandraquetsgameId}",  method=RequestMethod.GET)
+    public BatAndRaquetsGames fetchBatAndRaquetsGame(@PathVariable long batandraquetsgameId) {
+        return brRepository.findOne(batandraquetsgameId);
+    }
+    
+    @RequestMapping(value = "/batandraquetsgame/{batandraquetsgameId}",  method=RequestMethod.DELETE)
+    public BatAndRaquetsGames deleteBatAndRaquetsGame(@PathVariable long batandraquetsgameId) {
+        BatAndRaquetsGames temp = brRepository.findOne(batandraquetsgameId);
+        brRepository.delete(brRepository.findOne(batandraquetsgameId));
+        return temp;
+    }
+    
+    @RequestMapping(value = "/batandraquetsgame/color/{batandraquetsgameColor}",  method=RequestMethod.GET)
+    public List<BatAndRaquetsGames> fetchBatAndRaquetsGameByColor(@PathVariable String batandraquetsgameColor) {
+        return brRepository.findByColor(batandraquetsgameColor);
+    }
+    
+    @RequestMapping(value = "/batandraquetsgame/material/{batandraquetsgameMaterial}",  method=RequestMethod.GET)
+    public List<BatAndRaquetsGames> fetchBatAndRaquetsGamesByMaterial(@PathVariable String batandraquetsgameMaterial) {
+        return brRepository.findByMaterial(batandraquetsgameMaterial);
+    }
+    
+    @RequestMapping(value = "/batandraquetsgame/name/{batandraquetsgameName}",  method=RequestMethod.GET)
+    public BatAndRaquetsGames fetchBatAndRaquetsGamesByName(@PathVariable String batandraquetsgameName) {
+        return brRepository.findByName(batandraquetsgameName);
+    }
+     
+    @RequestMapping(value = "/batandraquetsgame/type/{type}",  method=RequestMethod.GET)
+    public List<BatAndRaquetsGames> fetchBatAndRaquetsGamesByType(@PathVariable String type) {
+        return brRepository.findByType(type);
     }
     
     // Football and Basketball related stuff
