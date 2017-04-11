@@ -24,6 +24,7 @@ public class Golfball
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    private String category;
     
     public Golfball(){};
     
@@ -39,6 +40,7 @@ public class Golfball
         setPrice(price);
         setAmount(amount);
         setId(id);
+        category = "Target sports";
     }
     
     public void setName(String name) {
@@ -107,6 +109,9 @@ public class Golfball
     }
     public long getId() {
         return id;
+    }
+    public String getCategory() {
+        return category;
     }
     
 }

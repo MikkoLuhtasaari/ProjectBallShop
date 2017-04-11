@@ -25,6 +25,7 @@ public class Football
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    private String category;
     
     public Football(){};
     
@@ -41,6 +42,7 @@ public class Football
         setPrice(price);
         setAmount(amount);
         setId(id);
+        category = "Goal sports";
     }
     
     public void setName(String name) {
@@ -115,6 +117,9 @@ public class Football
     }
     public long getId() {
         return id;
+    }
+    public String getCategory() {
+        return category;
     }
     
 }
