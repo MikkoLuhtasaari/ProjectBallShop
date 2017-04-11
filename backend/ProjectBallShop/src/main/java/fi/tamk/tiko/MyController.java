@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RestController
 public class MyController {
     @Autowired
-    FootballRepository fbRepository;
+    GoalSportsBallRepository gsbRepository;
   
     @Autowired
     TargetSportsBallRepository tsbRepository;
@@ -28,19 +28,13 @@ public class MyController {
     @RequestMapping(value = "/populate",  method=RequestMethod.GET)
     public String populate() {
         //FOOTBALLS
-        Football football1 = new Football("Placeholder1", "Red", 12, 500, "None", "Rubber", "Adidas", "A ball to kick", "Football", 25.95 , 1, 1);
-        Football football2 = new Football("Placeholder2", "Green", 15, 1000, "Some details", "Rubber", "Nike", "Basic kickball", "Football", 15.0, 2, 2);
-        Football football3 = new Football("Placeholder3", "Yellow", 13, 3000, "Crappy ball", "Duck skin", "Adidas", "For professionals", "Football", 16.95, 1, 3);
-        Football football4 = new Football("Placeholder4", "Red", 22, 2000, "None", "Lamb skin", "Diipadaa", "Another ball", "Football", 10.45, 3, 4);
-        Football football5 = new Football("Placeholder5", "Red", 25, 1000, "None", "Plastic", "Adidas", "Best ball", "Football", 16.55, 1, 5);
+        GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
+        GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
         
-        fbRepository.save(football1);
-        fbRepository.save(football2);
-        fbRepository.save(football3);
-        fbRepository.save(football4);
-        fbRepository.save(football5);
+        gsbRepository.save(tempGoal1);
+        gsbRepository.save(tempGoal2);
         
-        //BOWLINGBALLS
+        //BOWLINGBALLS & GOLFBALLS
         TargetSportsBall tempTarget1 = new TargetSportsBall("Bowlingball1", "Black", 40, 3030, "Somethingsomething", "Steel", "Adidas", "A ball not to kick", "Bowlingball", 109.95, 3, 1);
         TargetSportsBall tempTarget2 = new TargetSportsBall("Golfball1", "Orange", 40, 200, "", "Rubber", "AnotherDas", "A ball not to kick", "Golfball", 105.95, 4, 2);
         TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 5, 3);
