@@ -32,8 +32,8 @@ export default class Footballs extends React.Component{
             width: "100%"
         };
             propArray.push(
-                <div class="ball_floated_img" style={div_style}>
-                    <img src="../../images/Foot.jpg" alt="Ball" style={img_style} />
+                <div style={div_style}>
+                    <img src="../../images/Foot.png" alt="Ball" style={img_style} />
                     <h4>{fbObject.name} {fbObject.color}</h4>
                     <h6>{fbObject.details}</h6>
                     <h2>15,95€</h2>
