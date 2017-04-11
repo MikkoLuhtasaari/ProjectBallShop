@@ -21,7 +21,7 @@ public class MyController {
     TargetSportsBallRepository tsbRepository;
     
     @Autowired
-    BatAndRaquetsGames brRepository;
+    BatAndRaquetsGamesRepository brRepository;
     
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
@@ -72,7 +72,7 @@ public class MyController {
     }
     
     @RequestMapping(value = "/batandraquetsgame/{batandraquetsgameId}",  method=RequestMethod.GET)
-    public BatAndRaquetsGames fetchGoalSportsBall(@PathVariable long batandraquetsgameId) {
+    public BatAndRaquetsGames fetchBatAndRaquetsGame(@PathVariable long batandraquetsgameId) {
         return brRepository.findOne(batandraquetsgameId);
     }
     
