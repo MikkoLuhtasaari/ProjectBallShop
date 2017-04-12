@@ -37,6 +37,8 @@ public class MyController implements ApplicationRunner {
     }
     
     public void run(ApplicationArguments args) {
+        
+        //Welcome message
         System.out.println("  ____        _ _   _    _                _        ");
         System.out.println(" |  _ \\      | | | | |  | |              | |       ");
         System.out.println(" | |_) | __ _| | | | |__| | __ ___      _| | _____ ");
@@ -45,6 +47,20 @@ public class MyController implements ApplicationRunner {
         System.out.println(" |____/ \\__,_|_|_| |_|  |_|\\__,_| \\_/\\_/ |_|\\_\\___/");
         System.out.println("                                                   ");
         System.out.println("                                                   ");
+        
+        //Paths (Netsportsballs)
+        System.out.println("Volleyball and Handball related requests");
+        System.out.println("POST netsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/");
+        System.out.println("DELETE curl -X DELETE \"localhost:8080/netsportsball/{id}");
+        System.out.println("GET netsportsballs/");
+        System.out.println("GET netsportsball/{id}/");
+        System.out.println("GET netsportsball/{name}");
+        System.out.println("GET netsportsball/material/{material}");
+        System.out.println("GET netsportsball/color/{color}");
+        System.out.println("GET netsportsball/type/{Volleyball | Handball}");
+        System.out.println("");
+        
+
         
         //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
