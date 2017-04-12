@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 
 @RestController
-public class MyController {
+public class MyController implements ApplicationRunner {
     @Autowired
     GoalSportsBallRepository gsbRepository;
   
@@ -30,6 +30,10 @@ public class MyController {
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
+    }
+    
+    public void run(ApplicationArguments args) {
+        System.out.println("Ran app");
     }
     
     
