@@ -2,7 +2,7 @@ export default class Client{
     footballs(){
         let result = new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
-            request.open("GET", "http://localhost:8080/footballs");
+            request.open("GET", "http://localhost:8080/goalsportsball/type/Football");
             request.onreadystatechange = () => {
                 if (request.readyState === 4 && request.status === 200) {
                     let raw = request.responseText; //array
@@ -17,7 +17,7 @@ export default class Client{
     bowlingballs(){
         let result = new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
-            request.open("GET", "http://localhost:8080/bowlingballs");
+            request.open("GET", "http://localhost:8080/targetsportsball/type/Bowlingball");
             request.onreadystatechange = () => {
                 if (request.readyState === 4 && request.status === 200) {
                     let raw = request.responseText; //array
@@ -32,7 +32,7 @@ export default class Client{
     golfballs(){
         let result = new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
-            request.open("GET", "http://localhost:8080/golfballs");
+            request.open("GET", "http://localhost:8080/targetsportsball/type/Golfball");
             request.onreadystatechange = () => {
                 if (request.readyState === 4 && request.status === 200) {
                     let raw = request.responseText; //array
