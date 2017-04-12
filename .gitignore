@@ -55,4 +55,3 @@ backend/ProjectBallShop/target/maven-status/maven-compiler-plugin/compile/defaul
 *.lst
 frontend/shop/less
 frontend/shop/node_modules
-frontend/shop/public/fonts
