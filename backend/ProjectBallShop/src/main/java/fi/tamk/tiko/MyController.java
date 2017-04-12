@@ -73,6 +73,17 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET batandraquetsgame/color/{color}");
         System.out.println("GET batandraquetsgame/type/{Baseball | Tennisball}");
         
+        //Paths (goalsportsball)
+        System.out.println("Football and Basketball related requests");
+        System.out.println("POST goalsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/");
+        System.out.println("DELETE curl -X DELETE \"localhost:8080/goalsportsball/{id}");
+        System.out.println("GET goalsportsballs/");
+        System.out.println("GET goalsportsball/{id}/");
+        System.out.println("GET goalsportsball/{name}");
+        System.out.println("GET goalsportsball/material/{material}");
+        System.out.println("GET goalsportsball/color/{color}");
+        System.out.println("GET goalsportsball/type/{Football | Basketball}");
+        
         //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
         GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
