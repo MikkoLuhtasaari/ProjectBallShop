@@ -3,17 +3,22 @@ package fi.tamk.tiko;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.ApplicationArguments;
+
 @RestController
-public class MyController {
+public class MyController implements ApplicationRunner {
     @Autowired
     GoalSportsBallRepository gsbRepository;
   
@@ -31,9 +36,65 @@ public class MyController {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
     }
     
-    
-    @RequestMapping(value = "/populate",  method=RequestMethod.GET)
-    public String populate() {
+    public void run(ApplicationArguments args) {
+        
+        //Welcome message
+        System.out.println("                                                   ");
+        System.out.println("                                                   ");
+        System.out.println("  ____        _ _   _    _                _        ");
+        System.out.println(" |  _ \\      | | | | |  | |              | |       ");
+        System.out.println(" | |_) | __ _| | | | |__| | __ ___      _| | _____ ");
+        System.out.println(" |  _ < / _` | | | |  __  |/ _` \\ \\ /\\ / / |/ / __|");
+        System.out.println(" | |_) | (_| | | | | |  | | (_| |\\ V  V /|   <\\__ \\");
+        System.out.println(" |____/ \\__,_|_|_| |_|  |_|\\__,_| \\_/\\_/ |_|\\_\\___/");
+        System.out.println("                                                   ");
+        System.out.println("                                                   ");
+        
+        //Paths (Netsportsballs)
+        System.out.println("Volleyball and Handball related requests");
+        System.out.println("POST netsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/");
+        System.out.println("DELETE curl -X DELETE \"localhost:8080/netsportsball/{id}");
+        System.out.println("GET netsportsballs/");
+        System.out.println("GET netsportsball/{id}/");
+        System.out.println("GET netsportsball/{name}");
+        System.out.println("GET netsportsball/material/{material}");
+        System.out.println("GET netsportsball/color/{color}");
+        System.out.println("GET netsportsball/type/{Volleyball | Handball}");
+        System.out.println("");
+        
+        //Paths (BatAndRaquetsGames)
+        System.out.println("Baseball and Tennisball related requests");
+        System.out.println("POST batandraquetsgame/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/batandraquetsgame/");
+        System.out.println("DELETE curl -X DELETE \"localhost:8080/batandraquetsgame/{id}");
+        System.out.println("GET batandraquetsgames/");
+        System.out.println("GET batandraquetsgame/{id}/");
+        System.out.println("GET batandraquetsgame/{name}");
+        System.out.println("GET batandraquetsgame/material/{material}");
+        System.out.println("GET batandraquetsgame/color/{color}");
+        System.out.println("GET batandraquetsgame/type/{Baseball | Tennisball}");
+        
+        //Paths (goalsportsball)
+        System.out.println("Football and Basketball related requests");
+        System.out.println("POST goalsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/");
+        System.out.println("DELETE curl -X DELETE \"localhost:8080/goalsportsball/{id}");
+        System.out.println("GET goalsportsballs/");
+        System.out.println("GET goalsportsball/{id}/");
+        System.out.println("GET goalsportsball/{name}");
+        System.out.println("GET goalsportsball/material/{material}");
+        System.out.println("GET goalsportsball/color/{color}");
+        System.out.println("GET goalsportsball/type/{Football | Basketball}");
+        
+        //Paths (targetsportsball)
+        System.out.println("Golfball and Bowlingball related requests");
+        System.out.println("POST targetsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Bowlingball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/targetsportsball/");
+        System.out.println("DELETE curl -X DELETE \"localhost:8080/targetsportsball/{id}");
+        System.out.println("GET targetsportsballs/");
+        System.out.println("GET targetsportsball/{id}/");
+        System.out.println("GET targetsportsball/{name}");
+        System.out.println("GET targetsportsball/material/{material}");
+        System.out.println("GET targetsportsball/color/{color}");
+        System.out.println("GET targetsportsball/type/{Football | Basketball}");
+        
         //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
         GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
@@ -69,8 +130,6 @@ public class MyController {
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
-        
-        return "Populate succesfull";
     }
     
     // Volleyball and Handball related stuff
