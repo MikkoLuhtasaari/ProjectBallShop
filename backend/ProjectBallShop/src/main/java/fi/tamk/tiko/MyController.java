@@ -37,7 +37,16 @@ public class MyController implements ApplicationRunner {
     }
     
     public void run(ApplicationArguments args) {
-        System.out.println("Ran app");
+        System.out.println("  ____        _ _   _    _                _        ");
+        System.out.println(" |  _ \\      | | | | |  | |              | |       ");
+        System.out.println(" | |_) | __ _| | | | |__| | __ ___      _| | _____ ");
+        System.out.println(" |  _ < / _` | | | |  __  |/ _` \\ \\ /\\ / / |/ / __|");
+        System.out.println(" | |_) | (_| | | | | |  | | (_| |\\ V  V /|   <\\__ \\");
+        System.out.println(" |____/ \\__,_|_|_| |_|  |_|\\__,_| \\_/\\_/ |_|\\_\\___/");
+        System.out.println("                                                   ");
+        System.out.println("                                                   ");
+        
+
     }
     
     
