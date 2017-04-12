@@ -39,6 +39,8 @@ public class MyController implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         
         //Welcome message
+        System.out.println("                                                   ");
+        System.out.println("                                                   ");
         System.out.println("  ____        _ _   _    _                _        ");
         System.out.println(" |  _ \\      | | | | |  | |              | |       ");
         System.out.println(" | |_) | __ _| | | | |__| | __ ___      _| | _____ ");
