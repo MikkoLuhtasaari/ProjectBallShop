@@ -1,12 +1,13 @@
 export default class Client{
-    footballs(){
+    ball(sporttype, balltype){
+        console.log("yasd")
         let result = new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
-            request.open("GET", "http://localhost:8080/footballs");
+            request.open("GET", "http://localhost:8080/" + sporttype + "/type/" + balltype);
             request.onreadystatechange = () => {
                 if (request.readyState === 4 && request.status === 200) {
-                    let raw = request.responseText; //array
-                    let objectified = JSON.parse(raw); //array of objects
+                    let raw = request.responseText;
+                    let objectified = JSON.parse(raw);
                     resolve(objectified);
                 }};
             request.send();
@@ -14,44 +15,14 @@ export default class Client{
         return result;
     }
 
-    bowlingballs(){
+    balls(sporttype){
         let result = new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
-            request.open("GET", "http://localhost:8080/bowlingballs");
+            request.open("GET", "http://localhost:8080/" + sporttype);
             request.onreadystatechange = () => {
                 if (request.readyState === 4 && request.status === 200) {
-                    let raw = request.responseText; //array
-                    let objectified = JSON.parse(raw); //array of objects
-                    resolve(objectified);
-                }};
-            request.send();
-        });
-        return result;
-    }
-
-    golfballs(){
-        let result = new Promise((resolve, reject) => {
-            let request = new XMLHttpRequest();
-            request.open("GET", "http://localhost:8080/golfballs");
-            request.onreadystatechange = () => {
-                if (request.readyState === 4 && request.status === 200) {
-                    let raw = request.responseText; //array
-                    let objectified = JSON.parse(raw); //array of objects
-                    resolve(objectified);
-                }};
-            request.send();
-        });
-        return result;
-    }
-
-    chocolateballs(){
-        let result = new Promise((resolve, reject) => {
-            let request = new XMLHttpRequest();
-            request.open("GET", "http://localhost:8080/chocolateballs");
-            request.onreadystatechange = () => {
-                if (request.readyState === 4 && request.status === 200) {
-                    let raw = request.responseText; //array
-                    let objectified = JSON.parse(raw); //array of objects
+                    let raw = request.responseText;
+                    let objectified = JSON.parse(raw);
                     resolve(objectified);
                 }};
             request.send();

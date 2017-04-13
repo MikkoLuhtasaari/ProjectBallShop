@@ -1,123 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+
     <link rel="icon" href="images/favicon.ico">
     <title>Bally Balls</title>
-    <link href="css_files/bootstrap.min.css" rel="stylesheet">
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link href="css_files/carousel.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/half-slider.css" rel="stylesheet">
+
 </head>
-<!-- NAVBAR
-================================================== -->
 <body>
-<div class="navbar-wrapper">
-    <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Bally Ball</a>
+<!--Top navigation-->
+<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top bs-dark">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="Bally Balls" style="padding: 10px 20px 10px 20px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left form-horizontal" role="search">
+                <div class="input-group">
+                    <input type="text" class="search-box" placeholder="Search">
+                    <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">Sign in</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-shopping-cart" style="padding-right: 5px">
+                        </span>7 - Items<span class="caret" style="margin-right: 10px"></span></a>
+                    <ul class="dropdown-menu dropdown-cart" role="menu">
+                        <li>
+                              <span class="item">
+                                <span class="item-left">
+                                    <img src="images/Foot.png" style="height: 40px" alt="item" />
+                                    <span class="item-info">
+                                        <span>ITEM NAME</span>
+                                        <span>23€</span>
+                                    </span>
+                                </span>
+                                <span class="item-right">
+                                    <button class="btn btn-xs btn-danger pull-right" style="margin-right: 10px">x</button>
+                                </span>
+                            </span>
                         </li>
+                        <li class="divider"></li>
+                        <li><a class="text-center" href="">View Cart</a></li>
                     </ul>
-                </div>
-            </div>
-        </nav>
-
-    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
-
-<!-- Carousel
-================================================== -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
+<!--Carousel-->
+<header id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner" role="listbox">
+
+    <div class="carousel-inner">
         <div class="item active">
-            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Goal sports</h1>
-                    <p>Win from Within</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Explore</a></p>
-                </div>
-            </div>
+            <div class="fill" style="background-image:url('images/soccer.jpg');"></div>
         </div>
         <div class="item">
-            <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Net sports</h1>
-                    <p>Play like a champion!</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Explore</a></p>
-                </div>
-            </div>
+            <div class="fill" style="background-image:url('images/bowling.jpg');"></div>
         </div>
         <div class="item">
-            <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Target sports</h1>
-                    <p>Respect all, fear none</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Explore</a></p>
-                </div>
-            </div>
+            <div class="fill" style="background-image:url('images/tennis.jpg');"></div>
         </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
     </a>
+</header>
+
+<!--Middle navigatin-->
+<div class="container-fullwidth">
+    <nav class="navbar-inverse center">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Net Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/netsportsball/Volleyball/">Volleyball</a></li>
+                        <li><a href="http://localhost:3000/#/type/netsportsball/Handball">Handball</a></li>
+                        <li><a href="http://localhost:3000/#/group/netsportsballs">All</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bat & Racket Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/batandraquetsgame/Baseball">Baseball</a></li>
+                        <li><a href="http://localhost:3000/#/type/batandraquetsgame/Tennisball">Tennis</a></li>
+                        <li><a href="http://localhost:3000/#/group/batandraquetsgames">All</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Goal Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/goalsportsball/Football">Football</a></li>
+                        <li><a href="http://localhost:3000/#/type/goalsportsball/Basketball">Basketball</a></li>
+                        <li><a href="http://localhost:3000/#/group/goalsportsballs">All</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Target Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/targetsportsball/Bowlingball">Bowling</a></li>
+                        <li><a href="http://localhost:3000/#/type/targetsportsball/Golfball">Golf</a></li>
+                        <li><a href="http://localhost:3000/#/group/targetsportsballs">All</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
-<!-- Content
-================================================== -->
+<!-- Page Content -->
 <div id="app"></div>
-<!-- FOOTER -->
+
+<!-- Footer -->
 <footer>
-    <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Copyright &copy; Ball Hawks 2017</p>
+        </div>
+    </div>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $('.carousel').carousel({
+        interval: 3000
+    })
+</script>
+
 </body>
+
 </html>

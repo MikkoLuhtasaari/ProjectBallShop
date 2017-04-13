@@ -8,8 +8,8 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
-public class Bowlingball 
+@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
+public class NetSportsBall 
 {
     private String name;
     private String color;
@@ -28,9 +28,9 @@ public class Bowlingball
     private long id;
     private String category;
     
-    public Bowlingball(){};
+    public NetSportsBall(){};
     
-    public Bowlingball(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, int holeAmount, long id) {
+    public NetSportsBall(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
@@ -42,9 +42,8 @@ public class Bowlingball
         setType(type);
         setPrice(price);
         setAmount(amount);
-        setHoleAmount(holeAmount);
         setId(id);
-        category = "Target sports";
+        category = "Net sports";
     }
     
     public void setName(String name) {
@@ -79,9 +78,6 @@ public class Bowlingball
     }
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-    public void setHoleAmount(int holeAmount) {
-        this.holeAmount = holeAmount;
     }
     public void setId(long id) {
         this.id = id;
@@ -119,9 +115,6 @@ public class Bowlingball
     }
     public int getAmount() {
         return amount;
-    }
-    public int getHoleAmount() {
-        return holeAmount;
     }
     public long getId() {
         return id;
