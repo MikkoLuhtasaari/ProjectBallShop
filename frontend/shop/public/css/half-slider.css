@@ -62,6 +62,11 @@ body {
     z-index: 3;
 }
 
+footer{
+    width: 100%;
+    display: inline-block;
+}
+
 /*Shopping cart*/
 
 ul.dropdown-cart{
