@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="images/favicon.ico">
+    <title>Bally Balls</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/half-slider.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!--Top navigation-->
+<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top bs-dark">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="Bally Balls" style="padding: 10px 20px 10px 20px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left form-horizontal" role="search">
+                <div class="input-group">
+                    <input type="text" class="search-box" placeholder="Search">
+                    <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">Sign in</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-shopping-cart" style="padding-right: 5px">
+                        </span>7 - Items<span class="caret" style="margin-right: 10px"></span></a>
+                    <ul class="dropdown-menu dropdown-cart" role="menu">
+                        <li>
+                              <span class="item">
+                                <span class="item-left">
+                                    <img src="images/Foot.png" style="height: 40px" alt="item" />
+                                    <span class="item-info">
+                                        <span>ITEM NAME</span>
+                                        <span>23€</span>
+                                    </span>
+                                </span>
+                                <span class="item-right">
+                                    <button class="btn btn-xs btn-danger pull-right" style="margin-right: 10px">x</button>
+                                </span>
+                            </span>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a class="text-center" href="">View Cart</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--Carousel-->
+<header id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="fill" style="background-image:url('images/soccer.jpg');"></div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image:url('images/bowling.jpg');"></div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image:url('images/tennis.jpg');"></div>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</header>
+
+<!--Middle navigatin-->
+<div class="container-fullwidth">
+    <nav class="navbar-inverse center">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Net Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/netsportsball/Volleyball/">Volleyball</a></li>
+                        <li><a href="http://localhost:3000/#/type/netsportsball/Handball">Handball</a></li>
+                        <li><a href="http://localhost:3000/#/group/netsportsballs">All</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bat & Racket Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/batandraquetsgame/Baseball">Baseball</a></li>
+                        <li><a href="http://localhost:3000/#/type/batandraquetsgame/Tennisball">Tennis</a></li>
+                        <li><a href="http://localhost:3000/#/group/batandraquetsgames">All</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Goal Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/goalsportsball/Football">Football</a></li>
+                        <li><a href="http://localhost:3000/#/type/goalsportsball/Basketball">Basketball</a></li>
+                        <li><a href="http://localhost:3000/#/group/goalsportsballs">All</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Target Sports <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://localhost:3000/#/type/targetsportsball/Bowlingball">Bowling</a></li>
+                        <li><a href="http://localhost:3000/#/type/targetsportsball/Golfball">Golf</a></li>
+                        <li><a href="http://localhost:3000/#/group/targetsportsballs">All</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!-- Page Content -->
+<div id="app"></div>
+
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Copyright &copy; Ball Hawks 2017</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $('.carousel').carousel({
+        interval: 3000
+    })
+</script>
+
+</body>
+
+</html>
