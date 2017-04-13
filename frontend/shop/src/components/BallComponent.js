@@ -4,11 +4,32 @@ export default class BallComponent extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
-        this.state = {balls: []};
-        if (props.group !== undefined) this.client.balls(props.group).then(b => this.setState({balls: b}));
-        else if (props.params.type !== undefined) this.client.ball(props.params.group, props.params.type).then(b => this.setState({balls: b}));
-        else this.client.balls(props.params.group).then(b => this.setState({balls: b}));
+        this.state = {
+            balls: [],
+            updated:false
+        };
+        this.fetchItems = this.fetchItems.bind(this);
+        this.fetchItems();
     }
+
+    componentWillReceiveProps() {
+        this.fetchItems();
+        this.setState({updated:false});
+    }
+
+    componentDidUpdate() {
+        if(!this.state.updated) {
+          this.fetchItems();
+          this.setState({updated:true});
+        }
+    }
+
+    fetchItems() {
+      if (this.props.group !== undefined) this.client.balls(this.props.group).then(b => this.setState({balls: b}));
+      else if (this.props.params.type !== undefined) this.client.ball(this.props.params.group, this.props.params.type).then(b => this.setState({balls: b}));
+      else this.client.balls(this.props.params.group).then(b => this.setState({balls: b}));
+    }
+
     render(){
         return(
             <section>
