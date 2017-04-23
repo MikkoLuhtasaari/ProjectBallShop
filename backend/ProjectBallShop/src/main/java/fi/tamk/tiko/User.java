@@ -53,6 +53,18 @@ public class User
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
 
     public long getId() {
         return id;
