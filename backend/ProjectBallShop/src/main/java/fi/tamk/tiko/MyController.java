@@ -56,7 +56,7 @@ public class MyController implements ApplicationRunner {
         //Paths (Netsportsballs)
         System.out.println("Volleyball and Handball related requests");
         System.out.println("POST netsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/netsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/netsportsball/{id}");
         System.out.println("GET netsportsballs/");
         System.out.println("GET netsportsball/{id}/");
         System.out.println("GET netsportsball/{name}");
@@ -68,7 +68,7 @@ public class MyController implements ApplicationRunner {
         //Paths (BatAndRaquetsGames)
         System.out.println("Baseball and Tennisball related requests");
         System.out.println("POST batandraquetsgame/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/batandraquetsgame/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/batandraquetsgame/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/batandraquetsgame/{id}");
         System.out.println("GET batandraquetsgames/");
         System.out.println("GET batandraquetsgame/{id}/");
         System.out.println("GET batandraquetsgame/{name}");
@@ -79,7 +79,7 @@ public class MyController implements ApplicationRunner {
         //Paths (goalsportsball)
         System.out.println("Football and Basketball related requests");
         System.out.println("POST goalsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/goalsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/goalsportsball/{id}");
         System.out.println("GET goalsportsballs/");
         System.out.println("GET goalsportsball/{id}/");
         System.out.println("GET goalsportsball/{name}");
@@ -90,7 +90,7 @@ public class MyController implements ApplicationRunner {
         //Paths (targetsportsball)
         System.out.println("Golfball and Bowlingball related requests");
         System.out.println("POST targetsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Bowlingball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/targetsportsball/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/targetsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/targetsportsball/{id}");
         System.out.println("GET targetsportsballs/");
         System.out.println("GET targetsportsball/{id}/");
         System.out.println("GET targetsportsball/{name}");
