@@ -1,10 +1,19 @@
 To run the server navigate to ProjectBallShop\ProjectBallShop\backend\ProjectBallShop and type mvn compile. After compiling type mvn spring-boot:run
 Port is http://localhost:8080/
 
+User related requests
+---------------------
+POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}" http://localhost:8080/user/
+DELETE curl -X DELETE localhost:8080/user/{id}
+GET users/
+GET user/{id}
+GET user/username/{userName}
+
+
 Volleyball and Handball related requests
 ----------------------------------------
 POST netsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/netsportsball/
-DELETE curl -X DELETE "localhost:8080/netsportsball/{id}
+DELETE curl -X DELETE localhost:8080/netsportsball/{id}
 GET netsportsballs/
 GET netsportsball/{id}/
 GET netsportsball/{name}
@@ -15,7 +24,7 @@ GET netsportsball/type/{Volleyball | Handball}
 Baseball and Tennisball related requests
 ----------------------------------------
 POST batandraquetsgame/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/batandraquetsgame/
-DELETE curl -X DELETE "localhost:8080/batandraquetsgame/{id}
+DELETE curl -X DELETE localhost:8080/batandraquetsgame/{id}
 GET batandraquetsgames/
 GET batandraquetsgame/{id}/
 GET batandraquetsgame/{name}
@@ -27,7 +36,7 @@ GET batandraquetsgame/type/{Baseball | Tennisball}
 Football and Basketball related requests
 ----------------------------
 POST goalsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/goalsportsball/
-DELETE curl -X DELETE "localhost:8080/goalsportsball/{id}
+DELETE curl -X DELETE localhost:8080/goalsportsball/{id}
 GET goalsportsballs/
 GET goalsportsball/{id}/
 GET goalsportsball/{name}
@@ -39,7 +48,7 @@ GET goalsportsball/type/{Football | Basketball}
 Bowlingball and Golfball related requests
 ------------------------------
 POST targetsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 109.95, \"amount\" : 1}" http://localhost:8080/targetsportsball/
-DELETE curl -X DELETE "localhost:8080/targetsportsball/{id}
+DELETE curl -X DELETE localhost:8080/targetsportsball/{id}
 GET targetsportsballs/
 GET targetsportsball/{id}/
 GET targetsportsball/name/{name}
