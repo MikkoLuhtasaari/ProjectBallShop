@@ -53,6 +53,14 @@ public class MyController implements ApplicationRunner {
         System.out.println("                                                   ");
         System.out.println("                                                   ");
         
+        //Paths (Users)
+        System.out.println("User related requests");
+        System.out.println("POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}" http://localhost:8080/user/");
+        System.out.println("DELETE curl -X DELETE localhost:8080/user/{id}");
+        System.out.println("GET users/");
+        System.out.println("GET user/{id}");
+        System.out.println("GET user/username/{userName}");
+        
         //Paths (Netsportsballs)
         System.out.println("Volleyball and Handball related requests");
         System.out.println("POST netsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/");
