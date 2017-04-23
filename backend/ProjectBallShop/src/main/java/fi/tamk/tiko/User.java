@@ -11,6 +11,11 @@ import javax.persistence.Table;
 //@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
 public class User 
 {
+    private string userName;
+    private string email;
+    private string password;
+    private string firstName;
+    private string lastName;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
