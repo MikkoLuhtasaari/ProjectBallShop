@@ -48,4 +48,19 @@ public class User
     public long getId() {
         return id;
     }
+    public String getUserName() {
+        return userName;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
 }
