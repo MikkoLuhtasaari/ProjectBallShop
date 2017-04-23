@@ -16,13 +16,17 @@ public class User
     private String password;
     private String firstName;
     private String lastName;
+    private String city;
+    private String address;
+    private int zipCode;
+    private String accessLevel;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
     public User(){};
     
-    public User(String firstName, String lastName, String userName, String password, String email, long id) {
+    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel, long id) {
         setFirstName(firstName);
         setLastName(lastName);
         setUserName(userName);
