@@ -22,7 +22,12 @@ public class User
     
     public User(){};
     
-    public User(long id) {
+    public User(String firstName, String lastName, String userName, String password, String email, long id) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setUserName(userName);
+        setPassword(password);
+        setEmail(email);
         setId(id);
     }
     
