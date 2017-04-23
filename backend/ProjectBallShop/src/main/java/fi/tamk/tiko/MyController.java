@@ -135,6 +135,11 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS3);
     }
     
+    @RequestMapping(value = "/user",  method=RequestMethod.POST)
+    public void saveUser(@RequestBody User user) {
+        userRepository.save(user);
+    }
+    
     @RequestMapping(value="/users/", method=RequestMethod.GET)
     public Iterable<User> fetchUsers() {
         return userRepository.findAll();
