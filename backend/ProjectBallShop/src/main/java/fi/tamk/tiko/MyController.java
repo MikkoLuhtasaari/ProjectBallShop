@@ -55,7 +55,7 @@ public class MyController implements ApplicationRunner {
         
         //Paths (Users)
         System.out.println("User related requests");
-        System.out.println("POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}" http://localhost:8080/user/");
+        System.out.println("POST user/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}\" http://localhost:8080/user/");
         System.out.println("DELETE curl -X DELETE localhost:8080/user/{id}");
         System.out.println("GET users/");
         System.out.println("GET user/{id}");
@@ -105,6 +105,16 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET targetsportsball/material/{material}");
         System.out.println("GET targetsportsball/color/{color}");
         System.out.println("GET targetsportsball/type/{Football | Basketball}");
+        
+        //USERS
+        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", 1);
+        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", 2);
+        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", 3);
+        
+        userRepository.save(tempUser1);
+        userRepository.save(tempUser2);
+        userRepository.save(tempUser3);
+
         
         //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
