@@ -135,6 +135,7 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS3);
     }
     
+    // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
         userRepository.save(user);
@@ -143,6 +144,23 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value="/users/", method=RequestMethod.GET)
     public Iterable<User> fetchUsers() {
         return userRepository.findAll();
+    }
+    
+    @RequestMapping(value="/user/{userId}", method=RequestMethod.GET)
+    public User fetchUserById(@PathVariable long userId) {
+        return userRepository.findOne(userId);
+    }
+    
+    @RequestMapping(value="/user/username/{userName}", method=RequestMethod.GET)
+    public User fetchUserByUserName(@PathVariable String userName) {
+        return userRepository.findByUserName(userName);
+    }
+    
+    @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
+    public User deleteUser(@PathVariable long userId) {
+        User temp = userRepository.findOne(userId);
+        userRepository.delete(userRepository.findOne(userId));
+        return temp;
     }
     
     // Volleyball and Handball related stuff
