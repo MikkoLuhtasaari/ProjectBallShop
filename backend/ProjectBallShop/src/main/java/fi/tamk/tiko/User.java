@@ -84,4 +84,16 @@ public class User
     public String getLastName() {
         return lastName;
     }
+    public String getAddress() {
+        return address;
+    }
+    public String getCity() {
+        return city;
+    }
+    public int getZipCode() {
+        return zipCode;
+    }
+    public String getAccessLevel() {
+        return accessLevel;
+    }
 }
