@@ -31,6 +31,9 @@ public class MyController implements ApplicationRunner {
     @Autowired
     NetSportsBallRepository nsRepository;
     
+    @Autowired
+    UserRepository userRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -130,6 +133,11 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
+    }
+    
+    @RequestMapping(value="/users/", method=RequestMethod.GET)
+    public Iterable<User> fetchUsers() {
+        return userRepository.findAll();
     }
     
     // Volleyball and Handball related stuff
