@@ -141,7 +141,7 @@ public class MyController implements ApplicationRunner {
         userRepository.save(user);
     }
     
-    @RequestMapping(value="/users/", method=RequestMethod.GET)
+    @RequestMapping(value="/users", method=RequestMethod.GET)
     public Iterable<User> fetchUsers() {
         return userRepository.findAll();
     }
