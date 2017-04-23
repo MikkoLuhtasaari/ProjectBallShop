@@ -5,6 +5,7 @@ User related requests
 ---------------------
 POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}" http://localhost:8080/user/
 DELETE curl -X DELETE localhost:8080/user/{id}
+GET users/
 GET user/{id}
 GET user/username/{userName}
 
