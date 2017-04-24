@@ -1,13 +1,16 @@
-import React from 'react'; import Client from '../Client'
+import React from 'react';
+import Client from '../Client';
 
 export default class BallComponent extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
+
         this.state = {
             balls: [],
             updated:false
         };
+
         this.fetchItems = this.fetchItems.bind(this);
         this.fetchItems();
     }
@@ -32,7 +35,7 @@ export default class BallComponent extends React.Component{
 
     render(){
         return(
-            <section>
+            <section id="allBalls">
                 {
                     this.state.balls.map(b => BallComponent.createContent(b))
                 }
@@ -42,24 +45,58 @@ export default class BallComponent extends React.Component{
 
     static createContent(ballObject) {
         const propArray = [];
-        const div_style = {
-            float: "left",
-            display: "inline-block",
-            padding: 30,
-            width: "20%",
-            textAlign: "center"
-        };
-        const img_style = {
-            width: "100%"
-        };
-        propArray.push(
-            <div style={div_style}>
-                <img src="../../images/Foot.png" alt="Ball" style={img_style} />
-                <h4>{ballObject.manufacturer} {ballObject.type}</h4>
-                <h6>{ballObject.shortDetails}</h6>
-                <h2>15,95€</h2>
+        let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
+
+         propArray.push(
+             <div className="col-sm-4 col-lg-4 col-md-4">
+                 <article className="col-item">
+                     <div className="thumbnail">
+                         <div className="photo">
+                             {BallComponent.getShoppingCartBtn()}
+                             <img id="ballImage" src={imageSrc} className="img-responsive" alt="Ball"/>
+                             {BallComponent.getBallDetails(ballObject)}
+                             {BallComponent.getRatings()}
+                         </div></div>
+                 </article>
+             </div>
+         );
+        return propArray;
+    }
+
+    static getRatings() {
+        return (
+            <div className="ratings">
+                <p className="pull-right">6 reviews</p>
+                <p>
+                    <span className="glyphicon glyphicon-star"/>
+                    <span className="glyphicon glyphicon-star"/>
+                    <span className="glyphicon glyphicon-star"/>
+                    <span className="glyphicon glyphicon-star-empty"/>
+                    <span className="glyphicon glyphicon-star-empty"/>
+                </p>
             </div>
         )
-        return propArray;
+    }
+
+    static getBallDetails(ballObject) {
+        let link = "/#/" + ballObject.type + "/" + ballObject.id;
+        return (
+            <div className="caption">
+                {/*option 2*/}
+                <h4 className="pull-right">{ballObject.price}€</h4>
+                <h4><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h4>
+                <p>{ballObject.shortDetails}</p>
+            </div>
+        )
+    }
+
+    static getShoppingCartBtn() {
+        return (
+            <div className="options-cart-round">
+                <button className="btn btn-default" title="Add to cart">
+                    <span className="fa fa-shopping-cart"/>
+                </button>
+            </div>
+        )
     }
 }

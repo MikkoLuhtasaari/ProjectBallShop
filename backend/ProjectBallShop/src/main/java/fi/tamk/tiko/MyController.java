@@ -31,6 +31,9 @@ public class MyController implements ApplicationRunner {
     @Autowired
     NetSportsBallRepository nsRepository;
     
+    @Autowired
+    UserRepository userRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -50,10 +53,18 @@ public class MyController implements ApplicationRunner {
         System.out.println("                                                   ");
         System.out.println("                                                   ");
         
+        //Paths (Users)
+        System.out.println("User related requests");
+        System.out.println("POST user/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}\" http://localhost:8080/user/");
+        System.out.println("DELETE curl -X DELETE localhost:8080/user/{id}");
+        System.out.println("GET users/");
+        System.out.println("GET user/{id}");
+        System.out.println("GET user/username/{userName}");
+        
         //Paths (Netsportsballs)
         System.out.println("Volleyball and Handball related requests");
         System.out.println("POST netsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/netsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/netsportsball/{id}");
         System.out.println("GET netsportsballs/");
         System.out.println("GET netsportsball/{id}/");
         System.out.println("GET netsportsball/{name}");
@@ -65,7 +76,7 @@ public class MyController implements ApplicationRunner {
         //Paths (BatAndRaquetsGames)
         System.out.println("Baseball and Tennisball related requests");
         System.out.println("POST batandraquetsgame/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/batandraquetsgame/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/batandraquetsgame/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/batandraquetsgame/{id}");
         System.out.println("GET batandraquetsgames/");
         System.out.println("GET batandraquetsgame/{id}/");
         System.out.println("GET batandraquetsgame/{name}");
@@ -76,7 +87,7 @@ public class MyController implements ApplicationRunner {
         //Paths (goalsportsball)
         System.out.println("Football and Basketball related requests");
         System.out.println("POST goalsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/goalsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/goalsportsball/{id}");
         System.out.println("GET goalsportsballs/");
         System.out.println("GET goalsportsball/{id}/");
         System.out.println("GET goalsportsball/{name}");
@@ -87,13 +98,23 @@ public class MyController implements ApplicationRunner {
         //Paths (targetsportsball)
         System.out.println("Golfball and Bowlingball related requests");
         System.out.println("POST targetsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Bowlingball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/targetsportsball/");
-        System.out.println("DELETE curl -X DELETE \"localhost:8080/targetsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/targetsportsball/{id}");
         System.out.println("GET targetsportsballs/");
         System.out.println("GET targetsportsball/{id}/");
         System.out.println("GET targetsportsball/{name}");
         System.out.println("GET targetsportsball/material/{material}");
         System.out.println("GET targetsportsball/color/{color}");
         System.out.println("GET targetsportsball/type/{Football | Basketball}");
+        
+        //USERS
+        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", 1);
+        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", 2);
+        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", 3);
+        
+        userRepository.save(tempUser1);
+        userRepository.save(tempUser2);
+        userRepository.save(tempUser3);
+
         
         //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
@@ -130,6 +151,34 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
+    }
+    
+    // User related stuff
+    @RequestMapping(value = "/user",  method=RequestMethod.POST)
+    public void saveUser(@RequestBody User user) {
+        userRepository.save(user);
+    }
+    
+    @RequestMapping(value="/users", method=RequestMethod.GET)
+    public Iterable<User> fetchUsers() {
+        return userRepository.findAll();
+    }
+    
+    @RequestMapping(value="/user/{userId}", method=RequestMethod.GET)
+    public User fetchUserById(@PathVariable long userId) {
+        return userRepository.findOne(userId);
+    }
+    
+    @RequestMapping(value="/user/username/{userName}", method=RequestMethod.GET)
+    public User fetchUserByUserName(@PathVariable String userName) {
+        return userRepository.findByUserName(userName);
+    }
+    
+    @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
+    public User deleteUser(@PathVariable long userId) {
+        User temp = userRepository.findOne(userId);
+        userRepository.delete(userRepository.findOne(userId));
+        return temp;
     }
     
     // Volleyball and Handball related stuff
