@@ -7,6 +7,7 @@ POST review/ curl -H "Content-Type: application/json" -X POST -d "{\"category\" 
 DELETE curl -X DELETE localhost:/review/{id}
 GET reviews/
 GET review/{id}
+GET review/{category}/{itemId}
 
 User related requests
 ---------------------
