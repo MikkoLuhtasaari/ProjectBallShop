@@ -29,11 +29,11 @@ body {
 .bs-dark .navbar-form {
     margin:0;
     margin-top: 5px;
-    padding:8px 0px;
+    padding:8px 0;
 }
 
 .bs-dark .navbar-form .search-box {
-    border:0px;
+    border:0;
     height:35px;
     outline: none;
     width:320px;
@@ -69,12 +69,32 @@ footer{
 
 /*Shopping cart*/
 
+.glyphicon-shopping-cart:before {
+    padding-right: 5px;
+}
+
+.caret{
+    margin-right: 10px;
+}
+
+#img40{
+    height: 40px;
+}
+
+#marginR10{
+    margin-right: 10px;
+}
+
+.container-fullwidth{
+    margin-bottom: 30px;
+}
 ul.dropdown-cart{
     min-width:250px;
+    background-color: #222;
 }
 ul.dropdown-cart li .item{
     display:block;
-    color: #777;
+    color: white;
     padding:3px 10px;
     margin: 3px 0;
 }
@@ -115,12 +135,20 @@ ul.dropdown-cart li .item-right button{
 }
 
 .navbar-brand {
-    padding: 0px;
+    padding: 0;
 }
 .navbar-brand>img {
     height: 100%;
     padding: 0;
     width: auto;
+}
+
+.navbar-collapse.in {
+    overflow-y: hidden;
+}
+
+.col-md-12{
+    border: none;
 }
 
 .open > .dropdown-menu {
@@ -129,9 +157,85 @@ ul.dropdown-cart li .item-right button{
     opacity:1;
 }
 
+.dropdown-menu{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    background-color: #222;
+    overflow: hidden;
+}
+
+#login-dp .bottom{
+    border-top:1px solid #ddd;
+    padding:14px;
+}
+
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+#nostyling{
+    display: none;
+    margin: 0;
+}
+
+/*Shop items*/
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+.col-sm-4{
+    width: 100%; !important;
+    display: inline-block;
+}
+
+#ballImage{
+    padding: 30px;
+}
+
+#itemPrice{
+    font-size: 30px;
+    background: white;
+    color: red;
+    padding: 10px;
+    border: yellow solid 2px;
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+
+@media (min-width: 500px) {
+    .col-sm-4{
+        width: 49%; !important;
+    }
+}
+
 @media (min-width: 768px) {
     .bs-dark .navbar-form {
-        padding:0px;
+        padding:0;
     }
     ul.dropdown-cart li .item:hover{
         background-color:#f3f3f3;
@@ -141,5 +245,30 @@ ul.dropdown-cart li .item-right button{
         display: flex; !important;
         width: 100%; !important;
         justify-content: center !important;
+    }
+    .col-sm-4{
+        width: 33%; !important;
+    }
+
+    #login-dp .bottom{
+        border-top:0 none;
+    }
+}
+
+@media (min-width: 1000px) {
+    .col-sm-4{
+        width: 25%; !important;
+    }
+}
+
+@media (min-width: 1300px) {
+    .col-sm-4{
+        width: 20%; !important;
+    }
+}
+
+@media (min-width: 1600px) {
+    .col-sm-4{
+        width: 16.5%; !important;
     }
 }
