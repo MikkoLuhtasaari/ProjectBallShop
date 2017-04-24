@@ -60,6 +60,7 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET users/");
         System.out.println("GET user/{id}");
         System.out.println("GET user/username/{userName}");
+        System.out.println("");
         
         //Paths (Netsportsballs)
         System.out.println("Volleyball and Handball related requests");
@@ -83,6 +84,7 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET batandraquetsgame/material/{material}");
         System.out.println("GET batandraquetsgame/color/{color}");
         System.out.println("GET batandraquetsgame/type/{Baseball | Tennisball}");
+        System.out.println("");
         
         //Paths (goalsportsball)
         System.out.println("Football and Basketball related requests");
@@ -94,6 +96,7 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET goalsportsball/material/{material}");
         System.out.println("GET goalsportsball/color/{color}");
         System.out.println("GET goalsportsball/type/{Football | Basketball}");
+        System.out.println("");
         
         //Paths (targetsportsball)
         System.out.println("Golfball and Bowlingball related requests");
