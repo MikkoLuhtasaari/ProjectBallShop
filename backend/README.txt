@@ -4,6 +4,9 @@ Port is http://localhost:8080/
 Review related requests
 -----------------------
 POST review/ curl -H "Content-Type: application/json" -X POST -d "{\"category\" : \"Bat and Racquet games\", \"userId\" : 1, \"itemId\" : \"1\", \"score\" : 2, \"header\" : \"Header\", \"content\" : \"Content\"}" http://localhost:8080/review/
+DELETE curl -X DELETE localhost:/review/{id}
+GET reviews/
+GET review/{id}
 
 User related requests
 ---------------------
