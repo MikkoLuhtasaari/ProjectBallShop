@@ -13,10 +13,10 @@ export default class SearchComponent extends React.Component {
         super(props);
         this.client = new Client();
 
-        this.client.balls("netsportsballs").then(b => this.setState({balls: b}));
-        this.client.balls("batandraquetsgames").then(b => this.setState({balls: b}));
-        this.client.balls("goalsportsballs").then(b => this.setState({balls: b}));
-        this.client.balls("targetsportsballs").then(b => this.setState({balls: b}));
+        this.client.ballsByType("netsportsballs").then(b => this.setState({balls: b}));
+        this.client.ballsByType("batandraquetsgames").then(b => this.setState({balls: b}));
+        this.client.ballsByType("goalsportsballs").then(b => this.setState({balls: b}));
+        this.client.ballsByType("targetsportsballs").then(b => this.setState({balls: b}));
     }
 
     render() {

@@ -28,9 +28,9 @@ export default class BallComponent extends React.Component{
     }
 
     fetchItems() {
-      if (this.props.group !== undefined) this.client.balls(this.props.group).then(b => this.setState({balls: b}));
-      else if (this.props.params.type !== undefined) this.client.ball(this.props.params.group, this.props.params.type).then(b => this.setState({balls: b}));
-      else this.client.balls(this.props.params.group).then(b => this.setState({balls: b}));
+      if (this.props.group !== undefined) this.client.ballsByType(this.props.group).then(b => this.setState({balls: b}));
+      else if (this.props.params.type !== undefined) this.client.ballsByName(this.props.params.group, this.props.params.type).then(b => this.setState({balls: b}));
+      else this.client.ballsByType(this.props.params.group).then(b => this.setState({balls: b}));
     }
 
     render(){
@@ -79,7 +79,13 @@ export default class BallComponent extends React.Component{
     }
 
     static getBallDetails(ballObject) {
-        let link = "/#/" + ballObject.type + "/" + ballObject.id;
+        let category = ballObject.category;
+        category = category.replace(/ /g,'');
+        category = category.toLowerCase();
+        if(!category.includes("game"))category += "ball";
+        else category = category.slice(0, -1);
+
+        let link = "/#/details/" + category + "/" + ballObject.id;
         return (
             <div className="caption">
                 {/*option 2*/}

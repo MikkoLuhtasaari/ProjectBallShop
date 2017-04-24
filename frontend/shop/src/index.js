@@ -4,6 +4,7 @@ import { hashHistory, Router, Route, IndexRoute } from 'react-router';
 import CartComponent from './components/TopNavComponent';
 import BallComponent from './components/BallComponent';
 import FrontpageComponent from './components/FrontpageComponent';
+import ItemDetailsComponent from './components/ItemDetailsComponent';
 
 render(
   <Router history={hashHistory}>
@@ -15,6 +16,9 @@ render(
       </Route>
       <Route path="/group/:group">
           <IndexRoute component={ BallComponent }/>
+      </Route>
+      <Route path="/details/:group/:id">
+          <IndexRoute component={ ItemDetailsComponent }/>
       </Route>
   </Router>,
     document.getElementById("app")
