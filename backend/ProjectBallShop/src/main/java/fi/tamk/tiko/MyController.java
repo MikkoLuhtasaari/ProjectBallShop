@@ -189,6 +189,10 @@ public class MyController implements ApplicationRunner {
     public Review fetchReviewById(@PathVariable long reviewId) {
         return reviewRepository.findOne(reviewId);
     }
+    @RequestMapping(value="/review/{category}/{itemId}", method=RequestMethod.GET)
+    public Iterable<Review> fetchReviewById(@PathVariable long itemId, @PathVariable String category) {
+        return reviewRepository.findByItemIdAndCategory(itemId, category);
+    }
     @RequestMapping(value = "/review/{reviewId}",  method=RequestMethod.DELETE)
     public Review deleteReview(@PathVariable long reviewId) {
         Review temp = reviewRepository.findOne(reviewId);
