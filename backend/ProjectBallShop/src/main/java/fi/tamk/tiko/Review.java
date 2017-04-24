@@ -23,7 +23,7 @@ public class Review
     
     public Review(){};
     
-    public Review(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
+    public Review() {
         
     }
     
@@ -53,44 +53,26 @@ public class Review
         this.content = content;
     }
     
-    public String getName() {
-        return name;
-    }
-    public String getColor() {
-        return color;
-    }
-    public int getDiameter() {
-        return diameter;
-    }
-    public int getWeigth() {
-        return weigth;
-    }
-    public String getDetails() {
-        return details;
-    }
-    public String getMaterial() {
-        return material;
-    }
-    public String getManufacturer() {
-        return manufacturer;
-    }
-    public String getShortDetails() {
-        return shortDetails;
-    }
-    public String getType() {
-        return type;
-    }
-    public double getPrice() {
-        return price;
-    }
-    public int getAmount() {
-        return amount;
-    }
     public long getId() {
         return id;
     }
     public String getCategory() {
         return category;
+    }
+    public long getUserId() {
+        return userId;
+    }
+    public long getItemId() {
+        return itemId;
+    }
+    public int getScore() {
+        return score;
+    }
+    public String getHeader() {
+        return header;
+    }
+    public String getContent() {
+        return content;
     }
     
 }
