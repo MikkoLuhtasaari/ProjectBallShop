@@ -30,6 +30,10 @@ public class User
         setFirstName(firstName);
         setLastName(lastName);
         setUserName(userName);
+        setCity(city);
+        setAddress(address);
+        setZipCode(zipCode);
+        setAccessLevel(accessLevel);
         setPassword(password);
         setEmail(email);
         setId(id);
