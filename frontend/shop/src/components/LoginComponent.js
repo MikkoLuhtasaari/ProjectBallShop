@@ -12,6 +12,9 @@ export default class LoginComponent extends React.Component{
 
     render(){
         return(
+        <li className="dropdown">
+            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span className="caret"/></a>
+            <ul id="login-dp" className="dropdown-menu">
             <li>
                 <div className="row">
                     <div className="col-md-12">
@@ -33,6 +36,8 @@ export default class LoginComponent extends React.Component{
                     </div>
                 </div>
             </li>
+            </ul>
+        </li>
         )
     }
 }
