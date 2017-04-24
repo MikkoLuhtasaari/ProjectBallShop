@@ -23,8 +23,14 @@ public class Review
     
     public Review(){};
     
-    public Review() {
-        
+    public Review(String category, long userId, long itemId, int score, String header, String content, long id) {
+        setCategory(category);
+        setUserId(userId);
+        setItemId(itemId);
+        setScore(score);
+        setHeader(header);
+        setContent(content);
+        setId(id);
     }
     
     public void setId(long id) {
