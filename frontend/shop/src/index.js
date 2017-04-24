@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import { hashHistory, Router, Route, IndexRoute } from 'react-router';
-
+import CartComponent from './components/TopNavComponent';
 import BallComponent from './components/BallComponent';
 import FrontpageComponent from './components/FrontpageComponent';
 
@@ -20,4 +20,7 @@ render(
     document.getElementById("app")
 );
 
-// TODO Router does NOT update unless refreshed!!! More info: https://github.com/ReactTraining/react-router/issues/292
+render(
+    <CartComponent/>,
+    document.getElementById("topNav")
+);
