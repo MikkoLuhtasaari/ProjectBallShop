@@ -20,12 +20,7 @@ export default class TopNavComponent extends React.Component{
                     <SearchComponent/>
                 </form>
                 <ul className="nav navbar-nav navbar-right">
-                    <li className="dropdown">
-                        <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span className="caret"/></a>
-                        <ul id="login-dp" className="dropdown-menu">
-                            <LoginComponent/>
-                        </ul>
-                    </li>
+                    <LoginComponent/>
                     <CartComponent/>
                 </ul>
             </div>
