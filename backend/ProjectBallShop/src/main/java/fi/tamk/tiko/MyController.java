@@ -34,6 +34,9 @@ public class MyController implements ApplicationRunner {
     @Autowired
     UserRepository userRepository;
     
+    @Autowired
+    ReviewRepository reviewRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -154,6 +157,16 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
+    }
+    
+    // Review related stuff
+    @RequestMapping(value= "/review", method= RequestMethod.POST)
+    public void saveReview(@RequestBody Review review) {
+        reviewRepository.save(review);
+    }
+    @RequestMapping(value="/reviews", method=RequestMethod.GET)
+    public Iterable<Review> fetchReviews() {
+        return reviewRepository.findAll();
     }
     
     // User related stuff
