@@ -16,13 +16,17 @@ public class User
     private String password;
     private String firstName;
     private String lastName;
+    private String city;
+    private String address;
+    private int zipCode;
+    private String accessLevel;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
     public User(){};
     
-    public User(String firstName, String lastName, String userName, String password, String email, long id) {
+    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel, long id) {
         setFirstName(firstName);
         setLastName(lastName);
         setUserName(userName);
@@ -49,6 +53,18 @@ public class User
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
 
     public long getId() {
         return id;
@@ -67,5 +83,17 @@ public class User
     }
     public String getLastName() {
         return lastName;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public String getCity() {
+        return city;
+    }
+    public int getZipCode() {
+        return zipCode;
+    }
+    public String getAccessLevel() {
+        return accessLevel;
     }
 }
