@@ -168,6 +168,16 @@ public class MyController implements ApplicationRunner {
     public Iterable<Review> fetchReviews() {
         return reviewRepository.findAll();
     }
+    @RequestMapping(value="/review/{reviewId}", method=RequestMethod.GET)
+    public Review fetchReviewById(@PathVariable long reviewId) {
+        return reviewRepository.findOne(reviewId);
+    }
+    @RequestMapping(value = "/review/{reviewId}",  method=RequestMethod.DELETE)
+    public Review deleteReview(@PathVariable long reviewId) {
+        Review temp = reviewRepository.findOne(reviewId);
+        reviewRepository.delete(reviewRepository.findOne(reviewId));
+        return temp;
+    }
     
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
