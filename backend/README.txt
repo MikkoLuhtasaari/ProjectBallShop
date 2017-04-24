@@ -8,6 +8,7 @@ DELETE curl -X DELETE localhost:/review/{id}
 GET reviews/
 GET review/{id}
 GET review/{category}/{itemId}
+GET review/user/{userId}
 
 User related requests
 ---------------------
