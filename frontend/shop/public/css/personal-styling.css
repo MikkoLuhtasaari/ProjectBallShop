@@ -220,7 +220,8 @@ ul.dropdown-cart li .item-right button{
     white-space: nowrap;
 }
 
-.thumbnail img {
+.thumbnail img,
+#wideImg{
     width: 100%;
 }
 
@@ -243,7 +244,9 @@ ul.dropdown-cart li .item-right button{
     width: 100%; !important;
     display: inline-block;
 }
-
+#padBot{
+    padding-bottom: 10px;
+}
 #ballImage{
     padding: 30px;
 }
@@ -257,6 +260,49 @@ ul.dropdown-cart li .item-right button{
     position: absolute;
     top: 0;
     right: 20px;
+}
+
+.h3{
+    margin-top: 0;
+}
+
+#botBad{
+    padding-bottom: 20px;
+}
+
+#cursorPoint{
+    cursor: pointer;
+}
+
+#wideDiv{
+    margin-top: 20px;
+    width:100%;
+    border-top:1px solid silver;
+}
+
+.col-xs-5{
+    text-align: center;
+}
+#pad15{
+    padding:15px;
+}
+
+#red{
+    color: red;
+}
+
+#green{
+    color: green;
+}
+
+#green,
+#red{
+    font-size: 17px;
+    word-spacing: normal;
+}
+
+#shopItem{
+    padding-left: 12px;
 }
 
 /*_______________Responsiveness____________________________*/
