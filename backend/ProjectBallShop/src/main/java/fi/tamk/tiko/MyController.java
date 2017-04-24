@@ -62,6 +62,7 @@ public class MyController implements ApplicationRunner {
         System.out.println("DELETE curl -X DELETE localhost:8080/review/{id}");
         System.out.println("GET reviews/");
         System.out.println("GET review/{id}");
+        System.out.println("GET review/{category}/{itemId}");
         System.out.println("");
         
         //Paths (Users)
