@@ -56,6 +56,14 @@ public class MyController implements ApplicationRunner {
         System.out.println("                                                   ");
         System.out.println("                                                   ");
         
+        // Paths (Reviews)
+        System.out.println("Review related requests");
+        System.out.println("POST review/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"category\" : \"Bat and Racquet games\", \"userId\" : 1, \"itemId\" : \"1\", \"score\" : 2, \"header\" : \"Header\", \"content\" : \"Content\"}\" http://localhost:8080/review/");
+        System.out.println("DELETE curl -X DELETE localhost:8080/review/{id}");
+        System.out.println("GET reviews/");
+        System.out.println("GET review/{id}");
+        System.out.println("");
+        
         //Paths (Users)
         System.out.println("User related requests");
         System.out.println("POST user/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}, \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\" http://localhost:8080/user/");
