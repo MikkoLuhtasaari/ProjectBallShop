@@ -1,7 +1,7 @@
 import React from 'react';
 import Client from '../Client';
 import LoginComponent from '../components/LoginComponent';
-import CartComponent from '../components/ShoppingCartComponent';
+import ShoppingCartComponent from '../components/ShoppingCartComponent';
 import SearchComponent from '../components/SearchComponent';
 
 export default class TopNavComponent extends React.Component{
@@ -17,11 +17,11 @@ export default class TopNavComponent extends React.Component{
         return(
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form className="navbar-form navbar-left form-horizontal" role="search">
-                    <SearchComponent/>
+                    <SearchComponent />
                 </form>
                 <ul className="nav navbar-nav navbar-right">
                     <LoginComponent/>
-                    <CartComponent/>
+                    <ShoppingCartComponent/>
                 </ul>
             </div>
         )
