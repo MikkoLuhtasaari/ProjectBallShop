@@ -17,11 +17,12 @@ export default class SearchComponent extends React.Component {
         this.client.ballsByType("batandraquetsgames").then(b => this.setState({balls: b}));
         this.client.ballsByType("goalsportsballs").then(b => this.setState({balls: b}));
         this.client.ballsByType("targetsportsballs").then(b => this.setState({balls: b}));
+
     }
 
     render() {
+        this.state.balls.map(b => this.addToArray(b));
         let tempArray = this.ballsArray;
-        this.state.balls.map(b => this.ballsArray.push(b));
         let searchString = this.state.searchString;
         if (searchString.length > 0){
             tempArray = this.ballsArray.filter(function (i) {
@@ -30,6 +31,12 @@ export default class SearchComponent extends React.Component {
             });
         }
         return this.toReturn(searchString.length, tempArray, this.keynum);
+    }
+
+    addToArray(b) {
+        if (!this.ballsArray.includes(b)) {
+            this.ballsArray.push(b)
+        }
     }
 
     toReturn(length, tempArray, keynum) {
@@ -42,8 +49,10 @@ export default class SearchComponent extends React.Component {
                     <ul>
                         {tempArray.map(function (i) {
                             keynum++;
-                            let url = "/#/" + i.type + "/" + i.id;
-                            return <li key={keynum} className="list-unstyled"><a href={url}>{i.manufacturer} {i.name}</a></li>;
+                            let category = i.category.replace(/ /g,'').toLowerCase();
+                            if(!category.includes("game"))category += "sball";
+                            let link = "/#/details/" + category + "/" + i.id;
+                            return <li key={keynum} className="list-unstyled"><a href={link}>{i.manufacturer} {i.name}</a></li>;
                         })}
                     </ul>
                 </div>
