@@ -43,7 +43,7 @@ public class NetSportsBall
         setPrice(price);
         setAmount(amount);
         setId(id);
-        category = "Net sports";
+        category = "Net sport";
     }
     
     public void setName(String name) {
