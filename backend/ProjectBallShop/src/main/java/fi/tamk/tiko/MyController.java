@@ -34,6 +34,9 @@ public class MyController implements ApplicationRunner {
     @Autowired
     UserRepository userRepository;
     
+    @Autowired
+    ReviewRepository reviewRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -53,13 +56,24 @@ public class MyController implements ApplicationRunner {
         System.out.println("                                                   ");
         System.out.println("                                                   ");
         
+        // Paths (Reviews)
+        System.out.println("Review related requests");
+        System.out.println("POST review/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"category\" : \"Bat and Racquet games\", \"userId\" : 1, \"itemId\" : \"1\", \"score\" : 2, \"header\" : \"Header\", \"content\" : \"Content\"}\" http://localhost:8080/review/");
+        System.out.println("DELETE curl -X DELETE localhost:8080/review/{id}");
+        System.out.println("GET reviews/");
+        System.out.println("GET review/{id}");
+        System.out.println("GET review/{category}/{itemId}");
+        System.out.println("GET review/user/{userId}");
+        System.out.println("");
+        
         //Paths (Users)
         System.out.println("User related requests");
-        System.out.println("POST user/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}\" http://localhost:8080/user/");
+        System.out.println("POST user/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}, \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\" http://localhost:8080/user/");
         System.out.println("DELETE curl -X DELETE localhost:8080/user/{id}");
         System.out.println("GET users/");
         System.out.println("GET user/{id}");
         System.out.println("GET user/username/{userName}");
+        System.out.println("");
         
         //Paths (Netsportsballs)
         System.out.println("Volleyball and Handball related requests");
@@ -83,6 +97,7 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET batandraquetsgame/material/{material}");
         System.out.println("GET batandraquetsgame/color/{color}");
         System.out.println("GET batandraquetsgame/type/{Baseball | Tennisball}");
+        System.out.println("");
         
         //Paths (goalsportsball)
         System.out.println("Football and Basketball related requests");
@@ -94,6 +109,7 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET goalsportsball/material/{material}");
         System.out.println("GET goalsportsball/color/{color}");
         System.out.println("GET goalsportsball/type/{Football | Basketball}");
+        System.out.println("");
         
         //Paths (targetsportsball)
         System.out.println("Golfball and Bowlingball related requests");
@@ -106,10 +122,19 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET targetsportsball/color/{color}");
         System.out.println("GET targetsportsball/type/{Football | Basketball}");
         
+        // REVIEWS
+        Review tempReview1 = new Review("Bat and Racquet games", 1, 1, 2, "Header", "Content", 1);
+        Review tempReview2 = new Review("Goal sports", 1, 2, 5, "Header2", "Content2", 2);
+        Review tempReview3 = new Review("Bat and Racquet games", 2, 1, 3, "Header3", "Content3", 3);
+        
+        reviewRepository.save(tempReview1);
+        reviewRepository.save(tempReview2);
+        reviewRepository.save(tempReview3);
+        
         //USERS
-        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", 1);
-        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", 2);
-        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", 3);
+        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin", 1);
+        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User", 2);
+        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", "Vaasa", "Merimiehenkatu 1a1", 65200, "User", 3);
         
         userRepository.save(tempUser1);
         userRepository.save(tempUser2);
@@ -151,6 +176,34 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
+    }
+    
+    // Review related stuff
+    @RequestMapping(value= "/review", method= RequestMethod.POST)
+    public void saveReview(@RequestBody Review review) {
+        reviewRepository.save(review);
+    }
+    @RequestMapping(value="/reviews", method=RequestMethod.GET)
+    public Iterable<Review> fetchReviews() {
+        return reviewRepository.findAll();
+    }
+    @RequestMapping(value="/review/{reviewId}", method=RequestMethod.GET)
+    public Review fetchReviewById(@PathVariable long reviewId) {
+        return reviewRepository.findOne(reviewId);
+    }
+    @RequestMapping(value="/review/{category}/{itemId}", method=RequestMethod.GET)
+    public Iterable<Review> fetchReviewById(@PathVariable long itemId, @PathVariable String category) {
+        return reviewRepository.findByItemIdAndCategory(itemId, category);
+    }
+    @RequestMapping(value="/review/user/{userId}", method=RequestMethod.GET)
+    public Iterable<Review> fetchReviewByUserId(@PathVariable long userId) {
+        return reviewRepository.findByUserId(userId);
+    }
+    @RequestMapping(value = "/review/{reviewId}",  method=RequestMethod.DELETE)
+    public Review deleteReview(@PathVariable long reviewId) {
+        Review temp = reviewRepository.findOne(reviewId);
+        reviewRepository.delete(reviewRepository.findOne(reviewId));
+        return temp;
     }
     
     // User related stuff
