@@ -43,7 +43,7 @@ public class BatAndRaquetsGames
         setPrice(price);
         setAmount(amount);
         setId(id);
-        category = "Bat and raquets games";
+        category = "Bat and raquets game";
     }
     
     public void setName(String name) {
