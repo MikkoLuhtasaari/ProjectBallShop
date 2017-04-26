@@ -43,7 +43,7 @@ public class GoalSportsBall
         setPrice(price);
         setAmount(amount);
         setId(id);
-        category = "Goal sports";
+        category = "Goal sport";
     }
     
     public void setName(String name) {

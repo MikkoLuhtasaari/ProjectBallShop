@@ -1,64 +1,92 @@
 import React from 'react';
 import Client from '../Client';
+import ReviewsComponent from '../components/ReviewsComponent'
 
-export default class ItemDetailsComponent extends React.Component{
+export default class ItemDetailsComponent extends React.Component {
     constructor(props) {
         super(props);
         this.client = new Client();
-        this.state = {ball : ''};
-        this.client.ballById(this.props.params.group, this.props.params.id).then(b => this.setState({ball: b }));
+        this.state = {ball: ''};
+        this.client.ballById(this.props.params.group, this.props.params.id).then(b => this.setState({ball: b}));
     }
 
-    render(){
+    render() {
         const ball = this.state.ball;
-        let imageSrc = "../../images/items/"+ ball.type + "_" + ball.id + ".png";
+        let category = ball.category;
+        if (typeof category !== "undefined") category = category.replace(/ /g, '').toLowerCase();
+        let imageSrc = "../../images/items/" + ball.type + "_" + ball.id + ".png";
         let onStock = "This item is out of stock";
         let ikon = "glyphicon glyphicon-remove-circle";
         let colorId = "red";
         let buttonId = "btn disabled";
-        if(ball.amount > 0){
+        if (ball.amount > 0) {
             onStock = "On stock";
             ikon = "glyphicon glyphicon-ok-circle";
             colorId = "green";
             buttonId = "btn btn-success active";
         }
-        return(
+        return (
             <section>
                 {
-                    <div className="container">
-                        <div className="row" id="centerAll">
-                            <div className="col-xs-4 item-photo">
-                                <img alt="item" id="wideImg" src={imageSrc} />
+                    <div>
+                        <div className="row">
+                            <div className="col-xs-1"/>
+
+                            <div className="col-xs-3 item-photo">
+                                <img alt="item" id="wideImg" src={imageSrc}/>
                             </div>
-                            <div className="col-xs-5">
+                            <div className="col-xs-1"/>
+                            <div className="col-xs-3 text-center">
                                 <h3>{ball.manufacturer} {ball.type}</h3>
                                 <h5 id="padBot">{ball.shortDetails}</h5>
                                 <h3>{ball.price} €</h3>
+
                                 <div className="section" id="botBad">
-                                    <button className={buttonId}><span id="marginR20" className="glyphicon glyphicon-shopping-cart" aria-hidden="true"/> Add to cart</button>
+                                    <button className={buttonId}>
+                                        <span id="marginR20" className="glyphicon glyphicon-shopping-cart" aria-hidden="true"/>
+                                        Add to cart
+                                    </button>
                                 </div>
+
                                 <span id={colorId}>
                                     <span className={ikon}/>
                                     <span id="shopItem">{onStock}</span>
                                 </span>
+                                <br/><br/>
+                                <span className="text-left">
+                                    <ReviewsComponent group={category} ballId={ball.id} need={"light"}
+                                                      location={"tweaked-margin"}/>
+                                </span>
+
                             </div>
-                            <div className="col-xs-9" id="wideDiv">
-                                <div>
-                                    <p id="pad15" className="text-center">
-                                        <small>
-                                            {ball.details}
-                                        </small>
-                                    </p>
-                                    <ul>
-                                        <li>Name: {ball.name}</li>
-                                        <li>Color: {ball.color}</li>
-                                        <li>Diameter: {ball.diameter}</li>
-                                        <li>Weight: {ball.weigth}</li>
-                                        <li>Name: {ball.name}</li>
-                                        <li>Manufacturer: {ball.manufacturer}</li>
-                                        <li>Category: {ball.category}</li>
-                                    </ul>
+                            <div className="col-xs-1"/>
+                            <div className="col-xs-3">
+                                <ul>
+                                    <li id="minH50">{ball.details}</li>
+                                    <br/>
+                                    <li>Name: {ball.name}</li>
+                                    <li>Color: {ball.color}</li>
+                                    <li>Diameter: {ball.diameter}</li>
+                                    <li>Weight: {ball.weigth}</li>
+                                    <li>Name: {ball.name}</li>
+                                    <li>Manufacturer: {ball.manufacturer}</li>
+                                    <li>Category: {ball.category}</li>
+                                </ul>
+                            </div>
+
+
+                            <div className="thumbnail">
+                                <div className="col-xs-12" id="wideDiv"/>
+                                <div className="col-xs-1"/>
+                                <div className="col-xs-4">
+                                    <ReviewsComponent need={"postReview"}/>
                                 </div>
+                                <div className="col-xs-1"/>
+                            </div>
+                            <div className="col-xs-6">
+                                <h3 className="padding10">Customer reviews:</h3>
+                                <br/>
+                                <ReviewsComponent need={"wide"}/>
                             </div>
                         </div>
                     </div>
