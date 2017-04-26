@@ -7,6 +7,7 @@ import BallComponent from './components/BallComponent';
 import FrontpageComponent from './components/FrontpageComponent';
 import ItemDetailsComponent from './components/ItemDetailsComponent';
 import AdminItemDetailsComponent from './components/admin/AdminItemDetailsComponent';
+import AddItem from './components/admin/AddItem';
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -24,6 +25,9 @@ ReactDOM.render(
       </Route>
     <Route path="/admin/details/:group/:id">
       <IndexRoute component={ AdminItemDetailsComponent }/>
+    </Route>
+    <Route path="/admin/add">
+      <IndexRoute component={ AddItem }/>
     </Route>
   </Router>,
     document.getElementById("app")
