@@ -358,6 +358,7 @@ public class MyController implements ApplicationRunner {
             return nsRepository.findByType(type);
         } else {
             System.out.println("Error! No balls with that material");
+            return null;
         }
     }
     
@@ -482,7 +483,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.GET)
     public GoalSportsBall fetchGoalSportsBall(@PathVariable long goalsportsballId) {
         
-        if(gsbRepository.findOne(id) != null) {
+        if(gsbRepository.findOne(goalsportsballId) != null) {
             return gsbRepository.findOne(goalsportsballId);
         } else {
             System.out.println("Error! No balls with that id found");
@@ -493,7 +494,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.DELETE)
     public GoalSportsBall deleteGoalSportsBall(@PathVariable long goalsportsballId) {
         
-        if(gsbRepository.findOne(id) != null) {
+        if(gsbRepository.findOne(goalsportsballId) != null) {
             GoalSportsBall temp = gsbRepository.findOne(goalsportsballId);
             gsbRepository.delete(gsbRepository.findOne(goalsportsballId));
             return temp;
@@ -527,7 +528,13 @@ public class MyController implements ApplicationRunner {
     
     @RequestMapping(value = "/goalsportsball/name/{goalsportsballName}",  method=RequestMethod.GET)
     public GoalSportsBall fetchGoalSportsBallByName(@PathVariable String goalsportsballName) {
-        return gsbRepository.findByName(goalsportsballName);
+        
+        if(gsbRepository.findByName(goalsportsballName) != null) {
+            return gsbRepository.findByName(goalsportsballName);
+        } else {
+            System.out.println("Error! No balls with that name");
+            return null;
+        }
     }
      
     @RequestMapping(value = "/goalsportsball/type/{type}",  method=RequestMethod.GET)
