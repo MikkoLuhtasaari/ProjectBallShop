@@ -576,33 +576,69 @@ public class MyController implements ApplicationRunner {
     
     @RequestMapping(value = "/targetsportsball/{targetsportsballId}",  method=RequestMethod.GET)
     public TargetSportsBall fetchTargetSportsBall(@PathVariable long targetsportsballId) {
-        return tsbRepository.findOne(targetsportsballId);
+        
+        if(tsbRepository.findOne(targetsportsballId) != null) {
+            return tsbRepository.findOne(targetsportsballId);
+        } else {
+            System.out.println("Error! No ball with that id");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/targetsportsball/{targetsportsballId}",  method=RequestMethod.DELETE)
     public TargetSportsBall deleteTargetSportsBall(@PathVariable long targetsportsballId) {
-        TargetSportsBall temp = tsbRepository.findOne(targetsportsballId);
-        tsbRepository.delete(tsbRepository.findOne(targetsportsballId));
-        return temp;
+        
+        if(tsbRepository.findOne(targetsportsballId) != null) {
+            TargetSportsBall temp = tsbRepository.findOne(targetsportsballId);
+            tsbRepository.delete(tsbRepository.findOne(targetsportsballId));
+            return temp;
+        } else {
+            System.out.println("Error! No ball with that id");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/targetsportsball/color/{targetsportsballColor}",  method=RequestMethod.GET)
     public List<TargetSportsBall> fetchTargetSportsBallsByColor(@PathVariable String targetsportsballColor) {
-        return tsbRepository.findByColor(targetsportsballColor);
+        
+        if(tsbRepository.findByColor(targetsportsballColor) != null) {
+            return tsbRepository.findByColor(targetsportsballColor);
+        } else {
+            System.out.println("Error! No balls with that color");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/targetsportsball/material/{targetsportsballMaterial}",  method=RequestMethod.GET)
     public List<TargetSportsBall> fetchTargetSportsBallsByMaterial(@PathVariable String targetsportsballMaterial) {
-        return tsbRepository.findByMaterial(targetsportsballMaterial);
+        
+        if(tsbRepository.findByMaterial(targetsportsballMaterial) != null) {
+            return tsbRepository.findByMaterial(targetsportsballMaterial);
+        } else {
+            System.out.println("Error! No balls with that material");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/targetsportsball/name/{targetsportsballName}",  method=RequestMethod.GET)
     public TargetSportsBall fetchTargetSportsBallByName(@PathVariable String targetsportsballName) {
-        return tsbRepository.findByName(targetsportsballName);
+        
+        if(tsbRepository.findByName(targetsportsballName) != null) {
+            return tsbRepository.findByName(targetsportsballName);
+        } else {
+            System.out.println("Error! No balls with that name");
+            return null;
+        }
     }
      
     @RequestMapping(value = "/targetsportsball/type/{type}",  method=RequestMethod.GET)
     public List<TargetSportsBall> fetchTargetSportsBallsByType(@PathVariable String type) {
-        return tsbRepository.findByType(type);
+        
+        if(tsbRepository.findByType(type) != null) {
+            return tsbRepository.findByType(type);
+        } else {
+            System.out.println("Error! No balls of that type");
+            return null;
+        }
     }
 }
