@@ -388,34 +388,70 @@ public class MyController implements ApplicationRunner {
     
     @RequestMapping(value = "/batandraquetsgame/{batandraquetsgameId}",  method=RequestMethod.GET)
     public BatAndRaquetsGames fetchBatAndRaquetsGame(@PathVariable long batandraquetsgameId) {
-        return brRepository.findOne(batandraquetsgameId);
+        
+        if(brRepository.findOne(batandraquetsgameId) != null) {
+            return brRepository.findOne(batandraquetsgameId);
+        } else {
+            System.out.println("Error! No balls with that id");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/batandraquetsgame/{batandraquetsgameId}",  method=RequestMethod.DELETE)
     public BatAndRaquetsGames deleteBatAndRaquetsGame(@PathVariable long batandraquetsgameId) {
-        BatAndRaquetsGames temp = brRepository.findOne(batandraquetsgameId);
-        brRepository.delete(brRepository.findOne(batandraquetsgameId));
-        return temp;
+        
+        if(brRepository.findOne(batandraquetsgameId) != null) {
+            BatAndRaquetsGames temp = brRepository.findOne(batandraquetsgameId);
+            brRepository.delete(brRepository.findOne(batandraquetsgameId));
+            return temp;
+        } else {
+            System.out.println("Error! No balls with that id");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/batandraquetsgame/color/{batandraquetsgameColor}",  method=RequestMethod.GET)
     public List<BatAndRaquetsGames> fetchBatAndRaquetsGameByColor(@PathVariable String batandraquetsgameColor) {
-        return brRepository.findByColor(batandraquetsgameColor);
+        
+        if(brRepository.findByColor(batandraquetsgameColor) != null) {
+            return brRepository.findByColor(batandraquetsgameColor);
+        } else {
+            System.out.println("Error! No balls of that color");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/batandraquetsgame/material/{batandraquetsgameMaterial}",  method=RequestMethod.GET)
     public List<BatAndRaquetsGames> fetchBatAndRaquetsGamesByMaterial(@PathVariable String batandraquetsgameMaterial) {
-        return brRepository.findByMaterial(batandraquetsgameMaterial);
+        
+        if(brRepository.findByMaterial(batandraquetsgameMaterial) != null) {
+            return brRepository.findByMaterial(batandraquetsgameMaterial);
+        } else {
+            System.out.println("Error! No balls with that material");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/batandraquetsgame/name/{batandraquetsgameName}",  method=RequestMethod.GET)
     public BatAndRaquetsGames fetchBatAndRaquetsGamesByName(@PathVariable String batandraquetsgameName) {
-        return brRepository.findByName(batandraquetsgameName);
+        
+        if(brRepository.findByName(batandraquetsgameName) != null) {
+            return brRepository.findByName(batandraquetsgameName);
+        } else {
+            System.out.println("Error! No balls with that name");
+            return null;
+        }
     }
      
     @RequestMapping(value = "/batandraquetsgame/type/{type}",  method=RequestMethod.GET)
     public List<BatAndRaquetsGames> fetchByType(@PathVariable String type) {
-        return brRepository.findByType(type);
+        
+        if(brRepository.findByType(type) != null) {
+            return brRepository.findByType(type);
+        } else {
+            System.out.println("Error! No balls of that type");
+            return null;
+        }
     }
     
     
