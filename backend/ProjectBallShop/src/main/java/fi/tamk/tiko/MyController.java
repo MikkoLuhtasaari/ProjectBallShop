@@ -329,6 +329,13 @@ public class MyController implements ApplicationRunner {
         gsbRepository.save(goalsportsball);
     }
     
+    @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
+    public void saveGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
+        gsbRepository.delete(gsbRepository.findOne(id));
+        GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
+        gsbRepository.save(temp);
+    }
+    
     @RequestMapping(value = "/goalsportsballs",  method=RequestMethod.GET)
     public Iterable<GoalSportsBall> fetchGoalSportsBalls() {
         return gsbRepository.findAll();
