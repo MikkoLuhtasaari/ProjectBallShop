@@ -45,6 +45,7 @@ GET batandraquetsgame/type/{Baseball | Tennisball}
 Football and Basketball related requests
 ----------------------------
 POST goalsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/goalsportsball/
+PUT goalsportsball/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/goalsportsball/{id}
 DELETE curl -X DELETE localhost:8080/goalsportsball/{id}
 GET goalsportsballs/
 GET goalsportsball/{id}/
