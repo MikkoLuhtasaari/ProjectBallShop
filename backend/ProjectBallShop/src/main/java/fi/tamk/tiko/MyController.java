@@ -284,6 +284,19 @@ public class MyController implements ApplicationRunner {
         brRepository.save(batandraquetsgame);
     }
     
+    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
+    public void saveBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
+        
+        if(brRepository.findOne(id) != null) {
+            brRepository.delete(brRepository.findOne(id));
+            
+            BatAndRaquetsGames temp = new BatAndRaquetsGames(batandraquetsgame.getName(), batandraquetsgame.getColor(), batandraquetsgame.getDiameter(), batandraquetsgame.getWeigth(), batandraquetsgame.getDetails(), batandraquetsgame.getMaterial(), batandraquetsgame.getManufacturer(), batandraquetsgame.getShortDetails(), batandraquetsgame.getType(), batandraquetsgame.getPrice(), batandraquetsgame.getAmount(), id);
+            brRepository.save(temp);
+        } else {
+            System.out.println("Error! Invalid id");
+        }
+    }
+    
     @RequestMapping(value = "/batandraquetsgames",  method=RequestMethod.GET)
     public Iterable<BatAndRaquetsGames> fetchBatAndRaquetsGames() {
         return brRepository.findAll();
