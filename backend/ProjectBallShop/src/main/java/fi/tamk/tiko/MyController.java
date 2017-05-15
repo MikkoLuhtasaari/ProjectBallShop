@@ -464,9 +464,14 @@ public class MyController implements ApplicationRunner {
     
     @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
     public void modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
-        gsbRepository.delete(gsbRepository.findOne(id));
-        GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
-        gsbRepository.save(temp);
+        
+        if(gsbRepository.findOne(id) != null) {
+            gsbRepository.delete(gsbRepository.findOne(id));
+            GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
+            gsbRepository.save(temp);
+        } else {
+            System.out.println("Error! No balls with that id found!");
+        }
     }
     
     @RequestMapping(value = "/goalsportsballs",  method=RequestMethod.GET)
@@ -476,24 +481,48 @@ public class MyController implements ApplicationRunner {
     
     @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.GET)
     public GoalSportsBall fetchGoalSportsBall(@PathVariable long goalsportsballId) {
-        return gsbRepository.findOne(goalsportsballId);
+        
+        if(gsbRepository.findOne(id) != null) {
+            return gsbRepository.findOne(goalsportsballId);
+        } else {
+            System.out.println("Error! No balls with that id found");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.DELETE)
     public GoalSportsBall deleteGoalSportsBall(@PathVariable long goalsportsballId) {
-        GoalSportsBall temp = gsbRepository.findOne(goalsportsballId);
-        gsbRepository.delete(gsbRepository.findOne(goalsportsballId));
-        return temp;
+        
+        if(gsbRepository.findOne(id) != null) {
+            GoalSportsBall temp = gsbRepository.findOne(goalsportsballId);
+            gsbRepository.delete(gsbRepository.findOne(goalsportsballId));
+            return temp;
+        } else {
+            System.out.println("Error! No balls with that id found");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/goalsportsball/color/{goalsportsballColor}",  method=RequestMethod.GET)
     public List<GoalSportsBall> fetchGoalSportsBallsByColor(@PathVariable String goalsportsballColor) {
-        return gsbRepository.findByColor(goalsportsballColor);
+        
+        if(gsbRepository.findByColor(goalsportsballColor) != null) {
+            return gsbRepository.findByColor(goalsportsballColor);
+        } else {
+            System.out.println("Error! No balls with that color");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/goalsportsball/material/{goalsportsballMaterial}",  method=RequestMethod.GET)
     public List<GoalSportsBall> fetchGoalSportsBallsByMaterial(@PathVariable String goalsportsballMaterial) {
-        return gsbRepository.findByMaterial(goalsportsballMaterial);
+        
+        if(gsbRepository.findByMaterial(goalsportsballMaterial) != null) {
+            return gsbRepository.findByMaterial(goalsportsballMaterial);
+        } else {
+            System.out.println("Error! No balls with that material");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/goalsportsball/name/{goalsportsballName}",  method=RequestMethod.GET)
@@ -503,7 +532,13 @@ public class MyController implements ApplicationRunner {
      
     @RequestMapping(value = "/goalsportsball/type/{type}",  method=RequestMethod.GET)
     public List<GoalSportsBall> fetchGoalSportsBallsByType(@PathVariable String type) {
-        return gsbRepository.findByType(type);
+        
+        if(gsbRepository.findByType(type) != null) {
+            return gsbRepository.findByType(type);
+        } else {
+            System.out.println("Error no balls of that type");
+            return null;
+        }
     }
     
 
