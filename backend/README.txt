@@ -13,7 +13,7 @@ GET review/user/{userId}
 User related requests
 ---------------------
 POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\", \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/
-PUT user/{id} curl -H "Content-Type: application/json" -X POST -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\", \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/{id}
+PUT user/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\", \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/{id}
 DELETE curl -X DELETE localhost:8080/user/{id}
 GET users/
 GET user/{id}
@@ -23,7 +23,7 @@ GET user/username/{userName}
 Volleyball and Handball related requests
 ----------------------------------------
 POST netsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/netsportsball/
-PUT netsportsball/{id} curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/netsportsball/{id}
+PUT netsportsball/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/netsportsball/{id}
 DELETE curl -X DELETE localhost:8080/netsportsball/{id}
 GET netsportsballs/
 GET netsportsball/{id}/
