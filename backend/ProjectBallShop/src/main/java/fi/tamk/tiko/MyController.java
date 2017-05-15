@@ -237,19 +237,37 @@ public class MyController implements ApplicationRunner {
     
     @RequestMapping(value="/user/{userId}", method=RequestMethod.GET)
     public User fetchUserById(@PathVariable long userId) {
-        return userRepository.findOne(userId);
+        
+        if(userRepository.findOne(userId) != null) {
+            return userRepository.findOne(userId);
+        } else {
+            System.out.println("Error! Invalid user id");
+            return null;
+        }
     }
     
     @RequestMapping(value="/user/username/{userName}", method=RequestMethod.GET)
     public User fetchUserByUserName(@PathVariable String userName) {
-        return userRepository.findByUserName(userName);
+        
+        if(userRepository.findByUserName(userName) != null) {
+            return userRepository.findByUserName(userName);
+        } else {
+            System.out.println("Error! No user found with that username");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
     public User deleteUser(@PathVariable long userId) {
-        User temp = userRepository.findOne(userId);
-        userRepository.delete(userRepository.findOne(userId));
-        return temp;
+        
+        if(userRepository.findOne(userId) != null) {
+            User temp = userRepository.findOne(userId);
+            userRepository.delete(userRepository.findOne(userId));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid user id");
+            return null;
+        }
     }
     
     // Volleyball and Handball related stuff
