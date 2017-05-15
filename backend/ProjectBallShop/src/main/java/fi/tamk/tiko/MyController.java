@@ -380,6 +380,20 @@ public class MyController implements ApplicationRunner {
         tsbRepository.save(targetsportsball);
     }
     
+    @RequestMapping(value = "/targetsportsball/{id}",  method=RequestMethod.PUT)
+    public void saveTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
+        
+        if(tsbRepository.findOne(id) != null) {
+            tsbRepository.delete(tsbRepository.findOne(id));
+            
+            TargetSportsBall temp = new TargetSportsBall(targetsportsball.getName(), targetsportsball.getColor(), targetsportsball.getDiameter(), targetsportsball.getWeigth(), targetsportsball.getDetails(), targetsportsball.getMaterial(), targetsportsball.getManufacturer(), targetsportsball.getShortDetails(), targetsportsball.getType(), targetsportsball.getPrice(), targetsportsball.getAmount(), id);
+            
+            tsbRepository.save(temp);
+        } else {
+            System.out.println("Error, invalid ID!");
+        }
+    }
+    
     @RequestMapping(value = "/targetsportsballs",  method=RequestMethod.GET)
     public Iterable<TargetSportsBall> fetchTargetSportsBalls() {
         return tsbRepository.findAll();
