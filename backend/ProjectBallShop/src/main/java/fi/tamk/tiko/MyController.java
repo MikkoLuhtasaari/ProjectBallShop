@@ -296,34 +296,69 @@ public class MyController implements ApplicationRunner {
     
     @RequestMapping(value = "/netsportsball/{netsportsballId}",  method=RequestMethod.GET)
     public NetSportsBall fetchNetSportsBall(@PathVariable long netsportsballId) {
-        return nsRepository.findOne(netsportsballId);
+        
+        if(nsRepository.findOne(netsportsballId) != null) {
+            return nsRepository.findOne(netsportsballId);
+        } else {
+            System.out.println("Error! Invalid netSportsBall id");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/netsportsball/{netsportsballId}",  method=RequestMethod.DELETE)
     public NetSportsBall deleteNetSportsBall(@PathVariable long netsportsballId) {
-        NetSportsBall temp = nsRepository.findOne(netsportsballId);
-        nsRepository.delete(nsRepository.findOne(netsportsballId));
-        return temp;
+        
+        if(nsRepository.findOne(netsportsballId) != null) {
+            NetSportsBall temp = nsRepository.findOne(netsportsballId);
+            nsRepository.delete(nsRepository.findOne(netsportsballId));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid netSportsBall id");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/netsportsball/color/{netsportsballColor}",  method=RequestMethod.GET)
     public List<NetSportsBall> fetchNetSportsBall(@PathVariable String netsportsballColor) {
-        return nsRepository.findByColor(netsportsballColor);
+        
+        if(nsRepository.findByColor(netsportsballColor) != null) {
+            return nsRepository.findByColor(netsportsballColor);
+        } else {
+            System.out.println("Error! No balls with that color");
+            return null;
+        }
     }
     
     @RequestMapping(value = "/netsportsball/material/{netsportsballMaterial}",  method=RequestMethod.GET)
     public List<NetSportsBall> fetchNetSportsBallByMaterial(@PathVariable String netsportsballMaterial) {
-        return nsRepository.findByMaterial(netsportsballMaterial);
+        
+        if(nsRepository.findByMaterial(netsportsballMaterial) != null) {
+            return nsRepository.findByMaterial(netsportsballMaterial);
+        } else {
+            System.out.println("Error! No balls with that material");
+            return null;
+        }
     }
     
-    @RequestMapping(value = "/netsportsball/name/{batandraquetsgameName}",  method=RequestMethod.GET)
+    @RequestMapping(value = "/netsportsball/name/{netsportsballName}",  method=RequestMethod.GET)
     public NetSportsBall fetchNetSportsBallByName(@PathVariable String netsportsballName) {
-        return nsRepository.findByName(netsportsballName);
+        
+        if(nsRepository.findByName(netsportsballName) != null) {
+            return nsRepository.findByName(netsportsballName);
+        } else {
+            System.out.println("Error! No balls with that name");
+            return null;
+        }
     }
      
     @RequestMapping(value = "/netsportsball/type/{type}",  method=RequestMethod.GET)
     public List<NetSportsBall> fetchNetSportsBallByType(@PathVariable String type) {
-        return nsRepository.findByType(type);
+        
+        if(nsRepository.findByType(type) != null) {
+            return nsRepository.findByType(type);
+        } else {
+            System.out.println("Error! No balls with that material");
+        }
     }
     
     
