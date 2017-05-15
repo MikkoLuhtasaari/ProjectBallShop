@@ -239,6 +239,19 @@ public class MyController implements ApplicationRunner {
     public void saveNetSportsBall(@RequestBody NetSportsBall netsportsball) {
         nsRepository.save(netsportsball);
     }
+    
+    @RequestMapping(value = "/netsportsball/{id}",  method=RequestMethod.PUT)
+    public void modifyNetSportsBall(@PathVariable long id, @RequestBody NetSportsBall netsportsball) {
+        
+        if(nsRepository.findOne(id) != null) {
+            nsRepository.delete(nsRepository.findOne(id));
+            
+            NetSportsBall temp = new NetSportsBall(netsportsball.getName(), netsportsball.getColor(), netsportsball.getDiameter(), netsportsball.getWeigth(), netsportsball.getDetails(), netsportsball.getMaterial(), netsportsball.getManufacturer(), netsportsball.getShortDetails(), netsportsball.getType(), netsportsball.getPrice(), netsportsball.getAmount(), id);
+            nsRepository.save(temp);
+        } else {
+            System.out.println("Error! Invalid id");
+        }
+    }
    
     @RequestMapping(value = "/netsportsballs",  method=RequestMethod.GET)
     public Iterable<NetSportsBall> fetchNetSportsBalls() {
@@ -285,7 +298,7 @@ public class MyController implements ApplicationRunner {
     }
     
     @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
-    public void saveBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
+    public void modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
         
         if(brRepository.findOne(id) != null) {
             brRepository.delete(brRepository.findOne(id));
@@ -343,7 +356,7 @@ public class MyController implements ApplicationRunner {
     }
     
     @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
-    public void saveGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
+    public void modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
         gsbRepository.delete(gsbRepository.findOne(id));
         GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
         gsbRepository.save(temp);
@@ -394,7 +407,7 @@ public class MyController implements ApplicationRunner {
     }
     
     @RequestMapping(value = "/targetsportsball/{id}",  method=RequestMethod.PUT)
-    public void saveTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
+    public void modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
         
         if(tsbRepository.findOne(id) != null) {
             tsbRepository.delete(tsbRepository.findOne(id));
