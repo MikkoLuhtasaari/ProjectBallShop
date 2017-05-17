@@ -1,13 +1,15 @@
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
+
 import { hashHistory, Router, Route, IndexRoute } from 'react-router';
-import TopNavComponent from './components/TopNavComponent';
+import CartComponent from './components/TopNavComponent';
 import BallComponent from './components/BallComponent';
 import FrontpageComponent from './components/FrontpageComponent';
 import ItemDetailsComponent from './components/ItemDetailsComponent';
-import CheckoutComponent from './components/CheckoutComponent';
+import AdminItemDetailsComponent from './components/admin/AdminItemDetailsComponent';
+import AddItem from './components/admin/AddItem';
 
-render(
+ReactDOM.render(
   <Router history={hashHistory}>
       <Route path="/" >
           <IndexRoute component={ FrontpageComponent }/>
@@ -21,14 +23,17 @@ render(
       <Route path="/details/:group/:id">
           <IndexRoute component={ ItemDetailsComponent }/>
       </Route>
-      <Route path="/checkout">
-          <IndexRoute component={ CheckoutComponent }/>
-      </Route>
+    <Route path="/admin/details/:group/:id">
+      <IndexRoute component={ AdminItemDetailsComponent }/>
+    </Route>
+    <Route path="/admin/add">
+      <IndexRoute component={ AddItem }/>
+    </Route>
   </Router>,
     document.getElementById("app")
 );
 
-render(
-    <TopNavComponent/>,
+ReactDOM.render(
+    <CartComponent/>,
     document.getElementById("topNav")
 );
