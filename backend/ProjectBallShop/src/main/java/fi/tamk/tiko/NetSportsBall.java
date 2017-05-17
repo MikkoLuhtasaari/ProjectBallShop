@@ -27,7 +27,7 @@ public class NetSportsBall implements Serializable
     private long id;
     private String category;
     
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<NSBReview> reviews;
     
     public NetSportsBall(){};
@@ -84,8 +84,23 @@ public class NetSportsBall implements Serializable
     public void setId(long id) {
         this.id = id;
     }
+    
     public void setReviews(Set<NSBReview> reviews) {
+        System.out.println("Setting reviews");
+        System.out.println(reviews.size());
+        
+        for(NSBReview n: reviews) {
+            System.out.println(n.getScore());
+        }
         this.reviews = reviews;
+    }
+    
+    public void setReview(NSBReview review) {
+        System.out.println("Setting review");
+        System.out.println(review);
+        System.out.println(reviews.size());
+        reviews.add(review);
+        System.out.println(reviews.size());
     }
     
     public String getName() {
@@ -128,6 +143,8 @@ public class NetSportsBall implements Serializable
         return category;
     }
     public Set<NSBReview> getReviews() {
+       System.out.println("Getting reviews!");
+       System.out.println(reviews.size());
        return reviews;
     }
     
