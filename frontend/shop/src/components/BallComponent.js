@@ -1,6 +1,7 @@
 import React from 'react';
 import Client from '../Client';
 import ReviewsComponent from '../components/ReviewsComponent'
+import ShoppingCartComponent from '../components/ShoppingCartComponent'
 
 export default class BallComponent extends React.Component{
     constructor(props) {
@@ -37,14 +38,12 @@ export default class BallComponent extends React.Component{
     render(){
         return(
             <section id="allBalls">
-                {
-                    this.state.balls.map(b => BallComponent.createContent(b))
-                }
+                { this.state.balls.map(b => this.createContent(b)) }
             </section>
         )
     }
 
-    static createContent(ballObject) {
+    createContent(ballObject) {
         const propArray = [];
         let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
@@ -55,9 +54,9 @@ export default class BallComponent extends React.Component{
                 <article className="col-item">
                     <div className="thumbnail">
                         <div className="photo">
-                            {BallComponent.getShoppingCartBtn()}
+                            {this.getShoppingCartBtn(ballObject)}
                             <img id="ballImage" src={imageSrc} className="img-responsive" alt="Ball"/>
-                            {BallComponent.getBallDetails(ballObject, category)}
+                            {this.getBallDetails(ballObject, category)}
                             <ReviewsComponent group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                         </div></div>
                 </article>
@@ -66,11 +65,10 @@ export default class BallComponent extends React.Component{
         return propArray;
     }
 
-    static getBallDetails(ballObject, category) {
+    getBallDetails(ballObject, category) {
         let link = "/#/details/" + category + "/" + ballObject.id;
         return (
             <div className="caption">
-                {/*option 2*/}
                 <h4 className="pull-right">{ballObject.price}€</h4>
                 <h4><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h4>
                 <p>{ballObject.shortDetails}</p>
@@ -78,13 +76,20 @@ export default class BallComponent extends React.Component{
         )
     }
 
-    static getShoppingCartBtn() {
+    getShoppingCartBtn(ball) {
         return (
             <div className="options-cart-round">
-                <button className="btn btn-default" title="Add to cart">
+                <button className="btn btn-default" title="Add to cart" onClick={ () => this.addCookie(ball) }>
                     <span className="fa fa-shopping-cart"/>
                 </button>
             </div>
         )
+    }
+
+    addCookie(ball) {
+        let temp = [];
+        temp = ShoppingCartComponent.cookies.get('ballArray');
+        temp.push(ball);
+        ShoppingCartComponent.cookies.set('ballArray', temp);
     }
 }
