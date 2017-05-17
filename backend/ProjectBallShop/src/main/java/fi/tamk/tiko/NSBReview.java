@@ -1,10 +1,11 @@
 package fi.tamk.tiko;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(indexes = {@Index(columnList="userId")})
-public class NSBReview 
+public class NSBReview implements Serializable
 {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
