@@ -14,7 +14,7 @@ public class NSBReview implements Serializable
     private int score;
     private String header;
     private String content;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="NSB_ID")
     private NetSportsBall owner;
     
@@ -52,6 +52,7 @@ public class NSBReview implements Serializable
     }
     
     public long getId() {
+        System.out.println("Getting review id");
         return id;
     }
     public long getUserId() {
@@ -68,6 +69,7 @@ public class NSBReview implements Serializable
     }
     
     public NetSportsBall getOwner() {
+        System.out.println("Get owner");
         return owner;
     }
     
