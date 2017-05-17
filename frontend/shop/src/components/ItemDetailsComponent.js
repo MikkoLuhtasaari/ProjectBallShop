@@ -1,6 +1,7 @@
 import React from 'react';
 import Client from '../Client';
 import ReviewsComponent from '../components/ReviewsComponent'
+import ShoppingCartComponent from '../components/ShoppingCartComponent'
 
 export default class ItemDetailsComponent extends React.Component {
     constructor(props) {
@@ -16,12 +17,12 @@ export default class ItemDetailsComponent extends React.Component {
         if (typeof category !== "undefined") category = category.replace(/ /g, '').toLowerCase();
         let imageSrc = "../../images/items/" + ball.type + "_" + ball.id + ".png";
         let onStock = "This item is out of stock";
-        let ikon = "glyphicon glyphicon-remove-circle";
+        let icon = "glyphicon glyphicon-remove-circle";
         let colorId = "red";
         let buttonId = "btn disabled";
         if (ball.amount > 0) {
             onStock = "On stock";
-            ikon = "glyphicon glyphicon-ok-circle";
+            icon = "glyphicon glyphicon-ok-circle";
             colorId = "green";
             buttonId = "btn btn-success active";
         }
@@ -42,14 +43,14 @@ export default class ItemDetailsComponent extends React.Component {
                                 <h3>{ball.price} €</h3>
 
                                 <div className="section" id="botBad">
-                                    <button className={buttonId}>
+                                    <button className={buttonId} onClick={ () => this.addCookie(ball) }>
                                         <span id="marginR20" className="glyphicon glyphicon-shopping-cart" aria-hidden="true"/>
                                         Add to cart
                                     </button>
                                 </div>
 
                                 <span id={colorId}>
-                                    <span className={ikon}/>
+                                    <span className={icon}/>
                                     <span id="shopItem">{onStock}</span>
                                 </span>
                                 <br/><br/>
@@ -93,5 +94,12 @@ export default class ItemDetailsComponent extends React.Component {
                 }
             </section>
         )
+    }
+
+    addCookie(ball) {
+        let temp = [];
+        temp = ShoppingCartComponent.cookies.get('ballArray');
+        temp.push(ball);
+        ShoppingCartComponent.cookies.set('ballArray', temp);
     }
 }

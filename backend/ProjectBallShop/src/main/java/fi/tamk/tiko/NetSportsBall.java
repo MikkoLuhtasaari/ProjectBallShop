@@ -1,15 +1,14 @@
 package fi.tamk.tiko;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.io.Serializable;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
-public class NetSportsBall 
+public class NetSportsBall implements Serializable
 {
     private String name;
     private String color;
@@ -27,6 +26,9 @@ public class NetSportsBall
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String category;
+    
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private Set<NSBReview> reviews;
     
     public NetSportsBall(){};
     
@@ -83,6 +85,24 @@ public class NetSportsBall
         this.id = id;
     }
     
+    public void setReviews(Set<NSBReview> reviews) {
+        System.out.println("Setting reviews");
+        System.out.println(reviews.size());
+        
+        for(NSBReview n: reviews) {
+            System.out.println(n.getScore());
+        }
+        this.reviews = reviews;
+    }
+    
+    public void setReview(NSBReview review) {
+        System.out.println("Setting review");
+        System.out.println(review);
+        System.out.println(reviews.size());
+        reviews.add(review);
+        System.out.println(reviews.size());
+    }
+    
     public String getName() {
         return name;
     }
@@ -121,6 +141,11 @@ public class NetSportsBall
     }
     public String getCategory() {
         return category;
+    }
+    public Set<NSBReview> getReviews() {
+       System.out.println("Getting reviews!");
+       System.out.println(reviews.size());
+       return reviews;
     }
     
 }

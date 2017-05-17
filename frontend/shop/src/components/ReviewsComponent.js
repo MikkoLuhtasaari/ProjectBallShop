@@ -93,36 +93,24 @@ export default class ReviewsComponent extends React.Component{
         return (
             <div className="ratings">
                 <div className="thumbnail">
-                    <span className="glyphicon glyphicon-star"/>
-                    <span className="glyphicon glyphicon-star"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty tweaked-margin"/>
+                    {ReviewsComponent.getStarts(2)}
+                    <br/>
                     {content}
                 </div>
                 <div className="thumbnail">
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty tweaked-margin"/>
+                    {ReviewsComponent.getStarts(1)}
+                    <br/>
                     {content}
                 </div>
                 <div className="thumbnail">
-                    <span className="glyphicon glyphicon-star"/>
-                    <span className="glyphicon glyphicon-star"/>
-                    <span className="glyphicon glyphicon-star"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty tweaked-margin"/>
+                    {ReviewsComponent.getStarts(3)}
+                    <br/>
                     {content}
                 </div>
                 <div className="thumbnail">
-                    <span className="glyphicon glyphicon-star"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty"/>
-                    <span className="glyphicon glyphicon-star-empty tweaked-margin"/>
-                     {content}
+                    {ReviewsComponent.getStarts(2)}
+                    <br/>
+                    {content}
                 </div>
             </div>
         )
