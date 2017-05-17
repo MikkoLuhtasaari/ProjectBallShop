@@ -1,49 +1,38 @@
 package fi.tamk.tiko;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(indexes = {@Index(columnList="userId"), @Index(columnList="itemId"), @Index(columnList="category")})
-public class Review 
+@Table(indexes = {@Index(columnList="userId")})
+public class NSBReview implements Serializable
 {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    private String category;
     private long userId;
-    private long itemId;
     private int score;
     private String header;
     private String content;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="NSB_ID")
+    private NetSportsBall owner;
     
-    public Review(){};
+    public NSBReview(){};
     
-    public Review(String category, long userId, long itemId, int score, String header, String content, long id) {
-        setCategory(category);
+    public NSBReview(long userId, int score, String header, String content, NetSportsBall owner) {
         setUserId(userId);
-        setItemId(itemId);
         setScore(score);
         setHeader(header);
         setContent(content);
-        setId(id);
+        setOwner(owner);
     }
     
     public void setId(long id) {
         this.id = id;
     }
-    public void setCategory(String category) {
-        this.category = category;
-    }
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
     }
     public void setScore(int score) {
         if(score < 6 && score > 0 ) {
@@ -58,18 +47,16 @@ public class Review
     public void setContent(String content) {
         this.content = content;
     }
+    public void setOwner(NetSportsBall owner) {
+        this.owner = owner;
+    }
     
     public long getId() {
+        System.out.println("Getting review id");
         return id;
-    }
-    public String getCategory() {
-        return category;
     }
     public long getUserId() {
         return userId;
-    }
-    public long getItemId() {
-        return itemId;
     }
     public int getScore() {
         return score;
@@ -79,6 +66,11 @@ public class Review
     }
     public String getContent() {
         return content;
+    }
+    
+    public NetSportsBall getOwner() {
+        System.out.println("Get owner");
+        return owner;
     }
     
 }
