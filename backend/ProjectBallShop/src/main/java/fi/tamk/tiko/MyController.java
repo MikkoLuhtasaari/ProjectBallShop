@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
+import javax.*;
+
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -204,6 +206,13 @@ public class MyController implements ApplicationRunner {
        
         
     }
+    
+    /*RequestMapping(value="/test", method=RequestMethod.GET)
+    public List<JSONObject> fetchReviews() {
+        List<JSONObject> toBeReturned = new ArrayList<JSONObject>();
+        Set temp = new HashSet();
+        
+    }*/
     
     @RequestMapping(value="/test", method=RequestMethod.GET)
     public Iterable<NSBReview> fetchReviews() {
