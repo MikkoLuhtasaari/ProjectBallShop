@@ -195,6 +195,9 @@ public class MyController implements ApplicationRunner {
         
         tempNS1.setReviews(Test);
         
+        //tempNS1.setReview(new NSBReview(1,1,"Text","Text2",tempNS1));
+        
+        
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
@@ -202,6 +205,15 @@ public class MyController implements ApplicationRunner {
         
     }
     
+    @RequestMapping(value="/test", method=RequestMethod.GET)
+    public Iterable<NSBReview> fetchReviews() {
+        return nsReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/test/{id}", method=RequestMethod.GET)
+    public NSBReview fetchReviewById(@PathVariable long id) {
+        return nsReviewRepository.findOne(id);
+    }
     
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
