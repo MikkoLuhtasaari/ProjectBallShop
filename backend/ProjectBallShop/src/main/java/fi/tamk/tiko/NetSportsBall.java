@@ -1,11 +1,9 @@
 package fi.tamk.tiko;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
@@ -27,6 +25,9 @@ public class NetSportsBall
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String category;
+    
+    @OneToMany(mappedBy = "owner")
+    private Set<NSBReview> reviews;
     
     public NetSportsBall(){};
     
@@ -82,6 +83,9 @@ public class NetSportsBall
     public void setId(long id) {
         this.id = id;
     }
+    public void setReviews(Set<NSBReview> reviews) {
+        this.reviews = reviews;
+    }
     
     public String getName() {
         return name;
@@ -121,6 +125,9 @@ public class NetSportsBall
     }
     public String getCategory() {
         return category;
+    }
+    public Set<NSBReview> getReviews() {
+       return reviews;
     }
     
 }
