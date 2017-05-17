@@ -19,12 +19,11 @@ public class NSBReview
     
     public NSBReview(){};
     
-    public NSBReview(long userId, int score, String header, String content, long id, NetSportsBall owner) {
+    public NSBReview(long userId, int score, String header, String content, NetSportsBall owner) {
         setUserId(userId);
         setScore(score);
         setHeader(header);
         setContent(content);
-        setId(id);
         setOwner(owner);
     }
     
