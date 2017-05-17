@@ -2,6 +2,8 @@ package fi.tamk.tiko;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 import org.springframework.stereotype.Controller;
 
@@ -169,9 +171,34 @@ public class MyController implements ApplicationRunner {
         NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
         NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
         
+        /*NSBReview tempNSBReview1 = new NSBReview(1, 1, "Text", "Text4", tempNS1);
+        NSBReview tempNSBReview2 = new NSBReview(1, 2, "Text2", "Text5", tempNS1);
+        NSBReview tempNSBReview3 = new NSBReview(1, 3, "Text3", "Text6", tempNS1);
+        
+        nsReviewRepository.save(tempNSBReview1);
+        nsReviewRepository.save(tempNSBReview2);
+        nsReviewRepository.save(tempNSBReview3);*/
+
+        
+        /*Set Test = new HashSet<NSBReview>(){{
+            add(tempNSBReview1);
+            add(tempNSBReview2);
+            add(tempNSBReview3);
+        }};*/
+
+        
+        Set Test = new HashSet<NSBReview>(){{
+            add(new NSBReview(1, 1, "Text", "Text4", tempNS1));
+            add(new NSBReview(1, 2, "Text", "Text4", tempNS1));
+            add(new NSBReview(1, 3, "Text", "Text4", tempNS1));
+        }};
+        
+        tempNS1.setReviews(Test);
+        
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
+       
         
     }
     
