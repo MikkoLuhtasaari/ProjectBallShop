@@ -4,10 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
+import java.io.Serializable;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
-public class NetSportsBall 
+public class NetSportsBall implements Serializable
 {
     private String name;
     private String color;
