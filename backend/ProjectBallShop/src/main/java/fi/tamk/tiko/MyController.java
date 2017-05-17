@@ -202,6 +202,7 @@ public class MyController implements ApplicationRunner {
         
     }
     
+    
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
