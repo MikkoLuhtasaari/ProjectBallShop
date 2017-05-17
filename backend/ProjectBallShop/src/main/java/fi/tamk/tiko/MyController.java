@@ -35,7 +35,7 @@ public class MyController implements ApplicationRunner {
     UserRepository userRepository;
     
     @Autowired
-    ReviewRepository reviewRepository;
+    NSBReviewRepository nsReviewRepository;
     
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
@@ -127,15 +127,6 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET targetsportsball/color/{color}");
         System.out.println("GET targetsportsball/type/{Football | Basketball}");
         
-        // REVIEWS
-        Review tempReview1 = new Review("Bat and Racquet games", 1, 1, 2, "Header", "Content", 1);
-        Review tempReview2 = new Review("Goal sports", 1, 2, 5, "Header2", "Content2", 2);
-        Review tempReview3 = new Review("Bat and Racquet games", 2, 1, 3, "Header3", "Content3", 3);
-        
-        reviewRepository.save(tempReview1);
-        reviewRepository.save(tempReview2);
-        reviewRepository.save(tempReview3);
-        
         //USERS
         User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin", 1);
         User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User", 2);
@@ -181,34 +172,7 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
-    }
-    
-    // Review related stuff
-    @RequestMapping(value= "/review", method= RequestMethod.POST)
-    public void saveReview(@RequestBody Review review) {
-        reviewRepository.save(review);
-    }
-    @RequestMapping(value="/reviews", method=RequestMethod.GET)
-    public Iterable<Review> fetchReviews() {
-        return reviewRepository.findAll();
-    }
-    @RequestMapping(value="/review/{reviewId}", method=RequestMethod.GET)
-    public Review fetchReviewById(@PathVariable long reviewId) {
-        return reviewRepository.findOne(reviewId);
-    }
-    @RequestMapping(value="/review/{category}/{itemId}", method=RequestMethod.GET)
-    public Iterable<Review> fetchReviewById(@PathVariable long itemId, @PathVariable String category) {
-        return reviewRepository.findByItemIdAndCategory(itemId, category);
-    }
-    @RequestMapping(value="/review/user/{userId}", method=RequestMethod.GET)
-    public Iterable<Review> fetchReviewByUserId(@PathVariable long userId) {
-        return reviewRepository.findByUserId(userId);
-    }
-    @RequestMapping(value = "/review/{reviewId}",  method=RequestMethod.DELETE)
-    public Review deleteReview(@PathVariable long reviewId) {
-        Review temp = reviewRepository.findOne(reviewId);
-        reviewRepository.delete(reviewRepository.findOne(reviewId));
-        return temp;
+        
     }
     
     // User related stuff
