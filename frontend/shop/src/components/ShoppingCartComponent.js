@@ -64,7 +64,6 @@ export default class ShoppingCartComponent extends React.Component{
     };
 
     itemDetails() {
-        let items = ShoppingCartComponent.cookies.get('ballArray');
         let temp = [];
         ShoppingCartComponent.cookies.get('ballArray').forEach(item => {
             temp.push(
