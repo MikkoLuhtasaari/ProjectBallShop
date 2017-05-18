@@ -361,13 +361,26 @@ public class MyController implements ApplicationRunner {
         return temp;
     }
     
+    @RequestMapping(value = "/netsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
+    public NSBReview deleteNSBReviewById(@PathVariable long reviewid) {
+        
+        if(nsReviewRepository.findOne(reviewid) != null) {
+            NSBReview temp = nsReviewRepository.findOne(reviewid);
+            nsReviewRepository.delete(nsReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid netSportsBall id");
+            return null;
+        }
+    }
     
-    @RequestMapping(value="/test", method=RequestMethod.GET)
+    
+    @RequestMapping(value="/netsportsballs/reviews", method=RequestMethod.GET)
     public Iterable<NSBReview> fetchReviews() {
         return nsReviewRepository.findAll();
     }
     
-    @RequestMapping(value="/test/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/netsportsballs/review/{id}", method=RequestMethod.GET)
     public NSBReview fetchReviewById(@PathVariable long id) {
         return nsReviewRepository.findOne(id);
     }
