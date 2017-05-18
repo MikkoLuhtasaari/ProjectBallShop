@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
@@ -28,6 +29,7 @@ public class NetSportsBall implements Serializable
     private String category;
     
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<NSBReview> reviews;
     
     public NetSportsBall(){};
@@ -143,8 +145,6 @@ public class NetSportsBall implements Serializable
         return category;
     }
     public Set<NSBReview> getReviews() {
-       System.out.println("Getting reviews!");
-       System.out.println(reviews.size());
        return reviews;
     }
     
