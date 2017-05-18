@@ -27,8 +27,29 @@ export default class Client {
      * @param ballId - id of the ball that's reviews are to be retrieved
      * @returns {Promise}
      */
-    reviewByBallId(sporttype, ballId) {
-        return this.getPromise("GET", "http://localhost:8080/review/" + sporttype + "/" + ballId);
+    reviewsByBallId(sporttype, ballId) {
+        return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/review/" + ballId)
+    }
+
+    sendReview(sporttype, ballId, userId, rating, header, content){
+        let targetUrl = "http://localhost:8080/" + sporttype + "/" + ballId + "/review/user/" + userId;
+        console.log(targetUrl)
+        fetch(targetUrl,
+            {
+                method: 'POST',
+                contentType: 'application/json',
+                body: JSON.stringify({
+                    "score": rating,
+                    "header": header,
+                    "content": content,
+                })
+            }).then(function (response) {
+                console.log(response);
+                return response;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        console.log(targetUrl);
     }
 
     getPromise(type, address) {
