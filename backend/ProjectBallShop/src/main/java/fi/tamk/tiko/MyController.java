@@ -189,15 +189,24 @@ public class MyController implements ApplicationRunner {
         }};*/
 
         
-        Set Test = new HashSet<NSBReview>(){{
+        Set tempNSReview1 = new HashSet<NSBReview>(){{
             add(new NSBReview(1, 1, "Text", "Text4", tempNS1, tempUser1));
         }};
         
-        tempNS1.setReviews(Test);
+        tempNS1.setReviews(tempNSReview1);
         
-        //tempNS1.setReview(new NSBReview(1,1,"Text","Text2",tempNS1));
+        Set tempNSReview2 = new HashSet<NSBReview>(){{
+            add(new NSBReview(2, 1, "Text", "Text4", tempNS2, tempUser2));
+        }};
         
+        tempNS2.setReviews(tempNSReview2);
         
+        Set tempNSReview3 = new HashSet<NSBReview>(){{
+            add(new NSBReview(3, 1, "Text", "Text4", tempNS3, tempUser3));
+        }};
+        
+        tempNS3.setReviews(tempNSReview3);
+          
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
@@ -205,12 +214,17 @@ public class MyController implements ApplicationRunner {
         
     }
     
-    /*RequestMapping(value="/test", method=RequestMethod.GET)
-    public List<JSONObject> fetchReviews() {
-        List<JSONObject> toBeReturned = new ArrayList<JSONObject>();
-        Set temp = new HashSet();
-        
-    }*/
+    @RequestMapping(value="/testi", method=RequestMethod.GET)
+    public void testiiih() {
+        NSBReview temp = new NSBReview();
+        temp.setUserOwner(userRepository.findOne((long)1));
+        temp.setScore(1);
+        temp.setHeader("testi");
+        temp.setContent("Juttu");
+        temp.setOwner(nsRepository.findOne((long)1));
+        nsReviewRepository.save(temp);
+    }
+    
     
     @RequestMapping(value="/test", method=RequestMethod.GET)
     public Iterable<NSBReview> fetchReviews() {
