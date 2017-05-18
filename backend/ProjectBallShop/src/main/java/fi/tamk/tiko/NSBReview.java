@@ -2,7 +2,7 @@ package fi.tamk.tiko;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(indexes = {@Index(columnList="userId")})
@@ -17,7 +17,7 @@ public class NSBReview implements Serializable
     private String content;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="NSB_ID")
-    @JsonBackReference
+    @JsonIgnore
     private NetSportsBall owner;
     
     public NSBReview(){};
