@@ -41,6 +41,9 @@ public class MyController implements ApplicationRunner {
     @Autowired
     NSBReviewRepository nsReviewRepository;
     
+    @Autowired
+    GSBReviewRepository gsReviewRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -149,6 +152,24 @@ public class MyController implements ApplicationRunner {
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
         GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
         GoalSportsBall tempGoal3 = new GoalSportsBall("Bad Basketball", "White", 40, 20000, "LongDetails", "Concrete", "AnotherDas", "A ball to throw", "Basketball", 19.95, 4, 3);
+        
+        Set tempGSReview1 = new HashSet<GSBReview>(){{
+            add(new GSBReview(1, 1, "Good product", "Nothing more to say", tempGoal1, 1, tempUser1, 1));
+        }};
+        
+        tempGoal1.setReviews(tempGSReview1);
+        
+        Set tempGSReview2 = new HashSet<GSBReview>(){{
+            add(new GSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempGoal2, 2, tempUser2, 2));
+        }};
+        
+        tempGoal2.setReviews(tempGSReview2);
+        
+        Set tempGSReview3 = new HashSet<GSBReview>(){{
+            add(new GSBReview(3, 1, "Meh", "Meh", tempGoal3, 3, tempUser3, 3));
+        }};
+        
+        tempGoal3.setReviews(tempGSReview3);
         
         gsbRepository.save(tempGoal1);
         gsbRepository.save(tempGoal2);
