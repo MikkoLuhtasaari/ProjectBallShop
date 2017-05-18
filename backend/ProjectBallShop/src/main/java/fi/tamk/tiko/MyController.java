@@ -178,19 +178,19 @@ public class MyController implements ApplicationRunner {
         NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
         
         Set tempNSReview1 = new HashSet<NSBReview>(){{
-            add(new NSBReview(1, 1, "Text", "Text4", tempNS1, 1, tempUser1, 1));
+            add(new NSBReview(1, 1, "Good product", "Nothing more to say", tempNS1, 1, tempUser1, 1));
         }};
         
         tempNS1.setReviews(tempNSReview1);
         
         Set tempNSReview2 = new HashSet<NSBReview>(){{
-            add(new NSBReview(2, 1, "Text", "Text4", tempNS2, 2, tempUser2, 2));
+            add(new NSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
         }};
         
         tempNS2.setReviews(tempNSReview2);
         
         Set tempNSReview3 = new HashSet<NSBReview>(){{
-            add(new NSBReview(3, 1, "Text", "Text4", tempNS3, 3, tempUser3, 3));
+            add(new NSBReview(3, 1, "Meh", "Meh", tempNS3, 3, tempUser3, 3));
         }};
         
         tempNS3.setReviews(tempNSReview3);
