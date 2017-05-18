@@ -397,8 +397,7 @@ public class MyController implements ApplicationRunner {
             System.out.println("Error! Invalid netSportsBall id");
             return null;
         }
-    }
-    
+    }  
     
     @RequestMapping(value="/netsportsballs/reviews", method=RequestMethod.GET)
     public Iterable<NSBReview> fetchReviews() {
@@ -594,6 +593,43 @@ public class MyController implements ApplicationRunner {
             System.out.println("Error no balls of that type");
             return null;
         }
+    }
+    
+    @RequestMapping(value="/goalsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public GSBReview saveGSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody GSBReview review) {
+        GSBReview temp = new GSBReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(gsbRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        gsReviewRepository.save(temp);
+        return temp;
+    }
+    
+    @RequestMapping(value = "/goalsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
+    public GSBReview deleteGSBReviewById(@PathVariable long reviewid) {
+        
+        if(gsReviewRepository.findOne(reviewid) != null) {
+            GSBReview temp = gsReviewRepository.findOne(reviewid);
+            gsReviewRepository.delete(gsReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid goalsportsball id");
+            return null;
+        }
+    }  
+    
+    @RequestMapping(value="/goalsportsballs/reviews", method=RequestMethod.GET)
+    public Iterable<GSBReview> fetchGSBReviews() {
+        return gsReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/goalsportsballs/review/{id}", method=RequestMethod.GET)
+    public GSBReview fetchGSBReviewById(@PathVariable long id) {
+        return gsReviewRepository.findOne(id);
     }
     
 
