@@ -23,6 +23,9 @@ GET netsportsball/material/{material}
 GET netsportsball/color/{color}
 GET netsportsball/type/{Volleyball | Handball}
 
+Reviews:
+POST /netsportsball/{ballid}/review/user/{userid} curl -H "Content-Type: application/json" -X POST -d "{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}" http://localhost:8080/netsportsball/1/review/user/1
+
 Baseball and Tennisball related requests
 ----------------------------------------
 POST batandraquetsgame/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/batandraquetsgame/
