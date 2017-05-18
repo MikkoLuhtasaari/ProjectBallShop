@@ -25,6 +25,9 @@ GET netsportsball/type/{Volleyball | Handball}
 
 Reviews:
 POST /netsportsball/{ballid}/review/user/{userid} curl -H "Content-Type: application/json" -X POST -d "{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}" http://localhost:8080/netsportsball/1/review/user/1
+DELETE curl -X DELETE localhost:8080/netsportsball/review/{reviewid}
+GET netsportsballs/reviews
+GET netsportsballs/review/{id}
 
 Baseball and Tennisball related requests
 ----------------------------------------
