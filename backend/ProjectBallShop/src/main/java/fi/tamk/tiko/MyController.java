@@ -190,19 +190,19 @@ public class MyController implements ApplicationRunner {
 
         
         Set tempNSReview1 = new HashSet<NSBReview>(){{
-            add(new NSBReview(1, 1, "Text", "Text4", tempNS1, tempUser1));
+            add(new NSBReview(1, 1, "Text", "Text4", tempNS1, 1, tempUser1, 1));
         }};
         
         tempNS1.setReviews(tempNSReview1);
         
         Set tempNSReview2 = new HashSet<NSBReview>(){{
-            add(new NSBReview(2, 1, "Text", "Text4", tempNS2, tempUser2));
+            add(new NSBReview(2, 1, "Text", "Text4", tempNS2, 2, tempUser2, 2));
         }};
         
         tempNS2.setReviews(tempNSReview2);
         
         Set tempNSReview3 = new HashSet<NSBReview>(){{
-            add(new NSBReview(3, 1, "Text", "Text4", tempNS3, tempUser3));
+            add(new NSBReview(3, 1, "Text", "Text4", tempNS3, 3, tempUser3, 3));
         }};
         
         tempNS3.setReviews(tempNSReview3);
@@ -218,10 +218,12 @@ public class MyController implements ApplicationRunner {
     public void testiiih() {
         NSBReview temp = new NSBReview();
         temp.setUserOwner(userRepository.findOne((long)1));
+        temp.setUserId((long)1);
         temp.setScore(1);
         temp.setHeader("testi");
         temp.setContent("Juttu");
         temp.setOwner(nsRepository.findOne((long)1));
+        temp.setOwnerBallId((long)1);
         nsReviewRepository.save(temp);
     }
     
