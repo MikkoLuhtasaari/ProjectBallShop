@@ -190,9 +190,7 @@ public class MyController implements ApplicationRunner {
 
         
         Set Test = new HashSet<NSBReview>(){{
-            add(new NSBReview(1, 1, "Text", "Text4", tempNS1));
-            add(new NSBReview(1, 2, "Text", "Text4", tempNS1));
-            add(new NSBReview(1, 3, "Text", "Text4", tempNS1));
+            add(new NSBReview(1, 1, "Text", "Text4", tempNS1, tempUser1));
         }};
         
         tempNS1.setReviews(Test);
