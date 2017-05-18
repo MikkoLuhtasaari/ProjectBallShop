@@ -812,4 +812,41 @@ public class MyController implements ApplicationRunner {
             return null;
         }
     }
+    
+     @RequestMapping(value="/targetsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public TSBReview saveTSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody TSBReview review) {
+        TSBReview temp = new TSBReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(tsbRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        tsReviewRepository.save(temp);
+        return temp;
+    }
+    
+    @RequestMapping(value = "/targetsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
+    public TSBReview deleteTSBReviewById(@PathVariable long reviewid) {
+        
+        if(tsReviewRepository.findOne(reviewid) != null) {
+            TSBReview temp = tsReviewRepository.findOne(reviewid);
+            tsReviewRepository.delete(tsReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid targetsportsball id");
+            return null;
+        }
+    }  
+    
+    @RequestMapping(value="/targetsportsballs/reviews", method=RequestMethod.GET)
+    public Iterable<TSBReview> fetchTSBReviews() {
+        return tsReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/targetsportsballs/review/{id}", method=RequestMethod.GET)
+    public TSBReview fetchTSBReviewById(@PathVariable long id) {
+        return tsReviewRepository.findOne(id);
+    }
 }
