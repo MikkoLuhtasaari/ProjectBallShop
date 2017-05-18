@@ -41,6 +41,12 @@ GET batandraquetsgame/material/{material}
 GET batandraquetsgame/color/{color}
 GET batandraquetsgame/type/{Baseball | Tennisball}
 
+Reviews:
+POST /batandraquetsgame/{ballid}/review/user/{userid} curl -H "Content-Type: application/json" -X POST -d "{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}" http://localhost:8080/batandraquetsgame/1/review/user/1
+DELETE curl -X DELETE localhost:8080/batandraquetsgame/review/{reviewid}
+GET batandraquetsgames/reviews
+GET batandraquetsgames/review/{id}
+
 
 Football and Basketball related requests
 ----------------------------
