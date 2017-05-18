@@ -173,22 +173,6 @@ public class MyController implements ApplicationRunner {
         NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
         NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
         
-        /*NSBReview tempNSBReview1 = new NSBReview(1, 1, "Text", "Text4", tempNS1);
-        NSBReview tempNSBReview2 = new NSBReview(1, 2, "Text2", "Text5", tempNS1);
-        NSBReview tempNSBReview3 = new NSBReview(1, 3, "Text3", "Text6", tempNS1);
-        
-        nsReviewRepository.save(tempNSBReview1);
-        nsReviewRepository.save(tempNSBReview2);
-        nsReviewRepository.save(tempNSBReview3);*/
-
-        
-        /*Set Test = new HashSet<NSBReview>(){{
-            add(tempNSBReview1);
-            add(tempNSBReview2);
-            add(tempNSBReview3);
-        }};*/
-
-        
         Set tempNSReview1 = new HashSet<NSBReview>(){{
             add(new NSBReview(1, 1, "Text", "Text4", tempNS1, 1, tempUser1, 1));
         }};
@@ -210,34 +194,8 @@ public class MyController implements ApplicationRunner {
         nsRepository.save(tempNS1);
         nsRepository.save(tempNS2);
         nsRepository.save(tempNS3);
-       
+    }
         
-    }
-    
-    @RequestMapping(value="/testi", method=RequestMethod.GET)
-    public void testiiih() {
-        NSBReview temp = new NSBReview();
-        temp.setUserOwner(userRepository.findOne((long)1));
-        temp.setUserId((long)1);
-        temp.setScore(1);
-        temp.setHeader("testi");
-        temp.setContent("Juttu");
-        temp.setOwner(nsRepository.findOne((long)1));
-        temp.setOwnerBallId((long)1);
-        nsReviewRepository.save(temp);
-    }
-    
-    
-    @RequestMapping(value="/test", method=RequestMethod.GET)
-    public Iterable<NSBReview> fetchReviews() {
-        return nsReviewRepository.findAll();
-    }
-    
-    @RequestMapping(value="/test/{id}", method=RequestMethod.GET)
-    public NSBReview fetchReviewById(@PathVariable long id) {
-        return nsReviewRepository.findOne(id);
-    }
-    
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
@@ -387,6 +345,31 @@ public class MyController implements ApplicationRunner {
             System.out.println("Error! No balls with that material");
             return null;
         }
+    }
+    
+    @RequestMapping(value="/netsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public NSBReview saveNSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody NSBReview review) {
+        NSBReview temp = new NSBReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(nsRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        nsReviewRepository.save(temp);
+        return temp;
+    }
+    
+    
+    @RequestMapping(value="/test", method=RequestMethod.GET)
+    public Iterable<NSBReview> fetchReviews() {
+        return nsReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/test/{id}", method=RequestMethod.GET)
+    public NSBReview fetchReviewById(@PathVariable long id) {
+        return nsReviewRepository.findOne(id);
     }
     
     
