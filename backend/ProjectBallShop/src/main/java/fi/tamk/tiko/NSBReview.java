@@ -20,26 +20,24 @@ public class NSBReview implements Serializable
     @JsonIgnore
     private NetSportsBall owner;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="OWNER_USER_ID")
+    @JsonIgnore
+    private User userOwner;
+    
     public NSBReview(){};
     
-    public NSBReview(long userId, int score, String header, String content, NetSportsBall owner) {
-        setUserId(userId);
+    public NSBReview(long id, int score, String header, String content, NetSportsBall owner, User userOwner) {
+        setUserOwner(userOwner);
         setScore(score);
         setHeader(header);
         setContent(content);
         setOwner(owner);
-    }
-    
-    @Override
-    public String toString() {
-        return "test";
+        setId(id);
     }
     
     public void setId(long id) {
         this.id = id;
-    }
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
     public void setScore(int score) {
         if(score < 6 && score > 0 ) {
@@ -57,13 +55,13 @@ public class NSBReview implements Serializable
     public void setOwner(NetSportsBall owner) {
         this.owner = owner;
     }
+    public void setUserOwner(User userOwner) {
+        this.userOwner = userOwner;
+    }
     
     public long getId() {
         System.out.println("Getting review id");
         return id;
-    }
-    public long getUserId() {
-        return userId;
     }
     public int getScore() {
         return score;
@@ -78,6 +76,11 @@ public class NSBReview implements Serializable
     public NetSportsBall getOwner() {
         System.out.println("Get owner");
         return owner;
+    }
+    
+    public User getUserOwner() {
+        System.out.println("Get user");
+        return userOwner;
     }
     
 }
