@@ -47,6 +47,9 @@ public class MyController implements ApplicationRunner {
     @Autowired
     BARReviewRepository brReviewRepository;
     
+    @Autowired
+    TSBReviewRepository tsReviewRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -190,6 +193,24 @@ public class MyController implements ApplicationRunner {
         TargetSportsBall tempTarget1 = new TargetSportsBall("Bowlingball1", "Black", 40, 3030, "Somethingsomething", "Steel", "Adidas", "A ball not to kick", "Bowlingball", 109.95, 3, 1);
         TargetSportsBall tempTarget2 = new TargetSportsBall("Golfball1", "Orange", 40, 200, "", "Rubber", "AnotherDas", "A ball not to kick", "Golfball", 105.95, 4, 2);
         TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 5, 3);
+        
+        Set tempTSReview1 = new HashSet<TSBReview>(){{
+            add(new TSBReview(1, 1, "Good product", "Nothing more to say", tempTarget1, 1, tempUser1, 1));
+        }};
+        
+        tempTarget1.setReviews(tempTSReview1);
+        
+        Set tempTSReview2 = new HashSet<TSBReview>(){{
+            add(new TSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempTarget2, 2, tempUser2, 2));
+        }};
+        
+        tempTarget2.setReviews(tempTSReview2);
+        
+        Set tempTSReview3 = new HashSet<TSBReview>(){{
+            add(new TSBReview(3, 1, "Meh", "Meh", tempTarget3, 3, tempUser3, 3));
+        }};
+        
+        tempTarget3.setReviews(tempTSReview3);
         
         tsbRepository.save(tempTarget1);
         tsbRepository.save(tempTarget2);
