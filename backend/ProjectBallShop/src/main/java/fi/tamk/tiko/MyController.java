@@ -114,6 +114,10 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET batandraquetsgame/material/{material}");
         System.out.println("GET batandraquetsgame/color/{color}");
         System.out.println("GET batandraquetsgame/type/{Baseball | Tennisball}");
+        System.out.println("POST /batandraquetsgame/{ballid}/review/user/{userid} curl -H \"Content-Type: application/json\" -X POST -d \"{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}\" http://localhost:8080/batandraquetsgame/1/review/user/1");
+        System.out.println("DELETE curl -X DELETE localhost:8080/batandraquetsgame/review/{reviewid}");
+        System.out.println("GET batandraquetsgames/reviews");
+        System.out.println("GET batandraquetsgames/review/{id}");
         System.out.println("");
         
         //Paths (goalsportsball)
