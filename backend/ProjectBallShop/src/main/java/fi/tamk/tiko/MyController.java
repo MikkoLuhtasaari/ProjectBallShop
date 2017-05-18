@@ -45,7 +45,7 @@ public class MyController implements ApplicationRunner {
     GSBReviewRepository gsReviewRepository;
     
     @Autowired
-    BARReviewRepository barReviewRepository;
+    BARReviewRepository brReviewRepository;
     
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
@@ -525,6 +525,43 @@ public class MyController implements ApplicationRunner {
             System.out.println("Error! No balls of that type");
             return null;
         }
+    }
+    
+    @RequestMapping(value="/batandraquetsgame/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public BARReview saveBARReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody BARReview review) {
+        BARReview temp = new BARReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(brRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        brReviewRepository.save(temp);
+        return temp;
+    }
+    
+    @RequestMapping(value = "/batandraquetsgame/review/{reviewid}",  method=RequestMethod.DELETE)
+    public BARReview deleteBARReviewById(@PathVariable long reviewid) {
+        
+        if(brReviewRepository.findOne(reviewid) != null) {
+            BARReview temp = brReviewRepository.findOne(reviewid);
+            brReviewRepository.delete(brReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid netSportsBall id");
+            return null;
+        }
+    }  
+    
+    @RequestMapping(value="/batandraquetsgames/reviews", method=RequestMethod.GET)
+    public Iterable<BARReview> fetchBARReviews() {
+        return brReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/batandraquetsgames/review/{id}", method=RequestMethod.GET)
+    public BARReview fetchBARReviewById(@PathVariable long id) {
+        return brReviewRepository.findOne(id);
     }
     
     
