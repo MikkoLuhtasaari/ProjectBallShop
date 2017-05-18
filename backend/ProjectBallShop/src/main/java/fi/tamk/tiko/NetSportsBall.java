@@ -95,14 +95,6 @@ public class NetSportsBall implements Serializable
         this.reviews = reviews;
     }
     
-    public void setReview(NSBReview review) {
-        System.out.println("Setting review");
-        System.out.println(review);
-        System.out.println(reviews.size());
-        reviews.add(review);
-        System.out.println(reviews.size());
-    }
-    
     public String getName() {
         return name;
     }
