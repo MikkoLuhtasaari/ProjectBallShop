@@ -44,6 +44,9 @@ public class MyController implements ApplicationRunner {
     @Autowired
     GSBReviewRepository gsReviewRepository;
     
+    @Autowired
+    BARReviewRepository barReviewRepository;
+    
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
@@ -192,6 +195,24 @@ public class MyController implements ApplicationRunner {
         BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 3, 1);
         BatAndRaquetsGames tempBat2 = new BatAndRaquetsGames("Baseball2", "White", 6, 35, "Somethingsomething", "Elastic rubber", "Adidas", "A ball to throw2", "Baseball", 4.95, 3, 2);
         BatAndRaquetsGames tempBat3 = new BatAndRaquetsGames("Tennisball1", "Yellow", 5, 336, "Somethingsomething", "Rubber", "Adidas", "A ball to smash", "Tennisball", 2.95, 3, 3);
+        
+        Set tempBARReview1 = new HashSet<BARReview>(){{
+            add(new BARReview(1, 1, "Good product", "Nothing more to say", tempBat1, 1, tempUser1, 1));
+        }};
+        
+        tempBat1.setReviews(tempBARReview1);
+        
+        Set tempBARReview2 = new HashSet<BARReview>(){{
+            add(new BARReview(2, 1, "Hated it", "Absolutely disgusting product", tempBat2, 2, tempUser2, 2));
+        }};
+        
+        tempBat2.setReviews(tempBARReview2);
+        
+        Set tempBARReview3 = new HashSet<BARReview>(){{
+            add(new BARReview(3, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
+        }};
+        
+        tempBat3.setReviews(tempBARReview3);
 
         brRepository.save(tempBat1);
         brRepository.save(tempBat2);
