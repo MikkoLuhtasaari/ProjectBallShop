@@ -151,6 +151,10 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET targetsportsball/material/{material}");
         System.out.println("GET targetsportsball/color/{color}");
         System.out.println("GET targetsportsball/type/{Football | Basketball}");
+        System.out.println("POST /targetsportsball/{ballid}/review/user/{userid} curl -H \"Content-Type: application/json\" -X POST -d \"{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}\" http://localhost:8080/targetsportsball/1/review/user/1");
+        System.out.println("DELETE curl -X DELETE localhost:8080/targetsportsball/review/{reviewid}");
+        System.out.println("GET targetsportsballs/reviews");
+        System.out.println("GET targetsportsballs/review/{id}");
         
         //USERS
         User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin", 1);
