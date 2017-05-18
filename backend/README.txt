@@ -79,3 +79,9 @@ GET targetsportsball/material/{material}
 GET targetsportsball/color/{color}
 GET targetsportsball/type/{Bowlingball | Golfball}
 
+Reviews:
+POST /targetsportsball/{ballid}/review/user/{userid} curl -H "Content-Type: application/json" -X POST -d "{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}" http://localhost:8080/targetsportsball/1/review/user/1
+DELETE curl -X DELETE localhost:8080/targetsportsball/review/{reviewid}
+GET targetsportsballs/reviews
+GET targetsportsballs/review/{id}
+
