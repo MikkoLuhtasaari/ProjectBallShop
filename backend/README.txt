@@ -1,15 +1,6 @@
 To run the server navigate to ProjectBallShop\ProjectBallShop\backend\ProjectBallShop and type mvn compile. After compiling type mvn spring-boot:run
 Port is http://localhost:8080/
 
-Review related requests
------------------------
-POST review/ curl -H "Content-Type: application/json" -X POST -d "{\"category\" : \"Bat and Racquet games\", \"userId\" : 1, \"itemId\" : \"1\", \"score\" : 2, \"header\" : \"Header\", \"content\" : \"Content\"}" http://localhost:8080/review/
-DELETE curl -X DELETE localhost:/review/{id}
-GET reviews/
-GET review/{id}
-GET review/{category}/{itemId}
-GET review/user/{userId}
-
 User related requests
 ---------------------
 POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\", \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/
