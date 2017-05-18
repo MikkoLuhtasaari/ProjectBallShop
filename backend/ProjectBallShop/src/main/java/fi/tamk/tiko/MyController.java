@@ -2,6 +2,10 @@ package fi.tamk.tiko;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
+import javax.*;
 
 import org.springframework.stereotype.Controller;
 
@@ -35,7 +39,16 @@ public class MyController implements ApplicationRunner {
     UserRepository userRepository;
     
     @Autowired
-    ReviewRepository reviewRepository;
+    NSBReviewRepository nsReviewRepository;
+    
+    @Autowired
+    GSBReviewRepository gsReviewRepository;
+    
+    @Autowired
+    BARReviewRepository brReviewRepository;
+    
+    @Autowired
+    TSBReviewRepository tsReviewRepository;
     
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
@@ -43,174 +56,10 @@ public class MyController implements ApplicationRunner {
     }
     
     public void run(ApplicationArguments args) {
-        
-        //Welcome message
-        System.out.println("                                                   ");
-        System.out.println("                                                   ");
-        System.out.println("  ____        _ _   _    _                _        ");
-        System.out.println(" |  _ \\      | | | | |  | |              | |       ");
-        System.out.println(" | |_) | __ _| | | | |__| | __ ___      _| | _____ ");
-        System.out.println(" |  _ < / _` | | | |  __  |/ _` \\ \\ /\\ / / |/ / __|");
-        System.out.println(" | |_) | (_| | | | | |  | | (_| |\\ V  V /|   <\\__ \\");
-        System.out.println(" |____/ \\__,_|_|_| |_|  |_|\\__,_| \\_/\\_/ |_|\\_\\___/");
-        System.out.println("                                                   ");
-        System.out.println("                                                   ");
-        
-        // Paths (Reviews)
-        System.out.println("Review related requests");
-        System.out.println("POST review/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"category\" : \"Bat and Racquet games\", \"userId\" : 1, \"itemId\" : \"1\", \"score\" : 2, \"header\" : \"Header\", \"content\" : \"Content\"}\" http://localhost:8080/review/");
-        System.out.println("DELETE curl -X DELETE localhost:8080/review/{id}");
-        System.out.println("GET reviews/");
-        System.out.println("GET review/{id}");
-        System.out.println("GET review/{category}/{itemId}");
-        System.out.println("GET review/user/{userId}");
-        System.out.println("");
-        
-        //Paths (Users)
-        System.out.println("User related requests");
-        System.out.println("POST user/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}, \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\" http://localhost:8080/user/");
-        System.out.println("PUT user/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}, \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\" http://localhost:8080/user/{id}");
-        System.out.println("DELETE curl -X DELETE localhost:8080/user/{id}");
-        System.out.println("GET users/");
-        System.out.println("GET user/{id}");
-        System.out.println("GET user/username/{userName}");
-        System.out.println("");
-        
-        //Paths (Netsportsballs)
-        System.out.println("Volleyball and Handball related requests");
-        System.out.println("POST netsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/");
-        System.out.println("PUT netsportsball/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/{id}");
-        System.out.println("DELETE curl -X DELETE localhost:8080/netsportsball/{id}");
-        System.out.println("GET netsportsballs/");
-        System.out.println("GET netsportsball/{id}/");
-        System.out.println("GET netsportsball/{name}");
-        System.out.println("GET netsportsball/material/{material}");
-        System.out.println("GET netsportsball/color/{color}");
-        System.out.println("GET netsportsball/type/{Volleyball | Handball}");
-        System.out.println("");
-        
-        //Paths (BatAndRaquetsGames)
-        System.out.println("Baseball and Tennisball related requests");
-        System.out.println("POST batandraquetsgame/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/batandraquetsgame/");
-        System.out.println("PUT batandraquetsgame/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/batandraquetsgame/{id}");
-        System.out.println("DELETE curl -X DELETE localhost:8080/batandraquetsgame/{id}");
-        System.out.println("GET batandraquetsgames/");
-        System.out.println("GET batandraquetsgame/{id}/");
-        System.out.println("GET batandraquetsgame/{name}");
-        System.out.println("GET batandraquetsgame/material/{material}");
-        System.out.println("GET batandraquetsgame/color/{color}");
-        System.out.println("GET batandraquetsgame/type/{Baseball | Tennisball}");
-        System.out.println("");
-        
-        //Paths (goalsportsball)
-        System.out.println("Football and Basketball related requests");
-        System.out.println("POST goalsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/");
-        System.out.println("PUT goalsportsball/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/{id}");
-        System.out.println("DELETE curl -X DELETE localhost:8080/goalsportsball/{id}");
-        System.out.println("GET goalsportsballs/");
-        System.out.println("GET goalsportsball/{id}/");
-        System.out.println("GET goalsportsball/{name}");
-        System.out.println("GET goalsportsball/material/{material}");
-        System.out.println("GET goalsportsball/color/{color}");
-        System.out.println("GET goalsportsball/type/{Football | Basketball}");
-        System.out.println("");
-        
-        //Paths (targetsportsball)
-        System.out.println("Golfball and Bowlingball related requests");
-        System.out.println("POST targetsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Bowlingball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/targetsportsball/");
-         System.out.println("PUT targetsportsball/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Bowlingball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/targetsportsball/{id}");
-        System.out.println("DELETE curl -X DELETE localhost:8080/targetsportsball/{id}");
-        System.out.println("GET targetsportsballs/");
-        System.out.println("GET targetsportsball/{id}/");
-        System.out.println("GET targetsportsball/{name}");
-        System.out.println("GET targetsportsball/material/{material}");
-        System.out.println("GET targetsportsball/color/{color}");
-        System.out.println("GET targetsportsball/type/{Football | Basketball}");
-        
-        // REVIEWS
-        Review tempReview1 = new Review("Bat and Racquet games", 1, 1, 2, "Header", "Content", 1);
-        Review tempReview2 = new Review("Goal sports", 1, 2, 5, "Header2", "Content2", 2);
-        Review tempReview3 = new Review("Bat and Racquet games", 2, 1, 3, "Header3", "Content3", 3);
-        
-        reviewRepository.save(tempReview1);
-        reviewRepository.save(tempReview2);
-        reviewRepository.save(tempReview3);
-        
-        //USERS
-        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin", 1);
-        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User", 2);
-        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", "Vaasa", "Merimiehenkatu 1a1", 65200, "User", 3);
-        
-        userRepository.save(tempUser1);
-        userRepository.save(tempUser2);
-        userRepository.save(tempUser3);
-
-        
-        //FOOTBALLS & BASKETBALLS
-        GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
-        GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
-        GoalSportsBall tempGoal3 = new GoalSportsBall("Bad Basketball", "White", 40, 20000, "LongDetails", "Concrete", "AnotherDas", "A ball to throw", "Basketball", 19.95, 4, 3);
-        
-        gsbRepository.save(tempGoal1);
-        gsbRepository.save(tempGoal2);
-        gsbRepository.save(tempGoal3);
-        
-        //BOWLINGBALLS & GOLFBALLS
-        TargetSportsBall tempTarget1 = new TargetSportsBall("Bowlingball1", "Black", 40, 3030, "Somethingsomething", "Steel", "Adidas", "A ball not to kick", "Bowlingball", 109.95, 3, 1);
-        TargetSportsBall tempTarget2 = new TargetSportsBall("Golfball1", "Orange", 40, 200, "", "Rubber", "AnotherDas", "A ball not to kick", "Golfball", 105.95, 4, 2);
-        TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 5, 3);
-        
-        tsbRepository.save(tempTarget1);
-        tsbRepository.save(tempTarget2);
-        tsbRepository.save(tempTarget3);
-        
-        //BASEBALLS & TENNISBALLS
-        BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 3, 1);
-        BatAndRaquetsGames tempBat2 = new BatAndRaquetsGames("Baseball2", "White", 6, 35, "Somethingsomething", "Elastic rubber", "Adidas", "A ball to throw2", "Baseball", 4.95, 3, 2);
-        BatAndRaquetsGames tempBat3 = new BatAndRaquetsGames("Tennisball1", "Yellow", 5, 336, "Somethingsomething", "Rubber", "Adidas", "A ball to smash", "Tennisball", 2.95, 3, 3);
-
-        brRepository.save(tempBat1);
-        brRepository.save(tempBat2);
-        brRepository.save(tempBat3);
-        
-        // VOLLEYBALL & HANDBALL
-        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 3, 1);
-        NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
-        NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
-        
-        nsRepository.save(tempNS1);
-        nsRepository.save(tempNS2);
-        nsRepository.save(tempNS3);
+        printHelloMessage();
+        initStuff();
     }
-    
-    // Review related stuff
-    @RequestMapping(value= "/review", method= RequestMethod.POST)
-    public void saveReview(@RequestBody Review review) {
-        reviewRepository.save(review);
-    }
-    @RequestMapping(value="/reviews", method=RequestMethod.GET)
-    public Iterable<Review> fetchReviews() {
-        return reviewRepository.findAll();
-    }
-    @RequestMapping(value="/review/{reviewId}", method=RequestMethod.GET)
-    public Review fetchReviewById(@PathVariable long reviewId) {
-        return reviewRepository.findOne(reviewId);
-    }
-    @RequestMapping(value="/review/{category}/{itemId}", method=RequestMethod.GET)
-    public Iterable<Review> fetchReviewById(@PathVariable long itemId, @PathVariable String category) {
-        return reviewRepository.findByItemIdAndCategory(itemId, category);
-    }
-    @RequestMapping(value="/review/user/{userId}", method=RequestMethod.GET)
-    public Iterable<Review> fetchReviewByUserId(@PathVariable long userId) {
-        return reviewRepository.findByUserId(userId);
-    }
-    @RequestMapping(value = "/review/{reviewId}",  method=RequestMethod.DELETE)
-    public Review deleteReview(@PathVariable long reviewId) {
-        Review temp = reviewRepository.findOne(reviewId);
-        reviewRepository.delete(reviewRepository.findOne(reviewId));
-        return temp;
-    }
-    
+        
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
@@ -362,6 +211,43 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    @RequestMapping(value="/netsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public NSBReview saveNSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody NSBReview review) {
+        NSBReview temp = new NSBReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(nsRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        nsReviewRepository.save(temp);
+        return temp;
+    }
+    
+    @RequestMapping(value = "/netsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
+    public NSBReview deleteNSBReviewById(@PathVariable long reviewid) {
+        
+        if(nsReviewRepository.findOne(reviewid) != null) {
+            NSBReview temp = nsReviewRepository.findOne(reviewid);
+            nsReviewRepository.delete(nsReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid netSportsBall id");
+            return null;
+        }
+    }  
+    
+    @RequestMapping(value="/netsportsballs/reviews", method=RequestMethod.GET)
+    public Iterable<NSBReview> fetchReviews() {
+        return nsReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/netsportsballs/review/{id}", method=RequestMethod.GET)
+    public NSBReview fetchReviewById(@PathVariable long id) {
+        return nsReviewRepository.findOne(id);
+    }
+    
     
     // Baseball and Tennisball related stuff
     @RequestMapping(value = "/batandraquetsgame",  method=RequestMethod.POST)
@@ -453,6 +339,43 @@ public class MyController implements ApplicationRunner {
             System.out.println("Error! No balls of that type");
             return null;
         }
+    }
+    
+    @RequestMapping(value="/batandraquetsgame/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public BARReview saveBARReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody BARReview review) {
+        BARReview temp = new BARReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(brRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        brReviewRepository.save(temp);
+        return temp;
+    }
+    
+    @RequestMapping(value = "/batandraquetsgame/review/{reviewid}",  method=RequestMethod.DELETE)
+    public BARReview deleteBARReviewById(@PathVariable long reviewid) {
+        
+        if(brReviewRepository.findOne(reviewid) != null) {
+            BARReview temp = brReviewRepository.findOne(reviewid);
+            brReviewRepository.delete(brReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid netSportsBall id");
+            return null;
+        }
+    }  
+    
+    @RequestMapping(value="/batandraquetsgames/reviews", method=RequestMethod.GET)
+    public Iterable<BARReview> fetchBARReviews() {
+        return brReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/batandraquetsgames/review/{id}", method=RequestMethod.GET)
+    public BARReview fetchBARReviewById(@PathVariable long id) {
+        return brReviewRepository.findOne(id);
     }
     
     
@@ -548,6 +471,43 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    @RequestMapping(value="/goalsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public GSBReview saveGSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody GSBReview review) {
+        GSBReview temp = new GSBReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(gsbRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        gsReviewRepository.save(temp);
+        return temp;
+    }
+    
+    @RequestMapping(value = "/goalsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
+    public GSBReview deleteGSBReviewById(@PathVariable long reviewid) {
+        
+        if(gsReviewRepository.findOne(reviewid) != null) {
+            GSBReview temp = gsReviewRepository.findOne(reviewid);
+            gsReviewRepository.delete(gsReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid goalsportsball id");
+            return null;
+        }
+    }  
+    
+    @RequestMapping(value="/goalsportsballs/reviews", method=RequestMethod.GET)
+    public Iterable<GSBReview> fetchGSBReviews() {
+        return gsReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/goalsportsballs/review/{id}", method=RequestMethod.GET)
+    public GSBReview fetchGSBReviewById(@PathVariable long id) {
+        return gsReviewRepository.findOne(id);
+    }
+    
 
     // Bowlingball and Golfball related stuff
     @RequestMapping(value = "/targetsportsball",  method=RequestMethod.POST)
@@ -640,5 +600,265 @@ public class MyController implements ApplicationRunner {
             System.out.println("Error! No balls of that type");
             return null;
         }
+    }
+    
+     @RequestMapping(value="/targetsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    public TSBReview saveTSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody TSBReview review) {
+        TSBReview temp = new TSBReview();
+        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserId(userid);
+        temp.setScore(review.getScore());
+        temp.setHeader(review.getHeader());
+        temp.setContent(review.getContent());
+        temp.setOwner(tsbRepository.findOne(ballid));
+        temp.setOwnerBallId(ballid);
+        tsReviewRepository.save(temp);
+        return temp;
+    }
+    
+    @RequestMapping(value = "/targetsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
+    public TSBReview deleteTSBReviewById(@PathVariable long reviewid) {
+        
+        if(tsReviewRepository.findOne(reviewid) != null) {
+            TSBReview temp = tsReviewRepository.findOne(reviewid);
+            tsReviewRepository.delete(tsReviewRepository.findOne(reviewid));
+            return temp;
+        } else {
+            System.out.println("Error! Invalid targetsportsball id");
+            return null;
+        }
+    }  
+    
+    @RequestMapping(value="/targetsportsballs/reviews", method=RequestMethod.GET)
+    public Iterable<TSBReview> fetchTSBReviews() {
+        return tsReviewRepository.findAll();
+    }
+    
+    @RequestMapping(value="/targetsportsballs/review/{id}", method=RequestMethod.GET)
+    public TSBReview fetchTSBReviewById(@PathVariable long id) {
+        return tsReviewRepository.findOne(id);
+    }
+    
+    public void printHelloMessage() {
+                
+        //Welcome message
+        System.out.println("                                                   ");
+        System.out.println("                                                   ");
+        System.out.println("  ____        _ _   _    _                _        ");
+        System.out.println(" |  _ \\      | | | | |  | |              | |       ");
+        System.out.println(" | |_) | __ _| | | | |__| | __ ___      _| | _____ ");
+        System.out.println(" |  _ < / _` | | | |  __  |/ _` \\ \\ /\\ / / |/ / __|");
+        System.out.println(" | |_) | (_| | | | | |  | | (_| |\\ V  V /|   <\\__ \\");
+        System.out.println(" |____/ \\__,_|_|_| |_|  |_|\\__,_| \\_/\\_/ |_|\\_\\___/");
+        System.out.println("                                                   ");
+        System.out.println("                                                   ");
+        
+        // Paths (Reviews)
+        System.out.println("Review related requests");
+        System.out.println("POST review/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"category\" : \"Bat and Racquet games\", \"userId\" : 1, \"itemId\" : \"1\", \"score\" : 2, \"header\" : \"Header\", \"content\" : \"Content\"}\" http://localhost:8080/review/");
+        System.out.println("DELETE curl -X DELETE localhost:8080/review/{id}");
+        System.out.println("GET reviews/");
+        System.out.println("GET review/{id}");
+        System.out.println("GET review/{category}/{itemId}");
+        System.out.println("GET review/user/{userId}");
+        System.out.println("");
+        
+        //Paths (Users)
+        System.out.println("User related requests");
+        System.out.println("POST user/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}, \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\" http://localhost:8080/user/");
+        System.out.println("PUT user/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\"}, \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\" http://localhost:8080/user/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/user/{id}");
+        System.out.println("GET users/");
+        System.out.println("GET user/{id}");
+        System.out.println("GET user/username/{userName}");
+        System.out.println("");
+        
+        //Paths (Netsportsballs)
+        System.out.println("Volleyball and Handball related requests");
+        System.out.println("POST netsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/");
+        System.out.println("PUT netsportsball/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/netsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/netsportsball/{id}");
+        System.out.println("GET netsportsballs/");
+        System.out.println("GET netsportsball/{id}/");
+        System.out.println("GET netsportsball/{name}");
+        System.out.println("GET netsportsball/material/{material}");
+        System.out.println("GET netsportsball/color/{color}");
+        System.out.println("GET netsportsball/type/{Volleyball | Handball}");
+        System.out.println("POST /netsportsball/{ballid}/review/user/{userid} curl -H \"Content-Type: application/json\" -X POST -d \"{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}\" http://localhost:8080/netsportsball/1/review/user/1");
+        System.out.println("DELETE curl -X DELETE localhost:8080/netsportsball/review/{reviewid}");
+        System.out.println("GET netsportsballs/reviews");
+        System.out.println("GET netsportsballs/review/{id}");
+        System.out.println("");
+        
+        //Paths (BatAndRaquetsGames)
+        System.out.println("Baseball and Tennisball related requests");
+        System.out.println("POST batandraquetsgame/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/batandraquetsgame/");
+        System.out.println("PUT batandraquetsgame/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/batandraquetsgame/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/batandraquetsgame/{id}");
+        System.out.println("GET batandraquetsgames/");
+        System.out.println("GET batandraquetsgame/{id}/");
+        System.out.println("GET batandraquetsgame/{name}");
+        System.out.println("GET batandraquetsgame/material/{material}");
+        System.out.println("GET batandraquetsgame/color/{color}");
+        System.out.println("GET batandraquetsgame/type/{Baseball | Tennisball}");
+        System.out.println("POST /batandraquetsgame/{ballid}/review/user/{userid} curl -H \"Content-Type: application/json\" -X POST -d \"{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}\" http://localhost:8080/batandraquetsgame/1/review/user/1");
+        System.out.println("DELETE curl -X DELETE localhost:8080/batandraquetsgame/review/{reviewid}");
+        System.out.println("GET batandraquetsgames/reviews");
+        System.out.println("GET batandraquetsgames/review/{id}");
+        System.out.println("");
+        
+        //Paths (goalsportsball)
+        System.out.println("Football and Basketball related requests");
+        System.out.println("POST goalsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/");
+        System.out.println("PUT goalsportsball/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Football\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/goalsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/goalsportsball/{id}");
+        System.out.println("GET goalsportsballs/");
+        System.out.println("GET goalsportsball/{id}/");
+        System.out.println("GET goalsportsball/{name}");
+        System.out.println("GET goalsportsball/material/{material}");
+        System.out.println("GET goalsportsball/color/{color}");
+        System.out.println("GET goalsportsball/type/{Football | Basketball}");
+        System.out.println("POST /goalsportsball/{ballid}/review/user/{userid} curl -H \"Content-Type: application/json\" -X POST -d \"{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}\" http://localhost:8080/goalsportsball/1/review/user/1");
+        System.out.println("DELETE curl -X DELETE localhost:8080/goalsportsball/review/{reviewid}");
+        System.out.println("GET goalsportsballs/reviews");
+        System.out.println("GET goalsportsballs/review/{id}");
+        System.out.println("");
+        
+        //Paths (targetsportsball)
+        System.out.println("Golfball and Bowlingball related requests");
+        System.out.println("POST targetsportsball/ curl -H \"Content-Type: application/json\" -X POST -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Bowlingball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/targetsportsball/");
+         System.out.println("PUT targetsportsball/{id} curl -H \"Content-Type: application/json\" -X PUT -d \"{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Bowlingball\", \"price\" : 15.95, \"amount\" : 1}\" http://localhost:8080/targetsportsball/{id}");
+        System.out.println("DELETE curl -X DELETE localhost:8080/targetsportsball/{id}");
+        System.out.println("GET targetsportsballs/");
+        System.out.println("GET targetsportsball/{id}/");
+        System.out.println("GET targetsportsball/{name}");
+        System.out.println("GET targetsportsball/material/{material}");
+        System.out.println("GET targetsportsball/color/{color}");
+        System.out.println("GET targetsportsball/type/{Football | Basketball}");
+        System.out.println("POST /targetsportsball/{ballid}/review/user/{userid} curl -H \"Content-Type: application/json\" -X POST -d \"{\"score\" : 1, \"header\" : \"testHeader\", \"content\" : \"testContent\"}\" http://localhost:8080/targetsportsball/1/review/user/1");
+        System.out.println("DELETE curl -X DELETE localhost:8080/targetsportsball/review/{reviewid}");
+        System.out.println("GET targetsportsballs/reviews");
+        System.out.println("GET targetsportsballs/review/{id}");
+    }
+    
+    public void initStuff() {
+                
+        //USERS
+        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin", 1);
+        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User", 2);
+        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", "Vaasa", "Merimiehenkatu 1a1", 65200, "User", 3);
+        
+        userRepository.save(tempUser1);
+        userRepository.save(tempUser2);
+        userRepository.save(tempUser3);
+
+        
+        //FOOTBALLS & BASKETBALLS
+        GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
+        GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
+        GoalSportsBall tempGoal3 = new GoalSportsBall("Bad Basketball", "White", 40, 20000, "LongDetails", "Concrete", "AnotherDas", "A ball to throw", "Basketball", 19.95, 4, 3);
+        
+        Set tempGSReview1 = new HashSet<GSBReview>(){{
+            add(new GSBReview(1, 1, "Good product", "Nothing more to say", tempGoal1, 1, tempUser1, 1));
+        }};
+        
+        tempGoal1.setReviews(tempGSReview1);
+        
+        Set tempGSReview2 = new HashSet<GSBReview>(){{
+            add(new GSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempGoal2, 2, tempUser2, 2));
+        }};
+        
+        tempGoal2.setReviews(tempGSReview2);
+        
+        Set tempGSReview3 = new HashSet<GSBReview>(){{
+            add(new GSBReview(3, 1, "Meh", "Meh", tempGoal3, 3, tempUser3, 3));
+        }};
+        
+        tempGoal3.setReviews(tempGSReview3);
+        
+        gsbRepository.save(tempGoal1);
+        gsbRepository.save(tempGoal2);
+        gsbRepository.save(tempGoal3);
+        
+        //BOWLINGBALLS & GOLFBALLS
+        TargetSportsBall tempTarget1 = new TargetSportsBall("Bowlingball1", "Black", 40, 3030, "Somethingsomething", "Steel", "Adidas", "A ball not to kick", "Bowlingball", 109.95, 3, 1);
+        TargetSportsBall tempTarget2 = new TargetSportsBall("Golfball1", "Orange", 40, 200, "", "Rubber", "AnotherDas", "A ball not to kick", "Golfball", 105.95, 4, 2);
+        TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 5, 3);
+        
+        Set tempTSReview1 = new HashSet<TSBReview>(){{
+            add(new TSBReview(1, 1, "Good product", "Nothing more to say", tempTarget1, 1, tempUser1, 1));
+        }};
+        
+        tempTarget1.setReviews(tempTSReview1);
+        
+        Set tempTSReview2 = new HashSet<TSBReview>(){{
+            add(new TSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempTarget2, 2, tempUser2, 2));
+        }};
+        
+        tempTarget2.setReviews(tempTSReview2);
+        
+        Set tempTSReview3 = new HashSet<TSBReview>(){{
+            add(new TSBReview(3, 1, "Meh", "Meh", tempTarget3, 3, tempUser3, 3));
+        }};
+        
+        tempTarget3.setReviews(tempTSReview3);
+        
+        tsbRepository.save(tempTarget1);
+        tsbRepository.save(tempTarget2);
+        tsbRepository.save(tempTarget3);
+        
+        //BASEBALLS & TENNISBALLS
+        BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 3, 1);
+        BatAndRaquetsGames tempBat2 = new BatAndRaquetsGames("Baseball2", "White", 6, 35, "Somethingsomething", "Elastic rubber", "Adidas", "A ball to throw2", "Baseball", 4.95, 3, 2);
+        BatAndRaquetsGames tempBat3 = new BatAndRaquetsGames("Tennisball1", "Yellow", 5, 336, "Somethingsomething", "Rubber", "Adidas", "A ball to smash", "Tennisball", 2.95, 3, 3);
+        
+        Set tempBARReview1 = new HashSet<BARReview>(){{
+            add(new BARReview(1, 1, "Good product", "Nothing more to say", tempBat1, 1, tempUser1, 1));
+        }};
+        
+        tempBat1.setReviews(tempBARReview1);
+        
+        Set tempBARReview2 = new HashSet<BARReview>(){{
+            add(new BARReview(2, 1, "Hated it", "Absolutely disgusting product", tempBat2, 2, tempUser2, 2));
+        }};
+        
+        tempBat2.setReviews(tempBARReview2);
+        
+        Set tempBARReview3 = new HashSet<BARReview>(){{
+            add(new BARReview(3, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
+        }};
+        
+        tempBat3.setReviews(tempBARReview3);
+
+        brRepository.save(tempBat1);
+        brRepository.save(tempBat2);
+        brRepository.save(tempBat3);
+        
+        // VOLLEYBALL & HANDBALL
+        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 3, 1);
+        NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
+        NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
+        
+        Set tempNSReview1 = new HashSet<NSBReview>(){{
+            add(new NSBReview(1, 1, "Good product", "Nothing more to say", tempNS1, 1, tempUser1, 1));
+        }};
+        
+        tempNS1.setReviews(tempNSReview1);
+        
+        Set tempNSReview2 = new HashSet<NSBReview>(){{
+            add(new NSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
+        }};
+        
+        tempNS2.setReviews(tempNSReview2);
+        
+        Set tempNSReview3 = new HashSet<NSBReview>(){{
+            add(new NSBReview(3, 1, "Meh", "Meh", tempNS3, 3, tempUser3, 3));
+        }};
+        
+        tempNS3.setReviews(tempNSReview3);
+          
+        nsRepository.save(tempNS1);
+        nsRepository.save(tempNS2);
+        nsRepository.save(tempNS3);
     }
 }
