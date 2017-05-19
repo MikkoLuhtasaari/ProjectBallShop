@@ -1,9 +1,12 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
+import Client from '../Client';
 
 export default class CreateAccountComponent extends React.Component{
     constructor(props) {
         super(props);
+        this.client = new Client();
+
         this.state = {
             fName: '',
             lName: '',
@@ -21,7 +24,7 @@ export default class CreateAccountComponent extends React.Component{
             <div className="container">
                 <div className="row">
                     <div className="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                        <form role="form" onSubmit={this.add} ref="form">
+                        <form role="form" onSubmit={this.add}>
                             <h2>Please Sign Up</h2>
                             <hr className="signupLine"/>
                             {this.getPersonalInfo()}
@@ -115,16 +118,18 @@ export default class CreateAccountComponent extends React.Component{
             this.refs.passW2.setCustomValidity("Passwords Don't Match");
         } else {
             this.refs.passW2.setCustomValidity('');
-            this.setState({fName: this.refs.fName.value});
-            this.setState({lName: this.refs.lName.value});
-            this.setState({eMail: this.refs.eMail.value});
-            this.setState({uName: this.refs.uName.value});
-            this.setState({passW: this.refs.passW.value});
-            this.setState({address: this.refs.address.value});
-            this.setState({zip: this.refs.zip.value});
-            this.setState({city: this.refs.city.value});
-            alert("New account created!\nYou are now logged in.");
-            browserHistory.push('/');
+
+            let array = [];
+            for (const ref in this.refs) {
+                array.push({[ref]: this.refs[ref].value});
+                this.setState({[ref]: this.refs[ref].value});
+            }
+            this.client.createAccount(array).then(()=>this.accountCreated());
         }
+    }
+
+    accountCreated() {
+        alert("New account created!\nYou are now logged in.");
+        browserHistory.push('/');
     }
 }
