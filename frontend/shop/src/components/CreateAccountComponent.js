@@ -24,56 +24,27 @@ export default class CreateAccountComponent extends React.Component{
                         <form role="form" onSubmit={this.add} ref="form">
                             <h2>Please Sign Up</h2>
                             <hr className="signupLine"/>
-                            <div className="row">
-                                <div className="col-xs-12 col-sm-6 col-md-6">
-                                    <div className="form-group">
-                                        <input type="text" className="form-control input-lg" ref="fName" placeholder="First Name" required={true} minLength={2}/>
-                                    </div>
-                                </div>
-                                <div className="col-xs-12 col-sm-6 col-md-6">
-                                    <div className="form-group">
-                                        <input type="text" className="form-control input-lg" ref="lName" placeholder="Last Name" required={true} minLength={2}/>
-                                    </div>
-                                </div>
-                            </div>
+                            {this.getPersonalInfo()}
                             <div className="form-group">
-                                <input type="email" className="form-control input-lg" ref="eMail" placeholder="Email Address" required={true}/>
+                                <input type="email" className="form-control input-lg" ref="eMail"
+                                       placeholder="Email Address" required={true}/>
                             </div>
                             <hr className="signupLine"/>
                             <div className="form-group">
-                                <input type="text" className="form-control input-lg" ref="address" placeholder="Home Address" required={true} minLength={5}/>
+                                <input type="text" className="form-control input-lg" ref="address"
+                                       placeholder="Home Address" required={true} minLength={5}/>
                             </div>
-                            <div className="row">
-                                <div className="col-xs-12 col-sm-6 col-md-6">
-                                    <div className="form-group">
-                                        <input type="number" className="form-control input-lg" ref="zip" placeholder="Zip Code" required={true}/>
-                                    </div>
-                                </div>
-                                <div className="col-xs-12 col-sm-6 col-md-6">
-                                    <div className="form-group">
-                                        <input type="text" className="form-control input-lg" ref="city" placeholder="City" required={true} minLength={2}/>
-                                    </div>
-                                </div>
-                            </div>
+                            {this.getAddress()}
                             <hr className="signupLine"/>
                             <div className="form-group">
-                                <input type="text" className="form-control input-lg" ref="uName" placeholder="User Name" required={true} minLength={6}/>
+                                <input type="text" className="form-control input-lg" ref="uName"
+                                       placeholder="User Name" required={true} minLength={6}/>
                             </div>
-                            <div className="row">
-                                <div className="col-xs-12 col-sm-6 col-md-6">
-                                    <div className="form-group">
-                                        <input type="password" className="form-control input-lg" ref="passW" placeholder="Password" required={true} minLength={8}/>
-                                    </div>
-                                </div>
-                                <div className="col-xs-12 col-sm-6 col-md-6">
-                                    <div className="form-group">
-                                        <input type="password" className="form-control input-lg" ref="passW2" placeholder="Confirm Password" required={true} minLength={8}/>
-                                    </div>
-                                </div>
-                            </div>
+                            {this.getPassword()}
                             <hr className="signupLine"/>
                             <div className="row">
-                                <input type="submit" value="Register" onClick={() => this.handleChange()} className="btn btn-primary btn-block btn-lg"/>
+                                <input type="submit" value="Register" onClick={() => this.handleChange()}
+                                       className="btn btn-primary btn-block btn-lg"/>
                             </div>
                         </form>
                     </div>
@@ -82,9 +53,64 @@ export default class CreateAccountComponent extends React.Component{
         )
     }
 
+    getPassword(){
+        return (
+            <div className="row">
+                <div className="col-xs-12 col-sm-6 col-md-6">
+                    <div className="form-group">
+                        <input type="password" className="form-control input-lg"
+                               ref="passW" placeholder="Password" required={true} minLength={8}/>
+                    </div>
+                </div>
+                <div className="col-xs-12 col-sm-6 col-md-6">
+                    <div className="form-group">
+                        <input type="password" className="form-control input-lg"
+                               ref="passW2" placeholder="Confirm Password" required={true} minLength={8}/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    getAddress(){
+        return (
+            <div className="row">
+                <div className="col-xs-12 col-sm-6 col-md-6">
+                    <div className="form-group">
+                        <input type="number" className="form-control input-lg"
+                               ref="zip" placeholder="Zip Code" required={true}/>
+                    </div>
+                </div>
+                <div className="col-xs-12 col-sm-6 col-md-6">
+                    <div className="form-group">
+                        <input type="text" className="form-control input-lg"
+                               ref="city" placeholder="City" required={true} minLength={2}/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    getPersonalInfo(){
+        return (
+        <div className="row">
+            <div className="col-xs-12 col-sm-6 col-md-6">
+                <div className="form-group">
+                    <input type="text" className="form-control input-lg"
+                           ref="fName" placeholder="First Name" required={true} minLength={2}/>
+                </div>
+            </div>
+            <div className="col-xs-12 col-sm-6 col-md-6">
+                <div className="form-group">
+                    <input type="text" className="form-control input-lg"
+                           ref="lName" placeholder="Last Name" required={true} minLength={2}/>
+                </div>
+            </div>
+        </div>
+        )
+    }
+
     handleChange() {
-
-
         if(this.refs.passW.value !== this.refs.passW2.value) {
             this.refs.passW2.setCustomValidity("Passwords Don't Match");
         } else {
