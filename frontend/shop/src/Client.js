@@ -66,4 +66,11 @@ export default class Client {
             request.send();
         });
     }
+
+    createAccount(array) {
+        Object.keys(array).map((e) => {
+            console.log(array[e])
+        });
+        return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
+    }
 }
