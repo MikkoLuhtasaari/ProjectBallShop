@@ -98,8 +98,8 @@ footer{
 
 /*Shopping cart*/
 .glyphicon-shopping-cart:before,
-#marginR10,
-.caret{
+.marginR10,
+.caret {
     margin-right: 10px;
 }
 
@@ -149,9 +149,6 @@ ul.dropdown-cart li .item-right{
 }
 ul.dropdown-cart li .item-right button{
     margin-top:14px;
-}
-#whitetxt{
-    color: white;
 }
 
 /*_______________Carousel____________________________*/
@@ -348,6 +345,12 @@ label.star:before {
     content: '\f006';
     font-family: FontAwesome;
 }
+
+.dropdown-menu > li > a,
+.whitetxt{
+    color: #cccccc;
+}
+
 
 .padding10{
     padding: 10px;
