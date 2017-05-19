@@ -8,6 +8,7 @@ import FrontpageComponent from './components/FrontpageComponent';
 import ItemDetailsComponent from './components/ItemDetailsComponent';
 import AdminItemDetailsComponent from './components/admin/AdminItemDetailsComponent';
 import AddItem from './components/admin/AddItem';
+import CheckoutComponent from "./components/CheckoutComponent";
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -29,6 +30,9 @@ ReactDOM.render(
     <Route path="/admin/add">
       <IndexRoute component={ AddItem }/>
     </Route>
+      <Route path="/checkout">
+          <IndexRoute component={ CheckoutComponent }/>
+      </Route>
   </Router>,
     document.getElementById("app")
 );
