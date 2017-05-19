@@ -73,4 +73,9 @@ export default class Client {
         });
         return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
     }
+
+    login(username, password){
+        console.log(username + ", " + password);
+        return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
+    }
 }
