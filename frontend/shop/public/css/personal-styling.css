@@ -21,6 +21,22 @@ body {
 #whiteBg{
     padding-top: 50px;
 }
+
+.deleteButton {
+    color: red;
+    background-color:white;
+    border: 2px solid red;
+    border-radius: 10px;
+    font-weight:600;
+    transition: 0.3s;
+}
+
+.deleteButton:hover {
+    color:white;
+    background-color:red;
+    border: 2px solid black;
+}
+
 footer{
     width: 100%;
     display: inline-block;

@@ -34,6 +34,29 @@ export default class AdminItemDetailsComponent extends React.Component{
     this.onBlur = this.onBlur.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
     this.updateData = this.updateData.bind(this);
+    this.deleteButtonListener = this.deleteButtonListener.bind(this);
+    this.parseCategory = this.parseCategory.bind(this);
+  }
+
+  deleteButtonListener() {
+    console.log("delete clicked");
+    console.log(this.state.ball.id);
+    console.log(this.state.ball.category);
+
+    let targetUrl = 'http://localhost:8080/' + this.parseCategory() + '/' + this.state.ball.id;
+    //TODO: 403 CORS: Response for preflight has invalid HTTP status code 403
+    fetch(targetUrl,
+      {
+        method: 'delete',
+        mode: 'cors'
+      })
+      .then(function (response) {
+        console.log(response);
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   onFocus(e) {
@@ -122,25 +145,27 @@ export default class AdminItemDetailsComponent extends React.Component{
     }
   }
 
+  parseCategory() {
+    switch(this.state.ball.category) {
+      case 'Target sport':
+        return 'targetsportsball';
+      case 'Net sport':
+        return 'netsportsball';
+      case 'Bat and raquets game':
+        return 'batandraquetsgame';
+      case 'Goal sport':
+        return 'goalsportsball';
+      default:
+        return undefined;
+    }
+  }
+
   updateData() {
     let targetUrl = 'http://localhost:8080/';
     let ball = this.state.ball;
     console.log("CATEGORY: " + this.state.ball.category);
 
-    switch(this.state.ball.category) {
-      case 'Target sport':
-        targetUrl += 'targetsportsball';
-        break;
-      case 'Net sport':
-        targetUrl += 'netsportsball';
-        break;
-      case 'Bat and raquets game':
-        targetUrl += 'batandraquetsgame';
-        break;
-      case 'Goal sport':
-        targetUrl += 'goalsportsball';
-        break;
-    }
+    targetUrl += this.parseCategory();
 
     fetch(targetUrl,
       {
@@ -269,6 +294,7 @@ export default class AdminItemDetailsComponent extends React.Component{
                   <ul>
                     {this.generateListItems()}
                   </ul>
+                  <button className="deleteButton" onClick={this.deleteButtonListener} >Delete item</button>
                 </div>
               </div>
             </div>
