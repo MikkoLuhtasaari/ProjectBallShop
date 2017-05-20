@@ -1,6 +1,7 @@
 import React from 'react';
 import Client from '../Client';
 import ReviewsComponent from '../components/ReviewsComponent'
+import ShoppingCartComponent from '../components/ShoppingCartComponent'
 
 export default class BallComponent extends React.Component{
     constructor(props) {
@@ -36,55 +37,64 @@ export default class BallComponent extends React.Component{
 
     render(){
         return(
-            <section id="allBalls">
-                {
-                    this.state.balls.map(b => BallComponent.createContent(b))
-                }
-            </section>
-        )
-    }
-
-    static createContent(ballObject) {
-        const propArray = [];
-        let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
-        let category = ballObject.category.replace(/ /g,'').toLowerCase();
-        if(!category.includes("game"))category += "sball";
-
-        propArray.push(
-            <div className="col-sm-4 col-lg-4 col-md-4">
-                <article className="col-item">
-                    <div className="thumbnail">
-                        <div className="photo">
-                            {BallComponent.getShoppingCartBtn()}
-                            <img id="ballImage" src={imageSrc} className="img-responsive" alt="Ball"/>
-                            {BallComponent.getBallDetails(ballObject, category)}
-                            <ReviewsComponent group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
-                        </div></div>
-                </article>
-            </div>
-        );
-        return propArray;
-    }
-
-    static getBallDetails(ballObject, category) {
-        let link = "/#/details/" + category + "/" + ballObject.id;
-        return (
-            <div className="caption">
-                {/*option 2*/}
-                <h4 className="pull-right">{ballObject.price}€</h4>
-                <h4><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h4>
-                <p>{ballObject.shortDetails}</p>
+            <div className="marginMx">
+                <section id="allBalls">
+                    { this.state.balls.map(b => this.createContent(b)) }
+                </section>
             </div>
         )
     }
 
-    static getShoppingCartBtn() {
+    getShoppingCartBtn(ball) {
         return (
             <div className="options-cart-round">
-                <button className="btn btn-default" title="Add to cart">
+                <button className="btn btn-default" title="Add to cart" onClick={ () => this.addCookie(ball) }>
                     <span className="fa fa-shopping-cart"/>
                 </button>
             </div>
         )
+    }
+
+    createContent(ballObject) {
+        const propArray = [];
+        let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
+        let category = ballObject.category.replace(/ /g,'').toLowerCase();
+        if(!category.includes("game"))category += "sball";
+        let link = "/#/details/" + category + "/" + ballObject.id;
+
+        propArray.push(
+            <div className="col-md-3 col-sm-6">
+                <span className="thumbnail itemThumb">
+                        <article className="col-item">
+                            <div className="photo">
+                                {this.getShoppingCartBtn(ballObject)}
+                                <img src={imageSrc} alt="Ball"/>
+                            </div>
+                        </article>
+                    <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
+
+                    <ReviewsComponent group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
+                    <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>
+                    <hr className="item-line"/>
+                    <div className="row">
+                        <div className="col-md-4 col-sm-6" id="inlineBlock">
+                            <p className="item-p item-price">{ballObject.price}€</p>
+                        </div>
+                        <div className="col-md-4 col-sm-6" id="width100">
+                            <button className="btn btn-info item-right buttonFont" id="btn100" onClick={() => this.addCookie(ballObject)}>BUY ITEM</button>
+                        </div>
+                    </div>
+                </span>
+            </div>
+            );
+    return propArray;
+    }
+
+
+    addCookie(ball) {
+        let temp = [];
+        temp = ShoppingCartComponent.cookies.get('ballArray');
+        temp.push(ball);
+        ShoppingCartComponent.cookies.set('ballArray', temp);
     }
 }
