@@ -29,6 +29,9 @@ body {
     border-radius: 10px;
     font-weight:600;
     transition: 0.3s;
+    width:30%;
+    margin-left:35%;
+    margin-top:50px;
 }
 
 .deleteButton:hover {

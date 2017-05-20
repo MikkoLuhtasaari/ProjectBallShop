@@ -39,10 +39,6 @@ export default class AdminItemDetailsComponent extends React.Component{
   }
 
   deleteButtonListener() {
-    console.log("delete clicked");
-    console.log(this.state.ball.id);
-    console.log(this.state.ball.category);
-
     let targetUrl = 'http://localhost:8080/' + this.parseCategory() + '/' + this.state.ball.id;
     //TODO: 403 CORS: Response for preflight has invalid HTTP status code 403
     fetch(targetUrl,
