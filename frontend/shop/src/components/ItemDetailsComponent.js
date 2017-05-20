@@ -16,7 +16,7 @@ export default class ItemDetailsComponent extends React.Component {
     render() {
         let imageSrc = "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png";
         return (
-            <section>
+            <section id="whiteBg">
                 {
                     <div>
                         <div className="row">
@@ -28,14 +28,12 @@ export default class ItemDetailsComponent extends React.Component {
                             {this.getItemInfo()}
                             <div className="col-xs-1"/>
                             {this.getDetailsList()}
-                            <div className="thumbnail">
                                 <div className="col-xs-12" id="wideDiv"/>
                                 <div className="col-xs-1"/>
-                                <div className="col-xs-4">
+                                <div className="col-xs-4" id="textCenter">
                                     <ReviewsComponent need={"postReview"}/>
                                 </div>
                                 <div className="col-xs-1"/>
-                            </div>
                             <div className="col-xs-6">
                                 <h3 className="padding10">Customer reviews:</h3>
                                 <br/>
@@ -82,9 +80,9 @@ export default class ItemDetailsComponent extends React.Component {
         }
         return (
             <div className="col-xs-3 text-center">
-                <h3>{this.state.ball.manufacturer} {this.state.ball.type}</h3>
-                <h5 id="padBot">{this.state.ball.shortDetails}</h5>
-                <h3>{this.state.ball.price} €</h3>
+                <h1>{this.state.ball.manufacturer} {this.state.ball.type}</h1>
+                <h3 id="padBot">{this.state.ball.shortDetails}</h3>
+                <h1>{this.state.ball.price} €</h1>
                 <div className="section" id="botBad">
                     <button className={buttonId} onClick={ () => this.addCookie(this.state.ball) }>
                         <span id="marginR20" className="glyphicon glyphicon-shopping-cart" aria-hidden="true"/>

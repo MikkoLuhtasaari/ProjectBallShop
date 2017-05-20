@@ -1,17 +1,139 @@
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css);
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&subset=latin-ext,vietnamese');
 
 html,
 body {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
     height: 100%;
+    background-color: #222;
 }
 
 #app{
     min-height: 350px;
 }
 
+#colorGray{
+    background-color: #F2F2F2;
+}
+
+#whiteBg{
+    padding-top: 50px;
+}
 footer{
     width: 100%;
+    display: inline-block;
+}
+
+p{
+    font-size: 12px;
+    margin-top: 5px;
+}
+.price{
+    font-size: 30px;
+    margin: 0 auto;
+    color: #333;
+}
+
+.thumbnail{
+    opacity:0.70;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.thumbnail:hover{
+    opacity:1.00;
+    box-shadow: 0px 0px 10px #4bc6ff;
+}
+.line{
+    margin-bottom: 5px;
+}
+
+#textCenter{
+    text-align: center;
+}
+span.thumbnail {
+    border: 1px solid #00c4ff !important;
+    border-radius: 0px !important;
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
+    padding: 10px;
+}
+.container h4{margin-top:70px; margin-bottom:30px;}
+button {    margin-top: 6px;
+}
+.right {
+    float: right;
+    border-bottom: 2px solid #0a5971;
+}
+.btn-info {
+    color: #fff;
+    background-color: #19b4e2;
+    border-color: #19b4e2;
+    font-size:13px;
+    font-weight:600;
+}
+
+/*_______________Items____________________________*/
+
+.item-right{
+    float:left;
+}
+.item-p{
+    margin-top: 5px;
+    font-size: 18px;
+}
+.item-price{
+    font-size: 30px;
+    margin: 0 auto;
+    color: #333;
+}
+.marginMx{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.buttonFont{
+    font-size: 15px;
+}
+
+.thumbnail{
+    opacity:1.00;
+    box-shadow: 0 0 35px #4bc6ff;
+}
+
+.itemThumb{
+    margin-top: 30px;
+}
+
+.item-line{
+    margin-bottom: 5px;
+}
+
+#twoLines {
+     height: 3.75em !important;
+     line-height: 1.4em !important;
+     overflow: hidden;
+     box-sizing: content-box !important;
+ }
+
+#twoLines2 {
+    height: 2.8em !important;
+    line-height: 1.4em !important;
+    overflow: hidden;
+    box-sizing: content-box !important;
+}
+
+#width100 {
+    float: right;
+    width: initial;
+}
+
+.width100{
+    width: 100%;
+}
+#inlineBlock{
     display: inline-block;
 }
 
@@ -84,6 +206,7 @@ footer{
     padding: 14px 14px 0;
     background-color: #222;
     overflow: hidden;
+    font-size: 17px;
 }
 
 
@@ -176,7 +299,7 @@ ul.dropdown-cart li .item-right button{
 /*_______________Middle navigation____________________________*/
 
 .container-fullwidth{
-    margin-bottom: 30px;
+    font-size: 20px;
 }
 
 
@@ -184,8 +307,8 @@ ul.dropdown-cart li .item-right button{
 
 .col-item .options-cart-round {
     position:absolute;
-    left:35%;
-    top:22%;
+    left:40%;
+    top:25%;
     display:none;
 }
 
@@ -195,7 +318,7 @@ ul.dropdown-cart li .item-right button{
 
 }
 .col-item .options-cart-round button .fa {
-    font-size:42px;
+    font-size:50px;
 }
 
 .col-item .photo:hover .options-cart-round {
@@ -227,8 +350,6 @@ ul.dropdown-cart li .item-right button{
 }
 
 .ratings {
-    padding-left: 10px;
-    padding-right: 10px;
     color: #d17581;
 }
 
@@ -295,9 +416,6 @@ ul.dropdown-cart li .item-right button{
     color: red;
 }
 
-#green{
-    color: green;
-}
 
 #green,
 #red{
@@ -373,8 +491,11 @@ label.star:before {
 /*_______________Responsiveness____________________________*/
 
 @media (min-width: 500px) {
-    .col-sm-4{
-        width: 49%; !important;
+    .col-md-3{
+        width: 100%; !important;
+    }
+    #width100 {
+        float: right;
     }
 }
 
@@ -391,29 +512,36 @@ label.star:before {
         width: 100%; !important;
         justify-content: center !important;
     }
-    .col-sm-4{
-        width: 33%; !important;
+    .col-md-3{
+        width: 49%; !important;
     }
 
     #login-dp .bottom{
         border-top:0 none;
     }
+    #width100 {
+        float: right;
+    }
 }
 
-@media (min-width: 1000px) {
-    .col-sm-4{
+@media (min-width: 1200px) {
+    .col-md-3{
+        width: 33%; !important;
+    }
+    .marginMx{
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    #width100 {
+        float: right;
+    }
+}
+
+@media (min-width: 1400px) {
+    .col-md-3{
         width: 25%; !important;
     }
-}
-
-@media (min-width: 1300px) {
-    .col-sm-4{
-        width: 20%; !important;
-    }
-}
-
-@media (min-width: 1600px) {
-    .col-sm-4{
-        width: 16.5%; !important;
+    #width100 {
+        float: right;
     }
 }

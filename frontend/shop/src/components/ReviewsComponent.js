@@ -107,11 +107,11 @@ export default class ReviewsComponent extends React.Component{
                         </form>
                     </div>
                     <form>
-                        <div className="form-group col-xs-7 text-center">
+                        <div className="form-group col-xs-7 text-center width100">
                             <label htmlFor="comment" className="">Header:</label>
                             <input className="form-control" ref="header" id="header"/>
                         </div>
-                        <div className="form-group col-xs-7 text-center">
+                        <div className="form-group col-xs-7 text-center width100">
                             <label htmlFor="comment" className="">Comments:</label>
                             <textarea className="form-control" ref="content" rows="5" id="comment"/>
                         </div>
@@ -119,7 +119,7 @@ export default class ReviewsComponent extends React.Component{
                 </div>
                 <div className="clearfix"/>
                 <button onClick={() => this.sendReview(rating, this.refs.header.value, this.refs.content.value)}
-                        type="button" className="col-xs-7 btn btn-success">Send</button>
+                        type="button" className="col-xs-7 btn btn-success width100">Send</button>
             </div>
         )
     }

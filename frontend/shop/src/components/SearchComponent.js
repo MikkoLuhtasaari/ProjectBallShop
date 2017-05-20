@@ -13,19 +13,19 @@ export default class SearchComponent extends React.Component {
         super(props);
         this.client = new Client();
 
-        this.client.ballsByType("netsportsballs").then(b => this.setState({balls: b}));
-        this.client.ballsByType("batandraquetsgames").then(b => this.setState({balls: b}));
-        this.client.ballsByType("goalsportsballs").then(b => this.setState({balls: b}));
-        this.client.ballsByType("targetsportsballs").then(b => this.setState({balls: b}));
+        this.client.ballsByType("netsportsballs").then((b) => this.setState({balls: b}));
+        this.client.ballsByType("batandraquetsgames").then((b) => this.setState({balls: b}));
+        this.client.ballsByType("goalsportsballs").then((b) => this.setState({balls: b}));
+        this.client.ballsByType("targetsportsballs").then((b) => this.setState({balls: b}));
 
     }
 
     render() {
-        this.state.balls.map(b => this.addToArray(b));
+        this.state.balls.map((b) => this.addToArray(b));
         let tempArray = this.ballsArray;
         let searchString = this.state.searchString;
         if (searchString.length > 0){
-            tempArray = this.ballsArray.filter(function (i) {
+            tempArray = this.ballsArray.filter((i) => {
                 if (i.name.toLowerCase().match(searchString.toLocaleLowerCase())) return true;
                 else return !!i.manufacturer.toLowerCase().match(searchString.toLowerCase());
             });
