@@ -7,8 +7,28 @@ export default class ItemDetailsComponent extends React.Component {
     constructor(props) {
         super(props);
         this.client = new Client();
-        this.state = { ball: '' };
-        this.client.ballById(this.props.params.group, this.props.params.id).then(b => this.setState({ball: b}));
+        this.state = {
+            group: props.params.group,
+            id: props.params.id,
+            ball: '',
+            test: 1
+        };
+
+        this.fetchCompleted = this.fetchCompleted.bind(this);
+    }
+
+    componentDidMount() {
+        this.client.ballById(this.state.group, this.state.id).then(b => this.setState({ball: b})).then(this.fetchCompleted);
+    }
+
+    fetchCompleted() {
+        this.setState({test: this.state.test + 1});
+    }
+
+    componentWillUpdate() {
+        if(this.state.ball === '' && this.state.mounted) {
+            this.setState({test: this.state.test + 1});
+        }
     }
 
     //Todo Tätä returnia kutsutaan liian aikaisin jonka takia ReviewsComponentiin lähtee undefindeja.
@@ -32,14 +52,14 @@ export default class ItemDetailsComponent extends React.Component {
                                 <div className="col-xs-12" id="wideDiv"/>
                                 <div className="col-xs-1"/>
                                 <div className="col-xs-4">
-                                    <ReviewsComponent need={"postReview"}/>
+                                    <ReviewsComponent need={"postReview"} group={this.state.ball.category} ballId={this.state.ball.id} location={"tweaked-margin"}/>
                                 </div>
                                 <div className="col-xs-1"/>
                             </div>
                             <div className="col-xs-6">
                                 <h3 className="padding10">Customer reviews:</h3>
                                 <br/>
-                                <ReviewsComponent need={"wide"}/>
+                                <ReviewsComponent need={"wide"} group={this.state.ball.category} ballId={this.state.ball.id} location={"tweaked-margin"}/>
                             </div>
                         </div>
                     </div>
@@ -97,7 +117,7 @@ export default class ItemDetailsComponent extends React.Component {
                 </span>
                 <br/><br/>
                 <span className="text-left">
-                    <ReviewsComponent group={category} ballId={this.state.ball.id}
+                    <ReviewsComponent group={this.state.ball.category} ballId={this.state.ball.id}
                                       need={"light"} location={"tweaked-margin"}/>
                 </span>
             </div>

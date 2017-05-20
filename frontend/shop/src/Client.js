@@ -33,15 +33,19 @@ export default class Client {
 
     sendReview(sporttype, ballId, userId, rating, header, content){
         let targetUrl = "http://localhost:8080/" + sporttype + "/" + ballId + "/review/user/" + userId;
-        console.log(targetUrl)
+
         fetch(targetUrl,
             {
                 method: 'POST',
-                contentType: 'application/json',
+                mode: 'no-cors',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                },
                 body: JSON.stringify({
-                    "score": rating,
-                    "header": header,
-                    "content": content,
+                  'score':rating,
+                  'header': header,
+                  'content': content
                 })
             }).then(function (response) {
                 console.log(response);
