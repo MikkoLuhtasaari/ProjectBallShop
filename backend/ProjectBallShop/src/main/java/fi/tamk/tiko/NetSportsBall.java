@@ -95,14 +95,6 @@ public class NetSportsBall implements Serializable
         this.reviews = reviews;
     }
     
-    public void setReview(NSBReview review) {
-        System.out.println("Setting review");
-        System.out.println(review);
-        System.out.println(reviews.size());
-        reviews.add(review);
-        System.out.println(reviews.size());
-    }
-    
     public String getName() {
         return name;
     }
@@ -143,8 +135,6 @@ public class NetSportsBall implements Serializable
         return category;
     }
     public Set<NSBReview> getReviews() {
-       System.out.println("Getting reviews!");
-       System.out.println(reviews.size());
        return reviews;
     }
     

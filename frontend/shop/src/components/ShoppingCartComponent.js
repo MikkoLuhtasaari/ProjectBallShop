@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 
 export default class ShoppingCartComponent extends React.Component{
     static cookies = new Cookies();
+    num = 0;
 
     constructor(props) {
         super(props);
@@ -48,7 +49,7 @@ export default class ShoppingCartComponent extends React.Component{
                             {this.itemDetails()}
                         </li>
                         <li className="divider"/>
-                        <li><b><a href="/#/checkout/">Checkout</a><p className="pull-right" href="">Total: {this.countTotal()}€</p></b></li>
+                        <li><b><a href="/#/checkout/">Checkout</a><p className="pull-right marginR10 whitetxt" href="">Total: {this.countTotal()}€</p></b></li>
                     </ul>
                 </li>
             )
@@ -57,18 +58,17 @@ export default class ShoppingCartComponent extends React.Component{
             <li className="dropdown">
                 {this.viewCart()}
                 <ul className="dropdown-menu dropdown-cart" role="menu">
-                    <div>Cart is empty</div>
+                    <div className="whitetxt">Cart is empty</div>
                 </ul>
             </li>
         )
     };
 
     itemDetails() {
-        let items = ShoppingCartComponent.cookies.get('ballArray');
         let temp = [];
         ShoppingCartComponent.cookies.get('ballArray').forEach(item => {
             temp.push(
-                <span className="item" key={item.type+item.id}>
+                <span className="item" key={item.type+item.id+temp.length}>
                     <span className="item-left">
                         <img src="images/items/Football_1.png" id="img40" alt="item" />
                         <span className="item-info">
@@ -77,7 +77,7 @@ export default class ShoppingCartComponent extends React.Component{
                         </span>
                     </span>
                     <span className="item-right">
-                        <button className="btn btn-xs btn-danger pull-right" id="marginR10" onClick={() => this.removeFromCart(item)}>x</button>
+                        <button className="btn btn-xs btn-danger pull-right marginR10" onClick={() => this.removeFromCart(item)}>x</button>
                     </span>
                 </span>
             )

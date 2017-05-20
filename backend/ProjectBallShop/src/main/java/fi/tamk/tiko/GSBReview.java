@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(indexes = {@Index(columnList="userId")})
-public class NSBReview implements Serializable
+public class GSBReview implements Serializable
 {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -17,9 +17,9 @@ public class NSBReview implements Serializable
     private String header;
     private String content;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="NSB_ID")
+    @JoinColumn(name="GSB_ID")
     @JsonIgnore
-    private NetSportsBall owner;
+    private GoalSportsBall owner;
 
     private long ballID;
     
@@ -28,9 +28,9 @@ public class NSBReview implements Serializable
     @JsonIgnore
     private User userOwner;
     
-    public NSBReview(){};
+    public GSBReview(){};
     
-    public NSBReview(long id, int score, String header, String content, NetSportsBall owner, long ownerBallId, User userOwner, long userId) {
+    public GSBReview(long id, int score, String header, String content, GoalSportsBall owner, long ownerBallId, User userOwner, long userId) {
         setUserOwner(userOwner);
         setScore(score);
         setHeader(header);
@@ -57,7 +57,7 @@ public class NSBReview implements Serializable
     public void setContent(String content) {
         this.content = content;
     }
-    public void setOwner(NetSportsBall owner) {
+    public void setOwner(GoalSportsBall owner) {
         this.owner = owner;
     }
     public void setUserOwner(User userOwner) {
@@ -84,7 +84,7 @@ public class NSBReview implements Serializable
         return content;
     }
     
-    public NetSportsBall getOwner() {
+    public GoalSportsBall getOwner() {
         System.out.println("Get owner");
         return owner;
     }
