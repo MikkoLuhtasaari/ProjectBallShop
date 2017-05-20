@@ -1,11 +1,10 @@
 package fi.tamk.tiko;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.io.Serializable;
 
 @Entity
 //@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
@@ -24,6 +23,9 @@ public class User
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
+    @OneToMany(mappedBy = "userOwner", cascade = CascadeType.ALL)
+    private Set<NSBReview> reviews;
+    
     public User(){};
     
     public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel, long id) {
@@ -37,6 +39,16 @@ public class User
         setPassword(password);
         setEmail(email);
         setId(id);
+    }
+    
+    public void setReviews(Set<NSBReview> reviews) {
+        System.out.println("Setting reviews");
+        System.out.println(reviews.size());
+        
+        for(NSBReview n: reviews) {
+            System.out.println(n.getScore());
+        }
+        this.reviews = reviews;
     }
     
     public void setId(long id) {
@@ -68,6 +80,10 @@ public class User
     }
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
+    }
+    
+    public Set<NSBReview> getReviews() {
+       return reviews;
     }
 
     public long getId() {

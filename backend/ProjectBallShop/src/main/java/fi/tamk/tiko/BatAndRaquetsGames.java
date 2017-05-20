@@ -1,11 +1,10 @@
 package fi.tamk.tiko;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.io.Serializable;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
@@ -27,6 +26,9 @@ public class BatAndRaquetsGames
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String category;
+    
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private Set<BARReview> reviews;
     
     public BatAndRaquetsGames(){};
     
@@ -82,6 +84,15 @@ public class BatAndRaquetsGames
     public void setId(long id) {
         this.id = id;
     }
+    public void setReviews(Set<BARReview> reviews) {
+        System.out.println("Setting reviews");
+        System.out.println(reviews.size());
+        
+        for(BARReview n: reviews) {
+            System.out.println(n.getScore());
+        }
+        this.reviews = reviews;
+    }
     
     public String getName() {
         return name;
@@ -121,6 +132,9 @@ public class BatAndRaquetsGames
     }
     public String getCategory() {
         return category;
+    }
+    public Set<BARReview> getReviews() {
+       return reviews;
     }
     
 }
