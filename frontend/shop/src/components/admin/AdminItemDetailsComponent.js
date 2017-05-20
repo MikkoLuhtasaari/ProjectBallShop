@@ -6,7 +6,9 @@ const styles = {
     color:'red',
     display:'inline-block',
     paddingRight:'10px',
-    margin:'0'
+    margin:'0',
+    fontSize:'22px',
+    fontWeight:'600'
   },
   textField: {
     resize:'none'
