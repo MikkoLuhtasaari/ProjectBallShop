@@ -125,18 +125,19 @@ export default class AdminItemDetailsComponent extends React.Component{
   updateData() {
     let targetUrl = 'http://localhost:8080/';
     let ball = this.state.ball;
+    console.log("CATEGORY: " + this.state.ball.category);
 
     switch(this.state.ball.category) {
-      case 'Target sports':
+      case 'Target sport':
         targetUrl += 'targetsportsball';
         break;
-      case 'Net sports':
+      case 'Net sport':
         targetUrl += 'netsportsball';
         break;
-      case 'Bat and raquets games':
+      case 'Bat and raquets game':
         targetUrl += 'batandraquetsgame';
         break;
-      case 'Goal sports':
+      case 'Goal sport':
         targetUrl += 'goalsportsball';
         break;
     }
