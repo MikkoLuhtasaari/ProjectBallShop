@@ -26,6 +26,17 @@ export default class ItemDetailsComponent extends React.Component {
     }
 
     componentWillUpdate() {
+        // Compare address bar URL to props.location
+        if(window.location.href.substring(23) != this.props.location.pathname) {
+          // If they are different, get new ball data with category and id from the current URL
+          let path = window.location.href.substring(32);
+          let category = path.substring(0, path.indexOf('/'));
+          let id = path.substring(path.indexOf('/') + 1);
+          // Fetch data and trigger re-render
+          this.client.ballById(category, id).then(b => this.setState({ball: b})).then(this.fetchCompleted);
+        }
+
+        // Render again if backend hasn't responded yet
         if(this.state.ball === '' && this.state.mounted) {
             this.setState({test: this.state.test + 1});
         }
