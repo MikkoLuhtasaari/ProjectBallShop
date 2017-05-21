@@ -21,6 +21,25 @@ body {
 .whiteBg{
     padding-top: 50px;
 }
+
+.deleteButton {
+    color: red;
+    background-color:white;
+    border: 2px solid red;
+    border-radius: 10px;
+    font-weight:600;
+    transition: 0.3s;
+    width:30%;
+    margin-left:35%;
+    margin-top:50px;
+}
+
+.deleteButton:hover {
+    color:white;
+    background-color:red;
+    border: 2px solid black;
+}
+
 footer{
     width: 100%;
     display: inline-block;
@@ -121,11 +140,11 @@ h4{
 }
 
 #twoLines {
-     height: 3.75em !important;
-     line-height: 1.4em !important;
-     overflow: hidden;
-     box-sizing: content-box !important;
- }
+    height: 3.75em !important;
+    line-height: 1.4em !important;
+    overflow: hidden;
+    box-sizing: content-box !important;
+}
 
 #twoLines2 {
     height: 2.8em !important;
