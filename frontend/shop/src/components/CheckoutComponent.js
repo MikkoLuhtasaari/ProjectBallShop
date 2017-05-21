@@ -1,5 +1,6 @@
 import React from 'react';
 import ShoppingCartComponent from '../components/ShoppingCartComponent'
+import LoginComponent from '../components/LoginComponent'
 
 export default class CheckoutComponent extends React.Component{
     constructor(props) {
@@ -56,9 +57,10 @@ export default class CheckoutComponent extends React.Component{
                                 <span className="glyphicon glyphicon-shopping-cart"/> Continue Shopping</a>
                             </button></td>
                         <td>
-                            <button type="button" className="btn btn-success">
-                                Checkout <span className="glyphicon glyphicon-play"/>
-                            </button></td>
+                            <button type="button" className="btn btn-success" onClick={() => this.redirectToBank()}>Checkout
+                                <span className="glyphicon glyphicon-play"/>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -108,5 +110,14 @@ export default class CheckoutComponent extends React.Component{
             else ShoppingCartComponent.addToCart(ball);
         }else console.log("PERSE!");
         this.setState({balls: ShoppingCartComponent.cookies.get('ballArray')});
+    }
+
+    redirectToBank() {
+        if (LoginComponent.userId === "") alert("You have to sign in to buy items");
+        else {
+            ShoppingCartComponent.cookies.set('ballArray', []);
+            alert("User is now redirected to bank services");
+            window.location = '/#/';
+        }
     }
 }

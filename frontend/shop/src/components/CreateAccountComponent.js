@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import Client from '../Client';
 
 export default class CreateAccountComponent extends React.Component{
@@ -135,6 +134,6 @@ export default class CreateAccountComponent extends React.Component{
 
     accountCreated() {
         alert("New account created!\nYou are now logged in.");
-        browserHistory.push('/#/');
+        window.location = '/#/';
     }
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import Client from '../Client';
 
 export default class LoginComponent extends React.Component {
+    static userId = "";
+
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -30,7 +32,10 @@ export default class LoginComponent extends React.Component {
             this.client.userLogin(userName).then(
                 (success) => {this.validateUser(success, pass, true)},
                 (failure) => {this.validateUser(failure, pass, false)});
-        } else this.setState({name: "Login"});
+        } else{
+            LoginComponent.userId = "";
+            this.setState({name: "Login"});
+        }
     }
 
     loggedIn(logged) {
@@ -79,6 +84,7 @@ export default class LoginComponent extends React.Component {
         if(!success){
             alert("Incorrect username.\nPlease try again.")
         } else if(pass === user.password){
+            LoginComponent.userId = user.id;
             this.setState({name: user.firstName + " " + user.lastName});
         } else alert("Incorrect password.\nPlease try again.");
     }

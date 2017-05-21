@@ -1,7 +1,7 @@
 import React from 'react';
 import BallComponent from '../components/BallComponent'
 
-export default class FrontpageComponent extends React.Component{
+export default class FrontPageComponent extends React.Component{
     render(){
         return (
             <div>

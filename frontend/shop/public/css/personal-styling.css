@@ -22,6 +22,10 @@ body {
     padding-top: 50px;
 }
 
+.padd{
+    padding: 10px 12px;
+}
+
 .deleteButton {
     color: red;
     background-color:white;
@@ -65,7 +69,7 @@ p{
 }
 .thumbnail:hover{
     opacity:1.00;
-    box-shadow: 0px 0px 10px #4bc6ff;
+    box-shadow: 0 0 10px green;
 }
 .line{
     margin-bottom: 5px;
@@ -75,14 +79,14 @@ p{
     text-align: center;
 }
 span.thumbnail {
-    border: 1px solid #00c4ff !important;
-    border-radius: 0px !important;
-    -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
-    -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
-    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
+    border: 1px solid green !important;
+    border-radius: 0 !important;
+    -webkit-box-shadow: 0 0 14px 0 rgba(0,0,0,0.16);
+    -moz-box-shadow: 0 0 14px 0 rgba(0,0,0,0.16);
+    box-shadow: 0 0 14px 0 rgba(0,0,0,0.16);
     padding: 10px;
 }
-.container
+
 h4{
     margin-top:70px;
     margin-bottom:30px;
@@ -91,11 +95,8 @@ h4{
     float: right;
     border-bottom: 2px solid #0a5971;
 }
-.btn-info {
-    color: #fff;
-    background-color: #19b4e2;
-    border-color: #19b4e2;
-    font-size:13px;
+
+.btn-success {
     font-weight:600;
 }
 
