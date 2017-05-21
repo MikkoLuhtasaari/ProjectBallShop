@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "FortAwesome/Font-Awesome": "*",
     "babel-plugin-react-css-modules": "^2.6.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^3.0.5",
     "react-scripts": "^0.9.5",
-    "FortAwesome/Font-Awesome": "*"
+    "whatwg-fetch": "^2.0.3",
+    "universal-cookie": "latest"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

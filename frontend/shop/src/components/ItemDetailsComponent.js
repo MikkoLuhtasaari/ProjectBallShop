@@ -31,12 +31,10 @@ export default class ItemDetailsComponent extends React.Component {
         }
     }
 
-    //Todo Tätä returnia kutsutaan liian aikaisin jonka takia ReviewsComponentiin lähtee undefindeja.
-    // Todo Pystyykö renderiä kutsuun vasta kun clientiltä on tullu vastaus TAI kutsuun sitä uudestaan kun clientiltä on tullu vastaus?
     render() {
         let imageSrc = "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png";
         return (
-            <section id="whiteBg">
+            <section className="whiteBg">
                 {
                     <div>
                         <div className="row">
@@ -104,7 +102,7 @@ export default class ItemDetailsComponent extends React.Component {
                 <h3 id="padBot">{this.state.ball.shortDetails}</h3>
                 <h1>{this.state.ball.price} €</h1>
                 <div className="section" id="botBad">
-                    <button className={buttonId} onClick={ () => this.addCookie(this.state.ball) }>
+                    <button className={buttonId} onClick={ () => ShoppingCartComponent.addToCart(this.state.ball) }>
                         <span id="marginR20" className="glyphicon glyphicon-shopping-cart" aria-hidden="true"/>
                         Add to cart
                     </button>
@@ -120,12 +118,5 @@ export default class ItemDetailsComponent extends React.Component {
                 </span>
             </div>
         );
-    }
-
-    addCookie(ball) {
-        let temp = [];
-        temp = ShoppingCartComponent.cookies.get('ballArray');
-        temp.push(ball);
-        ShoppingCartComponent.cookies.set('ballArray', temp);
     }
 }

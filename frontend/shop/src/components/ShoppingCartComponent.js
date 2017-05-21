@@ -3,7 +3,6 @@ import Cookies from 'universal-cookie';
 
 export default class ShoppingCartComponent extends React.Component{
     static cookies = new Cookies();
-    num = 0;
 
     constructor(props) {
         super(props);
@@ -15,28 +14,55 @@ export default class ShoppingCartComponent extends React.Component{
 
     render() {
         const itemsList = ShoppingCartComponent.cookies.get('ballArray');
-        const body = this.content(false);
-        const empty = this.content(true);
-        return ((itemsList.length > 0 ? body : empty))
+        return ((this.content(itemsList.length <= 0)))
     }
 
-    removeFromCart(ball) {
-        let array = ShoppingCartComponent.cookies.get('ballArray');
+    static addToCart(ball) {
+        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+        let item = {count: 1, content: ball};
+        let added = false;
 
-        for(let i = 0; i < array.length; i++) {
-            if(array[i].type === ball.type && array[i].id === ball.id)
-                array.splice(i, 1);
+        for(let i = 0; i < cookieArray.length; i++) {
+            let o = cookieArray[i].content;
+            if(o.type === ball.type && o.id === ball.id){
+                cookieArray[i].count += 1;
+                added = true;
+            }
         }
 
-        ShoppingCartComponent.cookies.set('ballArray', array);
+        if (added === false){
+            cookieArray.push(item);
+        }
+        ShoppingCartComponent.cookies.set('ballArray', cookieArray);
+    }
+
+    static removeFromCart(ball, removeAll) {
+        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+        let removed = false;
+
+        for(let i = 0; i < cookieArray.length && !removed; i++) {
+            let o = cookieArray[i].content;
+
+            if(o.type === ball.type && o.id === ball.id) {
+                cookieArray[i].count -= 1;
+                if(cookieArray[i].count <= 0 || removeAll) cookieArray.splice(i, 1);
+                removed = true;
+            }
+        }
+        ShoppingCartComponent.cookies.set('ballArray', cookieArray);
     }
 
     countTotal() {
         let total = 0;
-        ShoppingCartComponent.cookies.get('ballArray').forEach(function (item, index) {
-            total += item.price;
-        });
-        return total.toFixed(2);
+        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+
+        for(let i = 0; i < cookieArray.length; i++) {
+            let o = cookieArray[i].content;
+            let n = cookieArray[i].count;
+            total += (o.price * n);
+        }
+
+        this.setState({total: total.toFixed(2)});
     }
 
     content(empty) {
@@ -49,7 +75,7 @@ export default class ShoppingCartComponent extends React.Component{
                             {this.itemDetails()}
                         </li>
                         <li className="divider"/>
-                        <li><b><a href="/#/checkout/">Checkout</a><p className="pull-right marginR10 whitetxt" href="">Total: {this.countTotal()}€</p></b></li>
+                        <li><b><a href="/#/checkout/">Checkout</a><p className="pull-right marginR10 whitetxt" href="">Total: {this.state.total}€</p></b></li>
                     </ul>
                 </li>
             )
@@ -66,30 +92,45 @@ export default class ShoppingCartComponent extends React.Component{
 
     itemDetails() {
         let temp = [];
-        ShoppingCartComponent.cookies.get('ballArray').forEach(item => {
+        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+
+        for (let i = 0; i < cookieArray.length; i++) {
+            let o = cookieArray[i].content;
+            let n = cookieArray[i].count;
             temp.push(
-                <span className="item" key={item.type+item.id+temp.length}>
+                <span className="item" key={temp.length}>
                     <span className="item-left">
-                        <img src="images/items/Football_1.png" id="img40" alt="item" />
+                        <img src="images/items/Football_1.png" id="img40" alt="item"/>
                         <span className="item-info">
-                            <span>{item.name}</span>
-                            <span>{item.price} €</span>
+                            <span>{n}x {o.name}</span>
+                            <span>{o.price} €</span>
                         </span>
                     </span>
                     <span className="item-right">
-                        <button className="btn btn-xs btn-danger pull-right marginR10" onClick={() => this.removeFromCart(item)}>x</button>
+                        <button className="btn btn-xs btn-danger pull-right marginR10"
+                                onClick={() => ShoppingCartComponent.removeFromCart(o, false)}>x</button>
                     </span>
                 </span>
             )
-        });
+        }
+
         return temp;
     }
 
     viewCart() {
+        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+        let itemCount = 0;
+        for(let i = 0; i < cookieArray.length; i++) {
+            itemCount += cookieArray[i].count;
+        }
+
+        if (itemCount === 0) itemCount = "Shopping cart";
+        else itemCount += " items";
+
         return (
-            <a onClick={() => this.forceUpdate()} href="#" className="dropdown-toggle" data-toggle="dropdown"
+            <a onClick={() => this.countTotal()} href="#" className="dropdown-toggle" data-toggle="dropdown"
                role="button" aria-expanded="false">
-                <span className="glyphicon glyphicon-shopping-cart"/><b>View Cart</b><span className="caret"/>
+                <span className="glyphicon glyphicon-shopping-cart"/><b>{itemCount}</b><span className="caret"/>
             </a>
         )
     }
