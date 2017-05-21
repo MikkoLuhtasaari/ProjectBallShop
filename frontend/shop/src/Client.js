@@ -28,7 +28,17 @@ export default class Client {
      * @returns {Promise}
      */
     reviewsByBallId(sporttype, ballId) {
-        return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/review/" + ballId)
+        return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/reviews").then(r => this.filterArray(r, ballId));
+    }
+
+    filterArray(array, ballId) {
+      let parsed = [];
+      for(let i=0; i<array.length; i++) {
+        if(array[i].ownerBallId === ballId) {
+          parsed.push(array[i]);
+        }
+      }
+      return parsed;
     }
 
     sendReview(sporttype, ballId, userId, rating, header, content){
@@ -72,6 +82,8 @@ export default class Client {
     }
 
     createAccount(array) {
+        // TODO: Warning suppressed: Expected to  return a value in this function   array-callback-return
+        // eslint-disable-next-line
         Object.keys(array).map((e) => {
             console.log(array[e])
         });
