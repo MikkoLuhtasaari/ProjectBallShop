@@ -137,6 +137,8 @@ export default class AdminItemDetailsComponent extends React.Component{
       case 'Goal sports':
         targetUrl += 'goalsportsball';
         break;
+        default:
+          break;
     }
 
     fetch(targetUrl,

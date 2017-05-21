@@ -37,7 +37,7 @@ export default class Client {
         fetch(targetUrl,
             {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'cors',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type':'application/json'
@@ -74,6 +74,7 @@ export default class Client {
     createAccount(array) {
         Object.keys(array).map((e) => {
             console.log(array[e])
+            return e;
         });
         return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
     }

@@ -22,9 +22,6 @@ export default class ReviewsComponent extends React.Component{
 
         if(parsedG !== undefined)
             this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.addToArray(r));
-
-        console.log(parsedG);
-        console.log(this.props.ballId);
     }
 
     addToArray(r) {
@@ -109,11 +106,15 @@ export default class ReviewsComponent extends React.Component{
 
         for(let i = 0; i<this.state.reviews.length; i++){
             temp.push(
-                <div className="thumbnail">
+                <div className="thumbnail" key={temp.length}>
                     {this.getStars(this.state.reviews[i].score)}
+                    <div className="marginL10">
                     {this.state.reviews[i].header}
+                    </div>
                     <br/>
+                    <div className="black">
                     {this.state.reviews[i].content}
+                    </div>
                 </div>
             )
         }
