@@ -48,7 +48,7 @@ export default class BallComponent extends React.Component{
     getShoppingCartBtn(ball) {
         return (
             <div className="options-cart-round">
-                <button className="btn btn-default" title="Add to cart" onClick={ () => this.addCookie(ball) }>
+                <button className="btn btn-default" title="Add to cart" onClick={ () => ShoppingCartComponent.addToCart(ball) }>
                     <span className="fa fa-shopping-cart"/>
                 </button>
             </div>
@@ -81,20 +81,12 @@ export default class BallComponent extends React.Component{
                             <p className="item-p item-price">{ballObject.price}€</p>
                         </div>
                         <div className="col-md-4 col-sm-6" id="width100">
-                            <button className="btn btn-info item-right buttonFont" id="btn100" onClick={() => this.addCookie(ballObject)}>BUY ITEM</button>
+                            <button className="btn btn-info item-right buttonFont" id="btn100" onClick={() => ShoppingCartComponent.addToCart(ballObject)}>BUY ITEM</button>
                         </div>
                     </div>
                 </span>
             </div>
             );
     return propArray;
-    }
-
-
-    addCookie(ball) {
-        let temp = [];
-        temp = ShoppingCartComponent.cookies.get('ballArray');
-        temp.push(ball);
-        ShoppingCartComponent.cookies.set('ballArray', temp);
     }
 }

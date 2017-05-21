@@ -7,11 +7,47 @@ export default class ReviewsComponent extends React.Component{
         this.client = new Client();
         this.state = {
             reviews : [],
-            group : ''
+            group : '',
+            updated: false
         };
-        if (typeof this.props.group !== "undefined") {
-            this.state.group = this.props.group + "s";
-            this.client.reviewsByBallId(this.state.group, this.props.ballId).then(r => this.state.reviews.push(r));
+
+        this.parseGroup = this.parseGroup.bind(this);
+        this.addToArray = this.addToArray.bind(this);
+    }
+
+    componentWillReceiveProps() {
+        let g = this.props.group;
+        let parsedG = this.parseGroup(g);
+        this.setState({group : parsedG});
+
+        if(parsedG !== undefined)
+            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.addToArray(r));
+    }
+
+    addToArray(r) {
+        let tempArray = this.state.reviews;
+        tempArray.push(r);
+        this.setState({reviews: tempArray});
+    }
+
+    parseGroup(group) {
+        switch (group) {
+          case "Goal sport":
+              return "goalsportsballs";
+          case "Target sport":
+              return "targetsportsballs";
+          case "Bat and raquets game":
+              return "batandraquetsgames";
+          case "Net sport":
+              return "netsportsballs";
+          default:
+              return undefined;
+        }
+    }
+
+    componentDidUpdate() {
+        if(!this.state.updated) {
+            this.setState({updated: true});
         }
     }
 
@@ -70,11 +106,15 @@ export default class ReviewsComponent extends React.Component{
 
         for(let i = 0; i<this.state.reviews.length; i++){
             temp.push(
-                <div className="thumbnail">
+                <div className="thumbnail" key={temp.length}>
                     {this.getStars(this.state.reviews[i].score)}
+                    <div className="marginL10">
                     {this.state.reviews[i].header}
+                    </div>
                     <br/>
+                    <div className="black">
                     {this.state.reviews[i].content}
+                    </div>
                 </div>
             )
         }
@@ -125,10 +165,8 @@ export default class ReviewsComponent extends React.Component{
     }
 
     sendReview(rating, header, content){
-        //ToDo Alla olevat console.logit printtaa undefined.
-        console.log(this.state.group);
-        console.log(this.props.ballId);
-        if (rating !== 0) this.client.sendReview(this.state.group, this.props.ballId, 78, rating, header, content);
-        else console.log("VITTU VIRHE");
+        let formattedGroup = this.state.group.slice(0, this.state.group.length-1);
+        if (rating !== 0) this.client.sendReview(formattedGroup, this.props.ballId, 1, rating, header, content);
+        else console.log("Error");
     }
 }
