@@ -114,22 +114,27 @@ export default class CreateAccountComponent extends React.Component{
     }
 
     handleChange() {
+        let emptyFields = false;
+
         if(this.refs.passW.value !== this.refs.passW2.value) {
             this.refs.passW2.setCustomValidity("Passwords Don't Match");
         } else {
             this.refs.passW2.setCustomValidity('');
-
             let array = [];
             for (const ref in this.refs) {
-                array.push({[ref]: this.refs[ref].value});
-                this.setState({[ref]: this.refs[ref].value});
+                let value = this.refs[ref].value;
+                if (value === "") emptyFields = true;
+                if(!emptyFields) {
+                    array.push({[ref]: value});
+                    this.setState({[ref]: value});
+                }
             }
-            this.client.createAccount(array).then(()=>this.accountCreated());
+            if(!emptyFields) this.client.createAccount(array).then(()=>this.accountCreated());
         }
     }
 
     accountCreated() {
         alert("New account created!\nYou are now logged in.");
-        browserHistory.push('/');
+        browserHistory.push('/#/');
     }
 }

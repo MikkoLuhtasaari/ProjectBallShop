@@ -105,9 +105,13 @@ export default class ReviewsComponent extends React.Component{
             temp.push(
                 <div className="thumbnail" key={"wide"+i}>
                     {this.getStars(this.state.reviews[i].score)}
+                    <div className="marginL10">
                     {this.state.reviews[i].header}
+                    </div>
                     <br/>
+                    <div className="black">
                     {this.state.reviews[i].content}
+                    </div>
                 </div>
             )
         }

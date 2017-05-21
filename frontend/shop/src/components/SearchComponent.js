@@ -47,12 +47,12 @@ export default class SearchComponent extends React.Component {
                            className="search-box" placeholder="Search"/>
                     <button type="submit" className="btn"><span className="glyphicon glyphicon-search"/></button>
                     <ul>
-                        {tempArray.map(function (i) {
+                        {tempArray.map((i) => {
                             keynum++;
                             let category = i.category.replace(/ /g,'').toLowerCase();
                             if(!category.includes("game"))category += "sball";
                             let link = "/#/details/" + category + "/" + i.id;
-                            return <li key={keynum} className="list-unstyled"><a href={link}>{i.manufacturer} {i.name}</a></li>;
+                            return <li key={keynum} className="list-unstyled"><a href={link} onClick={() => this.setState({searchString: ""})}>{i.manufacturer} {i.name}</a></li>;
                         })}
                     </ul>
                 </div>
