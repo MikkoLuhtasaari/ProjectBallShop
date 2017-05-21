@@ -71,10 +71,14 @@ export default class Client {
             let request = new XMLHttpRequest();
             request.open(type, address);
             request.onreadystatechange = () => {
-                if (request.readyState === 4 && request.status === 200) {
-                    let raw = request.responseText;
-                    let objectified = JSON.parse(raw);
-                    resolve(objectified);
+                try{
+                    if (request.readyState === 4 && request.status === 200) {
+                        let raw = request.responseText;
+                        let objectified = JSON.parse(raw);
+                        resolve(objectified);
+                    }
+                }catch (e) {
+                    reject(' :( ')
                 }
             };
             request.send();
@@ -83,7 +87,6 @@ export default class Client {
 
     createAccount(array) {
         // TODO: Warning suppressed: Expected to  return a value in this function   array-callback-return
-        // eslint-disable-next-line
         Object.keys(array).map((e) => {
             console.log(array[e])
             return e;
@@ -91,8 +94,7 @@ export default class Client {
         return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
     }
 
-    login(username, password){
-        console.log(username + ", " + password);
-        return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
+    userLogin(userName) {
+        return this.getPromise("GET", "http://localhost:8080/user/username/" + userName);
     }
 }
