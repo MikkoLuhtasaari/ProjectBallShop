@@ -12,7 +12,6 @@ export default class ReviewsComponent extends React.Component{
         };
 
         this.parseGroup = this.parseGroup.bind(this);
-        this.addToArray = this.addToArray.bind(this);
     }
 
     componentWillReceiveProps() {
@@ -21,27 +20,22 @@ export default class ReviewsComponent extends React.Component{
         this.setState({group : parsedG});
 
         if(parsedG !== undefined)
-            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.addToArray(r));
-
-        console.log(parsedG);
-        console.log(this.props.ballId);
-    }
-
-    addToArray(r) {
-        let tempArray = this.state.reviews;
-        tempArray.push(r);
-        this.setState({reviews: tempArray});
+            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.setState({reviews: r}));
     }
 
     parseGroup(group) {
         switch (group) {
           case "Goal sport":
+          case "goalsportsball":
               return "goalsportsballs";
           case "Target sport":
+          case "targetsportsball":
               return "targetsportsballs";
           case "Bat and raquets game":
+          case "batandraquetsgame":
               return "batandraquetsgames";
           case "Net sport":
+          case "netsportsball":
               return "netsportsballs";
           default:
               return undefined;
@@ -64,7 +58,7 @@ export default class ReviewsComponent extends React.Component{
         let score = 0;
 
         for (let i = 0; i < this.state.reviews.length; i++){
-            score =+ this.state.reviews[i].score;
+            score += this.state.reviews[i].score;
         }
 
         score /= this.state.reviews.length;
@@ -109,7 +103,7 @@ export default class ReviewsComponent extends React.Component{
 
         for(let i = 0; i<this.state.reviews.length; i++){
             temp.push(
-                <div className="thumbnail">
+                <div className="thumbnail" key={"wide"+i}>
                     {this.getStars(this.state.reviews[i].score)}
                     {this.state.reviews[i].header}
                     <br/>
