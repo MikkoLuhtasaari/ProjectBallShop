@@ -82,10 +82,8 @@ export default class Client {
     }
 
     createAccount(array) {
-        // TODO: Warning suppressed: Expected to  return a value in this function   array-callback-return
-        // eslint-disable-next-line
         Object.keys(array).map((e) => {
-            console.log(array[e])
+            console.log(array[e]);
             return e;
         });
         return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
