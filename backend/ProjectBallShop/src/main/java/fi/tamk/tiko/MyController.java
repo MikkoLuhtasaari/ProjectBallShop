@@ -423,19 +423,34 @@ public class MyController implements ApplicationRunner {
     
     // Football and Basketball related stuff
     @RequestMapping(value = "/goalsportsball",  method=RequestMethod.POST)
-    public void saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
+    public GoalSportsBall saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
         gsbRepository.save(goalsportsball);
+        return goalsportsball;
     }
     
     @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
+    public GoalSportsBall modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
         
         if(gsbRepository.findOne(id) != null) {
-            gsbRepository.delete(gsbRepository.findOne(id));
-            GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
+            GoalSportsBall temp = gsbRepository.findOne(id);
+            
+            temp.setName(goalsportsball.getName());
+            temp.setColor(goalsportsball.getColor());
+            temp.setDiameter(goalsportsball.getDiameter());
+            temp.setWeigth(goalsportsball.getWeigth());
+            temp.setDetails(goalsportsball.getDetails());
+            temp.setMaterial(goalsportsball.getMaterial());
+            temp.setManufacturer(goalsportsball.getManufacturer());
+            temp.setShortDetails(goalsportsball.getShortDetails());
+            temp.setType(goalsportsball.getType());
+            temp.setPrice(goalsportsball.getPrice());
+            temp.setAmount(goalsportsball.getAmount());
+            
             gsbRepository.save(temp);
+            return gsbRepository.findOne(id);
         } else {
-            System.out.println("Error! No balls with that id found!");
+            System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
