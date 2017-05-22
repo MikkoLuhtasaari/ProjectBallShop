@@ -53,59 +53,68 @@ public class TSBReview implements Serializable
     public void setId(long id) {
         this.id = id;
     }
+    
     public void setScore(int score) {
+        
         if(score < 6 && score > 0 ) {
             this.score = score;
         } else {
             System.out.println("Score must be between 1-5");
         }
     }
+    
     public void setHeader(String header) {
         this.header = header;
     }
+    
     public void setContent(String content) {
         this.content = content;
     }
+    
     public void setOwner(TargetSportsBall owner) {
         this.owner = owner;
     }
+    
     public void setUserOwner(User userOwner) {
         this.userOwner = userOwner;
     }
+    
     public void setOwnerBallId(long ownerBallId) {
         this.ownerBallId = ownerBallId;
     }
+    
     public void setUserId(long userId) {
         this.userId = userId;
     }
     
     public long getId() {
-        System.out.println("Getting review id");
         return id;
     }
+    
     public int getScore() {
         return score;
     }
+    
     public String getHeader() {
         return header;
     }
+    
     public String getContent() {
         return content;
     }
     
     public TargetSportsBall getOwner() {
-        System.out.println("Get owner");
         return owner;
     }
     
     public User getUserOwner() {
-        System.out.println("Get user");
         return userOwner;
     }
     
     public long getUserId() {
         return userId;
     }
+    
     public long getOwnerBallId() {
         return ownerBallId;
     }
