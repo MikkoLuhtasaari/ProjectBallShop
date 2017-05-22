@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(indexes = {@Index(columnList="user_id"), @Index(columnList="owner_ball_id")})
-public class NSBReview implements Serializable
-{
+public class NSBReview implements Serializable {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
