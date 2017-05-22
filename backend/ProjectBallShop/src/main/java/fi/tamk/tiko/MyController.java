@@ -63,21 +63,22 @@ public class MyController implements ApplicationRunner {
         
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
-    public void saveUser(@RequestBody User user) {
-        System.out.println(user.getUserName() + " " + user.getPassword() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getCity() + " " + user.getAddress() + " " + user.getZipCode() + user.getAccessLevel() + user.getEmail());
+    public User saveUser(@RequestBody User user) {
         userRepository.save(user);
+        return user;
     }
     
     @RequestMapping(value = "/user/{id}",  method=RequestMethod.PUT)
-    public void saveUser(@PathVariable long id, @RequestBody User user) {
+    public User saveUser(@PathVariable long id, @RequestBody User user) {
         
         if(userRepository.findOne(id) != null) {
-            userRepository.delete(userRepository.findOne(id));
-            
-            User temp = new User(user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getEmail(), user.getCity(), user.getAddress(), user.getZipCode(), user.getAccessLevel());
+            User temp = userRepository.findOne(id);
+            temp.setUserName(user.getUserName());
             userRepository.save(temp);
+            return user;
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
     

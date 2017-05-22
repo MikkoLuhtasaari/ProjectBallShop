@@ -3,8 +3,8 @@ Port is http://localhost:8080/
 
 User related requests
 ---------------------
-POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"userName\" : \"TestUser\" , \"email\" : \"testEmail\" , \"password\" : \"jeppe\" , \"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\" , \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu\" , \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/
-PUT user/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"Jeppetes\", \"password\" : \"jeppe\", \"email\" : \"jeppe@jeppe.com\", \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" : \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/{id}
+POST user/ curl -H "Content-Type: application/json" -X POST -d "{\"userName\" : \"TestUser\" , \"email\" : \"testEmail@mail.com\" , \"password\" : \"jeppe\" , \"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\" , \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu\" , \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/
+PUT user/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"firstName\" : \"Jeppe\", \"lastName\" : \"Jeppenen\", \"userName\" : \"TestUser2\", \"password\" : \"jeppe\", \"email\" : \"email@asd.com\", \"city\" : \"Tampere\", \"address\" : \"Ruhtinaankatu 1\" , \"zipCode\" : 33560, \"accessLevel\" : \"Admin\"}" http://localhost:8080/user/{id}
 DELETE curl -X DELETE localhost:8080/user/{id}
 GET users/
 GET user/{id}
