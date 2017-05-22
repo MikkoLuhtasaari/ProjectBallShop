@@ -278,20 +278,34 @@ public class MyController implements ApplicationRunner {
     
     // Baseball and Tennisball related stuff
     @RequestMapping(value = "/batandraquetsgame",  method=RequestMethod.POST)
-    public void saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
+    public BatAndRaquetsGames saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
         brRepository.save(batandraquetsgame);
+        return batandraquetsgame;
     }
     
-    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
-    public void modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
+    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.PUT)
+    public BatAndRaquetsGames modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
         
         if(brRepository.findOne(id) != null) {
-            brRepository.delete(brRepository.findOne(id));
+            BatAndRaquetsGames temp = brRepository.findOne(id);
             
-            BatAndRaquetsGames temp = new BatAndRaquetsGames(batandraquetsgame.getName(), batandraquetsgame.getColor(), batandraquetsgame.getDiameter(), batandraquetsgame.getWeigth(), batandraquetsgame.getDetails(), batandraquetsgame.getMaterial(), batandraquetsgame.getManufacturer(), batandraquetsgame.getShortDetails(), batandraquetsgame.getType(), batandraquetsgame.getPrice(), batandraquetsgame.getAmount(), id);
+            temp.setName(batandraquetsgame.getName());
+            temp.setColor(batandraquetsgame.getColor());
+            temp.setDiameter(batandraquetsgame.getDiameter());
+            temp.setWeigth(batandraquetsgame.getWeigth());
+            temp.setDetails(batandraquetsgame.getDetails());
+            temp.setMaterial(batandraquetsgame.getMaterial());
+            temp.setManufacturer(batandraquetsgame.getManufacturer());
+            temp.setShortDetails(batandraquetsgame.getShortDetails());
+            temp.setType(batandraquetsgame.getType());
+            temp.setPrice(batandraquetsgame.getPrice());
+            temp.setAmount(batandraquetsgame.getAmount());
+            
             brRepository.save(temp);
+            return brRepository.findOne(id);
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
@@ -409,19 +423,34 @@ public class MyController implements ApplicationRunner {
     
     // Football and Basketball related stuff
     @RequestMapping(value = "/goalsportsball",  method=RequestMethod.POST)
-    public void saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
+    public GoalSportsBall saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
         gsbRepository.save(goalsportsball);
+        return goalsportsball;
     }
     
     @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
+    public GoalSportsBall modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
         
         if(gsbRepository.findOne(id) != null) {
-            gsbRepository.delete(gsbRepository.findOne(id));
-            GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
+            GoalSportsBall temp = gsbRepository.findOne(id);
+            
+            temp.setName(goalsportsball.getName());
+            temp.setColor(goalsportsball.getColor());
+            temp.setDiameter(goalsportsball.getDiameter());
+            temp.setWeigth(goalsportsball.getWeigth());
+            temp.setDetails(goalsportsball.getDetails());
+            temp.setMaterial(goalsportsball.getMaterial());
+            temp.setManufacturer(goalsportsball.getManufacturer());
+            temp.setShortDetails(goalsportsball.getShortDetails());
+            temp.setType(goalsportsball.getType());
+            temp.setPrice(goalsportsball.getPrice());
+            temp.setAmount(goalsportsball.getAmount());
+            
             gsbRepository.save(temp);
+            return gsbRepository.findOne(id);
         } else {
-            System.out.println("Error! No balls with that id found!");
+            System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
@@ -538,21 +567,34 @@ public class MyController implements ApplicationRunner {
 
     // Bowlingball and Golfball related stuff
     @RequestMapping(value = "/targetsportsball",  method=RequestMethod.POST)
-    public void saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
+    public TargetSportsBall saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
         tsbRepository.save(targetsportsball);
+        return targetsportsball;
     }
     
     @RequestMapping(value = "/targetsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
+    public TargetSportsBall modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
         
         if(tsbRepository.findOne(id) != null) {
-            tsbRepository.delete(tsbRepository.findOne(id));
+            TargetSportsBall temp = tsbRepository.findOne(id);
             
-            TargetSportsBall temp = new TargetSportsBall(targetsportsball.getName(), targetsportsball.getColor(), targetsportsball.getDiameter(), targetsportsball.getWeigth(), targetsportsball.getDetails(), targetsportsball.getMaterial(), targetsportsball.getManufacturer(), targetsportsball.getShortDetails(), targetsportsball.getType(), targetsportsball.getPrice(), targetsportsball.getAmount(), id);
+            temp.setName(targetsportsball.getName());
+            temp.setColor(targetsportsball.getColor());
+            temp.setDiameter(targetsportsball.getDiameter());
+            temp.setWeigth(targetsportsball.getWeigth());
+            temp.setDetails(targetsportsball.getDetails());
+            temp.setMaterial(targetsportsball.getMaterial());
+            temp.setManufacturer(targetsportsball.getManufacturer());
+            temp.setShortDetails(targetsportsball.getShortDetails());
+            temp.setType(targetsportsball.getType());
+            temp.setPrice(targetsportsball.getPrice());
+            temp.setAmount(targetsportsball.getAmount());
             
             tsbRepository.save(temp);
+            return tsbRepository.findOne(id);
         } else {
-            System.out.println("Error, invalid ID!");
+            System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
