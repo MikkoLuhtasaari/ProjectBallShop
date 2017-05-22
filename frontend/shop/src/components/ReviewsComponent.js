@@ -1,5 +1,6 @@
 import React from 'react';
 import Client from '../Client';
+import LoginComponent from '../components/LoginComponent';
 
 export default class ReviewsComponent extends React.Component{
     constructor(props) {
@@ -161,9 +162,13 @@ export default class ReviewsComponent extends React.Component{
         )
     }
 
-    sendReview(rating, header, content){
-        let formattedGroup = this.state.group.slice(0, this.state.group.length-1);
-        if (rating !== 0) this.client.sendReview(formattedGroup, this.props.ballId, 1, rating, header, content);
-        else console.log("Error");
+    sendReview(rating, header, content) {
+        let userId = LoginComponent.userId;
+        if (userId === "") alert("You have to sign in to post reviews");
+        else {
+            let formattedGroup = this.state.group.slice(0, this.state.group.length - 1);
+            if (rating !== 0) this.client.sendReview(formattedGroup, this.props.ballId, userId, rating, header, content);
+            else console.log("Error");
+        }
     }
 }

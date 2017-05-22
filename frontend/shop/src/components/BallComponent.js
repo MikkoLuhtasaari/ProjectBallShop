@@ -46,13 +46,16 @@ export default class BallComponent extends React.Component{
     }
 
     getShoppingCartBtn(ball) {
-        return (
-            <div className="options-cart-round">
-                <button className="btn btn-default" title="Add to cart" onClick={ () => ShoppingCartComponent.addToCart(ball) }>
-                    <span className="fa fa-shopping-cart"/>
-                </button>
-            </div>
-        )
+        if(ball.amount > 0) {
+            return (
+                <div className="options-cart-round">
+                    <button className="btn btn-default" title="Add to cart"
+                            onClick={ () => ShoppingCartComponent.addToCart(ball) }>
+                        <span className="fa fa-shopping-cart"/>
+                    </button>
+                </div>
+            )
+        }
     }
 
     createContent(ballObject) {
@@ -81,12 +84,29 @@ export default class BallComponent extends React.Component{
                             <p className="item-p item-price">{ballObject.price}€</p>
                         </div>
                         <div className="col-md-4 col-sm-6" id="width100">
-                            <button className="btn btn-info item-right buttonFont" id="btn100" onClick={() => ShoppingCartComponent.addToCart(ballObject)}>BUY ITEM</button>
+                            {this.buyButton(ballObject)}
                         </div>
                     </div>
                 </span>
             </div>
             );
     return propArray;
+    }
+
+    buyButton(ball) {
+        if (ball.amount > 0) {
+            return (
+                <button className="btn btn-success item-right buttonFont padd" id="btn100"
+                        onClick={() => ShoppingCartComponent.addToCart(ball)}>BUY ITEM
+                </button>
+
+            )
+        } else{
+            return (
+                <button className="btn item-right disabled buttonFont padd" id="btn100"
+                        onClick={() => ShoppingCartComponent.addToCart(ball)}>Out of stock
+                </button>
+            )
+        }
     }
 }

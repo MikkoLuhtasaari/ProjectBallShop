@@ -71,10 +71,14 @@ export default class Client {
             let request = new XMLHttpRequest();
             request.open(type, address);
             request.onreadystatechange = () => {
-                if (request.readyState === 4 && request.status === 200) {
-                    let raw = request.responseText;
-                    let objectified = JSON.parse(raw);
-                    resolve(objectified);
+                try{
+                    if (request.readyState === 4 && request.status === 200) {
+                        let raw = request.responseText;
+                        let objectified = JSON.parse(raw);
+                        resolve(objectified);
+                    }
+                }catch (e) {
+                    reject(' :( ')
                 }
             };
             request.send();
@@ -82,15 +86,44 @@ export default class Client {
     }
 
     createAccount(array) {
+        // TODO: Warning suppressed: Expected to  return a value in this function   array-callback-return
         Object.keys(array).map((e) => {
-            console.log(array[e]);
+            console.log(array[e])
             return e;
         });
         return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
     }
 
-    login(username, password){
-        console.log(username + ", " + password);
-        return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
+    userLogin(userName) {
+        return this.getPromise("GET", "http://localhost:8080/user/username/" + userName);
+    }
+
+    getUsers() {
+        return this.getPromise("GET", "http://localhost:8080/users");
+    }
+
+    reduceQuantity(balls) {
+        console.log("PUTTI PUUTTUU");
+        console.log("TÄNNE TULLEET PALLOT PITÄÄ PUTATA, JOTTA MÄÄRÄT PÄIVITTYY")
+
+        for(let i = 0; i < balls.length; i++) {
+            let o = balls[i].content;
+            let n = balls[i].count;
+
+            let category = o.category.replace(/ /g, '').toLowerCase();
+            if (!category.includes("game")) category += "sball";
+            console.log("--------")
+            if (n >= o.amount) console.log("DELETE: localhost:8080/" + category + "/" + o.id);
+            else console.log("PUT: " +
+                "localhost:8080/" + category + "/" + o.id + ":\n" +
+                "{\"name\" : \"" + o.name + "\", \"color\" : \"" + o.color + "\", " +
+                "\"diameter\" : " + o.diameter + ", \"weigth\" : " + o.weigth + ", \"details\" : \"" + o.details +
+                "\", \"material\" : \"" + o.material + "\", \"manufacturer\" : \"" + o.manufacturer + "\", " +
+                "\"shortDetails\" : \"" + o.shortDetails + "\", \"type\" : \"" + o.type + "\", " +
+                "\"price\" : " + o.price + ", \"amount\" : " + n +"}");
+            console.log("----------")
+        }
+
+        return this.getPromise("GET", "http://localhost:8080/users");
     }
 }
