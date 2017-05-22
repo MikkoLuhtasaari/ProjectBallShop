@@ -8,17 +8,35 @@ import java.io.Serializable;
 
 @Entity
 //@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
-public class User 
-{
+public class User {
+    
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     private String userName;
+    
+    @Column(name = "email", length = 80, nullable = false, unique = true)
     private String email;
+    
+    @Column(name = "password", length = 30, nullable = false, unique = false)
     private String password;
+    
+    @Column(name = "firstname", length = 30, nullable = false, unique = false)
     private String firstName;
+    
+    @Column(name = "lastname", length = 50, nullable = false, unique = false)
     private String lastName;
+    
+    @Column(name = "city", length = 50)
     private String city;
+    
+    @Column(name = "address", length = 80)
     private String address;
+    
+    @Column(name = "zip_code")
     private int zipCode;
+    
+    @Column(name = "access_level", length = 20)
     private String accessLevel;
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
