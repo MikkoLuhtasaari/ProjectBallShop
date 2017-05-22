@@ -25,7 +25,7 @@ export default class ShoppingCartComponent extends React.Component{
         for(let i = 0; i < cookieArray.length; i++) {
             let o = cookieArray[i].content;
             if(o.type === ball.type && o.id === ball.id){
-                cookieArray[i].count += 1;
+                if(cookieArray[i].count<ball.amount) cookieArray[i].count += 1;
                 added = true;
             }
         }
