@@ -38,9 +38,16 @@ public class User {
     private String accessLevel;
     
     @Id
-    //@Column(name = "id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    
+    /*@ManyToOne
+    @JoinColumn(name = "PARENT_ID")
+    private NSBReview parentNode;
+    
+    @OneToMany(mappedBy = "userOwner", cascade = CascadeType.REMOVE)
+    private Set<NSBReview> reviews;*/
     
     @OneToMany(mappedBy = "userOwner", cascade = CascadeType.ALL)
     private Set<NSBReview> reviews;
