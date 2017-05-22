@@ -7,19 +7,38 @@ import java.util.Set;
 import java.io.Serializable;
 
 @Entity
-//@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
-public class User 
-{
+//@Table(indexes = {@Index(columnList="username")})
+public class User {
+    
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     private String userName;
+    
+    @Column(name = "email", length = 80, nullable = false, unique = true)
     private String email;
+    
+    @Column(name = "password", length = 30, nullable = false, unique = false)
     private String password;
+    
+    @Column(name = "firstname", length = 30, nullable = false, unique = false)
     private String firstName;
+    
+    @Column(name = "lastname", length = 50, nullable = false, unique = false)
     private String lastName;
+    
+    @Column(name = "city", length = 50)
     private String city;
+    
+    @Column(name = "address", length = 80)
     private String address;
+    
+    @Column(name = "zip_code")
     private int zipCode;
+    
+    @Column(name = "access_level", length = 20)
     private String accessLevel;
+    
     @Id
+    //@Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
@@ -28,7 +47,7 @@ public class User
     
     public User(){};
     
-    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel, long id) {
+    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel) {
         setFirstName(firstName);
         setLastName(lastName);
         setUserName(userName);
@@ -38,46 +57,48 @@ public class User
         setAccessLevel(accessLevel);
         setPassword(password);
         setEmail(email);
-        setId(id);
     }
     
     public void setReviews(Set<NSBReview> reviews) {
-        System.out.println("Setting reviews");
-        System.out.println(reviews.size());
-        
-        for(NSBReview n: reviews) {
-            System.out.println(n.getScore());
-        }
         this.reviews = reviews;
     }
     
     public void setId(long id) {
         this.id = id;
     }
+    
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    
     public void setEmail(String email) {
         this.email = email;
     }
+    
     public void setPassword(String password) {
         this.password = password;
     }
+    
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    
     public void setCity(String city) {
         this.city = city;
     }
+    
     public void setAddress(String address) {
         this.address = address;
     }
+    
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
+    
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
@@ -89,30 +110,39 @@ public class User
     public long getId() {
         return id;
     }
+    
     public String getUserName() {
         return userName;
     }
+    
     public String getEmail() {
         return email;
     }
+    
     public String getPassword() {
         return password;
     }
+    
     public String getFirstName() {
         return firstName;
     }
+    
     public String getLastName() {
         return lastName;
     }
+    
     public String getAddress() {
         return address;
     }
+    
     public String getCity() {
         return city;
     }
+    
     public int getZipCode() {
         return zipCode;
     }
+    
     public String getAccessLevel() {
         return accessLevel;
     }

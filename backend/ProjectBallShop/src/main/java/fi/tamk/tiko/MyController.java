@@ -23,6 +23,7 @@ import org.springframework.boot.ApplicationArguments;
 
 @RestController
 public class MyController implements ApplicationRunner {
+    
     @Autowired
     GoalSportsBallRepository gsbRepository;
   
@@ -62,20 +63,22 @@ public class MyController implements ApplicationRunner {
         
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
-    public void saveUser(@RequestBody User user) {
+    public User saveUser(@RequestBody User user) {
         userRepository.save(user);
+        return user;
     }
     
     @RequestMapping(value = "/user/{id}",  method=RequestMethod.PUT)
-    public void saveUser(@PathVariable long id, @RequestBody User user) {
+    public User saveUser(@PathVariable long id, @RequestBody User user) {
         
         if(userRepository.findOne(id) != null) {
-            userRepository.delete(userRepository.findOne(id));
-            
-            User temp = new User(user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getEmail(), user.getCity(), user.getAddress(), user.getZipCode(), user.getAccessLevel(), id);
+            User temp = userRepository.findOne(id);
+            temp.setUserName(user.getUserName());
             userRepository.save(temp);
+            return user;
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
@@ -744,9 +747,9 @@ public class MyController implements ApplicationRunner {
     public void initStuff() {
                 
         //USERS
-        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin", 1);
-        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User", 2);
-        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", "Vaasa", "Merimiehenkatu 1a1", 65200, "User", 3);
+        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin");
+        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User");
+        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", "Vaasa", "Merimiehenkatu 1a1", 65200, "User");
         
         userRepository.save(tempUser1);
         userRepository.save(tempUser2);
@@ -831,7 +834,7 @@ public class MyController implements ApplicationRunner {
         
         Set tempNSReview2 = new HashSet<NSBReview>(){{
             add(new NSBReview(1, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
-            add(new NSBReview(2, 3, "Kinda good", "Maybe I jumped the gun a bit with my previous review.", tempNS2, 2, tempUser2, 2));
+            //add(new NSBReview(2, 3, "Kinda good", "Maybe I jumped the gun a bit with my previous review.", tempNS2, 2, tempUser2, 2));
         }};
         
         tempNS2.setReviews(tempNSReview2);
