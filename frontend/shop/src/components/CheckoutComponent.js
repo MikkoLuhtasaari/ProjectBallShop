@@ -1,9 +1,12 @@
 import React from 'react';
 import ShoppingCartComponent from '../components/ShoppingCartComponent'
+import LoginComponent from '../components/LoginComponent'
+import Client from "../Client";
 
 export default class CheckoutComponent extends React.Component{
     constructor(props) {
         super(props);
+        this.client = new Client();
         this.state = {
             balls: ShoppingCartComponent.cookies.get('ballArray')
         };
@@ -56,9 +59,10 @@ export default class CheckoutComponent extends React.Component{
                                 <span className="glyphicon glyphicon-shopping-cart"/> Continue Shopping</a>
                             </button></td>
                         <td>
-                            <button type="button" className="btn btn-success">
-                                Checkout <span className="glyphicon glyphicon-play"/>
-                            </button></td>
+                            <button type="button" className="btn btn-success" onClick={() => this.redirectToBank()}>Checkout
+                                <span className="glyphicon glyphicon-play"/>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -87,7 +91,9 @@ export default class CheckoutComponent extends React.Component{
                             </div>
                         </div></td>
                     <td className="col-sm-1 col-md-1">
-                        <input type="number" className="form-control" ref="inputCounter" value={n} onChange={() => this.addOrRemove(o, n, false)}/>
+                        <input type="number" className="form-control" ref="inputCounter" min="1" max={o.amount} value={n} onChange={() => this.addOrRemove(o, n, false)}/>
+                        <h5/>
+                        <h5 className="media-heading">On stock: {o.amount}</h5>
                     </td>
                     <td className="col-sm-1 col-md-1 text-center"><strong>{o.price}€</strong></td>
                     <td className="col-sm-1 col-md-1 text-center"><strong>{(o.price * n).toFixed(2)}€</strong></td>
@@ -108,5 +114,16 @@ export default class CheckoutComponent extends React.Component{
             else ShoppingCartComponent.addToCart(ball);
         }else console.log("PERSE!");
         this.setState({balls: ShoppingCartComponent.cookies.get('ballArray')});
+    }
+
+    redirectToBank() {
+        if (LoginComponent.userId === "") alert("You have to sign in to buy items");
+        else {
+            this.client.reduceQuantity(ShoppingCartComponent.cookies.get('ballArray')).then(() => {
+            ShoppingCartComponent.cookies.set('ballArray', []);
+            alert("User is now redirected to bank services");
+            window.location = '/#/';
+            });
+        }
     }
 }
