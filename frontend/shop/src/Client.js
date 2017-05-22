@@ -83,13 +83,27 @@ export default class Client {
         });
     }
 
-    createAccount(array) {
-        // TODO: Warning suppressed: Expected to  return a value in this function   array-callback-return
-        Object.keys(array).map((e) => {
-            console.log(array[e])
-            return e;
+    createAccount(obj) {
+        obj["accessLevel"] = "User";
+        console.log(obj);
+        for(const i in obj) {
+            console.log(i + ": " + obj[i]);
+        }
+        fetch("http://localhost:8080/user",
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(obj)
+            }).then(function (response) {
+                console.log(response);
+            return response;
+        }).catch(function (error) {
+            console.log(error);
         });
-        return this.getPromise("GET", "http://localhost:8080/netsportsball/1")
     }
 
     userLogin(userName) {
