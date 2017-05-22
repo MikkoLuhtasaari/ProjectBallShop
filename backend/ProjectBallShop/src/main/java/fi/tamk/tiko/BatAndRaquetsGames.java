@@ -57,7 +57,9 @@ public class BatAndRaquetsGames {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<BARReview> reviews;
     
-    public BatAndRaquetsGames(){};
+    public BatAndRaquetsGames(){
+        category = "Bat and raquets game";
+    };
     
     public BatAndRaquetsGames(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
         setName(name);

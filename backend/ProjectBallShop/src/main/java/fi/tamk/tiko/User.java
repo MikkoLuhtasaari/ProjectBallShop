@@ -7,7 +7,7 @@ import java.util.Set;
 import java.io.Serializable;
 
 @Entity
-@Table(indexes = {@Index(columnList="username")})
+//@Table(indexes = {@Index(columnList="username")})
 public class User {
     
     @Column(name = "username", length = 50, nullable = false, unique = true)
@@ -38,6 +38,7 @@ public class User {
     private String accessLevel;
     
     @Id
+    //@Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
@@ -46,7 +47,7 @@ public class User {
     
     public User(){};
     
-    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel, long id) {
+    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel) {
         setFirstName(firstName);
         setLastName(lastName);
         setUserName(userName);
@@ -56,7 +57,6 @@ public class User {
         setAccessLevel(accessLevel);
         setPassword(password);
         setEmail(email);
-        setId(id);
     }
     
     public void setReviews(Set<NSBReview> reviews) {

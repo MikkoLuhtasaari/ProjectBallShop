@@ -57,7 +57,9 @@ public class GoalSportsBall {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<GSBReview> reviews;
     
-    public GoalSportsBall(){};
+    public GoalSportsBall(){
+        category = "Goal sport";
+    };
     
     public GoalSportsBall(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
         setName(name);

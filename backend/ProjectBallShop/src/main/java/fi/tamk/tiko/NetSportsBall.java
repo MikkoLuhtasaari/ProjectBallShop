@@ -57,7 +57,9 @@ public class NetSportsBall implements Serializable{
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<NSBReview> reviews;
     
-    public NetSportsBall(){};
+    public NetSportsBall(){
+        category = "Net sport";
+    };
     
     public NetSportsBall(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
         setName(name);
