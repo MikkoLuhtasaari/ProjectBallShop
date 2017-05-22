@@ -23,6 +23,7 @@ import org.springframework.boot.ApplicationArguments;
 
 @RestController
 public class MyController implements ApplicationRunner {
+    
     @Autowired
     GoalSportsBallRepository gsbRepository;
   
