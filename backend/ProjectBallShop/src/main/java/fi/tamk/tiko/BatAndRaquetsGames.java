@@ -43,9 +43,6 @@ public class BatAndRaquetsGames {
     @Column(name = "amount")
     private int amount;
     
-    @Column(name = "hole_amount")
-    private int holeAmount;
-    
     @Id
     @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -65,7 +62,7 @@ public class BatAndRaquetsGames {
         setName(name);
         setColor(color);
         setDiameter(diameter);
-        setWeight(weigth);
+        setWeigth(weigth);
         setDetails(details);
         setMaterial(material);
         setManufacturer(manufacturer);
@@ -89,7 +86,7 @@ public class BatAndRaquetsGames {
         this.diameter = diameter;
     }
     
-    public void setWeight(int weigth) {
+    public void setWeigth(int weigth) {
         this.weigth = weigth;
     }
     
