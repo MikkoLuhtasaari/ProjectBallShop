@@ -45,6 +45,7 @@ public class TargetSportsBall
         setPrice(price);
         setAmount(amount);
         setId(id);
+        // comment
         category = "Target sport";
     }
     
