@@ -118,5 +118,4 @@ public class TSBReview implements Serializable
     public long getOwnerBallId() {
         return ownerBallId;
     }
-    
 }

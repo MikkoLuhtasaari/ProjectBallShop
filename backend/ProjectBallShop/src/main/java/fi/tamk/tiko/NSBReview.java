@@ -55,6 +55,7 @@ public class NSBReview implements Serializable
     }
     
     public void setScore(int score) {
+        
         if(score < 6 && score > 0 ) {
             this.score = score;
         } else {
@@ -117,5 +118,4 @@ public class NSBReview implements Serializable
     public long getOwnerBallId() {
         return ownerBallId;
     }
-    
 }
