@@ -278,20 +278,34 @@ public class MyController implements ApplicationRunner {
     
     // Baseball and Tennisball related stuff
     @RequestMapping(value = "/batandraquetsgame",  method=RequestMethod.POST)
-    public void saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
+    public BatAndRaquetsGames saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
         brRepository.save(batandraquetsgame);
+        return batandraquetsgame;
     }
     
-    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
-    public void modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
+    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.PUT)
+    public BatAndRaquetsGames modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
         
         if(brRepository.findOne(id) != null) {
-            brRepository.delete(brRepository.findOne(id));
+            BatAndRaquetsGames temp = brRepository.findOne(id);
             
-            BatAndRaquetsGames temp = new BatAndRaquetsGames(batandraquetsgame.getName(), batandraquetsgame.getColor(), batandraquetsgame.getDiameter(), batandraquetsgame.getWeigth(), batandraquetsgame.getDetails(), batandraquetsgame.getMaterial(), batandraquetsgame.getManufacturer(), batandraquetsgame.getShortDetails(), batandraquetsgame.getType(), batandraquetsgame.getPrice(), batandraquetsgame.getAmount(), id);
+            temp.setName(batandraquetsgame.getName());
+            temp.setColor(batandraquetsgame.getColor());
+            temp.setDiameter(batandraquetsgame.getDiameter());
+            temp.setWeigth(batandraquetsgame.getWeigth());
+            temp.setDetails(batandraquetsgame.getDetails());
+            temp.setMaterial(batandraquetsgame.getMaterial());
+            temp.setManufacturer(batandraquetsgame.getManufacturer());
+            temp.setShortDetails(batandraquetsgame.getShortDetails());
+            temp.setType(batandraquetsgame.getType());
+            temp.setPrice(batandraquetsgame.getPrice());
+            temp.setAmount(batandraquetsgame.getAmount());
+            
             brRepository.save(temp);
+            return brRepository.findOne(id);
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
