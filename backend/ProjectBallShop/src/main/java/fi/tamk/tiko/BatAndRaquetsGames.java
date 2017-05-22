@@ -39,12 +39,19 @@ public class BatAndRaquetsGames {
     
     @Column(name = "price")
     private double price;
+    
+    @Column(name = "amount")
     private int amount;
+    
+    @Column(name = "hole_amount")
     private int holeAmount;
+    
     @Id
     @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    
+    @Column(name = "category")
     private String category;
     
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
