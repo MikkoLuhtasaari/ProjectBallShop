@@ -8,8 +8,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
-public class BatAndRaquetsGames 
-{
+public class BatAndRaquetsGames {
+    
+    @Column(name = "name", length = 128, nullable = false, unique = false)
     private String name;
     private String color;
     private int diameter;
@@ -23,6 +24,7 @@ public class BatAndRaquetsGames
     private int amount;
     private int holeAmount;
     @Id
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String category;

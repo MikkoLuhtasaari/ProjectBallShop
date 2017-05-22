@@ -8,9 +8,11 @@ import java.io.Serializable;
 
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
-public class TargetSportsBall 
-{
+public class TargetSportsBall {
+    
+    @Column(name = "name", length = 128, nullable = false, unique = false)
     private String name;
+    
     private String color;
     private int diameter;
     private int weigth;
@@ -23,6 +25,7 @@ public class TargetSportsBall
     private int amount;
     private int holeAmount;
     @Id
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String category;
