@@ -755,7 +755,7 @@ public class MyController implements ApplicationRunner {
         
         //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
-        GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
+        GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 0, 2);
         GoalSportsBall tempGoal3 = new GoalSportsBall("Bad Basketball", "White", 40, 20000, "LongDetails", "Concrete", "AnotherDas", "A ball to throw", "Basketball", 19.95, 4, 3);
         
         Set tempGSReview1 = new HashSet<GSBReview>(){{
@@ -783,7 +783,7 @@ public class MyController implements ApplicationRunner {
         //BOWLINGBALLS & GOLFBALLS
         TargetSportsBall tempTarget1 = new TargetSportsBall("Bowlingball1", "Black", 40, 3030, "Somethingsomething", "Steel", "Adidas", "A ball not to kick", "Bowlingball", 109.95, 3, 1);
         TargetSportsBall tempTarget2 = new TargetSportsBall("Golfball1", "Orange", 40, 200, "", "Rubber", "AnotherDas", "A ball not to kick", "Golfball", 105.95, 4, 2);
-        TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 5, 3);
+        TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 0, 3);
         
         Set tempTSReview1 = new HashSet<TSBReview>(){{
             add(new TSBReview(1, 1, "Good product", "Nothing more to say", tempTarget1, 1, tempUser1, 1));
@@ -797,32 +797,21 @@ public class MyController implements ApplicationRunner {
         
         tempTarget2.setReviews(tempTSReview2);
         
-        Set tempTSReview3 = new HashSet<TSBReview>(){{
-            add(new TSBReview(3, 1, "Meh", "Meh", tempTarget3, 3, tempUser3, 3));
-        }};
-        
-        tempTarget3.setReviews(tempTSReview3);
-        
         tsbRepository.save(tempTarget1);
         tsbRepository.save(tempTarget2);
         tsbRepository.save(tempTarget3);
         
         //BASEBALLS & TENNISBALLS
-        BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 3, 1);
+        BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 0, 1);
         BatAndRaquetsGames tempBat2 = new BatAndRaquetsGames("Baseball2", "White", 6, 35, "Somethingsomething", "Elastic rubber", "Adidas", "A ball to throw2", "Baseball", 4.95, 3, 2);
         BatAndRaquetsGames tempBat3 = new BatAndRaquetsGames("Tennisball1", "Yellow", 5, 336, "Somethingsomething", "Rubber", "Adidas", "A ball to smash", "Tennisball", 2.95, 3, 3);
         
         Set tempBARReview1 = new HashSet<BARReview>(){{
-            add(new BARReview(1, 1, "Good product", "Nothing more to say", tempBat1, 1, tempUser1, 1));
+            add(new BARReview(1, 1, "Good product", "Nothing more to say. Hope it doesn't break anytime soon.", tempBat1, 1, tempUser1, 1));
         }};
         
         tempBat1.setReviews(tempBARReview1);
         
-        Set tempBARReview2 = new HashSet<BARReview>(){{
-            add(new BARReview(2, 1, "Hated it", "Absolutely disgusting product", tempBat2, 2, tempUser2, 2));
-        }};
-        
-        tempBat2.setReviews(tempBARReview2);
         
         Set tempBARReview3 = new HashSet<BARReview>(){{
             add(new BARReview(3, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
@@ -835,24 +824,20 @@ public class MyController implements ApplicationRunner {
         brRepository.save(tempBat3);
         
         // VOLLEYBALL & HANDBALL
-        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 3, 1);
+        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 0, 1);
         NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
         NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
         
-        Set tempNSReview1 = new HashSet<NSBReview>(){{
-            add(new NSBReview(1, 1, "Good product", "Nothing more to say", tempNS1, 1, tempUser1, 1));
-        }};
-        
-        tempNS1.setReviews(tempNSReview1);
         
         Set tempNSReview2 = new HashSet<NSBReview>(){{
-            add(new NSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
+            add(new NSBReview(1, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
+            add(new NSBReview(2, 3, "Kinda good", "Maybe I jumped the gun a bit with my previous review.", tempNS2, 2, tempUser2, 2));
         }};
         
         tempNS2.setReviews(tempNSReview2);
         
         Set tempNSReview3 = new HashSet<NSBReview>(){{
-            add(new NSBReview(3, 1, "Meh", "Meh", tempNS3, 3, tempUser3, 3));
+            add(new NSBReview(4, 1, "Meh", "Meh", tempNS3, 3, tempUser3, 3));
         }};
         
         tempNS3.setReviews(tempNSReview3);
