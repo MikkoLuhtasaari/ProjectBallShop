@@ -23,13 +23,14 @@ public class BARReview implements Serializable
     
     @Column(name = "header", length = 128, nullable = false)
     private String header;
+    
+    @Column(name = "content", nullable = false)
     private String content;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="BAR_ID")
     @JsonIgnore
     private BatAndRaquetsGames owner;
-
-    private long ballID;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="OWNER_USER_ID")

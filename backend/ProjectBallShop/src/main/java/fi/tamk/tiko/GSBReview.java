@@ -23,14 +23,15 @@ public class GSBReview implements Serializable
     
     @Column(name = "header", length = 128, nullable = false)
     private String header;
+    
+    @Column(name = "content", nullable = false)
     private String content;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="GSB_ID")
     @JsonIgnore
     private GoalSportsBall owner;
 
-    private long ballID;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="OWNER_USER_ID")
     @JsonIgnore
