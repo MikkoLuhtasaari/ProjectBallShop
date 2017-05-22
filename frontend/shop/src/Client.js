@@ -113,7 +113,7 @@ export default class Client {
             let category = o.category.replace(/ /g, '').toLowerCase();
             if (!category.includes("game")) category += "sball";
             console.log("--------")
-            if (n >= o.amount) console.log("DELETE: " + "localhost:8080/" + category + "/" + o.id);
+            if (n >= o.amount) console.log("DELETE: localhost:8080/" + category + "/" + o.id);
             else console.log("PUT: " +
                 "localhost:8080/" + category + "/" + o.id + ":\n" +
                 "{\"name\" : \"" + o.name + "\", \"color\" : \"" + o.color + "\", " +
