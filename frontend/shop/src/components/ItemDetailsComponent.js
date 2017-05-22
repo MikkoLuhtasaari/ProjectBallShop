@@ -95,14 +95,12 @@ export default class ItemDetailsComponent extends React.Component {
     }
 
     getItemInfo(){
-        let category = this.state.ball.category;
-        if (typeof category !== "undefined") category = category.replace(/ /g, '').toLowerCase();
         let onStock = "This item is out of stock";
         let icon = "glyphicon glyphicon-remove-circle";
         let colorId = "red";
         let buttonId = "btn disabled";
         if (this.state.ball.amount > 0) {
-            onStock = "On stock";
+            onStock = this.state.ball.amount + " on stock";
             icon = "glyphicon glyphicon-ok-circle";
             colorId = "green";
             buttonId = "btn btn-success active";
