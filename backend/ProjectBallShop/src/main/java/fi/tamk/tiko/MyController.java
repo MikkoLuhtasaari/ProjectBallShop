@@ -73,9 +73,19 @@ public class MyController implements ApplicationRunner {
         
         if(userRepository.findOne(id) != null) {
             User temp = userRepository.findOne(id);
+            
             temp.setUserName(user.getUserName());
+            temp.setEmail(user.getEmail());
+            temp.setPassword(user.getPassword());
+            temp.setFirstName(user.getFirstName());
+            temp.setLastName(user.getLastName());
+            temp.setCity(user.getCity());
+            temp.setAddress(user.getAddress());
+            temp.setZipCode(user.getZipCode());
+            temp.setAccessLevel(user.getAccessLevel());
+            
             userRepository.save(temp);
-            return user;
+            return userRepository.findOne(id);
         } else {
             System.out.println("Error! Invalid id");
             return null;
