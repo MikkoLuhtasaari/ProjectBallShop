@@ -134,20 +134,34 @@ public class MyController implements ApplicationRunner {
     
     // Volleyball and Handball related stuff
     @RequestMapping(value = "/netsportsball",  method=RequestMethod.POST)
-    public void saveNetSportsBall(@RequestBody NetSportsBall netsportsball) {
+    public NetSportsBall saveNetSportsBall(@RequestBody NetSportsBall netsportsball) {
         nsRepository.save(netsportsball);
+        return netsportsball;
     }
     
     @RequestMapping(value = "/netsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyNetSportsBall(@PathVariable long id, @RequestBody NetSportsBall netsportsball) {
+    public NetSportsBall modifyNetSportsBall(@PathVariable long id, @RequestBody NetSportsBall netsportsball) {
         
         if(nsRepository.findOne(id) != null) {
-            nsRepository.delete(nsRepository.findOne(id));
+            NetSportsBall temp = nsRepository.findOne(id);
             
-            NetSportsBall temp = new NetSportsBall(netsportsball.getName(), netsportsball.getColor(), netsportsball.getDiameter(), netsportsball.getWeigth(), netsportsball.getDetails(), netsportsball.getMaterial(), netsportsball.getManufacturer(), netsportsball.getShortDetails(), netsportsball.getType(), netsportsball.getPrice(), netsportsball.getAmount(), id);
+            temp.setName(netsportsball.getName());
+            temp.setColor(netsportsball.getColor());
+            temp.setDiameter(netsportsball.getDiameter());
+            temp.setWeigth(netsportsball.getWeigth());
+            temp.setDetails(netsportsball.getDetails());
+            temp.setMaterial(netsportsball.getMaterial());
+            temp.setManufacturer(netsportsball.getManufacturer());
+            temp.setShortDetails(netsportsball.getShortDetails());
+            temp.setType(netsportsball.getType());
+            temp.setPrice(netsportsball.getPrice());
+            temp.setAmount(netsportsball.getAmount());
+            
             nsRepository.save(temp);
+            return nsRepository.findOne(id); 
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
    
