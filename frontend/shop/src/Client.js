@@ -58,12 +58,10 @@ export default class Client {
                   'content': content
                 })
             }).then(function (response) {
-                console.log(response);
                 return response;
             }).catch(function (error) {
                 console.log(error);
             });
-        console.log(targetUrl);
     }
 
     getPromise(type, address) {
