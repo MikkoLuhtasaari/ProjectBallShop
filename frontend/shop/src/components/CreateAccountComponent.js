@@ -6,16 +6,15 @@ export default class CreateAccountComponent extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
-
         this.state = {
-            fName: '',
-            lName: '',
-            eMail: '',
-            uName: '',
-            passW: '',
+            userName: '',
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            city: '',
             address: '',
-            zip: '',
-            city: ''
+            zipCode: ''
         }
     }
 
@@ -29,7 +28,7 @@ export default class CreateAccountComponent extends React.Component{
                             <hr className="signupLine"/>
                             {this.getPersonalInfo()}
                             <div className="form-group">
-                                <input type="email" className="form-control input-lg" ref="eMail"
+                                <input type="email" className="form-control input-lg" ref="email"
                                        placeholder="Email Address" required={true}/>
                             </div>
                             <hr className="signupLine"/>
@@ -40,7 +39,7 @@ export default class CreateAccountComponent extends React.Component{
                             {this.getAddress()}
                             <hr className="signupLine"/>
                             <div className="form-group">
-                                <input type="text" className="form-control input-lg" ref="uName"
+                                <input type="text" className="form-control input-lg" ref="userName"
                                        placeholder="User Name" required={true} minLength={6}/>
                             </div>
                             {this.getPassword()}
@@ -62,7 +61,7 @@ export default class CreateAccountComponent extends React.Component{
                 <div className="col-xs-12 col-sm-6 col-md-6">
                     <div className="form-group">
                         <input type="password" className="form-control input-lg"
-                               ref="passW" placeholder="Password" required={true} minLength={8}/>
+                               ref="password" placeholder="Password" required={true} minLength={8}/>
                     </div>
                 </div>
                 <div className="col-xs-12 col-sm-6 col-md-6">
@@ -81,7 +80,7 @@ export default class CreateAccountComponent extends React.Component{
                 <div className="col-xs-12 col-sm-6 col-md-6">
                     <div className="form-group">
                         <input type="number" className="form-control input-lg"
-                               ref="zip" placeholder="Zip Code" required={true}/>
+                               ref="zipCode" placeholder="Zip Code" required={true}/>
                     </div>
                 </div>
                 <div className="col-xs-12 col-sm-6 col-md-6">
@@ -94,19 +93,22 @@ export default class CreateAccountComponent extends React.Component{
         )
     }
 
+
+
+
     getPersonalInfo(){
         return (
         <div className="row">
             <div className="col-xs-12 col-sm-6 col-md-6">
                 <div className="form-group">
                     <input type="text" className="form-control input-lg"
-                           ref="fName" placeholder="First Name" required={true} minLength={2}/>
+                           ref="firstName" placeholder="First Name" required={true} minLength={2}/>
                 </div>
             </div>
             <div className="col-xs-12 col-sm-6 col-md-6">
                 <div className="form-group">
                     <input type="text" className="form-control input-lg"
-                           ref="lName" placeholder="Last Name" required={true} minLength={2}/>
+                           ref="lastName" placeholder="Last Name" required={true} minLength={2}/>
                 </div>
             </div>
         </div>
@@ -118,44 +120,45 @@ export default class CreateAccountComponent extends React.Component{
     }
 
     accountCreated() {
-        alert("New account created!\nYou are now logged in.");
+        alert("New account created!\nYou can now sign in.");
         window.location = '/#/';
     }
 
     getUserNames(u) {
         let exists = false;
         for(let i = 0; i<u.length; i++){
-            if(u[i].userName === this.refs.uName.value) exists = true;
+            if(u[i].userName === this.refs.userName.value) exists = true;
         }
         this.exists = exists;
     }
 
     checkValues() {
-        console.log(this.exists);
         let emptyFields = false;
 
         if (this.exists){
-            this.refs.uName.setCustomValidity("Username already exists.\nPlease try again.");
-        } else if (this.refs.uName.value.includes(" ")){
-            this.refs.uName.setCustomValidity("Username can not contain spaces.\nPlease try again.");
+            this.refs.userName.setCustomValidity("Username already exists.\nPlease try again.");
+        } else if (this.refs.userName.value.includes(" ")){
+            this.refs.userName.setCustomValidity("Username can not contain spaces.\nPlease try again.");
         }
-        else if(this.refs.passW.value !== this.refs.passW2.value){
-            this.refs.uName.setCustomValidity('');
+        else if(this.refs.password.value !== this.refs.passW2.value){
+            this.refs.userName.setCustomValidity('');
             this.refs.passW2.setCustomValidity("Passwords Don't Match");
         } else {
-            this.refs.uName.setCustomValidity('');
+            this.refs.userName.setCustomValidity('');
             this.refs.passW2.setCustomValidity('');
 
-            let array = [];
             for (const ref in this.refs) {
                 let value = this.refs[ref].value;
                 if (value === "") emptyFields = true;
                 if(!emptyFields) {
-                    array.push({[ref]: value});
-                    this.setState({[ref]: value});
+                    if (ref !== "passW2") this.setState({[ref]: value});
                 }
             }
-            if(!emptyFields) this.client.createAccount(array).then(()=>this.accountCreated());
+            if(!emptyFields) {
+                this.client.createAccount(this.state);
+                this.accountCreated();
+            }
+
         }
     }
 }
