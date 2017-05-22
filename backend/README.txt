@@ -32,7 +32,7 @@ GET netsportsballs/review/{id}
 Baseball and Tennisball related requests
 ----------------------------------------
 POST batandraquetsgame/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/batandraquetsgame/
-PUT batandraquetsgame/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/batandraquetsgame/{id}
+PUT batandraquetsgame/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"name\" : \"New name 1\", \"color\" : \"blood red\", \"diameter\" : 1200, \"weigth\" : 50, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Best ball\", \"type\" : \"Baseball\", \"price\" : 15.95, \"amount\" : 1}" http://localhost:8080/batandraquetsgame/{id}
 DELETE curl -X DELETE localhost:8080/batandraquetsgame/{id}
 GET batandraquetsgames/
 GET batandraquetsgame/{id}/
