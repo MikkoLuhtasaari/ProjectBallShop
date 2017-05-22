@@ -69,8 +69,8 @@ GET goalsportsballs/review/{id}
 
 Bowlingball and Golfball related requests
 ------------------------------
-POST targetsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 109.95, \"amount\" : 1}" http://localhost:8080/targetsportsball/
-PUT targetsportsball/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"name\" : \"Placeholder1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 109.95, \"amount\" : 1}" http://localhost:8080/targetsportsball/{id}
+POST targetsportsball/ curl -H "Content-Type: application/json" -X POST -d "{\"name\" : \"New name 1\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 109.95, \"amount\" : 1}" http://localhost:8080/targetsportsball/
+PUT targetsportsball/{id} curl -H "Content-Type: application/json" -X PUT -d "{\"name\" : \"New name 2\", \"color\" : \"red\", \"diameter\" : 12, \"weigth\" : 500, \"details\" : \"none\", \"material\" : \"rubber\", \"manufacturer\" : \"Adidas\", \"shortDetails\" : \"Extremely bad ball\", \"type\" : \"Bowlingball\", \"price\" : 99.95, \"amount\" : 6}" http://localhost:8080/targetsportsball/{id}
 DELETE curl -X DELETE localhost:8080/targetsportsball/{id}
 GET targetsportsballs/
 GET targetsportsball/{id}/
