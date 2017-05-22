@@ -2,6 +2,7 @@ import React from 'react';
 import Client from '../Client';
 
 export default class CreateAccountComponent extends React.Component{
+    exists;
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -113,12 +114,38 @@ export default class CreateAccountComponent extends React.Component{
     }
 
     handleChange() {
+        this.client.getUsers().then((u)=> this.getUserNames(u)).then(() => this.checkValues());
+    }
+
+    accountCreated() {
+        alert("New account created!\nYou are now logged in.");
+        window.location = '/#/';
+    }
+
+    getUserNames(u) {
+        let exists = false;
+        for(let i = 0; i<u.length; i++){
+            if(u[i].userName === this.refs.uName.value) exists = true;
+        }
+        this.exists = exists;
+    }
+
+    checkValues() {
+        console.log(this.exists);
         let emptyFields = false;
 
-        if(this.refs.passW.value !== this.refs.passW2.value) {
+        if (this.exists){
+            this.refs.uName.setCustomValidity("Username already exists.\nPlease try again.");
+        } else if (this.refs.uName.value.includes(" ")){
+            this.refs.uName.setCustomValidity("Username can not contain spaces.\nPlease try again.");
+        }
+        else if(this.refs.passW.value !== this.refs.passW2.value){
+            this.refs.uName.setCustomValidity('');
             this.refs.passW2.setCustomValidity("Passwords Don't Match");
         } else {
+            this.refs.uName.setCustomValidity('');
             this.refs.passW2.setCustomValidity('');
+
             let array = [];
             for (const ref in this.refs) {
                 let value = this.refs[ref].value;
@@ -130,10 +157,5 @@ export default class CreateAccountComponent extends React.Component{
             }
             if(!emptyFields) this.client.createAccount(array).then(()=>this.accountCreated());
         }
-    }
-
-    accountCreated() {
-        alert("New account created!\nYou are now logged in.");
-        window.location = '/#/';
     }
 }
