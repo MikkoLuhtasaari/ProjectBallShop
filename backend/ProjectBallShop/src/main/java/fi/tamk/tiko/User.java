@@ -7,7 +7,7 @@ import java.util.Set;
 import java.io.Serializable;
 
 @Entity
-//@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
+@Table(indexes = {@Index(columnList="username")})
 public class User {
     
     @Column(name = "username", length = 50, nullable = false, unique = true)
@@ -60,42 +60,45 @@ public class User {
     }
     
     public void setReviews(Set<NSBReview> reviews) {
-        System.out.println("Setting reviews");
-        System.out.println(reviews.size());
-        
-        for(NSBReview n: reviews) {
-            System.out.println(n.getScore());
-        }
         this.reviews = reviews;
     }
     
     public void setId(long id) {
         this.id = id;
     }
+    
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    
     public void setEmail(String email) {
         this.email = email;
     }
+    
     public void setPassword(String password) {
         this.password = password;
     }
+    
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    
     public void setCity(String city) {
         this.city = city;
     }
+    
     public void setAddress(String address) {
         this.address = address;
     }
+    
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
+    
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
@@ -107,30 +110,39 @@ public class User {
     public long getId() {
         return id;
     }
+    
     public String getUserName() {
         return userName;
     }
+    
     public String getEmail() {
         return email;
     }
+    
     public String getPassword() {
         return password;
     }
+    
     public String getFirstName() {
         return firstName;
     }
+    
     public String getLastName() {
         return lastName;
     }
+    
     public String getAddress() {
         return address;
     }
+    
     public String getCity() {
         return city;
     }
+    
     public int getZipCode() {
         return zipCode;
     }
+    
     public String getAccessLevel() {
         return accessLevel;
     }
