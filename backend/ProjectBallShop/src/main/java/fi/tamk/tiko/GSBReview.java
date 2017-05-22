@@ -5,13 +5,17 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(indexes = {@Index(columnList="userId")})
+@Table(indexes = {@Index(columnList="user_id"), @Index(columnList="owner_ball_id")})
 public class GSBReview implements Serializable
 {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    
+    @Column(name = "user_id")
     private long userId;
+    
+    @Column(name = "owner_ball_id")
     private long ownerBallId;
     private int score;
     private String header;
