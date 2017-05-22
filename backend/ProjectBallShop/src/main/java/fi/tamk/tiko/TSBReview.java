@@ -17,7 +17,11 @@ public class TSBReview implements Serializable
     
     @Column(name = "owner_ball_id")
     private long ownerBallId;
+    
+    @Column(name = "score")
     private int score;
+    
+    @Column(name = "header", length = 128, nullable = false)
     private String header;
     private String content;
     @ManyToOne(fetch = FetchType.LAZY)
