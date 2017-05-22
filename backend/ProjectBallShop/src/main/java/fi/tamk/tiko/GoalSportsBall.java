@@ -21,8 +21,14 @@ public class GoalSportsBall {
     
     @Column(name = "weigth")
     private int weigth;
+    
+    @Column(name = "details")
     private String details;
+    
+    @Column(name = "material", length = 50, nullable = false, unique = false)
     private String material;
+    
+    @Column(name = "manufacturer", length = 128, nullable = false, unique = false)
     private String manufacturer;
     private String shortDetails;
     private String type;
