@@ -567,21 +567,34 @@ public class MyController implements ApplicationRunner {
 
     // Bowlingball and Golfball related stuff
     @RequestMapping(value = "/targetsportsball",  method=RequestMethod.POST)
-    public void saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
+    public TargetSportsBall saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
         tsbRepository.save(targetsportsball);
+        return targetsportsball;
     }
     
     @RequestMapping(value = "/targetsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
+    public TargetSportsBall modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
         
         if(tsbRepository.findOne(id) != null) {
-            tsbRepository.delete(tsbRepository.findOne(id));
+            TargetSportsBall temp = tsbRepository.findOne(id);
             
-            TargetSportsBall temp = new TargetSportsBall(targetsportsball.getName(), targetsportsball.getColor(), targetsportsball.getDiameter(), targetsportsball.getWeigth(), targetsportsball.getDetails(), targetsportsball.getMaterial(), targetsportsball.getManufacturer(), targetsportsball.getShortDetails(), targetsportsball.getType(), targetsportsball.getPrice(), targetsportsball.getAmount(), id);
+            temp.setName(targetsportsball.getName());
+            temp.setColor(targetsportsball.getColor());
+            temp.setDiameter(targetsportsball.getDiameter());
+            temp.setWeigth(targetsportsball.getWeigth());
+            temp.setDetails(targetsportsball.getDetails());
+            temp.setMaterial(targetsportsball.getMaterial());
+            temp.setManufacturer(targetsportsball.getManufacturer());
+            temp.setShortDetails(targetsportsball.getShortDetails());
+            temp.setType(targetsportsball.getType());
+            temp.setPrice(targetsportsball.getPrice());
+            temp.setAmount(targetsportsball.getAmount());
             
             tsbRepository.save(temp);
+            return tsbRepository.findOne(id);
         } else {
-            System.out.println("Error, invalid ID!");
+            System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
