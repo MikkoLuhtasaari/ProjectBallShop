@@ -30,8 +30,14 @@ public class TargetSportsBall {
     
     @Column(name = "manufacturer", length = 128, nullable = false, unique = false)
     private String manufacturer;
+    
+    @Column(name = "short_details", length = 255, nullable = false, unique = false)
     private String shortDetails;
+    
+    @Column(name = "type", length = 50, nullable = false, unique = false)
     private String type;
+    
+    @Column(name = "price")
     private double price;
     private int amount;
     private int holeAmount;
