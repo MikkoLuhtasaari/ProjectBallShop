@@ -119,11 +119,10 @@ export default class CheckoutComponent extends React.Component{
     redirectToBank() {
         if (LoginComponent.userId === "") alert("You have to sign in to buy items");
         else {
-            this.client.reduceQuantity(ShoppingCartComponent.cookies.get('ballArray')).then(() => {
+            this.client.reduceQuantity(ShoppingCartComponent.cookies.get('ballArray'));
             ShoppingCartComponent.cookies.set('ballArray', []);
             alert("User is now redirected to bank services");
             window.location = '/#/';
-            });
         }
     }
 }

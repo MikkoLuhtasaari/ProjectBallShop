@@ -23,6 +23,7 @@ import org.springframework.boot.ApplicationArguments;
 
 @RestController
 public class MyController implements ApplicationRunner {
+    
     @Autowired
     GoalSportsBallRepository gsbRepository;
   
@@ -62,20 +63,32 @@ public class MyController implements ApplicationRunner {
         
     // User related stuff
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
-    public void saveUser(@RequestBody User user) {
+    public User saveUser(@RequestBody User user) {
         userRepository.save(user);
+        return user;
     }
     
     @RequestMapping(value = "/user/{id}",  method=RequestMethod.PUT)
-    public void saveUser(@PathVariable long id, @RequestBody User user) {
+    public User saveUser(@PathVariable long id, @RequestBody User user) {
         
         if(userRepository.findOne(id) != null) {
-            userRepository.delete(userRepository.findOne(id));
+            User temp = userRepository.findOne(id);
             
-            User temp = new User(user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getEmail(), user.getCity(), user.getAddress(), user.getZipCode(), user.getAccessLevel(), id);
+            temp.setUserName(user.getUserName());
+            temp.setEmail(user.getEmail());
+            temp.setPassword(user.getPassword());
+            temp.setFirstName(user.getFirstName());
+            temp.setLastName(user.getLastName());
+            temp.setCity(user.getCity());
+            temp.setAddress(user.getAddress());
+            temp.setZipCode(user.getZipCode());
+            temp.setAccessLevel(user.getAccessLevel());
+            
             userRepository.save(temp);
+            return userRepository.findOne(id);
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
@@ -121,20 +134,34 @@ public class MyController implements ApplicationRunner {
     
     // Volleyball and Handball related stuff
     @RequestMapping(value = "/netsportsball",  method=RequestMethod.POST)
-    public void saveNetSportsBall(@RequestBody NetSportsBall netsportsball) {
+    public NetSportsBall saveNetSportsBall(@RequestBody NetSportsBall netsportsball) {
         nsRepository.save(netsportsball);
+        return netsportsball;
     }
     
     @RequestMapping(value = "/netsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyNetSportsBall(@PathVariable long id, @RequestBody NetSportsBall netsportsball) {
+    public NetSportsBall modifyNetSportsBall(@PathVariable long id, @RequestBody NetSportsBall netsportsball) {
         
         if(nsRepository.findOne(id) != null) {
-            nsRepository.delete(nsRepository.findOne(id));
+            NetSportsBall temp = nsRepository.findOne(id);
             
-            NetSportsBall temp = new NetSportsBall(netsportsball.getName(), netsportsball.getColor(), netsportsball.getDiameter(), netsportsball.getWeigth(), netsportsball.getDetails(), netsportsball.getMaterial(), netsportsball.getManufacturer(), netsportsball.getShortDetails(), netsportsball.getType(), netsportsball.getPrice(), netsportsball.getAmount(), id);
+            temp.setName(netsportsball.getName());
+            temp.setColor(netsportsball.getColor());
+            temp.setDiameter(netsportsball.getDiameter());
+            temp.setWeigth(netsportsball.getWeigth());
+            temp.setDetails(netsportsball.getDetails());
+            temp.setMaterial(netsportsball.getMaterial());
+            temp.setManufacturer(netsportsball.getManufacturer());
+            temp.setShortDetails(netsportsball.getShortDetails());
+            temp.setType(netsportsball.getType());
+            temp.setPrice(netsportsball.getPrice());
+            temp.setAmount(netsportsball.getAmount());
+            
             nsRepository.save(temp);
+            return nsRepository.findOne(id); 
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
    
@@ -251,20 +278,34 @@ public class MyController implements ApplicationRunner {
     
     // Baseball and Tennisball related stuff
     @RequestMapping(value = "/batandraquetsgame",  method=RequestMethod.POST)
-    public void saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
+    public BatAndRaquetsGames saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
         brRepository.save(batandraquetsgame);
+        return batandraquetsgame;
     }
     
-    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
-    public void modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
+    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.PUT)
+    public BatAndRaquetsGames modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
         
         if(brRepository.findOne(id) != null) {
-            brRepository.delete(brRepository.findOne(id));
+            BatAndRaquetsGames temp = brRepository.findOne(id);
             
-            BatAndRaquetsGames temp = new BatAndRaquetsGames(batandraquetsgame.getName(), batandraquetsgame.getColor(), batandraquetsgame.getDiameter(), batandraquetsgame.getWeigth(), batandraquetsgame.getDetails(), batandraquetsgame.getMaterial(), batandraquetsgame.getManufacturer(), batandraquetsgame.getShortDetails(), batandraquetsgame.getType(), batandraquetsgame.getPrice(), batandraquetsgame.getAmount(), id);
+            temp.setName(batandraquetsgame.getName());
+            temp.setColor(batandraquetsgame.getColor());
+            temp.setDiameter(batandraquetsgame.getDiameter());
+            temp.setWeigth(batandraquetsgame.getWeigth());
+            temp.setDetails(batandraquetsgame.getDetails());
+            temp.setMaterial(batandraquetsgame.getMaterial());
+            temp.setManufacturer(batandraquetsgame.getManufacturer());
+            temp.setShortDetails(batandraquetsgame.getShortDetails());
+            temp.setType(batandraquetsgame.getType());
+            temp.setPrice(batandraquetsgame.getPrice());
+            temp.setAmount(batandraquetsgame.getAmount());
+            
             brRepository.save(temp);
+            return brRepository.findOne(id);
         } else {
             System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
@@ -382,19 +423,34 @@ public class MyController implements ApplicationRunner {
     
     // Football and Basketball related stuff
     @RequestMapping(value = "/goalsportsball",  method=RequestMethod.POST)
-    public void saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
+    public GoalSportsBall saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
         gsbRepository.save(goalsportsball);
+        return goalsportsball;
     }
     
     @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
+    public GoalSportsBall modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
         
         if(gsbRepository.findOne(id) != null) {
-            gsbRepository.delete(gsbRepository.findOne(id));
-            GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
+            GoalSportsBall temp = gsbRepository.findOne(id);
+            
+            temp.setName(goalsportsball.getName());
+            temp.setColor(goalsportsball.getColor());
+            temp.setDiameter(goalsportsball.getDiameter());
+            temp.setWeigth(goalsportsball.getWeigth());
+            temp.setDetails(goalsportsball.getDetails());
+            temp.setMaterial(goalsportsball.getMaterial());
+            temp.setManufacturer(goalsportsball.getManufacturer());
+            temp.setShortDetails(goalsportsball.getShortDetails());
+            temp.setType(goalsportsball.getType());
+            temp.setPrice(goalsportsball.getPrice());
+            temp.setAmount(goalsportsball.getAmount());
+            
             gsbRepository.save(temp);
+            return gsbRepository.findOne(id);
         } else {
-            System.out.println("Error! No balls with that id found!");
+            System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
@@ -511,21 +567,34 @@ public class MyController implements ApplicationRunner {
 
     // Bowlingball and Golfball related stuff
     @RequestMapping(value = "/targetsportsball",  method=RequestMethod.POST)
-    public void saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
+    public TargetSportsBall saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
         tsbRepository.save(targetsportsball);
+        return targetsportsball;
     }
     
     @RequestMapping(value = "/targetsportsball/{id}",  method=RequestMethod.PUT)
-    public void modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
+    public TargetSportsBall modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
         
         if(tsbRepository.findOne(id) != null) {
-            tsbRepository.delete(tsbRepository.findOne(id));
+            TargetSportsBall temp = tsbRepository.findOne(id);
             
-            TargetSportsBall temp = new TargetSportsBall(targetsportsball.getName(), targetsportsball.getColor(), targetsportsball.getDiameter(), targetsportsball.getWeigth(), targetsportsball.getDetails(), targetsportsball.getMaterial(), targetsportsball.getManufacturer(), targetsportsball.getShortDetails(), targetsportsball.getType(), targetsportsball.getPrice(), targetsportsball.getAmount(), id);
+            temp.setName(targetsportsball.getName());
+            temp.setColor(targetsportsball.getColor());
+            temp.setDiameter(targetsportsball.getDiameter());
+            temp.setWeigth(targetsportsball.getWeigth());
+            temp.setDetails(targetsportsball.getDetails());
+            temp.setMaterial(targetsportsball.getMaterial());
+            temp.setManufacturer(targetsportsball.getManufacturer());
+            temp.setShortDetails(targetsportsball.getShortDetails());
+            temp.setType(targetsportsball.getType());
+            temp.setPrice(targetsportsball.getPrice());
+            temp.setAmount(targetsportsball.getAmount());
             
             tsbRepository.save(temp);
+            return tsbRepository.findOne(id);
         } else {
-            System.out.println("Error, invalid ID!");
+            System.out.println("Error! Invalid id");
+            return null;
         }
     }
     
@@ -744,9 +813,9 @@ public class MyController implements ApplicationRunner {
     public void initStuff() {
                 
         //USERS
-        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin", 1);
-        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User", 2);
-        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", "Vaasa", "Merimiehenkatu 1a1", 65200, "User", 3);
+        User tempUser1 = new User("Jeppe", "Jeppenen", "Jeppetes", "salasana", "jeppe@jeppe.com", "Tampere", "Ruhtinaankatu 1", 33560, "Admin");
+        User tempUser2 = new User("Jaska", "Jokunen", "MirrinSurma", "salasana123", "jaska@jeppe.com", "Vaasa", "Slottintie 19", 65220, "User");
+        User tempUser3 = new User("Jorma", "Ylinen", "Meeemit", "salis", "jorma@jeppe.com", "Vaasa", "Merimiehenkatu 1a1", 65200, "User");
         
         userRepository.save(tempUser1);
         userRepository.save(tempUser2);
@@ -755,7 +824,7 @@ public class MyController implements ApplicationRunner {
         
         //FOOTBALLS & BASKETBALLS
         GoalSportsBall tempGoal1 = new GoalSportsBall("Football1", "Black", 50, 300, "Somethingsomething", "Rubber", "Adidas", "A ball to kick", "Football", 30.95, 3, 1);
-        GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 4, 2);
+        GoalSportsBall tempGoal2 = new GoalSportsBall("Football2", "Orange", 40, 200, "LongDetails", "Rubber", "AnotherDas", "A ball not to kick", "Football", 105.95, 0, 2);
         GoalSportsBall tempGoal3 = new GoalSportsBall("Bad Basketball", "White", 40, 20000, "LongDetails", "Concrete", "AnotherDas", "A ball to throw", "Basketball", 19.95, 4, 3);
         
         Set tempGSReview1 = new HashSet<GSBReview>(){{
@@ -783,7 +852,7 @@ public class MyController implements ApplicationRunner {
         //BOWLINGBALLS & GOLFBALLS
         TargetSportsBall tempTarget1 = new TargetSportsBall("Bowlingball1", "Black", 40, 3030, "Somethingsomething", "Steel", "Adidas", "A ball not to kick", "Bowlingball", 109.95, 3, 1);
         TargetSportsBall tempTarget2 = new TargetSportsBall("Golfball1", "Orange", 40, 200, "", "Rubber", "AnotherDas", "A ball not to kick", "Golfball", 105.95, 4, 2);
-        TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 5, 3);
+        TargetSportsBall tempTarget3 = new TargetSportsBall("bb3", "Grey", 40, 6000, "Heavy ball", "Concrete", "Adidas", "A ball not to kick", "Bowlingball", 102.95, 0, 3);
         
         Set tempTSReview1 = new HashSet<TSBReview>(){{
             add(new TSBReview(1, 1, "Good product", "Nothing more to say", tempTarget1, 1, tempUser1, 1));
@@ -797,32 +866,21 @@ public class MyController implements ApplicationRunner {
         
         tempTarget2.setReviews(tempTSReview2);
         
-        Set tempTSReview3 = new HashSet<TSBReview>(){{
-            add(new TSBReview(3, 1, "Meh", "Meh", tempTarget3, 3, tempUser3, 3));
-        }};
-        
-        tempTarget3.setReviews(tempTSReview3);
-        
         tsbRepository.save(tempTarget1);
         tsbRepository.save(tempTarget2);
         tsbRepository.save(tempTarget3);
         
         //BASEBALLS & TENNISBALLS
-        BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 3, 1);
+        BatAndRaquetsGames tempBat1 = new BatAndRaquetsGames("Baseball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Baseball", 4.95, 0, 1);
         BatAndRaquetsGames tempBat2 = new BatAndRaquetsGames("Baseball2", "White", 6, 35, "Somethingsomething", "Elastic rubber", "Adidas", "A ball to throw2", "Baseball", 4.95, 3, 2);
         BatAndRaquetsGames tempBat3 = new BatAndRaquetsGames("Tennisball1", "Yellow", 5, 336, "Somethingsomething", "Rubber", "Adidas", "A ball to smash", "Tennisball", 2.95, 3, 3);
         
         Set tempBARReview1 = new HashSet<BARReview>(){{
-            add(new BARReview(1, 1, "Good product", "Nothing more to say", tempBat1, 1, tempUser1, 1));
+            add(new BARReview(1, 1, "Good product", "Nothing more to say. Hope it doesn't break anytime soon.", tempBat1, 1, tempUser1, 1));
         }};
         
         tempBat1.setReviews(tempBARReview1);
         
-        Set tempBARReview2 = new HashSet<BARReview>(){{
-            add(new BARReview(2, 1, "Hated it", "Absolutely disgusting product", tempBat2, 2, tempUser2, 2));
-        }};
-        
-        tempBat2.setReviews(tempBARReview2);
         
         Set tempBARReview3 = new HashSet<BARReview>(){{
             add(new BARReview(3, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
@@ -835,24 +893,20 @@ public class MyController implements ApplicationRunner {
         brRepository.save(tempBat3);
         
         // VOLLEYBALL & HANDBALL
-        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 3, 1);
+        NetSportsBall tempNS1 = new NetSportsBall("Volleyball1", "Black", 5, 30, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Volleyball", 4.95, 0, 1);
         NetSportsBall tempNS2 = new NetSportsBall("Volleyball2", "White", 50, 300, "Somethingsomeasdthing", "Rubber", "Adidas", "A ball to throw", "Volleyball", 8.95, 3, 2);
         NetSportsBall tempNS3 = new NetSportsBall("Handball1", "Black", 5, 360, "Somethingsomething", "Rubber", "Adidas", "A ball to throw", "Handball", 4.95, 3, 3);
         
-        Set tempNSReview1 = new HashSet<NSBReview>(){{
-            add(new NSBReview(1, 1, "Good product", "Nothing more to say", tempNS1, 1, tempUser1, 1));
-        }};
-        
-        tempNS1.setReviews(tempNSReview1);
         
         Set tempNSReview2 = new HashSet<NSBReview>(){{
-            add(new NSBReview(2, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
+            add(new NSBReview(1, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
+            //add(new NSBReview(2, 3, "Kinda good", "Maybe I jumped the gun a bit with my previous review.", tempNS2, 2, tempUser2, 2));
         }};
         
         tempNS2.setReviews(tempNSReview2);
         
         Set tempNSReview3 = new HashSet<NSBReview>(){{
-            add(new NSBReview(3, 1, "Meh", "Meh", tempNS3, 3, tempUser3, 3));
+            add(new NSBReview(4, 1, "Meh", "Meh", tempNS3, 3, tempUser3, 3));
         }};
         
         tempNS3.setReviews(tempNSReview3);

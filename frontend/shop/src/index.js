@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { hashHistory, Router, Route, IndexRoute } from 'react-router';
-import CartComponent from './components/TopNavComponent';
+import TopNavComponent from './components/TopNavComponent';
 import BallComponent from './components/BallComponent';
 import FrontpageComponent from './components/FrontpageComponent';
 import ItemDetailsComponent from './components/ItemDetailsComponent';
@@ -42,6 +42,6 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
-    <CartComponent/>,
+    <TopNavComponent/>,
     document.getElementById("topNav")
 );
