@@ -14,6 +14,9 @@ body {
     min-height: 350px;
 }
 
+#logoImg{
+    padding: 10px 20px 10px 20px;
+}
 .colorGray{
     background-color: #F2F2F2;
 }
