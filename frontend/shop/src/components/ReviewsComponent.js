@@ -1,6 +1,6 @@
 import React from 'react';
 import Client from '../Client';
-import LoginComponent from '../components/LoginComponent';
+import {Storage_getUserId} from "../Storage";
 
 export default class ReviewsComponent extends React.Component{
     constructor(props) {
@@ -163,7 +163,7 @@ export default class ReviewsComponent extends React.Component{
     }
 
     sendReview(header, content) {
-        let userId = LoginComponent.userId;
+        let userId = Storage_getUserId();
         if(this.state.rating < 1) alert("Please give star rating for your review.");
         else if(header === "" || content === "") alert("Please make sure you have given\nheader and content for your review.")
         else if (userId === "") alert("You have to sign in to post reviews");
