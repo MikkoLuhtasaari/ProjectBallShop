@@ -117,7 +117,7 @@ export default class CheckoutComponent extends React.Component{
     }
 
     redirectToBank() {
-        if (Storage_getUserId() === "") alert("You have to sign in to buy items");
+        if (Storage_getUserId() === "" || Storage_getUserId === null) alert("You have to sign in to buy items");
         else {
             this.client.reduceQuantity(Storage_getCart());
             Storage_setCart([]);

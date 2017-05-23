@@ -6,6 +6,14 @@ export function Storage_getUserId() {
     return sessionStorage.getItem('userId');
 }
 
+export function Storage_getUserName() {
+    return sessionStorage.getItem('userName');
+}
+
+export function Storage_setUserName(userName) {
+    sessionStorage.setItem('userName', userName);
+}
+
 export function Storage_getCart() {
     if (localStorage.getItem('shoppingCart') === null) Storage_setCart([]);
     return JSON.parse(localStorage.getItem('shoppingCart'));

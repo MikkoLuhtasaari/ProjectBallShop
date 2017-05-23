@@ -166,7 +166,7 @@ export default class ReviewsComponent extends React.Component{
         let userId = Storage_getUserId();
         if(this.state.rating < 1) alert("Please give star rating for your review.");
         else if(header === "" || content === "") alert("Please make sure you have given\nheader and content for your review.")
-        else if (userId === "") alert("You have to sign in to post reviews");
+        else if (userId === null || userId === "") alert("You have to sign in to post reviews");
         else {
             let formattedGroup = this.state.group.slice(0, this.state.group.length - 1);
             this.client.sendReview(formattedGroup, this.props.ballId, userId, this.state.rating, header, content);
