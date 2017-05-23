@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { hashHistory, Router, Route, IndexRoute } from 'react-router';
 import TopNavComponent from './components/TopNavComponent';
 import BallComponent from './components/BallComponent';
-import FrontpageComponent from './components/FrontpageComponent';
+import FrontPageComponent from './components/FrontPageComponent';
 import ItemDetailsComponent from './components/ItemDetailsComponent';
 import AdminItemDetailsComponent from './components/admin/AdminItemDetailsComponent';
 import AddItem from './components/admin/AddItem';
@@ -14,7 +14,7 @@ import CreateAccountComponent from './components/CreateAccountComponent'
 ReactDOM.render(
   <Router history={hashHistory}>
       <Route path="/" >
-          <IndexRoute component={ FrontpageComponent }/>
+          <IndexRoute component={ FrontPageComponent }/>
       </Route>
       <Route path="/type/:group/:type">
           <IndexRoute component={ BallComponent }/>

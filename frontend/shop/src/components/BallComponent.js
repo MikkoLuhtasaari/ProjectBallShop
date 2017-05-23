@@ -1,7 +1,7 @@
 import React from 'react';
 import Client from '../Client';
 import ReviewsComponent from '../components/ReviewsComponent'
-import ShoppingCartComponent from '../components/ShoppingCartComponent'
+import {Storage_addToCart} from '../Storage'
 
 export default class BallComponent extends React.Component{
     constructor(props) {
@@ -78,15 +78,13 @@ export default class BallComponent extends React.Component{
         if (ball.amount > 0) {
             return (
                 <button className="btn btn-success item-right buttonFont padd" id="btn100"
-                        onClick={() => ShoppingCartComponent.addToCart(ball)}>BUY ITEM
+                        onClick={() => Storage_addToCart(ball)}>BUY ITEM
                 </button>
 
             )
         } else{
             return (
-                <button className="btn item-right disabled buttonFont padd" id="btn100"
-                        onClick={() => ShoppingCartComponent.addToCart(ball)}>Out of stock
-                </button>
+                <button className="btn item-right disabled buttonFont padd" id="btn100">Out of stock</button>
             )
         }
     }
