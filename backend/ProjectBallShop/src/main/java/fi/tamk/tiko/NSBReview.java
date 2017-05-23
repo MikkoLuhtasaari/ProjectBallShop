@@ -33,14 +33,14 @@ public class NSBReview implements Serializable {
     private NetSportsBall owner;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="OWNER_USER_ID")
+    @JoinColumn(name="OWNER_USER_ONE_ID")
     @JsonIgnore
-    private User userOwner;
+    private User userOwnerOne;
     
     public NSBReview(){};
     
-    public NSBReview(long id, int score, String header, String content, NetSportsBall owner, long ownerBallId, User userOwner, long userId) {
-        setUserOwner(userOwner);
+    public NSBReview(long id, int score, String header, String content, NetSportsBall owner, long ownerBallId, User userOwnerOne, long userId) {
+        setUserOwnerOne(userOwnerOne);
         setScore(score);
         setHeader(header);
         setContent(content);
@@ -75,8 +75,8 @@ public class NSBReview implements Serializable {
         this.owner = owner;
     }
     
-    public void setUserOwner(User userOwner) {
-        this.userOwner = userOwner;
+    public void setUserOwnerOne(User userOwnerOne) {
+        this.userOwnerOne = userOwnerOne;
     }
     
     public void setOwnerBallId(long ownerBallId) {
@@ -107,8 +107,8 @@ public class NSBReview implements Serializable {
         return owner;
     }
     
-    public User getUserOwner() {
-        return userOwner;
+    public User getUserOwnerOne() {
+        return userOwnerOne;
     }
     
     public long getUserId() {

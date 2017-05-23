@@ -122,9 +122,29 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
     public User deleteUser(@PathVariable long userId) {
         
+        /*userRepository.delete(userId);
+        return null;*/
+        //List<NSBReview> temp1 = new ArrayList<>();
+        //temp1 = nsReviewRepository.findAll();
+        /*Iterable<NSBReview> temp1 = nsReviewRepository.findAll();
+        
+        for(NSBReview r : temp1) {
+            System.out.println(r.getUserId());
+        }*/
+        for(int i = 0; i<10; i++) {
+            System.out.println(" ");
+        }
+        System.out.println(userId);
+        for(int i = 0; i<10; i++) {
+            System.out.println(" ");
+        }
         if(userRepository.findOne(userId) != null) {
+            System.out.println("Found");
             User temp = userRepository.findOne(userId);
-            userRepository.delete(userRepository.findOne(userId));
+            System.out.println("Deleting");
+            //userRepository.delete(userRepository.findOne(userId));
+            userRepository.delete(userId);
+            System.out.println("Deleted");
             return temp;
         } else {
             System.out.println("Error! Invalid user id");
@@ -241,7 +261,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value="/netsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public NSBReview saveNSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody NSBReview review) {
         NSBReview temp = new NSBReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerOne(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());
@@ -385,7 +405,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value="/batandraquetsgame/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public BARReview saveBARReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody BARReview review) {
         BARReview temp = new BARReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerThree(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());
@@ -530,7 +550,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value="/goalsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public GSBReview saveGSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody GSBReview review) {
         GSBReview temp = new GSBReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerTwo(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());
@@ -674,7 +694,7 @@ public class MyController implements ApplicationRunner {
      @RequestMapping(value="/targetsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public TSBReview saveTSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody TSBReview review) {
         TSBReview temp = new TSBReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerFour(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());

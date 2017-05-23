@@ -45,13 +45,13 @@ public class GoalSportsBall {
     
     @Id
     @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     
     @Column(name = "category")
     private String category;
     
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval=true)
     private Set<GSBReview> reviews;
     
     public GoalSportsBall(){

@@ -5,11 +5,11 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(indexes = {@Index(columnList="user_id"), @Index(columnList="owner_ball_id")})
+//@Table(indexes = {@Index(columnList="user_id"), @Index(columnList="owner_ball_id")})
 public class GSBReview implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     
     @Column(name = "user_id")
@@ -33,14 +33,15 @@ public class GSBReview implements Serializable {
     private GoalSportsBall owner;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="OWNER_USER_ID")
+    @JoinColumn(name="OWNER_USER_TWO_ID")
     @JsonIgnore
-    private User userOwner;
+    //@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User userOwnerTwo;
     
     public GSBReview(){};
     
-    public GSBReview(long id, int score, String header, String content, GoalSportsBall owner, long ownerBallId, User userOwner, long userId) {
-        setUserOwner(userOwner);
+    public GSBReview(long id, int score, String header, String content, GoalSportsBall owner, long ownerBallId, User userOwnerTwo, long userId) {
+        setUserOwnerTwo(userOwnerTwo);
         setScore(score);
         setHeader(header);
         setContent(content);
@@ -75,8 +76,8 @@ public class GSBReview implements Serializable {
         this.owner = owner;
     }
     
-    public void setUserOwner(User userOwner) {
-        this.userOwner = userOwner;
+    public void setUserOwnerTwo(User userOwnerTwo) {
+        this.userOwnerTwo = userOwnerTwo;
     }
     
     public void setOwnerBallId(long ownerBallId) {
@@ -107,8 +108,8 @@ public class GSBReview implements Serializable {
         return owner;
     }
     
-    public User getUserOwner() {
-        return userOwner;
+    public User getUserOwnerTwo() {
+        return userOwnerTwo;
     }
     
     public long getUserId() {
