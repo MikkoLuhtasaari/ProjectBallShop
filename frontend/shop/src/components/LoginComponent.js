@@ -6,12 +6,13 @@ export default class LoginComponent extends React.Component {
     constructor(props) {
         super(props);
         this.client = new Client();
+        let logged = Storage_getUserId() !== null && Storage_getUserId() !== "";
+        let name = logged ? Storage_getUserName() : 'Sign in';
         this.state = {
             updated: false,
-            name: '',
-            logged: Storage_getUserId() !== null && Storage_getUserId() !== ""
+            name: name,
+            logged: logged
         };
-        this.state.name = this.state.logged ? Storage_getUserName() : 'Sign in';
     }
 
     render() {
@@ -37,6 +38,7 @@ export default class LoginComponent extends React.Component {
             Storage_setUserId("");
             Storage_setUserName("");
             this.setState({name: "Sign in"});
+            this.setState({logged: false});
         }
     }
 
@@ -89,6 +91,7 @@ export default class LoginComponent extends React.Component {
             Storage_setUserId(user.id);
             Storage_setUserName(user.firstName + " " + user.lastName);
             this.setState({name: user.firstName + " " + user.lastName});
+            this.setState({logged: true})
         } else alert("Incorrect password.\nPlease try again.");
     }
 }

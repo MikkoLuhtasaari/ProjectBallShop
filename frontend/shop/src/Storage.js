@@ -15,12 +15,12 @@ export function Storage_setUserName(userName) {
 }
 
 export function Storage_getCart() {
-    if (localStorage.getItem('shoppingCart') === null) Storage_setCart([]);
-    return JSON.parse(localStorage.getItem('shoppingCart'));
+    if (sessionStorage.getItem('shoppingCart') === null) Storage_setCart([]);
+    return JSON.parse(sessionStorage.getItem('shoppingCart'));
 }
 
 export function Storage_setCart(cart) {
-    localStorage.setItem('shoppingCart', JSON.stringify(cart));
+    sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
 }
 
 export function Storage_addToCart(ball) {
