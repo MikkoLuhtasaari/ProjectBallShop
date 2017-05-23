@@ -890,7 +890,7 @@ public class MyController implements ApplicationRunner {
         
         
         Set tempBARReview3 = new HashSet<BARReview>(){{
-            add(new BARReview(3, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
+            add(new BARReview(2, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
         }};
         
         tempBat3.setReviews(tempBARReview3);
