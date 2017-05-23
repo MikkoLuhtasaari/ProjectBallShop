@@ -1,7 +1,7 @@
 import React from 'react';
 import Client from '../Client';
 import ReviewsComponent from '../components/ReviewsComponent'
-import ShoppingCartComponent from '../components/ShoppingCartComponent'
+import {Storage_addToCart} from '../Storage'
 
 export default class BallComponent extends React.Component{
     constructor(props) {
@@ -45,16 +45,6 @@ export default class BallComponent extends React.Component{
         )
     }
 
-    getShoppingCartBtn(ball) {
-        return (
-            <div className="options-cart-round">
-                <button className="btn btn-default" title="Add to cart" onClick={ () => ShoppingCartComponent.addToCart(ball) }>
-                    <span className="fa fa-shopping-cart"/>
-                </button>
-            </div>
-        )
-    }
-
     createContent(ballObject) {
         const propArray = [];
         let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
@@ -65,14 +55,8 @@ export default class BallComponent extends React.Component{
         propArray.push(
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
-                        <article className="col-item">
-                            <div className="photo">
-                                {this.getShoppingCartBtn(ballObject)}
-                                <img src={imageSrc} alt="Ball"/>
-                            </div>
-                        </article>
+                    <a href={link}><img src={imageSrc} alt="Ball"/></a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
-
                     <ReviewsComponent group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>
                     <hr className="item-line"/>
@@ -81,12 +65,27 @@ export default class BallComponent extends React.Component{
                             <p className="item-p item-price">{ballObject.price}€</p>
                         </div>
                         <div className="col-md-4 col-sm-6" id="width100">
-                            <button className="btn btn-info item-right buttonFont" id="btn100" onClick={() => ShoppingCartComponent.addToCart(ballObject)}>BUY ITEM</button>
+                            {this.buyButton(ballObject)}
                         </div>
                     </div>
                 </span>
             </div>
             );
     return propArray;
+    }
+
+    buyButton(ball) {
+        if (ball.amount > 0) {
+            return (
+                <button className="btn btn-success item-right buttonFont padd" id="btn100"
+                        onClick={() => Storage_addToCart(ball)}>BUY ITEM
+                </button>
+
+            )
+        } else{
+            return (
+                <button className="btn item-right disabled buttonFont padd" id="btn100">Out of stock</button>
+            )
+        }
     }
 }

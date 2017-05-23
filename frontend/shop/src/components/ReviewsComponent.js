@@ -1,5 +1,6 @@
 import React from 'react';
 import Client from '../Client';
+import {Storage_getUserId} from "../Storage";
 
 export default class ReviewsComponent extends React.Component{
     constructor(props) {
@@ -8,11 +9,11 @@ export default class ReviewsComponent extends React.Component{
         this.state = {
             reviews : [],
             group : '',
-            updated: false
+            updated: false,
+            rating: 0
         };
 
         this.parseGroup = this.parseGroup.bind(this);
-        this.addToArray = this.addToArray.bind(this);
     }
 
     componentWillReceiveProps() {
@@ -21,24 +22,22 @@ export default class ReviewsComponent extends React.Component{
         this.setState({group : parsedG});
 
         if(parsedG !== undefined)
-            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.addToArray(r));
-    }
-
-    addToArray(r) {
-        let tempArray = this.state.reviews;
-        tempArray.push(r);
-        this.setState({reviews: tempArray});
+            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.setState({reviews: r}));
     }
 
     parseGroup(group) {
         switch (group) {
           case "Goal sport":
+          case "goalsportsball":
               return "goalsportsballs";
           case "Target sport":
+          case "targetsportsball":
               return "targetsportsballs";
           case "Bat and raquets game":
+          case "batandraquetsgame":
               return "batandraquetsgames";
           case "Net sport":
+          case "netsportsball":
               return "netsportsballs";
           default:
               return undefined;
@@ -61,7 +60,7 @@ export default class ReviewsComponent extends React.Component{
         let score = 0;
 
         for (let i = 0; i < this.state.reviews.length; i++){
-            score =+ this.state.reviews[i].score;
+            score += this.state.reviews[i].score;
         }
 
         score /= this.state.reviews.length;
@@ -106,7 +105,7 @@ export default class ReviewsComponent extends React.Component{
 
         for(let i = 0; i<this.state.reviews.length; i++){
             temp.push(
-                <div className="thumbnail" key={temp.length}>
+                <div className="thumbnail" key={"wide"+i}>
                     {this.getStars(this.state.reviews[i].score)}
                     <div className="marginL10">
                     {this.state.reviews[i].header}
@@ -126,7 +125,6 @@ export default class ReviewsComponent extends React.Component{
     }
 
     reviewItem() {
-        let rating = 0;
         return (
             <div>
                 <h3 className="padding10">Already bought this item?</h3>
@@ -134,15 +132,15 @@ export default class ReviewsComponent extends React.Component{
                 <div>
                     <div className="stars">
                         <form>
-                            <input className="star star-5" onClick={() => rating = 5} id="star-5" type="radio" name="star"/>
+                            <input className="star star-5" onClick={() => this.setState({rating: 5})} id="star-5" type="radio" name="star"/>
                             <label className="star star-5" htmlFor="star-5"/>
-                            <input className="star star-4" onClick={() => rating = 4} id="star-4" type="radio" name="star"/>
+                            <input className="star star-4" onClick={() => this.setState({rating: 4})} id="star-4" type="radio" name="star"/>
                             <label className="star star-4" htmlFor="star-4"/>
-                            <input className="star star-3" onClick={() => rating = 3} id="star-3" type="radio" name="star"/>
+                            <input className="star star-3" onClick={() => this.setState({rating: 3})} id="star-3" type="radio" name="star"/>
                             <label className="star star-3" htmlFor="star-3"/>
-                            <input className="star star-2" onClick={() => rating = 2} id="star-2" type="radio" name="star"/>
+                            <input className="star star-2" onClick={() => this.setState({rating: 2})} id="star-2" type="radio" name="star"/>
                             <label className="star star-2" htmlFor="star-2"/>
-                            <input className="star star-1" onClick={() => rating = 1} id="star-1" type="radio" name="star"/>
+                            <input className="star star-1" onClick={() => this.setState({rating: 1})} id="star-1" type="radio" name="star"/>
                             <label className="star star-1" htmlFor="star-1"/>
                         </form>
                     </div>
@@ -158,15 +156,20 @@ export default class ReviewsComponent extends React.Component{
                     </form>
                 </div>
                 <div className="clearfix"/>
-                <button onClick={() => this.sendReview(rating, this.refs.header.value, this.refs.content.value)}
+                <button onClick={() => this.sendReview(this.refs.header.value, this.refs.content.value)}
                         type="button" className="col-xs-7 btn btn-success width100">Send</button>
             </div>
         )
     }
 
-    sendReview(rating, header, content){
-        let formattedGroup = this.state.group.slice(0, this.state.group.length-1);
-        if (rating !== 0) this.client.sendReview(formattedGroup, this.props.ballId, 1, rating, header, content);
-        else console.log("Error");
+    sendReview(header, content) {
+        let userId = Storage_getUserId();
+        if(this.state.rating < 1) alert("Please give star rating for your review.");
+        else if(header === "" || content === "") alert("Please make sure you have given\nheader and content for your review.")
+        else if (userId === null || userId === "") alert("You have to sign in to post reviews");
+        else {
+            let formattedGroup = this.state.group.slice(0, this.state.group.length - 1);
+            this.client.sendReview(formattedGroup, this.props.ballId, userId, this.state.rating, header, content);
+        }
     }
 }

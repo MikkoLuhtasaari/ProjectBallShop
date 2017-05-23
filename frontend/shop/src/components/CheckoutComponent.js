@@ -1,21 +1,24 @@
 import React from 'react';
-import ShoppingCartComponent from '../components/ShoppingCartComponent'
+import Client from "../Client";
+import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../Storage"
+
 
 export default class CheckoutComponent extends React.Component{
     constructor(props) {
         super(props);
+        this.client = new Client();
         this.state = {
-            balls: ShoppingCartComponent.cookies.get('ballArray')
+            balls: Storage_getCart()
         };
     }
 
     render(){
         let total = 0;
-        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+        let array = Storage_getCart();
 
-        for(let i = 0; i < cookieArray.length; i++) {
-            let o = cookieArray[i].content;
-            let n = cookieArray[i].count;
+        for(let i = 0; i < array.length; i++) {
+            let o = array[i].content;
+            let n = array[i].count;
             total += (o.price * n);
         }
 
@@ -56,9 +59,10 @@ export default class CheckoutComponent extends React.Component{
                                 <span className="glyphicon glyphicon-shopping-cart"/> Continue Shopping</a>
                             </button></td>
                         <td>
-                            <button type="button" className="btn btn-success">
-                                Checkout <span className="glyphicon glyphicon-play"/>
-                            </button></td>
+                            <button type="button" className="btn btn-success" onClick={() => this.redirectToBank()}>Checkout
+                                <span className="glyphicon glyphicon-play"/>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -87,7 +91,9 @@ export default class CheckoutComponent extends React.Component{
                             </div>
                         </div></td>
                     <td className="col-sm-1 col-md-1">
-                        <input type="number" className="form-control" ref="inputCounter" value={n} onChange={() => this.addOrRemove(o, n, false)}/>
+                        <input type="number" className="form-control" ref="inputCounter" min="1" max={o.amount} value={n} onChange={() => this.addOrRemove(o, n, false)}/>
+                        <h5/>
+                        <h5 className="media-heading">On stock: {o.amount}</h5>
                     </td>
                     <td className="col-sm-1 col-md-1 text-center"><strong>{o.price}€</strong></td>
                     <td className="col-sm-1 col-md-1 text-center"><strong>{(o.price * n).toFixed(2)}€</strong></td>
@@ -104,9 +110,20 @@ export default class CheckoutComponent extends React.Component{
     //TODO Jos ostoskorista poistaa tuotteen (remove-napilla) se kadottaa inputCounterin reffin ja palauttaa sen undefinedinä.
     addOrRemove(ball, preCount, removeAll) {
         if(typeof this.refs.inputCounter !== "undefined"){
-            if(removeAll || preCount > this.refs.inputCounter.value) ShoppingCartComponent.removeFromCart(ball, removeAll);
-            else ShoppingCartComponent.addToCart(ball);
+            if(removeAll || preCount > this.refs.inputCounter.value) Storage_removeFromCart(ball, removeAll);
+            else Storage_addToCart(ball);
         }else console.log("PERSE!");
-        this.setState({balls: ShoppingCartComponent.cookies.get('ballArray')});
+        this.setState({balls: Storage_getCart()});
+    }
+
+    redirectToBank() {
+        if (Storage_getUserId() === "" || Storage_getUserId === null) alert("You have to sign in to buy items");
+        else {
+            this.client.reduceQuantity(Storage_getCart());
+            Storage_setCart([]);
+            this.setState({balls: Storage_getCart()})
+            alert("User is now redirected to bank services");
+            window.location = '/#/';
+        }
     }
 }
