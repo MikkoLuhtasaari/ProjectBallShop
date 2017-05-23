@@ -15,14 +15,17 @@ export default class CheckoutComponent extends React.Component{
     render(){
         let total = 0;
         let array = Storage_getCart();
+        let productCount = 0;
 
         for(let i = 0; i < array.length; i++) {
             let o = array[i].content;
             let n = array[i].count;
             total += (o.price * n);
+            productCount += n;
         }
 
-        let postage = 6.95;
+        //Postage per item
+        let postage = 0.95;
         return(
             <div className="marginMx whiteBg">
                 <table className="table table-bordered">
@@ -44,13 +47,13 @@ export default class CheckoutComponent extends React.Component{
                     </tr>
                     <tr>
                         <td colSpan={3}>   </td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td className="text-right"><h5><strong>{(postage).toFixed(2)}€</strong></h5></td>
+                        <td><h5>Shipping</h5></td>
+                        <td className="text-right"><h5><strong>{(postage*productCount).toFixed(2)}€</strong></h5></td>
                     </tr>
                     <tr>
                         <td colSpan={3}/>
                         <td><h3>Total</h3></td>
-                        <td className="text-right"><h3><strong>{(total + postage).toFixed(2)}€</strong></h3></td>
+                        <td className="text-right"><h3><strong>{(total + (postage*productCount)).toFixed(2)}€</strong></h3></td>
                     </tr>
                     <tr>
                         <td colSpan={3}/>
