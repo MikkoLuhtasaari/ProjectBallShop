@@ -325,7 +325,14 @@ ul.dropdown-cart li .item-right button{
 
 /*_______________Carousel____________________________*/
 .carousel {
-    height: 50%;
+    margin: 0;
+    margin-top: 50px;
+    height: 100%;
+}
+
+.rightControl,
+.leftControl {
+    top: 50% !important;
 }
 
 .item,
@@ -342,6 +349,9 @@ ul.dropdown-cart li .item-right button{
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 
