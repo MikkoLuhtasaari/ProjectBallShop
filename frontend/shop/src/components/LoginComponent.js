@@ -1,9 +1,8 @@
 import React from 'react';
 import Client from '../Client';
+import {Storage_setUserId} from '../Storage'
 
 export default class LoginComponent extends React.Component {
-    static userId = "";
-
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -33,7 +32,7 @@ export default class LoginComponent extends React.Component {
                 (success) => {this.validateUser(success, pass, true)},
                 (failure) => {this.validateUser(failure, pass, false)});
         } else{
-            LoginComponent.userId = "";
+            Storage_setUserId("");
             this.setState({name: "Login"});
         }
     }
@@ -84,7 +83,7 @@ export default class LoginComponent extends React.Component {
         if(!success){
             alert("Incorrect username.\nPlease try again.")
         } else if(pass === user.password){
-            LoginComponent.userId = user.id;
+            Storage_setUserId(user.id);
             this.setState({name: user.firstName + " " + user.lastName});
         } else alert("Incorrect password.\nPlease try again.");
     }
