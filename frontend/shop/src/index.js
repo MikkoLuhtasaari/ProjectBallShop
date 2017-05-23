@@ -11,6 +11,7 @@ import AddItem from './components/admin/AddItem';
 import CheckoutComponent from "./components/CheckoutComponent";
 import CreateAccountComponent from './components/CreateAccountComponent'
 import MiddleNavComponent from "./components/MiddleNavComponent";
+import FooterComponent from './components/FooterComponent'
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -50,4 +51,9 @@ ReactDOM.render(
 ReactDOM.render(
     <MiddleNavComponent/>,
     document.getElementById("midNav")
+);
+
+ReactDOM.render(
+    <FooterComponent/>,
+    document.getElementById("footer")
 );
