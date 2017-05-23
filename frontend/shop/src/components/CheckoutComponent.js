@@ -1,5 +1,4 @@
 import React from 'react';
-import LoginComponent from '../components/LoginComponent'
 import Client from "../Client";
 import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../Storage"
 
