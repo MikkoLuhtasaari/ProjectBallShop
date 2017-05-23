@@ -1,24 +1,25 @@
 import React from 'react';
-import ShoppingCartComponent from '../components/ShoppingCartComponent'
 import LoginComponent from '../components/LoginComponent'
 import Client from "../Client";
+import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../Storage"
+
 
 export default class CheckoutComponent extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
         this.state = {
-            balls: ShoppingCartComponent.cookies.get('ballArray')
+            balls: Storage_getCart()
         };
     }
 
     render(){
         let total = 0;
-        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+        let array = Storage_getCart();
 
-        for(let i = 0; i < cookieArray.length; i++) {
-            let o = cookieArray[i].content;
-            let n = cookieArray[i].count;
+        for(let i = 0; i < array.length; i++) {
+            let o = array[i].content;
+            let n = array[i].count;
             total += (o.price * n);
         }
 
@@ -110,17 +111,18 @@ export default class CheckoutComponent extends React.Component{
     //TODO Jos ostoskorista poistaa tuotteen (remove-napilla) se kadottaa inputCounterin reffin ja palauttaa sen undefinedinä.
     addOrRemove(ball, preCount, removeAll) {
         if(typeof this.refs.inputCounter !== "undefined"){
-            if(removeAll || preCount > this.refs.inputCounter.value) ShoppingCartComponent.removeFromCart(ball, removeAll);
-            else ShoppingCartComponent.addToCart(ball);
+            if(removeAll || preCount > this.refs.inputCounter.value) Storage_removeFromCart(ball, removeAll);
+            else Storage_addToCart(ball);
         }else console.log("PERSE!");
-        this.setState({balls: ShoppingCartComponent.cookies.get('ballArray')});
+        this.setState({balls: Storage_getCart()});
     }
 
     redirectToBank() {
-        if (LoginComponent.userId === "") alert("You have to sign in to buy items");
+        if (Storage_getUserId() === "") alert("You have to sign in to buy items");
         else {
-            this.client.reduceQuantity(ShoppingCartComponent.cookies.get('ballArray'));
-            ShoppingCartComponent.cookies.set('ballArray', []);
+            this.client.reduceQuantity(Storage_getCart());
+            Storage_setCart([]);
+            this.setState({balls: Storage_getCart()})
             alert("User is now redirected to bank services");
             window.location = '/#/';
         }
