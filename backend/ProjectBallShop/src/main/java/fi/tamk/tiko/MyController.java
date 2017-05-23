@@ -122,15 +122,6 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
     public User deleteUser(@PathVariable long userId) {
         
-        /*userRepository.delete(userId);
-        return null;*/
-        //List<NSBReview> temp1 = new ArrayList<>();
-        //temp1 = nsReviewRepository.findAll();
-        /*Iterable<NSBReview> temp1 = nsReviewRepository.findAll();
-        
-        for(NSBReview r : temp1) {
-            System.out.println(r.getUserId());
-        }*/
         for(int i = 0; i<10; i++) {
             System.out.println(" ");
         }
@@ -139,12 +130,8 @@ public class MyController implements ApplicationRunner {
             System.out.println(" ");
         }
         if(userRepository.findOne(userId) != null) {
-            System.out.println("Found");
             User temp = userRepository.findOne(userId);
-            System.out.println("Deleting");
-            //userRepository.delete(userRepository.findOne(userId));
             userRepository.delete(userId);
-            System.out.println("Deleted");
             return temp;
         } else {
             System.out.println("Error! Invalid user id");
