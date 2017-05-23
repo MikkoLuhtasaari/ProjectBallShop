@@ -9,7 +9,6 @@ npm install --save react react-dom
 npm install --save react-scripts
 npm install --save react-router
 npm install --save react-fontawesome
-npm install --save universal-cookie
 npm install --save bootstrap@3
 npm start
 
