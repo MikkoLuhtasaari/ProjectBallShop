@@ -10,6 +10,7 @@ import AdminItemDetailsComponent from './components/admin/AdminItemDetailsCompon
 import AddItem from './components/admin/AddItem';
 import CheckoutComponent from "./components/CheckoutComponent";
 import CreateAccountComponent from './components/CreateAccountComponent'
+import MiddleNavComponent from "./components/MiddleNavComponent";
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -44,4 +45,9 @@ ReactDOM.render(
 ReactDOM.render(
     <TopNavComponent/>,
     document.getElementById("topNav")
+);
+
+ReactDOM.render(
+    <MiddleNavComponent/>,
+    document.getElementById("midNav")
 );
