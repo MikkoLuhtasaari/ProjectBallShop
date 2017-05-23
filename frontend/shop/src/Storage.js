@@ -1,3 +1,11 @@
+export function Storage_setUserId(id) {
+    sessionStorage.setItem('userId', id);
+}
+
+export function Storage_getUserId() {
+    return sessionStorage.getItem('userId');
+}
+
 export function Storage_getCart() {
     if (localStorage.getItem('shoppingCart') === null) Storage_setCart([]);
     return JSON.parse(localStorage.getItem('shoppingCart'));
@@ -20,9 +28,9 @@ export function Storage_addToCart(ball) {
         }
     }
 
-    if (added === false){
+    if (added === false)
         array.push(item);
-    }
+
     Storage_setCart(array)
 }
 
@@ -40,16 +48,4 @@ export function Storage_removeFromCart(ball, removeAll) {
         }
     }
     Storage_setCart(array);
-}
-
-export function Storage_totalPrice() {
-    let total = 0;
-    let array = Storage_getCart();
-
-    for(let i = 0; i < array.length; i++) {
-        let o = array[i].content;
-        let n = array[i].count;
-        total += (o.price * n);
-    }
-    return total.toFixed(2);
 }
