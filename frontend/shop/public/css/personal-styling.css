@@ -361,33 +361,6 @@ ul.dropdown-cart li .item-right button{
     font-size: 20px;
 }
 
-
-/*_______________Cart animation over image____________________________*/
-
-.col-item .options-cart-round {
-    position:absolute;
-    left:40%;
-    top:25%;
-    display:none;
-}
-
-.col-item .options-cart-round button {
-    border-radius: 50%;
-    padding:14px 16px;
-
-}
-.col-item .options-cart-round button .fa {
-    font-size:50px;
-}
-
-.col-item .photo:hover .options-cart-round {
-    display:block;
-    -webkit-animation: fadeInDown .5s ease;
-    -moz-animation: fadeInDown .5s ease;
-    -o-animation: fadeInDown .5s ease;
-    animation: fadeInDown .5s ease;
-}
-
 /*_______________Shop items____________________________*/
 
 .caption {
@@ -530,7 +503,7 @@ label.star:hover { transform: rotate(-15deg) scale(1.3); }
 
 label.star:before {
     content: '\f006';
-    font-family: FontAwesome;
+    font-family: FontAwesome, serif;
 }
 
 .dropdown-menu > li > a,

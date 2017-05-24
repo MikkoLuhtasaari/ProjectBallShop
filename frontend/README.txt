@@ -10,6 +10,7 @@ npm install --save react-scripts
 npm install --save react-router
 npm install --save react-fontawesome
 npm install --save bootstrap@3
+npm install --save react-bootstrap-carousel
 npm start
 
 REMEMBER to add 'Access-Control-Allow-Origin' plugin if using Chrome

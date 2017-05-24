@@ -78,7 +78,7 @@ export default class BallComponent extends React.Component{
         if (ball.amount > 0) {
             return (
                 <button className="btn btn-success item-right buttonFont padd" id="btn100"
-                        onClick={() => Storage_addToCart(ball)}>BUY ITEM
+                        onClick={() => this.itemAdded(ball)}>BUY ITEM
                 </button>
 
             )
@@ -87,5 +87,11 @@ export default class BallComponent extends React.Component{
                 <button className="btn item-right disabled buttonFont padd" id="btn100">Out of stock</button>
             )
         }
+    }
+
+    itemAdded(ball){
+        Storage_addToCart(ball);
+        let handleUpdate = this.props.handleUpdate;
+        return handleUpdate(true);
     }
 }

@@ -11,8 +11,10 @@ import React from "react";
 export default class Content extends React.Component{
     render(){
         return(
+        //    <FrontPageComponent handleUpdate={this.props.handleUpdate}/>
+
             <Router history={hashHistory}>
-                <Route path="/" >
+                <Route path="/">
                     <IndexRoute component={ FrontPageComponent }/>
                 </Route>
                 <Route path="/type/:group/:type">

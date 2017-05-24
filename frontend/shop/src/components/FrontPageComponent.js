@@ -4,12 +4,12 @@ import BallComponent from '../components/BallComponent'
 export default class FrontPageComponent extends React.Component{
     render(){
         return (
-            <div>
-                <BallComponent group={"targetsportsballs"}/>
-                <BallComponent group={"goalsportsballs"}/>
-                <BallComponent group={"batandraquetsgames"}/>
-                <BallComponent group={"netsportsballs"}/>
-            </div>
+        <div>
+            <BallComponent group={"targetsportsballs"} handleUpdate={this.props.handleUpdate} />
+            <BallComponent group={"goalsportsballs"} handleUpdate={this.props.handleUpdate} />
+            <BallComponent group={"batandraquetsgames"} handleUpdate={this.props.handleUpdate} />
+            <BallComponent group={"netsportsballs"} handleUpdate={this.props.handleUpdate} />
+        </div>
         );
     }
 }

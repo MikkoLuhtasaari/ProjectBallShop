@@ -1,7 +1,5 @@
 import React from 'react';
 import {React_Bootstrap_Carousel} from 'react-bootstrap-carousel';
-import 'react-bootstrap-carousel/dist/bootstrap.min.css';
-import 'react-bootstrap-carousel/dist/react-bootstrap-carousel.css';
 import Bowling from '../../public/images/bowling.jpg'
 import Soccer from '../../public/images/soccer.jpg'
 import Tennis from '../../public/images/tennis.jpg'
@@ -10,7 +8,7 @@ export default class CarouselComponent extends React.Component{
 
     render(){
         return(
-            <div style={{height:300}}>
+            <div style={{height:400}}>
                 <React_Bootstrap_Carousel
                     animation={true}
                     onSelect={this.onSelect}

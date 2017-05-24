@@ -1,21 +1,12 @@
 import React from 'react';
-import Client from '../Client';
 import LoginComponent from '../components/LoginComponent';
 import ShoppingCartComponent from '../components/ShoppingCartComponent';
 import SearchComponent from '../components/SearchComponent';
 
 export default class TopNavComponent extends React.Component{
-    constructor(props) {
-        super(props);
-        this.client = new Client();
-        this.state = {
-            updated:false
-        };
-    }
-
     render(){
         return(
-            <nav className="navbar navbar-inverse navbar-fixed-top bs-dark">
+            <nav className="navbar navbar-inverse navbar-fixed-top top-bar fixed bs-dark">
                 <div className="navbar-header">
                     <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span className="sr-only">Toggle navigation</span>
@@ -33,7 +24,7 @@ export default class TopNavComponent extends React.Component{
                     </form>
                     <ul className="nav navbar-nav navbar-right">
                         <LoginComponent/>
-                        <ShoppingCartComponent/>
+                        <ShoppingCartComponent updated={false}/>
                     </ul>
                 </div>
             </nav>

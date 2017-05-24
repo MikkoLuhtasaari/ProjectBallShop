@@ -6,12 +6,21 @@ import TopNavComponent from "./TopNavComponent";
 import CarouselComponent from "./CarouselComponent";
 
 export default class BallShop extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = { updated: false};
+        this.handleUpdate = this.handleUpdate.bind(this)
+    }
+
+    handleUpdate(updated) {
+        this.setState({updated : updated})
+    }
 
     render(){
         return(
             <div>
-                <div class="container">
-                    <TopNavComponent/>
+                <div className="container">
+                    <TopNavComponent updated={false}/>
                 </div>
                 <CarouselComponent/>
                 <div className="container-fullwidth">
@@ -19,7 +28,7 @@ export default class BallShop extends React.Component{
                 </div>
 
                 <div className="colorGray">
-                    <Content/>
+                    <Content handleUpdate={this.handleUpdate} />
                     <FooterComponent/>
                 </div>
             </div>
