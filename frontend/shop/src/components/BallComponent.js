@@ -8,9 +8,17 @@ export default class BallComponent extends React.Component{
         super(props);
         this.client = new Client();
 
+        let administrator = false;
+        if (window.location.hash === "#/admin") {
+            administrator = true;
+        }
+
+        console.log(administrator);
+
         this.state = {
             balls: [],
-            updated:false
+            updated:false,
+            admin: administrator
         };
 
         this.fetchItems = this.fetchItems.bind(this);
@@ -50,7 +58,13 @@ export default class BallComponent extends React.Component{
         let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
-        let link = "/#/details/" + category + "/" + ballObject.id;
+        let link;
+        if(this.state.admin) {
+            console.log(this.state.admin);
+            link = "/#/admin/details/" + category + "/" + ballObject.id;
+        } else {
+          link = "/#/details/" + category + "/" + ballObject.id;
+        }
 
         propArray.push(
             <div className="col-md-3 col-sm-6">

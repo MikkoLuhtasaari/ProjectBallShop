@@ -31,8 +31,8 @@ export default class ReviewsComponent extends React.Component{
         // Warning: setState(...): Can only update a mounted or mounting component.
         // This usually means you called setState() on an unmounted component. This is a no-op.
         // Please check the code for the ReviewsComponent component.
-        console.log(r)
         // if(r.length > 0)
+
         this.setState({reviews: r})
     }
 

@@ -6,6 +6,7 @@ import AdminItemDetailsComponent from './admin/AdminItemDetailsComponent';
 import AddItem from './admin/AddItem';
 import CheckoutComponent from "./CheckoutComponent";
 import CreateAccountComponent from './CreateAccountComponent'
+import AdminFrontpage from './admin/AdminFrontpage'
 import React from "react";
 
 export default class Content extends React.Component{
@@ -26,12 +27,17 @@ export default class Content extends React.Component{
                 <Route path="/details/:group/:id">
                     <IndexRoute component={ ItemDetailsComponent }/>
                 </Route>
+
+                <Route path="/admin">
+                    <IndexRoute component={ AdminFrontpage } />
+                </Route>
                 <Route path="/admin/details/:group/:id">
                     <IndexRoute component={ AdminItemDetailsComponent }/>
                 </Route>
                 <Route path="/admin/add">
                     <IndexRoute component={ AddItem }/>
                 </Route>
+
                 <Route path="/CreateAccount">
                     <IndexRoute component={ CreateAccountComponent}/>
                 </Route>

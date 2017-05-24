@@ -1,5 +1,6 @@
 import React from 'react';
 import Client from '../../Client';
+import { browserHistory } from 'react-router';
 
 const styles = {
   isModified: {
@@ -40,19 +41,20 @@ export default class AdminItemDetailsComponent extends React.Component{
 
   deleteButtonListener() {
     let targetUrl = 'http://localhost:8080/' + this.parseCategory() + '/' + this.state.ball.id;
-    //TODO: 403 CORS: Response for preflight has invalid HTTP status code 403
     fetch(targetUrl,
       {
         method: 'delete',
         mode: 'cors'
       })
       .then(function (response) {
-        console.log(response);
         return response;
       })
       .catch(function (error) {
         console.log(error);
       });
+
+    browserHistory.push('/#admin');
+    location.reload();
   }
 
   onFocus(e) {
@@ -165,7 +167,7 @@ export default class AdminItemDetailsComponent extends React.Component{
 
     fetch(targetUrl,
       {
-        method: 'POST',
+        method: 'PUT',
         mode: 'cors',
         // TODO: Fix the request
         body: JSON.stringify({
@@ -259,7 +261,6 @@ export default class AdminItemDetailsComponent extends React.Component{
       colorId = "green";
       buttonId = "btn btn-success active";
     }
-    console.log(this.state.ball);
     return(
       <section>
         {
