@@ -19,10 +19,21 @@ export default class ReviewsComponent extends React.Component{
     componentWillReceiveProps() {
         let g = this.props.group;
         let parsedG = this.parseGroup(g);
-        this.setState({group : parsedG});
 
-        if(parsedG !== undefined)
-            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.setState({reviews: r}));
+        if(parsedG !== undefined){
+            this.setState({group : parsedG});
+            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.updateReviews(r));
+        }
+    }
+
+    updateReviews(r){
+        //TODO tää antaa välillä varotusta. Kokeilin johtuuko tyhjistä taulukoista mutta ei...
+        // Warning: setState(...): Can only update a mounted or mounting component.
+        // This usually means you called setState() on an unmounted component. This is a no-op.
+        // Please check the code for the ReviewsComponent component.
+        console.log(r)
+        // if(r.length > 0)
+        this.setState({reviews: r})
     }
 
     parseGroup(group) {

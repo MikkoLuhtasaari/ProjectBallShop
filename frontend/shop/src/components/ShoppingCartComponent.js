@@ -4,10 +4,12 @@ import {Storage_getCart, Storage_removeFromCart} from '../Storage'
 export default class ShoppingCartComponent extends React.Component{
     constructor(props) {
         super(props);
+        let updated = false;
+        if(this.props.updated !== "undefined") updated = this.props.updated;
         this.state = {
             total: 0,
             cart: [],
-            updated: false
+            updated: updated
         };
     }
 
