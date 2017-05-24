@@ -39,7 +39,7 @@ public class User {
     
     @Id
     @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     
     /*@ManyToOne
@@ -49,8 +49,17 @@ public class User {
     @OneToMany(mappedBy = "userOwner", cascade = CascadeType.REMOVE)
     private Set<NSBReview> reviews;*/
     
-    @OneToMany(mappedBy = "userOwner", cascade = CascadeType.ALL)
-    private Set<NSBReview> reviews;
+    @OneToMany(mappedBy = "userOwnerOne", cascade = CascadeType.ALL, orphanRemoval=true)
+    private Set<NSBReview> NSBReviews;
+    
+    @OneToMany(mappedBy = "userOwnerTwo", cascade = CascadeType.ALL, orphanRemoval=true)
+    private Set<GSBReview> GSBReviews;
+    
+    @OneToMany(mappedBy = "userOwnerThree", cascade = CascadeType.ALL, orphanRemoval=true)
+    private Set<BARReview> BARReviews;
+    
+    @OneToMany(mappedBy = "userOwnerFour", cascade = CascadeType.ALL, orphanRemoval=true)
+    private Set<TSBReview> TSBReviews;
     
     public User(){};
     
@@ -66,8 +75,36 @@ public class User {
         setEmail(email);
     }
     
-    public void setReviews(Set<NSBReview> reviews) {
-        this.reviews = reviews;
+    public void setNSBReviews(Set<NSBReview> reviews) {
+        this.NSBReviews = reviews;
+    }
+    
+    public void setBARReviews(Set<BARReview> reviews) {
+        this.BARReviews = reviews;
+    }
+    
+    public void setGSBReviews(Set<GSBReview> reviews) {
+        this.GSBReviews = reviews;
+    }
+    
+    public void setTSBReviews(Set<TSBReview> reviews) {
+        this.TSBReviews = reviews;
+    }
+    
+    public Set<NSBReview> getNSBReviews() {
+       return NSBReviews;
+    }
+    
+    public Set<BARReview> getBARReviews() {
+       return BARReviews;
+    }
+    
+    public Set<TSBReview> getTSBReviews() {
+       return TSBReviews;
+    }
+    
+    public Set<GSBReview> getGSBReviews() {
+       return GSBReviews;
     }
     
     public void setId(long id) {
@@ -108,10 +145,6 @@ public class User {
     
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
-    }
-    
-    public Set<NSBReview> getReviews() {
-       return reviews;
     }
 
     public long getId() {

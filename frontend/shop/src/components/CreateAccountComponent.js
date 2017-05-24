@@ -2,7 +2,8 @@ import React from 'react';
 import Client from '../Client';
 
 export default class CreateAccountComponent extends React.Component{
-    exists;
+    userExists;
+    emailExists;
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -125,30 +126,37 @@ export default class CreateAccountComponent extends React.Component{
     }
 
     getUserNames(u) {
-        let exists = false;
+        let uExists = false;
+        let eExists = false;
         for(let i = 0; i<u.length; i++){
-            if(u[i].userName === this.refs.userName.value) exists = true;
+            if(u[i].userName === this.refs.userName.value) uExists = true;
+            if(u[i].email === this.refs.email.value) eExists = true;
         }
-        this.exists = exists;
+        this.userExists = uExists;
+        this.emailExists = eExists;
     }
 
     checkValues() {
         let emptyFields = false;
 
-        if (this.exists){
+        if (this.userExists) {
             this.refs.userName.setCustomValidity("Username already exists.\nPlease try again.");
         } else if (this.refs.userName.value.includes(" ")){
             this.refs.userName.setCustomValidity("Username can not contain spaces.\nPlease try again.");
-        }
-        else if(this.refs.password.value !== this.refs.passW2.value){
+        } else if (this.emailExists){
+            this.refs.email.setCustomValidity("Email already exists.\nPlease try again.");
+        } else if(this.refs.password.value !== this.refs.passW2.value){
             this.refs.userName.setCustomValidity('');
+            this.refs.email.setCustomValidity('');
             this.refs.passW2.setCustomValidity("Passwords Don't Match");
         } else {
             this.refs.userName.setCustomValidity('');
             this.refs.passW2.setCustomValidity('');
+            this.refs.email.setCustomValidity('');
 
             for (const ref in this.refs) {
                 let value = this.refs[ref].value;
+                if(this.refs[ref].checkValidity() === false) emptyFields = true;
                 if (value === "") emptyFields = true;
                 if(!emptyFields) {
                     if (ref !== "passW2") this.setState({[ref]: value});

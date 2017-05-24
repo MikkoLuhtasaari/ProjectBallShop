@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.ApplicationArguments;
 
+@CrossOrigin
 @RestController
 public class MyController implements ApplicationRunner {
     
@@ -59,6 +64,11 @@ public class MyController implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         printHelloMessage();
         initStuff();
+    }
+        
+    @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
+    public ResponseEntity handle() {
+        return new ResponseEntity(HttpStatus.OK);
     }
         
     // User related stuff
@@ -122,9 +132,16 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
     public User deleteUser(@PathVariable long userId) {
         
+        for(int i = 0; i<10; i++) {
+            System.out.println(" ");
+        }
+        System.out.println(userId);
+        for(int i = 0; i<10; i++) {
+            System.out.println(" ");
+        }
         if(userRepository.findOne(userId) != null) {
             User temp = userRepository.findOne(userId);
-            userRepository.delete(userRepository.findOne(userId));
+            userRepository.delete(userId);
             return temp;
         } else {
             System.out.println("Error! Invalid user id");
@@ -241,7 +258,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value="/netsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public NSBReview saveNSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody NSBReview review) {
         NSBReview temp = new NSBReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerOne(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());
@@ -385,7 +402,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value="/batandraquetsgame/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public BARReview saveBARReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody BARReview review) {
         BARReview temp = new BARReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerThree(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());
@@ -530,7 +547,7 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value="/goalsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public GSBReview saveGSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody GSBReview review) {
         GSBReview temp = new GSBReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerTwo(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());
@@ -674,7 +691,7 @@ public class MyController implements ApplicationRunner {
      @RequestMapping(value="/targetsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public TSBReview saveTSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody TSBReview review) {
         TSBReview temp = new TSBReview();
-        temp.setUserOwner(userRepository.findOne(userid));
+        temp.setUserOwnerFour(userRepository.findOne(userid));
         temp.setUserId(userid);
         temp.setScore(review.getScore());
         temp.setHeader(review.getHeader());
@@ -883,7 +900,7 @@ public class MyController implements ApplicationRunner {
         
         
         Set tempBARReview3 = new HashSet<BARReview>(){{
-            add(new BARReview(3, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
+            add(new BARReview(2, 1, "Meh", "Meh", tempBat3, 3, tempUser3, 3));
         }};
         
         tempBat3.setReviews(tempBARReview3);

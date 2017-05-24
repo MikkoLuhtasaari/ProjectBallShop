@@ -32,16 +32,16 @@ export default class Client {
     }
 
     filterArray(array, ballId) {
-      let parsed = [];
-      for(let i=0; i<array.length; i++) {
-        if(array[i].ownerBallId === ballId) {
-          parsed.push(array[i]);
+        let parsed = [];
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].ownerBallId === ballId) {
+                parsed.push(array[i]);
+            }
         }
-      }
-      return parsed;
+        return parsed;
     }
 
-    sendReview(sporttype, ballId, userId, rating, header, content){
+    sendReview(sporttype, ballId, userId, rating, header, content) {
         let targetUrl = "http://localhost:8080/" + sporttype + "/" + ballId + "/review/user/" + userId;
 
         fetch(targetUrl,
@@ -50,18 +50,18 @@ export default class Client {
                 mode: 'cors',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type':'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  'score':rating,
-                  'header': header,
-                  'content': content
+                    'score': rating,
+                    'header': header,
+                    'content': content
                 })
             }).then(function (response) {
-                return response;
-            }).catch(function (error) {
-                console.log(error);
-            });
+            return response;
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     getPromise(type, address) {
@@ -69,13 +69,13 @@ export default class Client {
             let request = new XMLHttpRequest();
             request.open(type, address);
             request.onreadystatechange = () => {
-                try{
+                try {
                     if (request.readyState === 4 && request.status === 200) {
                         let raw = request.responseText;
                         let objectified = JSON.parse(raw);
                         resolve(objectified);
                     }
-                }catch (e) {
+                } catch (e) {
                     reject(' :( ')
                 }
             };
@@ -86,7 +86,7 @@ export default class Client {
     createAccount(obj) {
         obj["accessLevel"] = "User";
         console.log(obj);
-        for(const i in obj) {
+        for (const i in obj) {
             console.log(i + ": " + obj[i]);
         }
         fetch("http://localhost:8080/user",
@@ -95,11 +95,11 @@ export default class Client {
                 mode: 'cors',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type':'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(obj)
             }).then(function (response) {
-                console.log(response);
+            console.log(response);
             return response;
         }).catch(function (error) {
             console.log(error);
@@ -115,27 +115,37 @@ export default class Client {
     }
 
     reduceQuantity(balls) {
-        console.log("PUTTI PUUTTUU");
-        console.log("TÄNNE TULLEET PALLOT PITÄÄ PUTATA, JOTTA MÄÄRÄT PÄIVITTYY")
-
-        for(let i = 0; i < balls.length; i++) {
+        for (let i = 0; i < balls.length; i++) {
             let o = balls[i].content;
-            let n = balls[i].count;
-
             let category = o.category.replace(/ /g, '').toLowerCase();
             if (!category.includes("game")) category += "sball";
-            console.log("--------")
-            if (n >= o.amount) console.log("DELETE: localhost:8080/" + category + "/" + o.id);
-            else console.log("PUT: " +
-                "localhost:8080/" + category + "/" + o.id + ":\n" +
-                "{\"name\" : \"" + o.name + "\", \"color\" : \"" + o.color + "\", " +
-                "\"diameter\" : " + o.diameter + ", \"weigth\" : " + o.weigth + ", \"details\" : \"" + o.details +
-                "\", \"material\" : \"" + o.material + "\", \"manufacturer\" : \"" + o.manufacturer + "\", " +
-                "\"shortDetails\" : \"" + o.shortDetails + "\", \"type\" : \"" + o.type + "\", " +
-                "\"price\" : " + o.price + ", \"amount\" : " + n +"}");
-            console.log("----------")
-        }
 
-        return this.getPromise("GET", "http://localhost:8080/users");
+            fetch("http://localhost:8080/" + category + "/" + o.id,
+                {
+                    method: 'PUT',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        'name': o.name,
+                        'color': o.color,
+                        'diameter': o.diameter,
+                        'weigth': o.weigth,
+                        'details': o.details,
+                        'material': o.material,
+                        'manufacturer': o.manufacturer,
+                        'shortDetails': o.shortDetails,
+                        'type': o.type,
+                        'price': o.price,
+                        'amount': o.amount - balls[i].count
+                    })
+                }).then(function (response) {
+                return response;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 }

@@ -1,28 +1,40 @@
 import React from 'react';
-import ShoppingCartComponent from '../components/ShoppingCartComponent'
-import LoginComponent from '../components/LoginComponent'
 import Client from "../Client";
+import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../Storage"
+
 
 export default class CheckoutComponent extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
+
+        let values = [];
+        let array = Storage_getCart();
+
+        for(let i = 0; i < array.length; i++)
+            values.push(array[i].count);
+
         this.state = {
-            balls: ShoppingCartComponent.cookies.get('ballArray')
+            balls: array,
+            inputs: values,
+            updated: false
         };
     }
 
     render(){
         let total = 0;
-        let cookieArray = ShoppingCartComponent.cookies.get('ballArray');
+        let array = Storage_getCart();
+        let productCount = 0;
 
-        for(let i = 0; i < cookieArray.length; i++) {
-            let o = cookieArray[i].content;
-            let n = cookieArray[i].count;
+        for(let i = 0; i < array.length; i++) {
+            let o = array[i].content;
+            let n = array[i].count;
             total += (o.price * n);
+            productCount += n;
         }
 
-        let postage = 6.95;
+        //Postage per item
+        let postage = 0.95;
         return(
             <div className="marginMx whiteBg">
                 <table className="table table-bordered">
@@ -44,13 +56,13 @@ export default class CheckoutComponent extends React.Component{
                     </tr>
                     <tr>
                         <td colSpan={3}>   </td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td className="text-right"><h5><strong>{(postage).toFixed(2)}€</strong></h5></td>
+                        <td><h5>Shipping</h5></td>
+                        <td className="text-right"><h5><strong>{(postage*productCount).toFixed(2)}€</strong></h5></td>
                     </tr>
                     <tr>
                         <td colSpan={3}/>
                         <td><h3>Total</h3></td>
-                        <td className="text-right"><h3><strong>{(total + postage).toFixed(2)}€</strong></h3></td>
+                        <td className="text-right"><h3><strong>{(total + (postage*productCount)).toFixed(2)}€</strong></h3></td>
                     </tr>
                     <tr>
                         <td colSpan={3}/>
@@ -91,14 +103,14 @@ export default class CheckoutComponent extends React.Component{
                             </div>
                         </div></td>
                     <td className="col-sm-1 col-md-1">
-                        <input type="number" className="form-control" ref="inputCounter" min="1" max={o.amount} value={n} onChange={() => this.addOrRemove(o, n, false)}/>
+                        <input type="number" className="form-control" min="1" max={o.amount} value={this.state.inputs[i]} onChange={(e)=> this.setValue(e.target.value, i, o, n)} />
                         <h5/>
                         <h5 className="media-heading">On stock: {o.amount}</h5>
                     </td>
                     <td className="col-sm-1 col-md-1 text-center"><strong>{o.price}€</strong></td>
                     <td className="col-sm-1 col-md-1 text-center"><strong>{(o.price * n).toFixed(2)}€</strong></td>
                     <td className="col-sm-1 col-md-1">
-                        <button type="button" className="btn btn-danger" onClick={() => this.addOrRemove(o, n, true)}>
+                        <button type="button" className="btn btn-danger" onClick={() => this.addOrRemove(o, n, i, true)}>
                             <span className="glyphicon glyphicon-remove" id="noMargin"/> Remove
                         </button></td>
                 </tr>
@@ -107,23 +119,27 @@ export default class CheckoutComponent extends React.Component{
         return temp;
     }
 
-    //TODO Jos ostoskorista poistaa tuotteen (remove-napilla) se kadottaa inputCounterin reffin ja palauttaa sen undefinedinä.
-    addOrRemove(ball, preCount, removeAll) {
-        if(typeof this.refs.inputCounter !== "undefined"){
-            if(removeAll || preCount > this.refs.inputCounter.value) ShoppingCartComponent.removeFromCart(ball, removeAll);
-            else ShoppingCartComponent.addToCart(ball);
-        }else console.log("PERSE!");
-        this.setState({balls: ShoppingCartComponent.cookies.get('ballArray')});
+    addOrRemove(ball, preCount, value, removeAll) {
+        if(removeAll || preCount > value) Storage_removeFromCart(ball, removeAll);
+        else Storage_addToCart(ball);
+        this.setState({balls: Storage_getCart()});
     }
 
     redirectToBank() {
-        if (LoginComponent.userId === "") alert("You have to sign in to buy items");
+        if (Storage_getUserId() === "" || Storage_getUserId() === null) alert("You have to sign in to buy items");
         else {
-            this.client.reduceQuantity(ShoppingCartComponent.cookies.get('ballArray')).then(() => {
-            ShoppingCartComponent.cookies.set('ballArray', []);
+            this.client.reduceQuantity(Storage_getCart());
+            Storage_setCart([]);
+            this.setState({balls: Storage_getCart()})
             alert("User is now redirected to bank services");
             window.location = '/#/';
-            });
         }
+    }
+
+    setValue(value, pos, o, n) {
+        let arr = this.state.inputs;
+        arr[pos] = value;
+        this.addOrRemove(o, n, value, false);
+        this.setState({inputs: arr});
     }
 }

@@ -1,15 +1,17 @@
 import React from 'react';
 import Client from '../Client';
+import {Storage_getUserId, Storage_setUserId, Storage_getUserName, Storage_setUserName} from '../Storage'
 
 export default class LoginComponent extends React.Component {
-    static userId = "";
-
     constructor(props) {
         super(props);
         this.client = new Client();
+        let logged = Storage_getUserId() !== null && Storage_getUserId() !== "";
+        let name = logged ? Storage_getUserName() : 'Sign in';
         this.state = {
             updated: false,
-            name: "Login"
+            name: name,
+            logged: logged
         };
     }
 
@@ -19,7 +21,7 @@ export default class LoginComponent extends React.Component {
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>{this.state.name}</b> <span
                     className="caret"/></a>
                 <ul id="login-dp" className="dropdown-menu">
-                    {this.loggedIn(this.state.name !== "Login")}
+                    {this.loggedIn(this.state.logged)}
                 </ul>
             </li>
         )
@@ -33,8 +35,10 @@ export default class LoginComponent extends React.Component {
                 (success) => {this.validateUser(success, pass, true)},
                 (failure) => {this.validateUser(failure, pass, false)});
         } else{
-            LoginComponent.userId = "";
-            this.setState({name: "Login"});
+            Storage_setUserId("");
+            Storage_setUserName("");
+            this.setState({name: "Sign in"});
+            this.setState({logged: false});
         }
     }
 
@@ -84,8 +88,10 @@ export default class LoginComponent extends React.Component {
         if(!success){
             alert("Incorrect username.\nPlease try again.")
         } else if(pass === user.password){
-            LoginComponent.userId = user.id;
+            Storage_setUserId(user.id);
+            Storage_setUserName(user.firstName + " " + user.lastName);
             this.setState({name: user.firstName + " " + user.lastName});
+            this.setState({logged: true})
         } else alert("Incorrect password.\nPlease try again.");
     }
 }

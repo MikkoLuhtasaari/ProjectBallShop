@@ -1,6 +1,6 @@
 import React from 'react';
 import Client from '../Client';
-import LoginComponent from '../components/LoginComponent';
+import {Storage_getUserId} from "../Storage";
 
 export default class ReviewsComponent extends React.Component{
     constructor(props) {
@@ -19,10 +19,21 @@ export default class ReviewsComponent extends React.Component{
     componentWillReceiveProps() {
         let g = this.props.group;
         let parsedG = this.parseGroup(g);
-        this.setState({group : parsedG});
 
-        if(parsedG !== undefined)
-            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.setState({reviews: r}));
+        if(parsedG !== undefined){
+            this.setState({group : parsedG});
+            this.client.reviewsByBallId(parsedG, this.props.ballId).then(r => this.updateReviews(r));
+        }
+    }
+
+    updateReviews(r){
+        //TODO tää antaa välillä varotusta. Kokeilin johtuuko tyhjistä taulukoista mutta ei...
+        // Warning: setState(...): Can only update a mounted or mounting component.
+        // This usually means you called setState() on an unmounted component. This is a no-op.
+        // Please check the code for the ReviewsComponent component.
+        console.log(r)
+        // if(r.length > 0)
+        this.setState({reviews: r})
     }
 
     parseGroup(group) {
@@ -163,10 +174,10 @@ export default class ReviewsComponent extends React.Component{
     }
 
     sendReview(header, content) {
-        let userId = LoginComponent.userId;
+        let userId = Storage_getUserId();
         if(this.state.rating < 1) alert("Please give star rating for your review.");
         else if(header === "" || content === "") alert("Please make sure you have given\nheader and content for your review.")
-        else if (userId === "") alert("You have to sign in to post reviews");
+        else if (userId === null || userId === "") alert("You have to sign in to post reviews");
         else {
             let formattedGroup = this.state.group.slice(0, this.state.group.length - 1);
             this.client.sendReview(formattedGroup, this.props.ballId, userId, this.state.rating, header, content);

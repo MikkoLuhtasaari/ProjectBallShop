@@ -33,14 +33,14 @@ public class TSBReview implements Serializable {
     private TargetSportsBall owner;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="OWNER_USER_ID")
+    @JoinColumn(name="OWNER_USER_FOUR_ID")
     @JsonIgnore
-    private User userOwner;
+    private User userOwnerFour;
     
     public TSBReview(){};
     
-    public TSBReview(long id, int score, String header, String content, TargetSportsBall owner, long ownerBallId, User userOwner, long userId) {
-        setUserOwner(userOwner);
+    public TSBReview(long id, int score, String header, String content, TargetSportsBall owner, long ownerBallId, User userOwnerFour, long userId) {
+        setUserOwnerFour(userOwnerFour);
         setScore(score);
         setHeader(header);
         setContent(content);
@@ -75,8 +75,8 @@ public class TSBReview implements Serializable {
         this.owner = owner;
     }
     
-    public void setUserOwner(User userOwner) {
-        this.userOwner = userOwner;
+    public void setUserOwnerFour(User userOwnerFour) {
+        this.userOwnerFour = userOwnerFour;
     }
     
     public void setOwnerBallId(long ownerBallId) {
@@ -107,8 +107,8 @@ public class TSBReview implements Serializable {
         return owner;
     }
     
-    public User getUserOwner() {
-        return userOwner;
+    public User getUserOwnerFour() {
+        return userOwnerFour;
     }
     
     public long getUserId() {

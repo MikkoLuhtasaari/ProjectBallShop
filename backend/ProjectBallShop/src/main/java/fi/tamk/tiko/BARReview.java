@@ -33,14 +33,14 @@ public class BARReview implements Serializable {
     private BatAndRaquetsGames owner;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="OWNER_USER_ID")
+    @JoinColumn(name="OWNER_USER_THREE_ID")
     @JsonIgnore
-    private User userOwner;
+    private User userOwnerThree;
     
     public BARReview(){};
     
-    public BARReview(long id, int score, String header, String content, BatAndRaquetsGames owner, long ownerBallId, User userOwner, long userId) {
-        setUserOwner(userOwner);
+    public BARReview(long id, int score, String header, String content, BatAndRaquetsGames owner, long ownerBallId, User userOwnerThree, long userId) {
+        setUserOwnerThree(userOwnerThree);
         setScore(score);
         setHeader(header);
         setContent(content);
@@ -74,8 +74,8 @@ public class BARReview implements Serializable {
         this.owner = owner;
     }
     
-    public void setUserOwner(User userOwner) {
-        this.userOwner = userOwner;
+    public void setUserOwnerThree(User userOwnerThree) {
+        this.userOwnerThree = userOwnerThree;
     }
     
     public void setOwnerBallId(long ownerBallId) {
@@ -106,8 +106,8 @@ public class BARReview implements Serializable {
         return owner;
     }
     
-    public User getUserOwner() {
-        return userOwner;
+    public User getUserOwnerThree() {
+        return userOwnerThree;
     }
     
     public long getUserId() {
