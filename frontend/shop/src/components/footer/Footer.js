@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class FooterComponent extends React.Component{
+export default class Footer extends React.Component{
     render(){
         return(
             <footer className="colorGray">

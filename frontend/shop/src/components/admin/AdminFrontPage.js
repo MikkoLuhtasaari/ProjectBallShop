@@ -1,5 +1,5 @@
 import React from 'react';
-import BallComponent from '../BallComponent'
+import BallHandler from '../pageContent/BallHandler'
 
 const styles = {
   button: {
@@ -19,10 +19,10 @@ export default class AdminFrontpage extends React.Component{
     return (
       <div>
         <a href="/#/admin/add"><button style={styles.button} > ADD ITEM </button></a>
-        <BallComponent group={"targetsportsballs"}/>
-        <BallComponent group={"goalsportsballs"}/>
-        <BallComponent group={"batandraquetsgames"}/>
-        <BallComponent group={"netsportsballs"}/>
+        <BallHandler group={"targetsportsballs"}/>
+        <BallHandler group={"goalsportsballs"}/>
+        <BallHandler group={"batandraquetsgames"}/>
+        <BallHandler group={"netsportsballs"}/>
       </div>
     );
   }

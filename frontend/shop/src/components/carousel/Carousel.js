@@ -1,10 +1,10 @@
 import React from 'react';
 import {React_Bootstrap_Carousel} from 'react-bootstrap-carousel';
-import Bowling from '../../public/images/bowling.jpg'
-import Soccer from '../../public/images/soccer.jpg'
-import Tennis from '../../public/images/tennis.jpg'
+import Bowling from '../../../public/images/bowling.jpg'
+import Soccer from '../../../public/images/soccer.jpg'
+import Tennis from '../../../public/images/tennis.jpg'
 
-export default class CarouselComponent extends React.Component{
+export default class Carousel extends React.Component{
 
     render(){
         return(

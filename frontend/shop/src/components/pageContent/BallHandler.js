@@ -1,9 +1,9 @@
 import React from 'react';
-import Client from '../Client';
-import ReviewsComponent from '../components/ReviewsComponent'
-import {Storage_addToCart} from '../Storage'
+import Client from '../../Client';
+import Reviews from './Reviews'
+import {Storage_addToCart} from '../../Storage'
 
-export default class BallComponent extends React.Component{
+export default class BallHandler extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -71,7 +71,7 @@ export default class BallComponent extends React.Component{
                 <span className="thumbnail itemThumb">
                     <a href={link}><img src={imageSrc} alt="Ball"/></a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
-                    <ReviewsComponent group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
+                    <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>
                     <hr className="item-line"/>
                     <div className="row">
