@@ -333,5 +333,4 @@ public class BatAndRaquetsGames {
     public Set<BARReview> getReviews() {
        return reviews;
     }
-    
 }
