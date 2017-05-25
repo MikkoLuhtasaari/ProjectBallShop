@@ -60,7 +60,6 @@ export default class BallHandler extends React.Component{
         if(!category.includes("game"))category += "sball";
         let link;
         if(this.state.admin) {
-            console.log(this.state.admin);
             link = "/#/admin/details/" + category + "/" + ballObject.id;
         } else {
           link = "/#/details/" + category + "/" + ballObject.id;

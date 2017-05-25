@@ -128,6 +128,19 @@ public class MyController implements ApplicationRunner {
             return null;
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/images/items/{type}/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getImage(@PathVariable("type")String type, @PathVariable("id")int id) {
+        try{
+            InputStream in = new ClassPathResource(
+                    "images/" + type + "/" + id).getInputStream();
+            return IOUtils.toByteArray(in);
+            )
+        }catch (IOException e){
+            console.log("NOT FOUND");
+        }
+    }
     
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
     public User deleteUser(@PathVariable long userId) {
