@@ -17,12 +17,8 @@ export default class Routes extends React.Component {
                 <Route path="/type/:group/:type" component={props => <BallHandler {...props} handleUpdate={this.props.handleUpdate} />}/>
                 <Route path="/group/:group" component={props => <BallHandler {...props} handleUpdate={this.props.handleUpdate} />}/>
                 <Route path="/details/:group/:id" component={props => <ItemDetails {...props} handleUpdate={this.props.handleUpdate} />}/>
-                <Route path="/admin">
-                    <IndexRoute component={ AdminFrontPage }/>
-                </Route>
-                <Route path="/admin/details/:group/:id">
-                    <IndexRoute component={ AdminItemDetailsComponent }/>
-                </Route>
+                <Route path="/admin" component={props => <AdminFrontPage {...props} handleUpdate={this.props.handleUpdate} />}/>
+                <Route path="/admin/details/:group/:id" component={props => <AdminItemDetailsComponent {...props} handleUpdate={this.props.handleUpdate} />}/>
                 <Route path="/admin/add">
                     <IndexRoute component={ AddItem }/>
                 </Route>

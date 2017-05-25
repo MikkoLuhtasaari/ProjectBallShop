@@ -71,7 +71,6 @@ export default class ShoppingCart extends React.Component{
             let o = array[i].content;
             let n = array[i].count;
             let imageSrc = "../../images/items/"+ o.type + "_" + o.id + ".png";
-            console.log(o.name)
             temp.push(
                 <span className="item" key={temp.length}>
                     <span className="item-left">

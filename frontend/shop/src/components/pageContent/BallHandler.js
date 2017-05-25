@@ -1,7 +1,6 @@
 import React from 'react';
 import Client from '../../Client';
 import Reviews from './Reviews'
-import Image from 'react-image-file';
 import {Storage_addToCart} from '../../Storage'
 
 export default class BallHandler extends React.Component{
@@ -17,13 +16,10 @@ export default class BallHandler extends React.Component{
         this.state = {
             balls: [],
             updated:false,
-            admin: administrator,
-            imageCount: 0
+            admin: administrator
         };
 
-        this.imageUrls = [];
         this.fetchItems = this.fetchItems.bind(this);
-        this.handleBlob = this.handleBlob.bind(this);
         this.fetchItems();
     }
 
@@ -46,7 +42,6 @@ export default class BallHandler extends React.Component{
     }
 
     render(){
-        console.log("OIKEE RENDER");
         return(
             <div className="marginMx">
                 <section id="allBalls">
@@ -56,22 +51,13 @@ export default class BallHandler extends React.Component{
         )
     }
 
-    handleBlob(b) {
-      this.imageUrls.push(this.createUrl(b));
-
-      console.log(this.imageUrls.length);
-      console.log(this.state.balls.length);
-
-      if(this.imageUrls.length <= this.state.balls.length) {
-          this.setState({imageCount: this.state.imageCount + 1});
-          console.log("REDNER");
-      }
-    }
-
     createContent(ballObject) {
         const propArray = [];
-        this.client.getImage(ballObject.type + "_" + ballObject.id + ".png")
-            .then((response) => this.handleBlob(response));
+        let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
+        if(ballObject.category === null) {
+            imageSrc = "../../images/items/no_image.png";
+            ballObject.category = "Net sport";
+        }
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
         let link;
@@ -82,14 +68,10 @@ export default class BallHandler extends React.Component{
           link = "/#/details/" + category + "/" + ballObject.id;
         }
 
-        console.log(this.imageUrls);
-
-        // https://www.npmjs.com/package/react-image-file, ei toimi?
-
         propArray.push(
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
-                    <a href={link}><Image file={this.imageUrls[propArray.length]} alt="Ball"/>URL:{this.imageUrls[propArray.length]}</a>
+                    <a href={link}><img id="ballImage" src={imageSrc} className="img-responsive" alt="Ball"/></a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
                     <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>
@@ -127,12 +109,5 @@ export default class BallHandler extends React.Component{
         Storage_addToCart(ball);
         let handleUpdate = this.props.handleUpdate;
         return handleUpdate(true);
-    }
-
-    createUrl(blob) {
-        const urlCreator = window.URL || window.webkitURL;
-        let imageUrl = urlCreator.createObjectURL(blob);
-        imageUrl = imageUrl.replace("blob:", "");
-        return imageUrl;
     }
 }

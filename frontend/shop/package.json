@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react-image-file": "0.1.0",
     "babel-plugin-react-css-modules": "^2.6.1",
     "bootstrap": "^3.3.7",
     "react": "^15.5.4",
     "react-bootstrap-carousel": "^1.2.0",
     "react-dom": "^15.5.4",
     "react-fontawesome": "^1.6.1",
+    "react-image-file": "0.1.0",
     "react-router": "^3.0.5",
     "react-scripts": "^0.9.5"
   },

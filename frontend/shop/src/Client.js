@@ -85,10 +85,6 @@ export default class Client {
 
     createAccount(obj) {
         obj["accessLevel"] = "User";
-        console.log(obj);
-        for (const i in obj) {
-            console.log(i + ": " + obj[i]);
-        }
         fetch("http://localhost:8080/user",
             {
                 method: 'POST',
@@ -99,7 +95,6 @@ export default class Client {
                 },
                 body: JSON.stringify(obj)
             }).then(function (response) {
-            console.log(response);
             return response;
         }).catch(function (error) {
             console.log(error);

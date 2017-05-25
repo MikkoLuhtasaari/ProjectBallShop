@@ -69,6 +69,10 @@ public class NetSportsBall implements Serializable {
      * Hole amount of the ball
      */
     private int holeAmount;
+    /**
+     * Category of the ball
+     */
+    private String category;
     
     /**
      * Id of the ball
@@ -77,10 +81,7 @@ public class NetSportsBall implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
-    /**
-     * Category of the ball
-     */
-    private String category;
+    
     
     /**
      * Join column with reviews
@@ -97,6 +98,7 @@ public class NetSportsBall implements Serializable {
      * Constructor
      */
     public NetSportsBall(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
+        this.category = "Net sport";
         setName(name);
         setColor(color);
         setDiameter(diameter);
@@ -108,8 +110,7 @@ public class NetSportsBall implements Serializable {
         setType(type);
         setPrice(price);
         setAmount(amount);
-        setId(id);
-        category = "Net sport";
+        setId(id);        
     }
     
     /**

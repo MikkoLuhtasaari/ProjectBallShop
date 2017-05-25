@@ -4,7 +4,7 @@ Navigate to:
 frontend/shop
 
 --> Commands:
-npm install -g create-react-app
+npm install --save -g create-react-app
 npm install --save react react-dom
 npm install --save react-scripts
 npm install --save react-router

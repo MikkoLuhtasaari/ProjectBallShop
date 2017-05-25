@@ -39,6 +39,8 @@ export default class SignIn extends React.Component {
             Storage_setUserName("");
             this.setState({name: "Sign in"});
             this.setState({logged: false});
+            alert("You are now logged out");
+                window.location = '/#/';
         }
     }
 

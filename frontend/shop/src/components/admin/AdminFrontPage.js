@@ -19,10 +19,10 @@ export default class AdminFrontpage extends React.Component{
     return (
       <div>
         <a href="/#/admin/add"><button style={styles.button} > ADD ITEM </button></a>
-        <BallHandler group={"targetsportsballs"}/>
-        <BallHandler group={"goalsportsballs"}/>
-        <BallHandler group={"batandraquetsgames"}/>
-        <BallHandler group={"netsportsballs"}/>
+        <BallHandler group={"targetsportsballs"} handleUpdate={this.props.handleUpdate}/>
+        <BallHandler group={"goalsportsballs"} handleUpdate={this.props.handleUpdate}/>
+        <BallHandler group={"batandraquetsgames"} handleUpdate={this.props.handleUpdate}/>
+        <BallHandler group={"netsportsballs"} handleUpdate={this.props.handleUpdate}/>
       </div>
     );
   }
