@@ -1,7 +1,7 @@
 import React from 'react';
-import Client from '../Client';
+import Client from '../../Client';
 
-export default class CreateAccountComponent extends React.Component{
+export default class CreateAccount extends React.Component{
     userExists;
     emailExists;
     constructor(props) {

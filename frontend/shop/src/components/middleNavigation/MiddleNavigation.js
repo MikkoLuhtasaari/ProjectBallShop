@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class MiddleNavComponent extends React.Component{
+export default class MiddleNavigation extends React.Component{
     render(){
         return(
             <nav className="navbar-inverse center">

@@ -1,7 +1,7 @@
 import React from 'react';
-import {Storage_getCart, Storage_removeFromCart} from '../Storage'
+import {Storage_getCart, Storage_removeFromCart} from '../../Storage'
 
-export default class ShoppingCartComponent extends React.Component{
+export default class ShoppingCart extends React.Component{
     constructor(props) {
         super(props);
         let updated = false;
@@ -70,10 +70,12 @@ export default class ShoppingCartComponent extends React.Component{
         for (let i = 0; i < array.length; i++) {
             let o = array[i].content;
             let n = array[i].count;
+            let imageSrc = "../../images/items/"+ o.type + "_" + o.id + ".png";
+            console.log(o.name)
             temp.push(
                 <span className="item" key={temp.length}>
                     <span className="item-left">
-                        <img src="images/items/Football_1.png" id="img40" alt="item"/>
+                        <img src={imageSrc} id="img40" alt="item"/>
                         <span className="item-info">
                             <span>{n}x {o.name}</span>
                             <span>{o.price} €</span>
@@ -81,12 +83,17 @@ export default class ShoppingCartComponent extends React.Component{
                     </span>
                     <span className="item-right">
                         <button className="btn btn-xs btn-danger pull-right marginR10"
-                                onClick={() => Storage_removeFromCart(o, true)}>X</button>
+                                onClick={() => this.removeItem(o)}>X</button>
                     </span>
                 </span>
             )
         }
         return temp;
+    }
+
+    removeItem(o){
+        Storage_removeFromCart(o, true);
+        this.setState({updated: !this.state.updated})
     }
 
     viewCart() {

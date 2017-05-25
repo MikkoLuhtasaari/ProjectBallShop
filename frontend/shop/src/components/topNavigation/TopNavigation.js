@@ -1,9 +1,9 @@
 import React from 'react';
-import LoginComponent from '../components/LoginComponent';
-import ShoppingCartComponent from '../components/ShoppingCartComponent';
-import SearchComponent from '../components/SearchComponent';
+import SignIn from './SignIn';
+import ShoppingCart from './ShoppingCart';
+import Search from './Search';
 
-export default class TopNavComponent extends React.Component{
+export default class TopNavigation extends React.Component{
     render(){
         return(
             <nav className="navbar navbar-inverse navbar-fixed-top top-bar fixed bs-dark">
@@ -20,11 +20,11 @@ export default class TopNavComponent extends React.Component{
                 </div>
                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form className="navbar-form navbar-left form-horizontal" role="search">
-                        <SearchComponent />
+                        <Search />
                     </form>
                     <ul className="nav navbar-nav navbar-right">
-                        <LoginComponent/>
-                        <ShoppingCartComponent updated={false}/>
+                        <SignIn/>
+                        <ShoppingCart updated={false}/>
                     </ul>
                 </div>
             </nav>

@@ -1,9 +1,9 @@
 import React from 'react';
-import Client from "../Client";
-import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../Storage"
+import Client from "../../Client";
+import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../../Storage"
 
 
-export default class CheckoutComponent extends React.Component{
+export default class Checkout extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -91,11 +91,12 @@ export default class CheckoutComponent extends React.Component{
             let category = o.category.replace(/ /g,'').toLowerCase();
             if(!category.includes("game"))category += "sball";
             let link = "/#/details/" + category + "/" + o.id;
+            let imageSrc = "../../images/items/"+ o.type + "_" + o.id + ".png";
             temp.push(
                 <tr key={temp.length}>
                     <td className="col-sm-8 col-md-6">
                         <div className="media">
-                            <img className="pull-left media-object" id="scaleImg" alt="item" src="../../images/items/Baseball_1.png"/>
+                            <img className="pull-left media-object" id="scaleImg" alt="item" src={imageSrc}/>
                             <div className="media-body">
                                 <h4 className="media-heading"><a href={link}>{o.name}</a></h4>
                                 <h5 className="media-heading">{o.manufacturer}</h5>

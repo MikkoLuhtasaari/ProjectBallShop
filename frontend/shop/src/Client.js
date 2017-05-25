@@ -148,4 +148,21 @@ export default class Client {
             });
         }
     }
+
+    addItemToDatabase(obj, category) {
+        fetch("http://localhost:8080/" + category,
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            }).then(function (response) {
+            return response;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 }

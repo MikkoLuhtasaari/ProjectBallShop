@@ -1,9 +1,9 @@
 import React from 'react';
-import Content from "./Content";
-import FooterComponent from "./FooterComponent";
-import MiddleNavComponent from "./MiddleNavComponent";
-import TopNavComponent from "./TopNavComponent";
-import CarouselComponent from "./CarouselComponent";
+import Routes from "./pageContent/Routes";
+import Footer from "./footer/Footer";
+import MiddleNavigation from "./middleNavigation/MiddleNavigation";
+import TopNavigation from "./topNavigation/TopNavigation";
+import CarouselComponent from "./carousel/Carousel";
 
 export default class BallShop extends React.Component{
     constructor(props) {
@@ -20,16 +20,15 @@ export default class BallShop extends React.Component{
         return(
             <div>
                 <div className="container">
-                    <TopNavComponent updated={false}/>
+                    <TopNavigation updated={false}/>
                 </div>
-                <CarouselComponent/>
+                    <CarouselComponent/>
                 <div className="container-fullwidth">
-                    <MiddleNavComponent/>
+                    <MiddleNavigation/>
                 </div>
-
                 <div className="colorGray">
-                    <Content handleUpdate={this.handleUpdate} />
-                    <FooterComponent/>
+                    <Routes handleUpdate={this.handleUpdate} />
+                    <Footer/>
                 </div>
             </div>
         )

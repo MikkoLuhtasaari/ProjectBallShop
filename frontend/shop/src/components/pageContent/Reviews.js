@@ -1,8 +1,8 @@
 import React from 'react';
-import Client from '../Client';
-import {Storage_getUserId} from "../Storage";
+import Client from '../../Client';
+import {Storage_getUserId} from "../../Storage";
 
-export default class ReviewsComponent extends React.Component{
+export default class Reviews extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -30,7 +30,7 @@ export default class ReviewsComponent extends React.Component{
         //TODO tää antaa välillä varotusta. Kokeilin johtuuko tyhjistä taulukoista mutta ei...
         // Warning: setState(...): Can only update a mounted or mounting component.
         // This usually means you called setState() on an unmounted component. This is a no-op.
-        // Please check the code for the ReviewsComponent component.
+        // Please check the code for the Reviews component.
         // if(r.length > 0)
 
         this.setState({reviews: r})

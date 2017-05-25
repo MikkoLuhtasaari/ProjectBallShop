@@ -1,7 +1,7 @@
 import React from 'react';
-import Client from "../Client";
+import Client from "../../Client";
 
-export default class SearchComponent extends React.Component {
+export default class Search extends React.Component {
     state = { searchString: '', balls: [] };
     handleChange = (e) => {
         this.setState({searchString: e.target.value});

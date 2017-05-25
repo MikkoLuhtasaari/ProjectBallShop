@@ -1,4 +1,5 @@
 import React from 'react';
+import Client from "../../Client";
 
 const styles = {
   form: {
@@ -25,68 +26,82 @@ const styles = {
   }
 };
 
-//TODO: send form data in JSON
-
 export default class ItemForm extends React.Component{
   constructor(props) {
     super(props);
-    console.log('http://localhost:8080/' + props.category);
+      this.client = new Client();
+
     this.state = {
-      formAction:'http://localhost:8080' + props.category
+        formAction: 'http://localhost:3000/#/group/' + props.category + "s",
+        html:'http://localhost:8080/' + props.category
     };
   }
 
   render(){
     return (
       <div>
-        <form style={styles.form} action={this.state.formAction} method="post">
+        <form id="myForm" style={styles.form} action={this.state.formAction}>
           <div style={styles.row}>
             <div style={styles.title}>Name</div>
-            <input style={styles.input} type="text"/>
+            <input id="name" style={styles.input} type="text" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Color</div>
-            <input style={styles.input} type="text"/>
+            <input id="color" style={styles.input} type="text" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Diameter</div>
-            <input style={styles.input} type="text"/>
+            <input id="diameter" style={styles.input} type="number" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Weight</div>
-            <input style={styles.input} type="text"/>
+            <input id="weigth" style={styles.input} type="number" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Details</div>
-            <input style={styles.input} type="text"/>
+            <input id="details" style={styles.input} type="text" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Material</div>
-            <input style={styles.input} type="text"/>
+            <input id="material" style={styles.input} type="text" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Manufacturer</div>
-            <input style={styles.input} type="text"/>
+            <input id="manufacturer" style={styles.input} type="text" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Short Details</div>
-            <input style={styles.input} type="text"/>
+            <input id="shortDetails" style={styles.input} type="text" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Type</div>
-            <input style={styles.input} type="text"/>
+            <input id="type" style={styles.input} type="text" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Price</div>
-            <input style={styles.input} type="text"/>
+            <input id="price" style={styles.input} type="number" required={true}/>
           </div>
           <div style={styles.row}>
             <div style={styles.title}>Amount</div>
-            <input style={styles.input} type="text"/>
+            <input id="amount" style={styles.input} type="number" required={true}/>
           </div>
-          <input style={styles.submitButton} type="submit"/>
+          <input style={styles.submitButton} onClick={() => this.sendDataToDatabase(this.state.html)} type="submit"/>
         </form>
       </div>
     );
   }
+//
+// <div style={styles.row}>
+// <div style={styles.title}>Image</div>
+// <input id="image" style={styles.input} type="file" required={true} accept="image/*"/>
+// </div>
+    sendDataToDatabase(http) {
+        let container = document.getElementById('myForm');
+        let inputs = container.getElementsByTagName('input');
+        let obj = {};
+        for (let index = 0; index < inputs.length; ++index) {
+            obj[inputs[index].id] = inputs[index].value;
+        }
+        this.client.addItemToDatabase(obj, this.props.category);
+    }
 }
