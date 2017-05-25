@@ -1,6 +1,7 @@
 import React from 'react';
 import Client from '../../Client';
 import Reviews from './Reviews'
+import Image from 'react-image-file';
 import {Storage_addToCart} from '../../Storage'
 
 export default class BallHandler extends React.Component{
@@ -16,10 +17,13 @@ export default class BallHandler extends React.Component{
         this.state = {
             balls: [],
             updated:false,
-            admin: administrator
+            admin: administrator,
+            imageCount: 0
         };
 
+        this.imageUrls = [];
         this.fetchItems = this.fetchItems.bind(this);
+        this.handleBlob = this.handleBlob.bind(this);
         this.fetchItems();
     }
 
@@ -42,6 +46,7 @@ export default class BallHandler extends React.Component{
     }
 
     render(){
+        console.log("OIKEE RENDER");
         return(
             <div className="marginMx">
                 <section id="allBalls">
@@ -51,25 +56,40 @@ export default class BallHandler extends React.Component{
         )
     }
 
+    handleBlob(b) {
+      this.imageUrls.push(this.createUrl(b));
+
+      console.log(this.imageUrls.length);
+      console.log(this.state.balls.length);
+
+      if(this.imageUrls.length <= this.state.balls.length) {
+          this.setState({imageCount: this.state.imageCount + 1});
+          console.log("REDNER");
+      }
+    }
+
     createContent(ballObject) {
         const propArray = [];
-        let imageUrls = [];
         this.client.getImage(ballObject.type + "_" + ballObject.id + ".png")
-            .then((response) => imageUrls.push(this.createUrl(response)));
+            .then((response) => this.handleBlob(response));
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
         let link;
+
         if(this.state.admin) {
             link = "/#/admin/details/" + category + "/" + ballObject.id;
         } else {
           link = "/#/details/" + category + "/" + ballObject.id;
         }
 
-        console.log(imageUrls.length)
+        console.log(this.imageUrls);
+
+        // https://www.npmjs.com/package/react-image-file, ei toimi?
+
         propArray.push(
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
-                    <a href={link}><img src={imageUrls[propArray.length]} alt="Ball"/>URL:{imageUrls[propArray.length]}</a>
+                    <a href={link}><Image file={this.imageUrls[propArray.length]} alt="Ball"/>URL:{this.imageUrls[propArray.length]}</a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
                     <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>

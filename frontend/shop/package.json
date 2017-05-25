@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "react-image-file": "0.1.0",
     "babel-plugin-react-css-modules": "^2.6.1",
     "bootstrap": "^3.3.7",
     "react": "^15.5.4",
