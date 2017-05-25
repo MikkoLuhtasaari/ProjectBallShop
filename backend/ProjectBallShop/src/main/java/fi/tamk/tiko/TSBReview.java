@@ -4,32 +4,72 @@ import javax.persistence.*;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Contains target sports ball reviews.
+ *
+ * @author      Mikko Luhtasaari
+ * @version     4.0
+ * @since       4.0
+ */
 @Entity
 @Table(indexes = {@Index(columnList="userId")})
-public class TSBReview implements Serializable
-{
+public class TSBReview implements Serializable {
+    /**
+     * Unique id to identify review.
+     */
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    
+    /**
+     * Unique id to identify reviews user.
+     */
     private long userId;
+    
+    /**
+     * Unique id to identify reviews ball.
+     */
     private long ownerBallId;
+    
+    /**
+     * How many points the user gave to ball.
+     */
     private int score;
+    
+    /**
+     * Reviews header.
+     */
     private String header;
+    
+    /**
+     * Reviews content.
+     */
     private String content;
+    
+    /**
+     * Join column with ball.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="BAR_ID")
     @JsonIgnore
     private TargetSportsBall owner;
-
-    private long ballID;
     
+    /**
+     * Join column with user.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="OWNER_USER_ID")
     @JsonIgnore
     private User userOwner;
     
+    /**
+     * Basic constructor.
+     */
     public TSBReview(){};
     
+    /**
+     * Constructor
+     */
     public TSBReview(long id, int score, String header, String content, TargetSportsBall owner, long ownerBallId, User userOwner, long userId) {
         setUserOwner(userOwner);
         setScore(score);
