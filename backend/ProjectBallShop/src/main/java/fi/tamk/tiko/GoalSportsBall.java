@@ -7,62 +7,100 @@ import java.util.Set;
 import java.io.Serializable;
 
 @Entity
-@Table(indexes = {@Index(columnList="name"), @Index(columnList="amount"), @Index(columnList="type")})
+@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
 public class GoalSportsBall {
     
-    @Column(name = "name", length = 128, nullable = false, unique = false)
+    /**
+     * Name of the ball
+     */
     private String name;
     
-    @Column(name = "color", length = 30, nullable = false, unique = false)
+    /**
+     * Color of the ball
+     */
     private String color;
     
-    @Column(name = "diameter")
+    /**
+     * Diameter of the ball
+     */
     private int diameter;
     
-    @Column(name = "weigth")
+    /**
+     * Weigth of the ball
+     */
     private int weigth;
     
-    @Column(name = "details")
+    /**
+     * Details of the ball
+     */
     private String details;
     
-    @Column(name = "material", length = 50, nullable = false, unique = false)
+    /**
+     * Material of the ball
+     */
     private String material;
     
-    @Column(name = "manufacturer", length = 128, nullable = false, unique = false)
+    /**
+     * Manufacturer of the ball
+     */
     private String manufacturer;
     
-    @Column(name = "short_details", length = 255, nullable = false, unique = false)
+    /**
+     * Short details of the ball
+     */
     private String shortDetails;
     
-    @Column(name = "type", length = 50, nullable = false, unique = false)
+    /**
+     * Type of the ball
+     */
     private String type;
     
-    @Column(name = "price")
+    /**
+     * Price of the ball
+     */
     private double price;
     
-    @Column(name = "amount")
+    /**
+     * Amount of the ball
+     */
     private int amount;
     
+    /**
+     * Hole amount of the ball
+     */
+    private int holeAmount;
+    
+    /**
+     * Id of the ball
+     */
     @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
-    @Column(name = "category")
+    /**
+     * Category of the ball
+     */
     private String category;
     
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval=true)
+    /**
+     * Join column with reviews
+     */
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<GSBReview> reviews;
     
-    public GoalSportsBall(){
-        category = "Goal sport";
-    };
+    /**
+     * Constructor
+     */
+    public GoalSportsBall(){};
     
+    /**
+     * Constructor
+     */
     public GoalSportsBall(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
         setName(name);
         setColor(color);
         setDiameter(diameter);
-        setWeigth(weigth);
+        setWeight(weigth);
         setDetails(details);
         setMaterial(material);
         setManufacturer(manufacturer);
@@ -74,110 +112,217 @@ public class GoalSportsBall {
         category = "Goal sport";
     }
     
+    /**
+     * Sets the name
+     *
+     * @param name name of the ball
+     */
     public void setName(String name) {
         this.name = name;
     }
     
+    /**
+     * Sets the color
+     *
+     * @param color color of the ball
+     */
     public void setColor(String color) {
         this.color = color;
     }
     
+    /**
+     * Sets the diameter
+     *
+     * @param diameter diameter of the ball
+     */
     public void setDiameter(int diameter) {
         this.diameter = diameter;
     }
     
-    public void setWeigth(int weigth) {
+    /**
+     * Sets the weigth
+     *
+     * @param weigth weigth of the ball
+     */
+    public void setWeight(int weigth) {
         this.weigth = weigth;
     }
     
+    /**
+     * Sets the details
+     *
+     * @param details details of the ball
+     */
     public void setDetails(String details) {
         this.details = details;
     }
     
+    /**
+     * Sets the material
+     *
+     * @param material material of the ball
+     */
     public void setMaterial(String material) {
         this.material = material;
     }
     
+    /**
+     * Sets the manufacturer
+     *
+     * @param manufacturer manufacturer of the ball
+     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
     
+    /**
+     * Sets the short details
+     *
+     * @param shortDetails short details of the ball
+     */
     public void setShortDetails(String shortDetails) {
         this.shortDetails = shortDetails;
     }
     
+    /**
+     * Sets the type
+     *
+     * @param type type of the ball
+     */
     public void setType(String type) {
         this.type = type;
     }
     
+    /**
+     * Sets the price
+     *
+     * @param price price of the ball
+     */
     public void setPrice(double price) {
         this.price = price;
     }
     
+    /**
+     * Sets the amount
+     *
+     * @param amount amount of the ball
+     */
     public void setAmount(int amount) {
         this.amount = amount;
     }
     
+    /**
+     * Sets the id
+     *
+     * @param id id of the ball
+     */
     public void setId(long id) {
         this.id = id;
     }
     
+    /**
+     * Sets the reviews
+     *
+     * @param reviews reviews of the ball
+     */
     public void setReviews(Set<GSBReview> reviews) {
         this.reviews = reviews;
     }
     
+    /**
+     * Return the name
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * Return the color
+     */
     public String getColor() {
         return color;
     }
     
+    /**
+     * Return the diameter
+     */
     public int getDiameter() {
         return diameter;
     }
     
+    /**
+     * Return the weigth
+     */
     public int getWeigth() {
         return weigth;
     }
     
+    /**
+     * Return the details
+     */
     public String getDetails() {
         return details;
     }
     
+    /**
+     * Return the material
+     */
     public String getMaterial() {
         return material;
     }
     
+    /**
+     * Return the manufacturer
+     */
     public String getManufacturer() {
         return manufacturer;
     }
     
+    /**
+     * Return the short details
+     */
     public String getShortDetails() {
         return shortDetails;
     }
     
+    /**
+     * Return the type
+     */
     public String getType() {
         return type;
     }
     
+    /**
+     * Return the price
+     */
     public double getPrice() {
         return price;
     }
     
+    /**
+     * Return the amount
+     */
     public int getAmount() {
         return amount;
     }
     
+    /**
+     * Return the id
+     */
     public long getId() {
         return id;
     }
     
+    /**
+     * Return the category
+     */
     public String getCategory() {
         return category;
     }
     
+    /**
+     * Return the reviews
+     */
     public Set<GSBReview> getReviews() {
        return reviews;
     }

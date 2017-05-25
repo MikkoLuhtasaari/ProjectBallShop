@@ -6,64 +6,84 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.io.Serializable;
 
+/**
+ * Contains users
+ *
+ * @author      Mikko Luhtasaari
+ * @version     4.0
+ * @since       1.0
+ */
 @Entity
-//@Table(indexes = {@Index(columnList="username")})
+//@Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="holeAmount")})
 public class User {
     
-    @Column(name = "username", length = 50, nullable = false, unique = true)
+    /**
+     * Users username
+     */
     private String userName;
     
-    @Column(name = "email", length = 80, nullable = false, unique = true)
+    /**
+     * Users email
+     */
     private String email;
     
-    @Column(name = "password", length = 30, nullable = false, unique = false)
+    /**
+     * Users password
+     */
     private String password;
     
-    @Column(name = "firstname", length = 30, nullable = false, unique = false)
+    /**
+     * Users firstname
+     */
     private String firstName;
     
-    @Column(name = "lastname", length = 50, nullable = false, unique = false)
+    /**
+     * Users lastname
+     */
     private String lastName;
     
-    @Column(name = "city", length = 50)
+    /**
+     * Users city
+     */
     private String city;
     
-    @Column(name = "address", length = 80)
+    /**
+     * Users address
+     */
     private String address;
     
-    @Column(name = "zip_code")
+    /**
+     * Users zipcode
+     */
     private int zipCode;
     
-    @Column(name = "access_level", length = 20)
+    /**
+     * Users accessLevel
+     */
     private String accessLevel;
     
+    /**
+     * Users id
+     */
     @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     
-    /*@ManyToOne
-    @JoinColumn(name = "PARENT_ID")
-    private NSBReview parentNode;
+    /**
+     * Join column to reviews
+     */
+    @OneToMany(mappedBy = "userOwner", cascade = CascadeType.ALL)
+    private Set<NSBReview> reviews;
     
-    @OneToMany(mappedBy = "userOwner", cascade = CascadeType.REMOVE)
-    private Set<NSBReview> reviews;*/
-    
-    @OneToMany(mappedBy = "userOwnerOne", cascade = CascadeType.ALL, orphanRemoval=true)
-    private Set<NSBReview> NSBReviews;
-    
-    @OneToMany(mappedBy = "userOwnerTwo", cascade = CascadeType.ALL, orphanRemoval=true)
-    private Set<GSBReview> GSBReviews;
-    
-    @OneToMany(mappedBy = "userOwnerThree", cascade = CascadeType.ALL, orphanRemoval=true)
-    private Set<BARReview> BARReviews;
-    
-    @OneToMany(mappedBy = "userOwnerFour", cascade = CascadeType.ALL, orphanRemoval=true)
-    private Set<TSBReview> TSBReviews;
-    
+    /**
+     * Constructor
+     */
     public User(){};
     
-    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel) {
+    /**
+     * Constructor
+     */
+    public User(String firstName, String lastName, String userName, String password, String email, String city, String address, int zipCode, String accessLevel, long id) {
         setFirstName(firstName);
         setLastName(lastName);
         setUserName(userName);
@@ -73,116 +93,181 @@ public class User {
         setAccessLevel(accessLevel);
         setPassword(password);
         setEmail(email);
+        setId(id);
     }
     
-    public void setNSBReviews(Set<NSBReview> reviews) {
-        this.NSBReviews = reviews;
+    /**
+     * Sets reviews to user
+     *
+     * @param reviews users reviews
+     */
+    public void setReviews(Set<NSBReview> reviews) {
+        this.reviews = reviews;
     }
     
-    public void setBARReviews(Set<BARReview> reviews) {
-        this.BARReviews = reviews;
-    }
-    
-    public void setGSBReviews(Set<GSBReview> reviews) {
-        this.GSBReviews = reviews;
-    }
-    
-    public void setTSBReviews(Set<TSBReview> reviews) {
-        this.TSBReviews = reviews;
-    }
-    
-    public Set<NSBReview> getNSBReviews() {
-       return NSBReviews;
-    }
-    
-    public Set<BARReview> getBARReviews() {
-       return BARReviews;
-    }
-    
-    public Set<TSBReview> getTSBReviews() {
-       return TSBReviews;
-    }
-    
-    public Set<GSBReview> getGSBReviews() {
-       return GSBReviews;
-    }
-    
+    /**
+     * Sets id to user
+     *
+     * @param id users id
+     */
     public void setId(long id) {
         this.id = id;
     }
     
+    /**
+     * Sets username to user
+     *
+     * @param userName users username
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
     
+    /**
+     * Sets email to user
+     *
+     * @param email users email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
     
+    /**
+     * Sets password to user
+     *
+     * @param password users password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
     
+    /**
+     * Sets firstname to user
+     *
+     * @param firstName users firstname
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
     
+    /**
+     * Sets lastname to user
+     *
+     * @param lastName users lastname
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
     
+    /**
+     * Sets city to user
+     *
+     * @param city users city
+     */
     public void setCity(String city) {
         this.city = city;
     }
     
+    /**
+     * Sets address to user
+     *
+     * @param address users address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
     
+    /**
+     * Sets zip code to user
+     *
+     * @param zipCode users zip code
+     */
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
     
+    /**
+     * Sets accessLevel to user
+     *
+     * @param accessLevel users accessLevel
+     */
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
+    
+    /**
+     * Returns reviews
+     */
+    public Set<NSBReview> getReviews() {
+       return reviews;
+    }
 
+    /**
+     * Returns id
+     */
     public long getId() {
         return id;
     }
     
+    /**
+     * Returns username
+     */
     public String getUserName() {
         return userName;
     }
     
+    /**
+     * Returns email
+     */
     public String getEmail() {
         return email;
     }
     
+    /**
+     * Returns password
+     */
     public String getPassword() {
         return password;
     }
     
+    /**
+     * Returns firstname
+     */
     public String getFirstName() {
         return firstName;
     }
     
+    /**
+     * Returns lastName
+     */
     public String getLastName() {
         return lastName;
     }
     
+    /**
+     * Returns address
+     */
     public String getAddress() {
         return address;
     }
     
+    /**
+     * Returns city
+     */
     public String getCity() {
         return city;
     }
     
+    /**
+     * Returns zip code
+     */
     public int getZipCode() {
         return zipCode;
     }
     
+    /**
+     * Returns accessLevel
+     */
     public String getAccessLevel() {
         return accessLevel;
     }
