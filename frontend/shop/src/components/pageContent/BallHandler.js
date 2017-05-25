@@ -55,7 +55,17 @@ export default class BallHandler extends React.Component{
 
     createContent(ballObject) {
         const propArray = [];
-        let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
+        let image;
+
+        let myImage = new Image();
+
+        myImage.crossOrigin = "";
+        this.client.getImage(ballObject.type + "_" + ballObject.id + ".png").then(function (response) {
+            myImage.src = URL.createObjectURL(response);
+            image = myImage;
+        }, function (Error) {
+            console.log(Error);
+        });
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
         let link;
@@ -68,7 +78,7 @@ export default class BallHandler extends React.Component{
         propArray.push(
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
-                    <a href={link}><img src={imageSrc} alt="Ball"/></a>
+                    <a href={link}><img src={image} alt="Ball"/></a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
                     <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>

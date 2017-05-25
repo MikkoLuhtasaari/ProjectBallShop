@@ -1,6 +1,7 @@
 package fi.tamk.tiko;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin
@@ -121,19 +125,28 @@ public class MyController implements ApplicationRunner {
         }
     }
 
-    @RequestMapping(value = "/image",  method=RequestMethod.POST)
-    public void imageUpload(@RequestParam("file") MultipartFile file, @PathVariable("type") String type, @PathVariable("id") int id) {
-        System.out.println("VITTU");
+    @RequestMapping(value = "/image/{filename}",  method=RequestMethod.POST)
+    public void imageUpload(@PathVariable String fileName, @RequestParam("file") MultipartFile file) {
         try {
-            System.out.println("type: " + type);
-            System.out.println("ID: " + id);
             byte[] bytes = file.getBytes();
-            Path path = Paths.get("C://Users//HP500311NOg//Downloads" + file.getOriginalFilename());
+            Path path = Paths.get("images/" + fileName);
             Files.write(path, bytes);
             System.out.println("TOIMI");
         } catch (IOException e) {
             System.out.println("EI TOIMI " + e);
         }
+    }
+    
+    @RequestMapping(value = "/image/{id}",  method=RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getImage(@PathVariable String id){
+        try{
+            ClassPathResource cp = new ClassPathResource("images/" + id + ".png");
+            InputStream in = cp.getInputStream();
+            return IOUtils.toByteArray(in);        
+        }catch(IOException e){
+            System.out.println(e);
+        }
+        return null;
     }
     
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)

@@ -76,7 +76,7 @@ export default class Client {
                         resolve(objectified);
                     }
                 } catch (e) {
-                    reject(' :( ')
+                    reject(e)
                 }
             };
             request.send();
@@ -112,6 +112,39 @@ export default class Client {
 
     getUsers() {
         return this.getPromise("GET", "http://localhost:8080/users");
+    }
+
+    getImage(id) {
+        return new Promise((resolve, reject) => {
+            let request = new XMLHttpRequest();
+            request.open('GET', "http://localhost:8080/image/" + id);
+            request.responseType = 'blob';
+            request.onreadystatechange = function () {
+                if (request.status === 200) {
+                    resolve(request.response);
+                } else {
+                    reject(new Error('Image didn\'t load successfully; error code:' + request.statusText));
+                }
+            };
+            request.send();
+        });
+
+        // return new Promise((resolve, reject) => {
+        //     let request = new XMLHttpRequest();
+        //     request.open("GET", );
+        //     request.onreadystatechange = () => {
+        //         try {
+        //             if (request.readyState === 4 && request.status === 200) {
+        //                 let raw = request.responseText;
+        //                 let objectified = JSON.parse(raw);
+        //                 resolve(objectified);
+        //             }
+        //         } catch (e) {
+        //             reject(e)
+        //         }
+        //     };
+        //     request.send();
+        // });
     }
 
     reduceQuantity(balls) {
