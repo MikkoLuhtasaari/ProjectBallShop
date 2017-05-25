@@ -21,51 +21,99 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.ApplicationArguments;
 
+/**
+ * Controls requests
+ *
+ * @author      Mikko Luhtasaari
+ * @version     4.0
+ * @since       1.0
+ */
 @RestController
 public class MyController implements ApplicationRunner {
+    
+    /**
+     * Repository for goal sports balls
+     */
     @Autowired
     GoalSportsBallRepository gsbRepository;
   
+    /**
+     * Repository for target sports balls
+     */
     @Autowired
     TargetSportsBallRepository tsbRepository;
-    
+     
+    /**
+     * Repository for bat and racquet balls
+     */
     @Autowired
     BatAndRaquetsGamesRepository brRepository;
     
+    /**
+     * Repository for net sports balls
+     */
     @Autowired
     NetSportsBallRepository nsRepository;
     
+    /**
+     * Repository for users
+     */
     @Autowired
     UserRepository userRepository;
     
+    /**
+     * Repository for net sports ball reviews
+     */
     @Autowired
     NSBReviewRepository nsReviewRepository;
-    
+   
+    /**
+     * Repository for goal sports ball reviews
+     */
     @Autowired
     GSBReviewRepository gsReviewRepository;
     
+    /**
+     * Repository for bat and racquet ball reviews
+     */
     @Autowired
     BARReviewRepository brReviewRepository;
     
+    /**
+     * Repository for target sports ball reviews
+     */
     @Autowired
     TSBReviewRepository tsReviewRepository;
     
+    /**
+     * Returns categories
+     */
     @RequestMapping(value= "/categories", method=RequestMethod.GET)
     public String getCategories() {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
     }
     
+    /**
+     * Starts the app
+     */
     public void run(ApplicationArguments args) {
         printHelloMessage();
         initStuff();
     }
         
     // User related stuff
+    
+    /**
+     * Saves a new user
+     */
     @RequestMapping(value = "/user",  method=RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
         userRepository.save(user);
     }
     
+    /**
+     * Modifies a new user
+     */
     @RequestMapping(value = "/user/{id}",  method=RequestMethod.PUT)
     public void saveUser(@PathVariable long id, @RequestBody User user) {
         
@@ -79,11 +127,17 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns users
+     */
     @RequestMapping(value="/users", method=RequestMethod.GET)
     public Iterable<User> fetchUsers() {
         return userRepository.findAll();
     }
     
+    /**
+     * Returns user by id
+     */
     @RequestMapping(value="/user/{userId}", method=RequestMethod.GET)
     public User fetchUserById(@PathVariable long userId) {
         
@@ -95,6 +149,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns user by username
+     */
     @RequestMapping(value="/user/username/{userName}", method=RequestMethod.GET)
     public User fetchUserByUserName(@PathVariable String userName) {
         
@@ -106,6 +163,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns user by id
+     */
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
     public User deleteUser(@PathVariable long userId) {
         
@@ -120,11 +180,18 @@ public class MyController implements ApplicationRunner {
     }
     
     // Volleyball and Handball related stuff
+    
+    /**
+     * Saves new net sports ball
+     */
     @RequestMapping(value = "/netsportsball",  method=RequestMethod.POST)
     public void saveNetSportsBall(@RequestBody NetSportsBall netsportsball) {
         nsRepository.save(netsportsball);
     }
     
+    /**
+     * Modifies net sports ball
+     */
     @RequestMapping(value = "/netsportsball/{id}",  method=RequestMethod.PUT)
     public void modifyNetSportsBall(@PathVariable long id, @RequestBody NetSportsBall netsportsball) {
         
@@ -138,11 +205,17 @@ public class MyController implements ApplicationRunner {
         }
     }
    
+    /**
+     * Returns net sports balls
+     */
     @RequestMapping(value = "/netsportsballs",  method=RequestMethod.GET)
     public Iterable<NetSportsBall> fetchNetSportsBalls() {
         return nsRepository.findAll();
     }
     
+    /**
+     * Returns net sports ball by id
+     */
     @RequestMapping(value = "/netsportsball/{netsportsballId}",  method=RequestMethod.GET)
     public NetSportsBall fetchNetSportsBall(@PathVariable long netsportsballId) {
         
@@ -154,6 +227,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Deletes new sports ball
+     */
     @RequestMapping(value = "/netsportsball/{netsportsballId}",  method=RequestMethod.DELETE)
     public NetSportsBall deleteNetSportsBall(@PathVariable long netsportsballId) {
         
