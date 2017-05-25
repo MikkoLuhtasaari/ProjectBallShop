@@ -13,8 +13,6 @@ export default class BallHandler extends React.Component{
             administrator = true;
         }
 
-        console.log(administrator);
-
         this.state = {
             balls: [],
             updated:false,
@@ -55,12 +53,9 @@ export default class BallHandler extends React.Component{
 
     createContent(ballObject) {
         const propArray = [];
-        let imageURL;
+        let imageUrls = [];
         this.client.getImage(ballObject.type + "_" + ballObject.id + ".png")
-            .then(function (response) {
-            imageURL = window.URL.createObjectURL(response);
-        });
-
+            .then((response) => imageUrls.push(this.createUrl(response)));
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
         let link;
@@ -70,10 +65,11 @@ export default class BallHandler extends React.Component{
           link = "/#/details/" + category + "/" + ballObject.id;
         }
 
+        console.log(imageUrls.length)
         propArray.push(
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
-                    <a href={link}><img src={imageURL} alt="Ball"/></a>
+                    <a href={link}><img src={imageUrls[propArray.length]} alt="Ball"/>URL:{imageUrls[propArray.length]}</a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
                     <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>
@@ -111,5 +107,12 @@ export default class BallHandler extends React.Component{
         Storage_addToCart(ball);
         let handleUpdate = this.props.handleUpdate;
         return handleUpdate(true);
+    }
+
+    createUrl(blob) {
+        const urlCreator = window.URL || window.webkitURL;
+        let imageUrl = urlCreator.createObjectURL(blob);
+        imageUrl = imageUrl.replace("blob:", "");
+        return imageUrl;
     }
 }
