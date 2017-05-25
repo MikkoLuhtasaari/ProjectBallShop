@@ -350,11 +350,18 @@ public class MyController implements ApplicationRunner {
     
     
     // Baseball and Tennisball related stuff
+    
+    /**
+     * Saves new bat and racquet sports ball
+     */
     @RequestMapping(value = "/batandraquetsgame",  method=RequestMethod.POST)
     public void saveBatAndRaquetsGame(@RequestBody BatAndRaquetsGames batandraquetsgame) {
         brRepository.save(batandraquetsgame);
     }
     
+    /**
+     * Modifies bat and racquet sports ball
+     */
     @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
     public void modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
         
@@ -368,11 +375,17 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns bat and racquet sports balls
+     */
     @RequestMapping(value = "/batandraquetsgames",  method=RequestMethod.GET)
     public Iterable<BatAndRaquetsGames> fetchBatAndRaquetsGames() {
         return brRepository.findAll();
     }
     
+    /**
+     * Returns bat and racquet sports ball by id
+     */
     @RequestMapping(value = "/batandraquetsgame/{batandraquetsgameId}",  method=RequestMethod.GET)
     public BatAndRaquetsGames fetchBatAndRaquetsGame(@PathVariable long batandraquetsgameId) {
         
@@ -384,6 +397,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Deletes bat and racquet sports ball
+     */
     @RequestMapping(value = "/batandraquetsgame/{batandraquetsgameId}",  method=RequestMethod.DELETE)
     public BatAndRaquetsGames deleteBatAndRaquetsGame(@PathVariable long batandraquetsgameId) {
         
@@ -397,6 +413,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns bat and racquet sports ball by color
+     */
     @RequestMapping(value = "/batandraquetsgame/color/{batandraquetsgameColor}",  method=RequestMethod.GET)
     public List<BatAndRaquetsGames> fetchBatAndRaquetsGameByColor(@PathVariable String batandraquetsgameColor) {
         
@@ -408,6 +427,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns bat and racquet sports ball by material
+     */
     @RequestMapping(value = "/batandraquetsgame/material/{batandraquetsgameMaterial}",  method=RequestMethod.GET)
     public List<BatAndRaquetsGames> fetchBatAndRaquetsGamesByMaterial(@PathVariable String batandraquetsgameMaterial) {
         
@@ -419,6 +441,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns bat and racquet sports ball by name
+     */
     @RequestMapping(value = "/batandraquetsgame/name/{batandraquetsgameName}",  method=RequestMethod.GET)
     public BatAndRaquetsGames fetchBatAndRaquetsGamesByName(@PathVariable String batandraquetsgameName) {
         
@@ -429,7 +454,10 @@ public class MyController implements ApplicationRunner {
             return null;
         }
     }
-     
+    
+   /**
+     * Returns bat and racquet sports ball by type
+     */
     @RequestMapping(value = "/batandraquetsgame/type/{type}",  method=RequestMethod.GET)
     public List<BatAndRaquetsGames> fetchByType(@PathVariable String type) {
         
@@ -441,6 +469,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Saves new review to bat and racquet sports ball
+     */
     @RequestMapping(value="/batandraquetsgame/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public BARReview saveBARReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody BARReview review) {
         BARReview temp = new BARReview();
@@ -455,6 +486,9 @@ public class MyController implements ApplicationRunner {
         return temp;
     }
     
+    /**
+     * Deletes bat and racquet sports ball review
+     */
     @RequestMapping(value = "/batandraquetsgame/review/{reviewid}",  method=RequestMethod.DELETE)
     public BARReview deleteBARReviewById(@PathVariable long reviewid) {
         
@@ -468,11 +502,17 @@ public class MyController implements ApplicationRunner {
         }
     }  
     
+    /**
+     * Returns bat and racquet sports ball reviews
+     */
     @RequestMapping(value="/batandraquetsgames/reviews", method=RequestMethod.GET)
     public Iterable<BARReview> fetchBARReviews() {
         return brReviewRepository.findAll();
     }
     
+    /**
+     * Returns bat and racquet sports ball review by id
+     */
     @RequestMapping(value="/batandraquetsgames/review/{id}", method=RequestMethod.GET)
     public BARReview fetchBARReviewById(@PathVariable long id) {
         return brReviewRepository.findOne(id);
@@ -481,11 +521,18 @@ public class MyController implements ApplicationRunner {
     
     
     // Football and Basketball related stuff
+    
+    /**
+     * Saves new goal sports ball
+     */
     @RequestMapping(value = "/goalsportsball",  method=RequestMethod.POST)
     public void saveGoalSportsBall(@RequestBody GoalSportsBall goalsportsball) {
         gsbRepository.save(goalsportsball);
     }
     
+    /**
+     * Modifies goal sports ball
+     */
     @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
     public void modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
         
@@ -498,11 +545,17 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns goal sports balls
+     */
     @RequestMapping(value = "/goalsportsballs",  method=RequestMethod.GET)
     public Iterable<GoalSportsBall> fetchGoalSportsBalls() {
         return gsbRepository.findAll();
     }
     
+    /**
+     * Returns goal sports ball by id
+     */
     @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.GET)
     public GoalSportsBall fetchGoalSportsBall(@PathVariable long goalsportsballId) {
         
@@ -514,6 +567,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Deletes goal sports ball
+     */
     @RequestMapping(value = "/goalsportsball/{goalsportsballId}",  method=RequestMethod.DELETE)
     public GoalSportsBall deleteGoalSportsBall(@PathVariable long goalsportsballId) {
         
@@ -527,6 +583,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns goal sports ball by color
+     */
     @RequestMapping(value = "/goalsportsball/color/{goalsportsballColor}",  method=RequestMethod.GET)
     public List<GoalSportsBall> fetchGoalSportsBallsByColor(@PathVariable String goalsportsballColor) {
         
@@ -538,6 +597,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns goal sports ball by material
+     */
     @RequestMapping(value = "/goalsportsball/material/{goalsportsballMaterial}",  method=RequestMethod.GET)
     public List<GoalSportsBall> fetchGoalSportsBallsByMaterial(@PathVariable String goalsportsballMaterial) {
         
@@ -549,6 +611,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns goal sports ball by name
+     */
     @RequestMapping(value = "/goalsportsball/name/{goalsportsballName}",  method=RequestMethod.GET)
     public GoalSportsBall fetchGoalSportsBallByName(@PathVariable String goalsportsballName) {
         
@@ -560,6 +625,9 @@ public class MyController implements ApplicationRunner {
         }
     }
      
+   /**
+     * Returns goal sports ball by type
+     */
     @RequestMapping(value = "/goalsportsball/type/{type}",  method=RequestMethod.GET)
     public List<GoalSportsBall> fetchGoalSportsBallsByType(@PathVariable String type) {
         
@@ -571,6 +639,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Saves new goal sports ball review
+     */
     @RequestMapping(value="/goalsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public GSBReview saveGSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody GSBReview review) {
         GSBReview temp = new GSBReview();
@@ -585,6 +656,9 @@ public class MyController implements ApplicationRunner {
         return temp;
     }
     
+    /**
+     * Deletes goal sports ball review
+     */
     @RequestMapping(value = "/goalsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
     public GSBReview deleteGSBReviewById(@PathVariable long reviewid) {
         
@@ -598,11 +672,17 @@ public class MyController implements ApplicationRunner {
         }
     }  
     
+    /**
+     * Returns goal sports ball reviews
+     */
     @RequestMapping(value="/goalsportsballs/reviews", method=RequestMethod.GET)
     public Iterable<GSBReview> fetchGSBReviews() {
         return gsReviewRepository.findAll();
     }
-    
+   
+    /**
+     * Returns goal sports ball review by id
+     */
     @RequestMapping(value="/goalsportsballs/review/{id}", method=RequestMethod.GET)
     public GSBReview fetchGSBReviewById(@PathVariable long id) {
         return gsReviewRepository.findOne(id);
@@ -610,11 +690,18 @@ public class MyController implements ApplicationRunner {
     
 
     // Bowlingball and Golfball related stuff
+    
+    /**
+     * Saves new target sports ball
+     */
     @RequestMapping(value = "/targetsportsball",  method=RequestMethod.POST)
     public void saveTargetSportsBall(@RequestBody TargetSportsBall targetsportsball) {
         tsbRepository.save(targetsportsball);
     }
     
+    /**
+     * Modifies target sports ball
+     */
     @RequestMapping(value = "/targetsportsball/{id}",  method=RequestMethod.PUT)
     public void modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
         
@@ -629,11 +716,17 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns target sports balls
+     */
     @RequestMapping(value = "/targetsportsballs",  method=RequestMethod.GET)
     public Iterable<TargetSportsBall> fetchTargetSportsBalls() {
         return tsbRepository.findAll();
     }
     
+    /**
+     * Returns target sports ball by id
+     */
     @RequestMapping(value = "/targetsportsball/{targetsportsballId}",  method=RequestMethod.GET)
     public TargetSportsBall fetchTargetSportsBall(@PathVariable long targetsportsballId) {
         
@@ -645,6 +738,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Deletes target sports ball
+     */
     @RequestMapping(value = "/targetsportsball/{targetsportsballId}",  method=RequestMethod.DELETE)
     public TargetSportsBall deleteTargetSportsBall(@PathVariable long targetsportsballId) {
         
@@ -658,6 +754,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns target sports ball by color
+     */
     @RequestMapping(value = "/targetsportsball/color/{targetsportsballColor}",  method=RequestMethod.GET)
     public List<TargetSportsBall> fetchTargetSportsBallsByColor(@PathVariable String targetsportsballColor) {
         
@@ -669,6 +768,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns target sports ball by material
+     */
     @RequestMapping(value = "/targetsportsball/material/{targetsportsballMaterial}",  method=RequestMethod.GET)
     public List<TargetSportsBall> fetchTargetSportsBallsByMaterial(@PathVariable String targetsportsballMaterial) {
         
@@ -680,6 +782,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns target sports ball by name
+     */
     @RequestMapping(value = "/targetsportsball/name/{targetsportsballName}",  method=RequestMethod.GET)
     public TargetSportsBall fetchTargetSportsBallByName(@PathVariable String targetsportsballName) {
         
@@ -691,6 +796,9 @@ public class MyController implements ApplicationRunner {
         }
     }
      
+    /**
+     * Returns target sports ball by type
+     */
     @RequestMapping(value = "/targetsportsball/type/{type}",  method=RequestMethod.GET)
     public List<TargetSportsBall> fetchTargetSportsBallsByType(@PathVariable String type) {
         
@@ -702,7 +810,10 @@ public class MyController implements ApplicationRunner {
         }
     }
     
-     @RequestMapping(value="/targetsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
+    /**
+     * Saves new target sports ball review
+     */
+    @RequestMapping(value="/targetsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public TSBReview saveTSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody TSBReview review) {
         TSBReview temp = new TSBReview();
         temp.setUserOwner(userRepository.findOne(userid));
@@ -716,6 +827,9 @@ public class MyController implements ApplicationRunner {
         return temp;
     }
     
+    /**
+     * Deletes target sports ball review
+     */
     @RequestMapping(value = "/targetsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
     public TSBReview deleteTSBReviewById(@PathVariable long reviewid) {
         
@@ -729,16 +843,25 @@ public class MyController implements ApplicationRunner {
         }
     }  
     
+    /**
+     * Returns target sports ball reviews
+     */
     @RequestMapping(value="/targetsportsballs/reviews", method=RequestMethod.GET)
     public Iterable<TSBReview> fetchTSBReviews() {
         return tsReviewRepository.findAll();
     }
     
+    /**
+     * Returns target sports ball review by id
+     */
     @RequestMapping(value="/targetsportsballs/review/{id}", method=RequestMethod.GET)
     public TSBReview fetchTSBReviewById(@PathVariable long id) {
         return tsReviewRepository.findOne(id);
     }
     
+    /**
+     * Prints message on startup
+     */
     public void printHelloMessage() {
                 
         //Welcome message
@@ -841,6 +964,9 @@ public class MyController implements ApplicationRunner {
         System.out.println("GET targetsportsballs/review/{id}");
     }
     
+    /**
+     * Fills the database with mock data on startup
+     */
     public void initStuff() {
                 
         //USERS
