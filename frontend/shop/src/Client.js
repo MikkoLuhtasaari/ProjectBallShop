@@ -121,30 +121,15 @@ export default class Client {
             request.responseType = 'blob';
             request.onreadystatechange = function () {
                 if (request.status === 200) {
-                    resolve(request.response);
+                    if(request.response !== null) {
+                        resolve(request.response);
+                    }
                 } else {
                     reject(new Error('Image didn\'t load successfully; error code:' + request.statusText));
                 }
             };
             request.send();
         });
-
-        // return new Promise((resolve, reject) => {
-        //     let request = new XMLHttpRequest();
-        //     request.open("GET", );
-        //     request.onreadystatechange = () => {
-        //         try {
-        //             if (request.readyState === 4 && request.status === 200) {
-        //                 let raw = request.responseText;
-        //                 let objectified = JSON.parse(raw);
-        //                 resolve(objectified);
-        //             }
-        //         } catch (e) {
-        //             reject(e)
-        //         }
-        //     };
-        //     request.send();
-        // });
     }
 
     reduceQuantity(balls) {
