@@ -82,11 +82,20 @@ public class NetSportsBall implements Serializable {
      */
     private String category;
     
+    /**
+     * Join column with reviews
+     */
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<NSBReview> reviews;
     
+    /**
+     * Constructor
+     */
     public NetSportsBall(){};
     
+    /**
+     * Constructor
+     */
     public NetSportsBall(String name, String color, int diameter, int weigth, String details, String material, String manufacturer, String shortDetails, String type, double price, int amount, long id) {
         setName(name);
         setColor(color);
