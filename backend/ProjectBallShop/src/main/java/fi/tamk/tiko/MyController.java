@@ -1,29 +1,15 @@
 package fi.tamk.tiko;
 
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
-
-import javax.*;
-
-import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.ApplicationArguments;
 
 @CrossOrigin
 @RestController
@@ -126,6 +112,19 @@ public class MyController implements ApplicationRunner {
         } else {
             System.out.println("Error! No user found with that username");
             return null;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/images/items/{type}/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getImage(@PathVariable("type")String type, @PathVariable("id")int id) {
+        try{
+            InputStream in = new ClassPathResource(
+                    "images/" + type + "/" + id).getInputStream();
+            return IOUtils.toByteArray(in);
+            )
+        }catch (IOException e){
+            console.log("NOT FOUND");
         }
     }
     
