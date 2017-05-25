@@ -6,6 +6,8 @@ import Tennis from '../../../public/images/tennis.jpg'
 
 export default class Carousel extends React.Component{
 
+  /* eslint-disable */
+
     render(){
         return(
             <div style={{height:400}}>
