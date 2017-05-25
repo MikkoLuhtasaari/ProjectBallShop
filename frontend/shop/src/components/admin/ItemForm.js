@@ -105,6 +105,6 @@ export default class ItemForm extends React.Component{
           if (obj[inputs[index].id] !== "image") obj[inputs[index].id] = inputs[index].value;
           else  image = inputs[index].value;
         }
-        this.client.addItemToDatabase(obj, this.props.category, image);
+        this.client.addItemToDatabase(obj, this.props.category);
     }
 }
