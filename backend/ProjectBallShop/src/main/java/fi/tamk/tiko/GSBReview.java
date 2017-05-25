@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-//@Table(indexes = {@Index(columnList="user_id"), @Index(columnList="owner_ball_id")})
+@Table(indexes = {@Index(columnList="user_id"), @Index(columnList="owner_ball_id")})
 public class GSBReview implements Serializable {
     
     @Id

@@ -65,7 +65,8 @@ public class MyController implements ApplicationRunner {
         printHelloMessage();
         initStuff();
     }
-        
+    
+    // Cors
     @RequestMapping(value = "/**", method = RequestMethod.OPTIONS)
     public ResponseEntity handle() {
         return new ResponseEntity(HttpStatus.OK);
@@ -132,13 +133,6 @@ public class MyController implements ApplicationRunner {
     @RequestMapping(value = "/user/{userId}",  method=RequestMethod.DELETE)
     public User deleteUser(@PathVariable long userId) {
         
-        for(int i = 0; i<10; i++) {
-            System.out.println(" ");
-        }
-        System.out.println(userId);
-        for(int i = 0; i<10; i++) {
-            System.out.println(" ");
-        }
         if(userRepository.findOne(userId) != null) {
             User temp = userRepository.findOne(userId);
             userRepository.delete(userId);

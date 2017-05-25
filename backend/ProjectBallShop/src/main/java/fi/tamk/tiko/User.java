@@ -7,7 +7,7 @@ import java.util.Set;
 import java.io.Serializable;
 
 @Entity
-//@Table(indexes = {@Index(columnList="username")})
+@Table(indexes = {@Index(columnList="username")})
 public class User {
     
     @Column(name = "username", length = 50, nullable = false, unique = true)
@@ -41,13 +41,6 @@ public class User {
     @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-    
-    /*@ManyToOne
-    @JoinColumn(name = "PARENT_ID")
-    private NSBReview parentNode;
-    
-    @OneToMany(mappedBy = "userOwner", cascade = CascadeType.REMOVE)
-    private Set<NSBReview> reviews;*/
     
     @OneToMany(mappedBy = "userOwnerOne", cascade = CascadeType.ALL, orphanRemoval=true)
     private Set<NSBReview> NSBReviews;
