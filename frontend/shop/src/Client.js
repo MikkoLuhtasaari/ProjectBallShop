@@ -165,8 +165,4 @@ export default class Client {
             console.log(error);
         });
     }
-
-    addImageToDatabase(value, category) {
-
-    }
 }
