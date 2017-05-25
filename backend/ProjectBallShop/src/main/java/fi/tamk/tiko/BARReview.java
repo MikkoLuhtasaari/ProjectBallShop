@@ -213,6 +213,5 @@ public class BARReview implements Serializable{
      */
     public long getOwnerBallId() {
         return ownerBallId;
-    }
-    
+    } 
 }
