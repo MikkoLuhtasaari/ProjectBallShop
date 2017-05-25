@@ -6,25 +6,87 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.io.Serializable;
 
+/**
+ * Contains bat and racquet games balls
+ *
+ * @author      Mikko Luhtasaari
+ * @version     4.0
+ * @since       1.0
+ */
 @Entity
 @Table(indexes = {@Index(columnList="name"), @Index(columnList="color"), @Index(columnList="amount"), @Index(columnList="material"), @Index(columnList="type")})
-public class BatAndRaquetsGames 
-{
+public class BatAndRaquetsGames {
+    
+    /**
+     * Name of the ball
+     */
     private String name;
+    
+    /**
+     * Color of the ball
+     */
     private String color;
+    
+    /**
+     * Diameter of the ball
+     */
     private int diameter;
+    
+    /**
+     * Weigth of the ball
+     */
     private int weigth;
+    
+    /**
+     * Details of the ball
+     */
     private String details;
+    
+    /**
+     * Material of the ball
+     */
     private String material;
+    
+    /**
+     * Manufacturer of the ball
+     */
     private String manufacturer;
+    
+    /**
+     * Short details of the ball
+     */
     private String shortDetails;
+    
+    /**
+     * Type of the ball
+     */
     private String type;
+    
+    /**
+     * Price of the ball
+     */
     private double price;
+    
+    /**
+     * Amount of the ball
+     */
     private int amount;
+    
+    /**
+     * Hole amount of the ball
+     */
     private int holeAmount;
+    
+    /**
+     * Id of the ball
+     */
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    
+    /**
+     * Category of the ball
+     */
     private String category;
     
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
