@@ -81,64 +81,136 @@ public class GSBReview implements Serializable {
         setUserId(userId);
     }
     
+    /**
+     * Sets the id
+     *
+     * @param id reviews id
+     */
     public void setId(long id) {
         this.id = id;
     }
+    
+    /**
+     * Sets the score
+     *
+     * @param score reviews score
+     */
     public void setScore(int score) {
+        
         if(score < 6 && score > 0 ) {
             this.score = score;
         } else {
             System.out.println("Score must be between 1-5");
         }
     }
+    
+    /**
+     * Sets the header
+     *
+     * @param header reviews header
+     */
     public void setHeader(String header) {
         this.header = header;
     }
+    
+    /**
+     * Sets the content
+     *
+     * @param content reviews content
+     */
     public void setContent(String content) {
         this.content = content;
     }
+    
+    /**
+     * Sets the owner ball
+     *
+     * @param owner ball which the review belongs to
+     */
     public void setOwner(GoalSportsBall owner) {
         this.owner = owner;
     }
+    
+    /**
+     * Sets the owner user
+     *
+     * @param userOwner user which the review belongs to
+     */
     public void setUserOwner(User userOwner) {
         this.userOwner = userOwner;
     }
+    
+    /**
+     * Sets the ownerBallId
+     *
+     * @param ownerBallId id of the ball which the review belongs to
+     */
     public void setOwnerBallId(long ownerBallId) {
         this.ownerBallId = ownerBallId;
     }
+    
+    /**
+     * Sets the userId
+     *
+     * @param userId id of the user which the review belongs to
+     */
     public void setUserId(long userId) {
         this.userId = userId;
     }
     
+    /**
+     * Returns reviews id
+     */
     public long getId() {
-        System.out.println("Getting review id");
         return id;
     }
+    
+    /**
+     * Returns reviews score
+     */
     public int getScore() {
         return score;
     }
+    
+    /**
+     * Returns reviews header
+     */
     public String getHeader() {
         return header;
     }
+    
+    /**
+     * Returns reviews content
+     */
     public String getContent() {
         return content;
     }
     
+    /**
+     * Returns reviews owner ball
+     */
     public GoalSportsBall getOwner() {
-        System.out.println("Get owner");
         return owner;
     }
     
+    /**
+     * Returns reviews owner user
+     */
     public User getUserOwner() {
-        System.out.println("Get user");
         return userOwner;
     }
     
+    /**
+     * Returns reviews user id
+     */
     public long getUserId() {
         return userId;
     }
+    
+    /**
+     * Returns reviews ball id
+     */
     public long getOwnerBallId() {
         return ownerBallId;
-    }
-    
+    } 
 }
