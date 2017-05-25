@@ -228,7 +228,7 @@ public class MyController implements ApplicationRunner {
     }
     
     /**
-     * Deletes new sports ball
+     * Deletes net sports ball
      */
     @RequestMapping(value = "/netsportsball/{netsportsballId}",  method=RequestMethod.DELETE)
     public NetSportsBall deleteNetSportsBall(@PathVariable long netsportsballId) {
@@ -243,6 +243,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns net sports ball by color
+     */
     @RequestMapping(value = "/netsportsball/color/{netsportsballColor}",  method=RequestMethod.GET)
     public List<NetSportsBall> fetchNetSportsBall(@PathVariable String netsportsballColor) {
         
@@ -254,6 +257,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns net sports ball by material
+     */
     @RequestMapping(value = "/netsportsball/material/{netsportsballMaterial}",  method=RequestMethod.GET)
     public List<NetSportsBall> fetchNetSportsBallByMaterial(@PathVariable String netsportsballMaterial) {
         
@@ -265,6 +271,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Returns net sports ball by name
+     */
     @RequestMapping(value = "/netsportsball/name/{netsportsballName}",  method=RequestMethod.GET)
     public NetSportsBall fetchNetSportsBallByName(@PathVariable String netsportsballName) {
         
@@ -276,6 +285,9 @@ public class MyController implements ApplicationRunner {
         }
     }
      
+    /**
+     * Returns net sports ball by type
+     */
     @RequestMapping(value = "/netsportsball/type/{type}",  method=RequestMethod.GET)
     public List<NetSportsBall> fetchNetSportsBallByType(@PathVariable String type) {
         
@@ -287,6 +299,9 @@ public class MyController implements ApplicationRunner {
         }
     }
     
+    /**
+     * Saves review to net sports ball
+     */
     @RequestMapping(value="/netsportsball/{ballid}/review/user/{userid}", method=RequestMethod.POST)
     public NSBReview saveNSBReview(@PathVariable long ballid, @PathVariable long userid, @RequestBody NSBReview review) {
         NSBReview temp = new NSBReview();
@@ -301,6 +316,9 @@ public class MyController implements ApplicationRunner {
         return temp;
     }
     
+    /**
+     * Deletes review from net sports ball 
+     */
     @RequestMapping(value = "/netsportsball/review/{reviewid}",  method=RequestMethod.DELETE)
     public NSBReview deleteNSBReviewById(@PathVariable long reviewid) {
         
@@ -314,11 +332,17 @@ public class MyController implements ApplicationRunner {
         }
     }  
     
+    /**
+     * Returns net sports ball reviews
+     */
     @RequestMapping(value="/netsportsballs/reviews", method=RequestMethod.GET)
     public Iterable<NSBReview> fetchReviews() {
         return nsReviewRepository.findAll();
     }
     
+    /**
+     * Returns net sports ball review by id
+     */
     @RequestMapping(value="/netsportsballs/review/{id}", method=RequestMethod.GET)
     public NSBReview fetchReviewById(@PathVariable long id) {
         return nsReviewRepository.findOne(id);
