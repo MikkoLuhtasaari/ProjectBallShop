@@ -19,7 +19,8 @@ const styles = {
     display:'inline-block'
   },
   input: {
-    width: '70%'
+    width: '70%',
+    display:'inline-block'
   },
   submitButton: {
     marginTop:'30px'
@@ -85,16 +86,15 @@ export default class ItemForm extends React.Component{
             <div style={styles.title}>Amount</div>
             <input id="amount" style={styles.input} type="number" required={true}/>
           </div>
+          <div style={styles.row}>
+            <div style={styles.title}>Image</div>
+            <input id="image" style={styles.input} type="file" required={true} accept="image/*"/>
+          </div>
           <input style={styles.submitButton} onClick={() => this.sendDataToDatabase(this.state.html)} type="submit"/>
         </form>
       </div>
     );
   }
-//
-// <div style={styles.row}>
-// <div style={styles.title}>Image</div>
-// <input id="image" style={styles.input} type="file" required={true} accept="image/*"/>
-// </div>
     sendDataToDatabase(http) {
         let container = document.getElementById('myForm');
         let inputs = container.getElementsByTagName('input');
