@@ -92,6 +92,10 @@ export default class SignIn extends React.Component {
             Storage_setUserName(user.firstName + " " + user.lastName);
             this.setState({name: user.firstName + " " + user.lastName});
             this.setState({logged: true})
+            if(user.accessLevel === "Admin"){
+                alert("Welcome to admin console!");
+                window.location = '/#/admin';
+            }
         } else alert("Incorrect password.\nPlease try again.");
     }
 }
