@@ -85,23 +85,25 @@ export default class ItemForm extends React.Component{
             <div style={styles.title}>Amount</div>
             <input id="amount" style={styles.input} type="number" required={true}/>
           </div>
+          <div style={styles.row}>
+            <div style={styles.title}>Image</div>
+            <input id="image" style={styles.input} type="file" required={true} accept="image/*"/>
+          </div>
           <input style={styles.submitButton} onClick={() => this.sendDataToDatabase(this.state.html)} type="submit"/>
         </form>
       </div>
     );
   }
-//
-// <div style={styles.row}>
-// <div style={styles.title}>Image</div>
-// <input id="image" style={styles.input} type="file" required={true} accept="image/*"/>
-// </div>
+
     sendDataToDatabase(http) {
         let container = document.getElementById('myForm');
         let inputs = container.getElementsByTagName('input');
         let obj = {};
+        let image;
         for (let index = 0; index < inputs.length; ++index) {
-            obj[inputs[index].id] = inputs[index].value;
+          if (obj[inputs[index].id] !== "image") obj[inputs[index].id] = inputs[index].value;
+          else  image = inputs[index].value;
         }
-        this.client.addItemToDatabase(obj, this.props.category);
+        this.client.addItemToDatabase(obj, this.props.category, image);
     }
 }

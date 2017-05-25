@@ -1,5 +1,9 @@
 package fi.tamk.tiko;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin
 @RestController
@@ -47,6 +52,7 @@ public class MyController implements ApplicationRunner {
         return "Bat and Racquet games, Goal sports, Net sports, Target sports";
     }
     
+    @Override
     public void run(ApplicationArguments args) {
         printHelloMessage();
         initStuff();
@@ -115,16 +121,18 @@ public class MyController implements ApplicationRunner {
         }
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/images/items/{type}/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getImage(@PathVariable("type")String type, @PathVariable("id")int id) {
-        try{
-            InputStream in = new ClassPathResource(
-                    "images/" + type + "/" + id).getInputStream();
-            return IOUtils.toByteArray(in);
-            )
-        }catch (IOException e){
-            console.log("NOT FOUND");
+    @RequestMapping(value = "/image",  method=RequestMethod.POST)
+    public void imageUpload(@RequestParam("file") MultipartFile file, @PathVariable("type") String type, @PathVariable("id") int id) {
+        System.out.println("VITTU");
+        try {
+            System.out.println("type: " + type);
+            System.out.println("ID: " + id);
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get("C://Users//HP500311NOg//Downloads" + file.getOriginalFilename());
+            Files.write(path, bytes);
+            System.out.println("TOIMI");
+        } catch (IOException e) {
+            System.out.println("EI TOIMI " + e);
         }
     }
     

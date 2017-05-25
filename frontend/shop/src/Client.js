@@ -149,7 +149,8 @@ export default class Client {
         }
     }
 
-    addItemToDatabase(obj, category) {
+    addItemToDatabase(obj, category, image) {
+        console.log(image);
         fetch("http://localhost:8080/" + category,
             {
                 method: 'POST',
@@ -159,6 +160,27 @@ export default class Client {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(obj)
+            }).then(function (response) {
+            return response;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    addImageToDatabase(value) {
+        console.log("PERKELE")
+        fetch("http://localhost:8080/image",
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'enctype':'multipart/form-data'
+                },
+                body: ({
+                    object: value
+                })
             }).then(function (response) {
             return response;
         }).catch(function (error) {
