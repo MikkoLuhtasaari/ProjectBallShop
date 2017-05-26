@@ -14,13 +14,39 @@ body {
     min-height: 350px;
 }
 
-#colorGray{
+#logoImg{
+    padding: 10px 20px 10px 20px;
+}
+.colorGray{
     background-color: #F2F2F2;
 }
 
 .whiteBg{
     padding-top: 50px;
 }
+
+.padd{
+    padding: 10px 12px;
+}
+
+.deleteButton {
+    color: red;
+    background-color:white;
+    border: 2px solid red;
+    border-radius: 10px;
+    font-weight:600;
+    transition: 0.3s;
+    width:30%;
+    margin-left:35%;
+    margin-top:50px;
+}
+
+.deleteButton:hover {
+    color:white;
+    background-color:red;
+    border: 2px solid black;
+}
+
 footer{
     width: 100%;
     display: inline-block;
@@ -46,7 +72,7 @@ p{
 }
 .thumbnail:hover{
     opacity:1.00;
-    box-shadow: 0px 0px 10px #4bc6ff;
+    box-shadow: 0 0 10px green;
 }
 .line{
     margin-bottom: 5px;
@@ -56,14 +82,14 @@ p{
     text-align: center;
 }
 span.thumbnail {
-    border: 1px solid #00c4ff !important;
-    border-radius: 0px !important;
-    -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
-    -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
-    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.16);
+    border: 1px solid green !important;
+    border-radius: 0 !important;
+    -webkit-box-shadow: 0 0 14px 0 rgba(0,0,0,0.16);
+    -moz-box-shadow: 0 0 14px 0 rgba(0,0,0,0.16);
+    box-shadow: 0 0 14px 0 rgba(0,0,0,0.16);
     padding: 10px;
 }
-.container
+
 h4{
     margin-top:70px;
     margin-bottom:30px;
@@ -72,11 +98,8 @@ h4{
     float: right;
     border-bottom: 2px solid #0a5971;
 }
-.btn-info {
-    color: #fff;
-    background-color: #19b4e2;
-    border-color: #19b4e2;
-    font-size:13px;
+
+.btn-success {
     font-weight:600;
 }
 
@@ -121,11 +144,11 @@ h4{
 }
 
 #twoLines {
-     height: 3.75em !important;
-     line-height: 1.4em !important;
-     overflow: hidden;
-     box-sizing: content-box !important;
- }
+    height: 3.75em !important;
+    line-height: 1.4em !important;
+    overflow: hidden;
+    box-sizing: content-box !important;
+}
 
 #twoLines2 {
     height: 2.8em !important;
@@ -302,7 +325,14 @@ ul.dropdown-cart li .item-right button{
 
 /*_______________Carousel____________________________*/
 .carousel {
-    height: 50%;
+    margin: 0;
+    margin-top: 50px;
+    height: 100%;
+}
+
+.rightControl,
+.leftControl {
+    top: 50% !important;
 }
 
 .item,
@@ -319,6 +349,9 @@ ul.dropdown-cart li .item-right button{
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 
@@ -326,33 +359,6 @@ ul.dropdown-cart li .item-right button{
 
 .container-fullwidth{
     font-size: 20px;
-}
-
-
-/*_______________Cart animation over image____________________________*/
-
-.col-item .options-cart-round {
-    position:absolute;
-    left:40%;
-    top:25%;
-    display:none;
-}
-
-.col-item .options-cart-round button {
-    border-radius: 50%;
-    padding:14px 16px;
-
-}
-.col-item .options-cart-round button .fa {
-    font-size:50px;
-}
-
-.col-item .photo:hover .options-cart-round {
-    display:block;
-    -webkit-animation: fadeInDown .5s ease;
-    -moz-animation: fadeInDown .5s ease;
-    -o-animation: fadeInDown .5s ease;
-    animation: fadeInDown .5s ease;
 }
 
 /*_______________Shop items____________________________*/
@@ -497,7 +503,7 @@ label.star:hover { transform: rotate(-15deg) scale(1.3); }
 
 label.star:before {
     content: '\f006';
-    font-family: FontAwesome;
+    font-family: FontAwesome, serif;
 }
 
 .dropdown-menu > li > a,
