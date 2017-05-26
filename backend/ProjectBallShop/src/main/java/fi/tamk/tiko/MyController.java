@@ -362,8 +362,9 @@ public class MyController implements ApplicationRunner {
     /**
      * Modifies bat and racquet sports ball
      */
-    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
+    @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.PUT)
     public void modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
+        
         BatAndRaquetsGames nsb = brRepository.findOne(id); 
 
         if (nsb != null) {
