@@ -156,7 +156,10 @@ export default class Checkout extends React.Component{
     addOrRemove(ball, preCount, value, removeAll) {
         if(removeAll || preCount > value) Storage_removeFromCart(ball, removeAll);
         else Storage_addToCart(ball);
+        console.log(this.state.balls)
         this.setState({balls: Storage_getCart()});
+        console.log(this.state.balls)
+
     }
 
     /**
@@ -165,7 +168,26 @@ export default class Checkout extends React.Component{
     redirectToBank() {
         if (Storage_getUserId() === "" || Storage_getUserId() === null) alert("You have to sign in to buy items");
         else {
-            this.client.reduceQuantity(Storage_getCart());
+            let obj = {};
+            let inputs = this.state.inputs;
+            let cart = Storage_getCart();
+            let category;
+            let id;
+
+            for (let i = 0; i < cart.length; i++) {
+                let content = cart[i].content;
+                let newValue = inputs[i];
+                for(let item in content) {
+                    if (item === "amount") content[item] -= newValue;
+                    if (item === "id") id = content[item];
+                    if (item !== "category" && item !== "id" && item !== "reviews") obj[item] = content[item];
+                    else if(item === "category") category = content[item];
+                }
+            }
+            category = category.replace(/ /g,'').toLowerCase();
+            if(!category.includes("game"))category += "sball";
+
+            this.client.reduceQuantity(obj, id, category);
             Storage_setCart([]);
             this.setState({balls: Storage_getCart()})
             alert("User is now redirected to bank services");
@@ -176,15 +198,15 @@ export default class Checkout extends React.Component{
     /**
      * Updates the value in input field according to adding or reducing.
      *
-     * @param value value after adding or reducing
+     * @param after value after adding or reducing
      * @param pos position that is updated
-     * @param o object that is updated
-     * @param n number of a object that is updated
+     * @param object object that is updated
+     * @param prior number of a object prior to update
      */
-    setValue(value, pos, o, n) {
+    setValue(after, pos, object, prior) {
         let arr = this.state.inputs;
-        arr[pos] = value;
-        this.addOrRemove(o, n, value, false);
+        arr[pos] = after;
+        this.addOrRemove(object, prior, after, false);
         this.setState({inputs: arr});
     }
 }

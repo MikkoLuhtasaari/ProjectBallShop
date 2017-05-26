@@ -191,44 +191,29 @@ export default class Client {
         });
     }
 
-    /**
-     * Updates a ball to reduce its quantity after purchase
-     *
-     * @param balls details of the ball to be updated
-     */
-    reduceQuantity(balls) {
-        for (let i = 0; i < balls.length; i++) {
-            let o = balls[i].content;
-            let category = o.category.replace(/ /g, '').toLowerCase();
-            if (!category.includes("game")) category += "sball";
 
-            fetch("http://localhost:8080/" + category + "/" + o.id,
-                {
-                    method: 'PUT',
-                    mode: 'cors',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        'name': o.name,
-                        'color': o.color,
-                        'diameter': o.diameter,
-                        'weigth': o.weigth,
-                        'details': o.details,
-                        'material': o.material,
-                        'manufacturer': o.manufacturer,
-                        'shortDetails': o.shortDetails,
-                        'type': o.type,
-                        'price': o.price,
-                        'amount': o.amount - balls[i].count
-                    })
-                }).then(function (response) {
-                return response;
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
+    /**
+     * Puts ball to database for updating amount after purchase
+     *
+     * @param obj object to be updated
+     * @param id id of the object to be updated
+     * @param category category of the object to be updated
+     */
+    reduceQuantity(obj, id, category) {
+        fetch("http://localhost:8080/" + category + "/" + id,
+            {
+                method: 'PUT',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            }).then(function (response) {
+            return response;
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     /**
