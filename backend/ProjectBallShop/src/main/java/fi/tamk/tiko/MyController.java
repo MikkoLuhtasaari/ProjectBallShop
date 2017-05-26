@@ -1057,7 +1057,6 @@ public class MyController implements ApplicationRunner {
         
         Set tempNSReview2 = new HashSet<NSBReview>(){{
             add(new NSBReview(1, 1, "Hated it", "Absolutely disgusting product", tempNS2, 2, tempUser2, 2));
-            add(new NSBReview(2, 3, "Kinda good", "Maybe I jumped the gun a bit with my previous review.", tempNS2, 2, tempUser2, 2));
         }};
         
         tempNS2.setReviews(tempNSReview2);
