@@ -90,7 +90,7 @@ export default class ItemForm extends React.Component{
             <div style={styles.title}>Image</div>
             <input id="image" style={styles.input} type="file" required={true} accept="image/*"/>
           </div>
-          <input id="runn" style={styles.submitButton} onClick={() => this.sendDataToDatabase()}/>
+          <input id="submit" type="submit" style={styles.submitButton} onClick={() => this.sendDataToDatabase()}/>
         </form>
       </div>
     );
@@ -101,7 +101,7 @@ export default class ItemForm extends React.Component{
         let inputs = container.getElementsByTagName('input');
         let obj = {};
         for (let index = 0; index < inputs.length; ++index) {
-            if (inputs[index].id !== "image" && inputs[index].id !== "runn") obj[inputs[index].id] = inputs[index].value;
+            if (inputs[index].id !== "submit" && inputs[index].id !== "runn") obj[inputs[index].id] = inputs[index].value;
         }
         this.client.addItemToDatabase(obj, this.props.category);
   }
