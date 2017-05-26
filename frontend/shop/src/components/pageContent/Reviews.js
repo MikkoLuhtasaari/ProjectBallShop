@@ -2,6 +2,12 @@ import React from 'react';
 import Client from '../../Client';
 import {Storage_getUserId} from "../../Storage";
 
+/**
+ * Displays reviews on all pages needed.
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class Reviews extends React.Component{
     constructor(props) {
         super(props);
@@ -16,6 +22,9 @@ export default class Reviews extends React.Component{
         this.parseGroup = this.parseGroup.bind(this);
     }
 
+    /**
+     * Retrieves balls from database if needed
+     */
     componentWillReceiveProps() {
         let g = this.props.group;
         let parsedG = this.parseGroup(g);
@@ -26,16 +35,22 @@ export default class Reviews extends React.Component{
         }
     }
 
-    updateReviews(r){
-        //TODO tää antaa välillä varotusta. Kokeilin johtuuko tyhjistä taulukoista mutta ei...
-        // Warning: setState(...): Can only update a mounted or mounting component.
-        // This usually means you called setState() on an unmounted component. This is a no-op.
-        // Please check the code for the Reviews component.
-        // if(r.length > 0)
+    /**
+     * Updates reviews if needed
+     *
+     * @param r reviews to update
+     */
 
+    updateReviews(r){
         this.setState({reviews: r})
     }
 
+    /**
+     * Parses group type to correct html form
+     *
+     * @param group group to be parsed
+     * @returns {*}
+     */
     parseGroup(group) {
         switch (group) {
           case "Goal sport":
@@ -55,18 +70,33 @@ export default class Reviews extends React.Component{
         }
     }
 
+    /**
+     * Updates state if needed
+     */
     componentDidUpdate() {
         if(!this.state.updated) {
             this.setState({updated: true});
         }
     }
 
+    /**
+     * Renders class and returns correct display of reviews
+     *
+     * @returns {*}
+     */
     render(){
         if (this.props.need === "light") return this.returnLight();
         if (this.props.need === "wide") return this.returnWide();
         if (this.props.need === "postReview") return this.reviewItem();
     }
 
+    /**
+     * Returns only stars and number of reviews.
+     *
+     * Used in item details and in front page.
+     *
+     * @returns {XML}
+     */
     returnLight() {
         let score = 0;
 
@@ -93,6 +123,14 @@ export default class Reviews extends React.Component{
         }
     }
 
+    /**
+     * Returns correctly displayed stars
+     *
+     * Stars can be empty or filled
+     *
+     * @param rating rating that defines how many stars to display filled
+     * @returns {XML}
+     */
     getStars(rating) {
         let starArr = [];
         for (let i = 0; i<5; i++){
@@ -111,6 +149,13 @@ export default class Reviews extends React.Component{
         );
     }
 
+    /**
+     * Returns wide information about reviews
+     *
+     * Contains also written text. Used in item details.
+     *
+     * @returns {XML}
+     */
     returnWide() {
         let temp = [];
 
@@ -135,6 +180,12 @@ export default class Reviews extends React.Component{
         )
     }
 
+    /**
+     * Returns form that is used in rating items.
+     *
+     * Used in item details.
+     * @returns {XML}
+     */
     reviewItem() {
         return (
             <div>
@@ -173,6 +224,12 @@ export default class Reviews extends React.Component{
         )
     }
 
+    /**
+     * Sends review to backend after validation.
+     *
+     * @param header header of the review
+     * @param content content of the review
+     */
     sendReview(header, content) {
         let userId = Storage_getUserId();
         if(this.state.rating < 1) alert("Please give star rating for your review.");

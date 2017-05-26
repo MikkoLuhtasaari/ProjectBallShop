@@ -1,6 +1,18 @@
 import React from 'react';
 
+/**
+ * Displays the middle navigation content and routes user to correct category
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class MiddleNavigation extends React.Component{
+
+    /**
+     * Renders MiddleNavigation and displays it to user
+     *
+     * @returns {XML}
+     */
     render(){
         return(
             <nav className="navbar-inverse center">
@@ -25,6 +37,11 @@ export default class MiddleNavigation extends React.Component{
         )
     }
 
+    /**
+     * Displays and handles net sports dropdown
+     *
+     * @returns {XML}
+     */
     netSports() {
         return(
             <li className="dropdown">
@@ -38,6 +55,10 @@ export default class MiddleNavigation extends React.Component{
         )
     }
 
+    /**
+     * Displays and handles bat and racquet game dropdown
+     * @returns {XML}
+     */
     batAndRacquet() {
         return(
             <li className="dropdown">
@@ -51,6 +72,10 @@ export default class MiddleNavigation extends React.Component{
         )
     }
 
+    /**
+     * Displays and handles goal sports dropdown
+     * @returns {XML}
+     */
     goalSports() {
         return(
             <li className="dropdown">
@@ -64,6 +89,10 @@ export default class MiddleNavigation extends React.Component{
         )
     }
 
+    /**
+     * Displays and handles target sports dropdown
+     * @returns {XML}
+     */
     targetSports() {
         return(
             <li className="dropdown">

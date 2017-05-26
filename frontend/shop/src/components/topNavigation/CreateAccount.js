@@ -1,9 +1,27 @@
 import React from 'react';
 import Client from '../../Client';
 
+/**
+ * Creates new account
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class CreateAccount extends React.Component{
+    /**
+     * True if username is already in database
+     */
     userExists;
+
+    /**
+     * True if email is already in database
+     */
     emailExists;
+
+    /**
+     * Constructs the class and creates client and state
+     * @param props
+     */
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -19,6 +37,11 @@ export default class CreateAccount extends React.Component{
         }
     }
 
+    /**
+     * Displays create account form to user
+     *
+     * @returns {XML}
+     */
     render(){
         return(
             <div className="container">
@@ -56,6 +79,11 @@ export default class CreateAccount extends React.Component{
         )
     }
 
+    /**
+     * Displays password fields
+     *
+     * @returns {XML}
+     */
     getPassword(){
         return (
             <div className="row">
@@ -75,6 +103,11 @@ export default class CreateAccount extends React.Component{
         )
     }
 
+    /**
+     * Displays address fields
+     *
+     * @returns {XML}
+     */
     getAddress(){
         return (
             <div className="row">
@@ -94,9 +127,11 @@ export default class CreateAccount extends React.Component{
         )
     }
 
-
-
-
+    /**
+     * Displays personal info fields
+     *
+     * @returns {XML}
+     */
     getPersonalInfo(){
         return (
         <div className="row">
@@ -116,15 +151,26 @@ export default class CreateAccount extends React.Component{
         )
     }
 
+    /**
+     * Gets all users that are already in database
+     */
     handleChange() {
         this.client.getUsers().then((u)=> this.getUserNames(u)).then(() => this.checkValues());
     }
 
+    /**
+     * Displays info about created account and redirects user to front page
+     */
     accountCreated() {
         alert("New account created!\nYou can now sign in.");
         window.location = '/#/';
     }
 
+    /**
+     * Checks if given username or email is already in database
+     *
+     * @param u list of all the users in database
+     */
     getUserNames(u) {
         let uExists = false;
         let eExists = false;
@@ -136,6 +182,9 @@ export default class CreateAccount extends React.Component{
         this.emailExists = eExists;
     }
 
+    /**
+     * Validates all the fields and creates new user to database.
+     */
     checkValues() {
         let emptyFields = false;
 

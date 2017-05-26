@@ -1,6 +1,12 @@
 import React from 'react';
 import ItemForm from './ItemForm.js'
 
+/**
+ * Styles for AddItem page
+ * @type {{button: {width: string, height: string, color: string, margin: string, border: string,
+ * borderRadius: string, background: string, fontSize: string}, row: {textAlign: string}, heading:
+ * {textAlign: string, marginBottom: string, fontSize: string}}}
+ */
 const styles = {
   button: {
     width:'200px',
@@ -22,6 +28,12 @@ const styles = {
   }
 };
 
+/**
+ * Routes admin to add items to database.
+ *
+ * @author      Pasi saikkonen
+ * @version     4.0
+ */
 export default class AddItem extends React.Component{
   constructor(props) {
     super(props);
@@ -31,10 +43,22 @@ export default class AddItem extends React.Component{
     this.manageClick = this.manageClick.bind(this);
   }
 
+    /**
+     * Manages clicking of the buttons and directs user to correct adding page
+     *
+     * @param e target where to direct user
+     */
   manageClick(e) {
     this.setState({target:e.target.id});
   }
 
+    /**
+     * Renders class.
+     *
+     * If target is not given, displays buttons. Else redirects user to ItemForm
+     *
+     * @returns {XML}
+     */
   render() {
     if(this.state.target === 'none') {
       return (

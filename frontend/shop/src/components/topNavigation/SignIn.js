@@ -2,7 +2,19 @@ import React from 'react';
 import Client from '../../Client';
 import {Storage_getUserId, Storage_setUserId, Storage_getUserName, Storage_setUserName} from '../../Storage'
 
+/**
+ * Creates sign in dropdown button displayed at top navigation
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class SignIn extends React.Component {
+
+    /**
+     * Constructs the class and creates its state.
+     *
+     * @param props props to be sent to super
+     */
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -15,6 +27,11 @@ export default class SignIn extends React.Component {
         };
     }
 
+    /**
+     * Renders class and displays its content to user
+     *
+     * @returns {XML}
+     */
     render() {
         return (
             <li className="dropdown">
@@ -27,6 +44,11 @@ export default class SignIn extends React.Component {
         )
     }
 
+    /**
+     * Logs user in or out according to current state
+     *
+     * @param login true if user is to be logged in.
+     */
     login(login) {
         if (login) {
             let pass = this.refs.pass.value;
@@ -44,6 +66,12 @@ export default class SignIn extends React.Component {
         }
     }
 
+    /**
+     * Returns content to be displayed to user according to login state.
+     *
+     * @param logged true if user is already logged in.
+     * @returns {XML}
+     */
     loggedIn(logged) {
         if (!logged) {
             return (
@@ -86,6 +114,13 @@ export default class SignIn extends React.Component {
         }
     }
 
+    /**
+     * Checks that username and password are stored in database and are correctly given.
+     *
+     * @param user username that is given
+     * @param pass password that is given
+     * @param success success if username is correct
+     */
     validateUser(user, pass, success) {
         if(!success){
             alert("Incorrect username.\nPlease try again.")

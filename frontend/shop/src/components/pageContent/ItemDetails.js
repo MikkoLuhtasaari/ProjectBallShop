@@ -3,7 +3,19 @@ import Client from '../../Client';
 import Reviews from './Reviews'
 import {Storage_addToCart} from "../../Storage"
 
+/**
+ * Displays detail view of specific ball
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class ItemDetails extends React.Component {
+
+    /**
+     * Constructs class and creates client and state.
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -17,31 +29,40 @@ export default class ItemDetails extends React.Component {
         this.fetchCompleted = this.fetchCompleted.bind(this);
     }
 
+    /**
+     * Fetches ball of a specific id from database
+     */
     componentDidMount() {
         this.client.ballById(this.state.group, this.state.id).then(b => this.setState({ball: b})).then(this.fetchCompleted);
     }
 
+    /**
+     * Reloads page when fetch is completed
+     */
     fetchCompleted() {
         this.setState({test: this.state.test + 1});
     }
 
+    /**
+     * Updates page if search is applied in item details page
+     */
     componentWillUpdate() {
-        // Compare address bar URL to props.location
         if(window.location.href.substring(23) !== this.props.location.pathname) {
-          // If they are different, get new ball data with category and id from the current URL
           let path = window.location.href.substring(32);
           let category = path.substring(0, path.indexOf('/'));
           let id = path.substring(path.indexOf('/') + 1);
-          // Fetch data and trigger re-render
           this.client.ballById(category, id).then(b => this.setState({ball: b})).then(this.fetchCompleted);
         }
-
-        // Render again if backend hasn't responded yet
         if(this.state.ball === '' && this.state.mounted) {
             this.setState({test: this.state.test + 1});
         }
     }
 
+    /**
+     * Renders class and displays its content to user.
+     *
+     * @returns {XML}
+     */
     render() {
         let imageSrc = "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png";
         return (
@@ -75,6 +96,11 @@ export default class ItemDetails extends React.Component {
         )
     }
 
+    /**
+     * Returns list of all the details that a ball has
+     *
+     * @returns {XML}
+     */
     getDetailsList(){
         let ball = this.state.ball;
         return (
@@ -94,6 +120,11 @@ export default class ItemDetails extends React.Component {
         );
     }
 
+    /**
+     * Displays main information about a ball, including image, stock and buy button
+     *
+     * @returns {XML}
+     */
     getItemInfo(){
         let onStock = "This item is out of stock";
         let icon = "glyphicon glyphicon-remove-circle";
@@ -124,6 +155,12 @@ export default class ItemDetails extends React.Component {
         );
     }
 
+    /**
+     * Displays add to cart button according to stock
+     *
+     * @param buttonId determines if item is on stock or not
+     * @returns {XML}
+     */
     addToCart(buttonId){
         if (this.state.ball.amount > 0) {
             return (
@@ -137,6 +174,12 @@ export default class ItemDetails extends React.Component {
         }
     }
 
+    /**
+     * Adds ball to shopping cart and updates it
+     *
+     * @param ball ball to be added to cart
+     * @returns {*}
+     */
     itemAdded(ball){
         Storage_addToCart(ball);
         let handleUpdate = this.props.handleUpdate;

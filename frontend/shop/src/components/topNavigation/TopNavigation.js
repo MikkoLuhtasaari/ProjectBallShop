@@ -3,7 +3,18 @@ import SignIn from './SignIn';
 import ShoppingCart from './ShoppingCart';
 import Search from './Search';
 
+/**
+ * Displays top navigation bar to user
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class TopNavigation extends React.Component{
+    /**
+     * Renders all top navigation and displays it to user.
+     *
+     * @returns {XML}
+     */
     render(){
         return(
             <nav className="navbar navbar-inverse navbar-fixed-top top-bar fixed bs-dark">

@@ -9,20 +9,38 @@ import CreateAccount from '../topNavigation/CreateAccount'
 import AdminFrontPage from '../admin/AdminFrontPage'
 import React from "react";
 
+/**
+ * Routes user to correct page according to url.
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class Routes extends React.Component {
+
+    /**
+     * Renders routes.
+     *
+     * @returns {XML}
+     */
     render() {
         return (
             <Router history={hashHistory}>
-                <Route path="/" component={props => <FrontPage {...props} handleUpdate={this.props.handleUpdate} />}/>
-                <Route path="/type/:group/:type" component={props => <BallHandler {...props} handleUpdate={this.props.handleUpdate} />}/>
-                <Route path="/group/:group" component={props => <BallHandler {...props} handleUpdate={this.props.handleUpdate} />}/>
-                <Route path="/details/:group/:id" component={props => <ItemDetails {...props} handleUpdate={this.props.handleUpdate} />}/>
-                <Route path="/admin" component={props => <AdminFrontPage {...props} handleUpdate={this.props.handleUpdate} />}/>
-                <Route path="/admin/details/:group/:id" component={props => <AdminItemDetailsComponent {...props} handleUpdate={this.props.handleUpdate} />}/>
+                <Route path="/"
+                       component={props => <FrontPage {...props} handleUpdate={this.props.handleUpdate} />}/>
+                <Route path="/type/:group/:type"
+                       component={props => <BallHandler {...props} handleUpdate={this.props.handleUpdate} />}/>
+                <Route path="/group/:group"
+                       component={props => <BallHandler {...props} handleUpdate={this.props.handleUpdate} />}/>
+                <Route path="/details/:group/:id"
+                       component={props => <ItemDetails {...props} handleUpdate={this.props.handleUpdate} />}/>
+                <Route path="/admin"
+                       component={props => <AdminFrontPage {...props} handleUpdate={this.props.handleUpdate} />}/>
+                <Route path="/admin/details/:group/:id"
+                       component={props => <AdminItemDetailsComponent {...props}
+                                                                      handleUpdate={this.props.handleUpdate} />}/>
                 <Route path="/admin/add">
                     <IndexRoute component={ AddItem }/>
                 </Route>
-
                 <Route path="/CreateAccount">
                     <IndexRoute component={ CreateAccount}/>
                 </Route>

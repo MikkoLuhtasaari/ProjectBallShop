@@ -2,8 +2,19 @@ import React from 'react';
 import Client from "../../Client";
 import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../../Storage"
 
-
+/**
+ * Displays shopping cart at check out page.
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class Checkout extends React.Component{
+
+    /**
+     * Constructs page and creates its state.
+     *
+     * @param props sends props forward if received
+     */
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -21,6 +32,11 @@ export default class Checkout extends React.Component{
         };
     }
 
+    /**
+     * Renders checkout page and displays it to user.
+     *
+     * @returns {XML}
+     */
     render(){
         let total = 0;
         let array = Storage_getCart();
@@ -48,7 +64,6 @@ export default class Checkout extends React.Component{
                     </thead>
                     <tbody>
                     {this.getProducts()}
-
                     <tr >
                         <td colSpan={3}/>
                         <td><h5>Subtotal</h5></td>
@@ -82,9 +97,13 @@ export default class Checkout extends React.Component{
         )
     }
 
+    /**
+     * Displays all the items added to cart
+     *
+     * @returns {Array}
+     */
     getProducts() {
         let temp = [];
-
         for(let i = 0; i < this.state.balls.length; i++) {
             let o = this.state.balls[i].content;
             let n = this.state.balls[i].count;
@@ -120,12 +139,23 @@ export default class Checkout extends React.Component{
         return temp;
     }
 
+    /**
+     * Adds or removes specific ball
+     *
+     * @param ball ball to be added or reduced
+     * @param preCount item count prior adding or reducing
+     * @param value value after adding or reducing
+     * @param removeAll true if all specific items are to be removed
+     */
     addOrRemove(ball, preCount, value, removeAll) {
         if(removeAll || preCount > value) Storage_removeFromCart(ball, removeAll);
         else Storage_addToCart(ball);
         this.setState({balls: Storage_getCart()});
     }
 
+    /**
+     * Redirect user to bank if signed in and checkout is pressed
+     */
     redirectToBank() {
         if (Storage_getUserId() === "" || Storage_getUserId() === null) alert("You have to sign in to buy items");
         else {
@@ -137,6 +167,14 @@ export default class Checkout extends React.Component{
         }
     }
 
+    /**
+     * Updates the value in input field according to adding or reducing.
+     *
+     * @param value value after adding or reducing
+     * @param pos position that is updated
+     * @param o object that is updated
+     * @param n number of a object that is updated
+     */
     setValue(value, pos, o, n) {
         let arr = this.state.inputs;
         arr[pos] = value;

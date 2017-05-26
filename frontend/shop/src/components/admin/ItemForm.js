@@ -1,6 +1,13 @@
 import React from 'react';
 import Client from "../../Client";
 
+/**
+ * Styles of item form
+ * @type {{form: {marginLeft: string, width: string, textAlign: string},
+ * row: {width: string, marginLeft: string, paddingTop: string, paddingBottom: string, textAlign: string},
+ * title: {width: string, display: string}, input: {width: string, display: string},
+ * submitButton: {marginTop: string}}}
+ */
 const styles = {
   form: {
     marginLeft:'10%',
@@ -27,6 +34,12 @@ const styles = {
   }
 };
 
+/**
+ * Displays form that is used to add items to database.
+ *
+ * @author      Pasi Saikkonen
+ * @version     4.0
+ */
 export default class ItemForm extends React.Component{
   constructor(props) {
     super(props);
@@ -38,6 +51,11 @@ export default class ItemForm extends React.Component{
     };
   }
 
+    /**
+     * Renders class and returns HTML form to be displayd at page.
+     *
+     * @returns {XML}
+     */
   render(){
     return (
       <div>
@@ -96,6 +114,9 @@ export default class ItemForm extends React.Component{
     );
   }
 
+    /**
+     * Sends all given information to database
+     */
     sendDataToDatabase() {
         let container = document.getElementById('myForm');
         let inputs = container.getElementsByTagName('input');

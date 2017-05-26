@@ -1,6 +1,11 @@
 import React from 'react';
 import BallHandler from '../pageContent/BallHandler'
 
+/**
+ * Styles for Admins front page
+ * @type {{button: {width: string, marginLeft: string, padding: string, backgroundColor: string,
+ * color: string, border: string, borderRadius: string, marginTop: string}}}
+ */
 const styles = {
   button: {
     width:'20%',
@@ -14,6 +19,14 @@ const styles = {
   }
 };
 
+/**
+ * Displays all the balls in database.
+ *
+ * Displays also button that directs admin to AddItem.
+ *
+ * @author      Pasi Saikkonen
+ * @version     4.0
+ */
 export default class AdminFrontpage extends React.Component{
   render(){
     return (

@@ -1,9 +1,13 @@
+/**
+ *
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class Client {
 
     /**
      * Gets all balls from a specific sport type
-     *
-     * Type can be netsportsballs, batandraquetsgames, goalsportsballs or targetsportsballs.
      *
      * @param sporttype type of balls to be retrieved.
      * @returns {Promise}
@@ -12,10 +16,24 @@ export default class Client {
         return this.getPromise("GET", "http://localhost:8080/" + sporttype);
     }
 
+    /**
+     * Gets all the balls by ball category
+     *
+     * @param sporttype type of balls to be retrieved.
+     * @param balltype more specific category to be retrieved
+     * @returns {*}
+     */
     ballsByName(sporttype, balltype) {
         return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/type/" + balltype);
     }
 
+    /**
+     * Gets a ball of a specific id
+     *
+     * @param sporttype type of ball to fetch
+     * @param id id of the ball to be fetched
+     * @returns {*}
+     */
     ballById(sporttype, id) {
         return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/" + id);
     }
@@ -31,6 +49,13 @@ export default class Client {
         return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/reviews").then(r => this.filterArray(r, ballId));
     }
 
+    /**
+     * Filters reviews array to remove unwanted reviews
+     *
+     * @param array array of reviews of a specific category
+     * @param ballId ball id of a specific ball in that category
+     * @returns {Array}
+     */
     filterArray(array, ballId) {
         let parsed = [];
         for (let i = 0; i < array.length; i++) {
@@ -41,6 +66,16 @@ export default class Client {
         return parsed;
     }
 
+    /**
+     * Sends review to database
+     *
+     * @param sporttype category of the ball reviewed
+     * @param ballId id of the ball reviewed
+     * @param userId id of the user reviewing ball
+     * @param rating rating given to ball
+     * @param header header of the review
+     * @param content content of the review
+     */
     sendReview(sporttype, ballId, userId, rating, header, content) {
         let targetUrl = "http://localhost:8080/" + sporttype + "/" + ballId + "/review/user/" + userId;
 
@@ -64,6 +99,13 @@ export default class Client {
         });
     }
 
+    /**
+     * Controller that handles requests to backend
+     *
+     * @param type what kind of request to send
+     * @param address address to send it to
+     * @returns {Promise}
+     */
     getPromise(type, address) {
         return new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
@@ -83,6 +125,11 @@ export default class Client {
         });
     }
 
+    /**
+     * Stores new user to database
+     *
+     * @param obj needed user details
+     */
     createAccount(obj) {
         obj["accessLevel"] = "User";
         fetch("http://localhost:8080/user",
@@ -101,14 +148,31 @@ export default class Client {
         });
     }
 
+    /**
+     * Gets a specific user from database to sign in purposes
+     *
+     * @param userName username to be fetched
+     * @returns {Promise}
+     */
     userLogin(userName) {
         return this.getPromise("GET", "http://localhost:8080/user/username/" + userName);
     }
 
+    /**
+     * Gets all the users from database
+     *
+     * @returns {Promise}
+     */
     getUsers() {
         return this.getPromise("GET", "http://localhost:8080/users");
     }
 
+    /**
+     * Gets an image from database
+     *
+     * @param id name of the image file
+     * @returns {Promise}
+     */
     getImage(id) {
         return new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
@@ -127,6 +191,11 @@ export default class Client {
         });
     }
 
+    /**
+     * Updates a ball to reduce its quantity after purchase
+     *
+     * @param balls details of the ball to be updated
+     */
     reduceQuantity(balls) {
         for (let i = 0; i < balls.length; i++) {
             let o = balls[i].content;
@@ -162,6 +231,12 @@ export default class Client {
         }
     }
 
+    /**
+     * Adds new item to database
+     *
+     * @param obj
+     * @param category
+     */
     addItemToDatabase(obj, category) {
         fetch("http://localhost:8080/" + category,
             {

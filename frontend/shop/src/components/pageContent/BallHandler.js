@@ -3,7 +3,19 @@ import Client from '../../Client';
 import Reviews from './Reviews'
 import {Storage_addToCart} from '../../Storage'
 
+/**
+ * Handles balls that are displayed in different sites
+ *
+ * @author      Sofia Piekkola
+ * @version     4.0
+ */
 export default class BallHandler extends React.Component{
+
+    /**
+     * Constructs class and creates client and state.
+     *
+     * @param props group and type details of items to display
+     */
     constructor(props) {
         super(props);
         this.client = new Client();
@@ -23,11 +35,17 @@ export default class BallHandler extends React.Component{
         this.fetchItems();
     }
 
+    /**
+     * Fetches items if needed
+     */
     componentWillReceiveProps() {
         this.fetchItems();
         this.setState({updated:false});
     }
 
+    /**
+     * Confirms that items have been fetched
+     */
     componentDidUpdate() {
         if(!this.state.updated) {
             this.fetchItems();
@@ -35,12 +53,20 @@ export default class BallHandler extends React.Component{
         }
     }
 
+    /**
+     * Fetches items from database
+     */
     fetchItems() {
         if (this.props.group !== undefined) this.client.ballsByType(this.props.group).then(b => this.setState({balls: b}));
         else if (this.props.params.type !== undefined) this.client.ballsByName(this.props.params.group, this.props.params.type).then(b => this.setState({balls: b}));
         else this.client.ballsByType(this.props.params.group).then(b => this.setState({balls: b}));
     }
 
+    /**
+     * Renders BallHandler and displays content to user
+     *
+     * @returns {XML}
+     */
     render(){
         return(
             <div className="marginMx">
@@ -51,6 +77,12 @@ export default class BallHandler extends React.Component{
         )
     }
 
+    /**
+     * Creates content to page by adding balls to display.
+     *
+     * @param ballObject item to be added to page
+     * @returns {Array}
+     */
     createContent(ballObject) {
         const propArray = [];
         let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
@@ -90,6 +122,13 @@ export default class BallHandler extends React.Component{
     return propArray;
     }
 
+    /**
+     * Adds buy button
+     *
+     * If there is no stock, button is disabled.
+     * @param ball
+     * @returns {XML}
+     */
     buyButton(ball) {
         if (ball.amount > 0) {
             return (
@@ -105,6 +144,12 @@ export default class BallHandler extends React.Component{
         }
     }
 
+    /**
+     * Adds ball to shopping cart
+     *
+     * @param ball ball to be added to cart
+     * @returns {*}
+     */
     itemAdded(ball){
         Storage_addToCart(ball);
         let handleUpdate = this.props.handleUpdate;

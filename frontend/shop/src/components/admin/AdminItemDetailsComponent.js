@@ -2,7 +2,11 @@ import React from 'react';
 import Client from '../../Client';
 import { browserHistory } from 'react-router';
 import {Storage_addToCart} from "../../Storage";
-
+/**
+ * Styles for AdminItemDetailsComponent
+ * @type {{isModified: {color: string, display: string, paddingRight: string, margin: string,
+ * fontSize: string, fontWeight: string}, textField: {resize: string}}}
+ */
 const styles = {
   isModified: {
     color:'red',
@@ -17,6 +21,12 @@ const styles = {
   }
 };
 
+/**
+ * Enables admin to edit item details or remove item from database
+ *
+ * @author      Pasi Saikkonen
+ * @version     4.0
+ */
 export default class AdminItemDetailsComponent extends React.Component{
   constructor(props) {
     super(props);
@@ -40,6 +50,9 @@ export default class AdminItemDetailsComponent extends React.Component{
     this.parseCategory = this.parseCategory.bind(this);
   }
 
+    /**
+     * Listens if delete is pressed and removes item from database.
+     */
   deleteButtonListener() {
     let targetUrl = 'http://localhost:8080/' + this.parseCategory() + '/' + this.state.ball.id;
     fetch(targetUrl,
@@ -58,6 +71,11 @@ export default class AdminItemDetailsComponent extends React.Component{
     location.reload();
   }
 
+    /**
+     * Enables field edition if field is selected
+     *
+     * @param e field to be edited
+     */
   onFocus(e) {
     switch(e.target.id) {
       case 'name':
@@ -83,6 +101,11 @@ export default class AdminItemDetailsComponent extends React.Component{
     }
   }
 
+    /**
+     * Detects witch field has been edited and moves to put it to database
+     *
+     * @param e information that has been edited
+     */
   onBlur(e) {
     let updatedBall = this.state.ball;
     switch(e.target.id) {
@@ -109,7 +132,6 @@ export default class AdminItemDetailsComponent extends React.Component{
         break;
       case 'weight':
         if(e.target.value.length > 0) {
-          // TODO: FIX THE TYPO IN WEIGHT
           updatedBall.weigth = e.target.value;
           this.setState({ball: updatedBall});
         }
@@ -135,7 +157,9 @@ export default class AdminItemDetailsComponent extends React.Component{
     this.updateData();
   }
 
-  // Finish editing a field by pressing enter
+    /**
+     * Finishes editing a field by pressing enter
+     */
   onKeyPress(e) {
     let charCode = e.which || e.keyCode;
     if(charCode === 13) {
@@ -143,6 +167,11 @@ export default class AdminItemDetailsComponent extends React.Component{
     }
   }
 
+    /**
+     * Detects the route category of a ball
+     *
+     * @returns {*}
+     */
   parseCategory() {
     switch(this.state.ball.category) {
       case 'Target sport':
@@ -158,6 +187,9 @@ export default class AdminItemDetailsComponent extends React.Component{
     }
   }
 
+    /**
+     * Updates data to backend
+     */
   updateData() {
     let targetUrl = 'http://localhost:8080/';
     let ball = this.state.ball;
@@ -168,7 +200,6 @@ export default class AdminItemDetailsComponent extends React.Component{
       {
         method: 'PUT',
         mode: 'cors',
-        // TODO: Fix the request
         body: JSON.stringify({
           "amount": ball.amount,
           "color": ball.color,
@@ -190,6 +221,11 @@ export default class AdminItemDetailsComponent extends React.Component{
       });
   }
 
+    /**
+     * Displays list of detail names and input fields
+     *
+     * @returns {Array}
+     */
   generateListItems() {
     let jsx = [];
 
@@ -244,6 +280,11 @@ export default class AdminItemDetailsComponent extends React.Component{
     return jsx;
   }
 
+    /**
+     * Renders component and returns content as HTML to display to admin
+     *
+     * @returns {XML}
+     */
   render(){
     const ball = this.state.ball;
     let imageSrc = "../../images/items/"+ ball.type + "_" + ball.id + ".png";
@@ -298,6 +339,12 @@ export default class AdminItemDetailsComponent extends React.Component{
     )
   }
 
+    /**
+     * Adds "add to cart" button
+     *
+     * @param buttonId
+     * @returns {XML}
+     */
     addToCart(buttonId){
         if (this.state.ball.amount > 0) {
             return (
@@ -311,6 +358,12 @@ export default class AdminItemDetailsComponent extends React.Component{
         }
     }
 
+    /**
+     * Adds item to cart
+     *
+     * @param ball item that is to be added to cart
+     * @returns {*}
+     */
     itemAdded(ball){
         Storage_addToCart(ball);
         let handleUpdate = this.props.handleUpdate;
