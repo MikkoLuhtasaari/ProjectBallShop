@@ -1,12 +1,16 @@
 import React from 'react';
 import Client from '../../Client';
+import { browserHistory } from 'react-router';
+import {Storage_addToCart} from "../../Storage";
 
 const styles = {
   isModified: {
     color:'red',
     display:'inline-block',
     paddingRight:'10px',
-    margin:'0'
+    margin:'0',
+    fontSize:'22px',
+    fontWeight:'600'
   },
   textField: {
     resize:'none'
@@ -32,10 +36,29 @@ export default class AdminItemDetailsComponent extends React.Component{
     this.onBlur = this.onBlur.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
     this.updateData = this.updateData.bind(this);
+    this.deleteButtonListener = this.deleteButtonListener.bind(this);
+    this.parseCategory = this.parseCategory.bind(this);
+  }
+
+  deleteButtonListener() {
+    let targetUrl = 'http://localhost:8080/' + this.parseCategory() + '/' + this.state.ball.id;
+    fetch(targetUrl,
+      {
+        method: 'delete',
+        mode: 'cors'
+      })
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    browserHistory.push('/#admin');
+    location.reload();
   }
 
   onFocus(e) {
-    console.log(e.target.id);
     switch(e.target.id) {
       case 'name':
         this.setState({editName: true});
@@ -120,30 +143,30 @@ export default class AdminItemDetailsComponent extends React.Component{
     }
   }
 
+  parseCategory() {
+    switch(this.state.ball.category) {
+      case 'Target sport':
+        return 'targetsportsball';
+      case 'Net sport':
+        return 'netsportsball';
+      case 'Bat and raquets game':
+        return 'batandraquetsgame';
+      case 'Goal sport':
+        return 'goalsportsball';
+      default:
+        return undefined;
+    }
+  }
+
   updateData() {
     let targetUrl = 'http://localhost:8080/';
     let ball = this.state.ball;
 
-    switch(this.state.ball.category) {
-      case 'Target sports':
-        targetUrl += 'targetsportsball';
-        break;
-      case 'Net sports':
-        targetUrl += 'netsportsball';
-        break;
-      case 'Bat and raquets games':
-        targetUrl += 'batandraquetsgame';
-        break;
-      case 'Goal sports':
-        targetUrl += 'goalsportsball';
-        break;
-        default:
-          break;
-    }
+    targetUrl += this.parseCategory();
 
     fetch(targetUrl,
       {
-        method: 'POST',
+        method: 'PUT',
         mode: 'cors',
         // TODO: Fix the request
         body: JSON.stringify({
@@ -160,14 +183,11 @@ export default class AdminItemDetailsComponent extends React.Component{
         })
       })
       .then(function (response) {
-        console.log(response);
         return response;
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    console.log(targetUrl);
   }
 
   generateListItems() {
@@ -175,7 +195,7 @@ export default class AdminItemDetailsComponent extends React.Component{
 
     // Name
     if(!this.state.editName) {
-      jsx.push(<li id="name" onClick={this.onFocus}>Name: {this.state.ball.name}</li>);
+      jsx.push(<li key={jsx.length} id="name" onClick={this.onFocus}>Name: {this.state.ball.name}</li>);
     } else {
       jsx.push(<p style={styles.isModified}>Name:</p>);
       jsx.push(<input type="text" style={styles.textField} id="name" onBlur={this.onBlur} autoFocus="true" onKeyPress={this.onKeyPress} placeholder={this.state.ball.name} />);
@@ -183,7 +203,7 @@ export default class AdminItemDetailsComponent extends React.Component{
 
     // Color
     if(!this.state.editColor) {
-      jsx.push(<li id="color" onClick={this.onFocus}>Color: {this.state.ball.color}</li>);
+      jsx.push(<li key={jsx.length + "c"} id="color" onClick={this.onFocus}>Color: {this.state.ball.color}</li>);
     } else {
       jsx.push(<p style={styles.isModified}>Color: </p>);
       jsx.push(<input type="text" style={styles.textField} id="color" onBlur={this.onBlur} autoFocus="true" onKeyPress={this.onKeyPress} placeholder={this.state.ball.color} />);
@@ -191,7 +211,7 @@ export default class AdminItemDetailsComponent extends React.Component{
 
     // Diameter
     if(!this.state.editDiameter) {
-      jsx.push(<li id="diameter" onClick={this.onFocus}>Diameter: {this.state.ball.diameter}</li>);
+      jsx.push(<li key={jsx.length + "d"} id="diameter" onClick={this.onFocus}>Diameter: {this.state.ball.diameter}</li>);
     } else {
       jsx.push(<p style={styles.isModified}>Diameter: </p>);
       jsx.push(<input type="text" style={styles.textField} id="diameter" onBlur={this.onBlur} autoFocus="true" onKeyPress={this.onKeyPress} placeholder={this.state.ball.diameter} />);
@@ -199,7 +219,7 @@ export default class AdminItemDetailsComponent extends React.Component{
 
     // Weight
     if(!this.state.editWeight) {
-      jsx.push(<li id="weight" onClick={this.onFocus}>Weight: {this.state.ball.weigth}</li>);
+      jsx.push(<li key={jsx.length + "w"} id="weight" onClick={this.onFocus}>Weight: {this.state.ball.weigth}</li>);
     } else {
       jsx.push(<p style={styles.isModified}>Weight: </p>);
       jsx.push(<input type="text" style={styles.textField} id="weight" onBlur={this.onBlur} autoFocus="true" onKeyPress={this.onKeyPress} placeholder={this.state.ball.weigth} />);
@@ -207,7 +227,7 @@ export default class AdminItemDetailsComponent extends React.Component{
 
     // Manufacturer
     if(!this.state.editManufacturer) {
-      jsx.push(<li id="manufacturer" onClick={this.onFocus}>Manufacturer: {this.state.ball.manufacturer}</li>);
+      jsx.push(<li key={jsx.length + "m"} id="manufacturer" onClick={this.onFocus}>Manufacturer: {this.state.ball.manufacturer}</li>);
     } else {
       jsx.push(<p style={styles.isModified}>Manufacturer: </p>);
       jsx.push(<input type="text" style={styles.textField} id="manufacturer" onBlur={this.onBlur} autoFocus="true" onKeyPress={this.onKeyPress} placeholder={this.state.ball.manufacturer} />);
@@ -215,7 +235,7 @@ export default class AdminItemDetailsComponent extends React.Component{
 
     // Category
     if(!this.state.editCategory) {
-      jsx.push(<li id="category" onClick={this.onFocus}>Category: {this.state.ball.category}</li>);
+      jsx.push(<li key={jsx.length + "cat"} id="category" onClick={this.onFocus}>Category: {this.state.ball.category}</li>);
     } else {
       jsx.push(<p style={styles.isModified}>Category: </p>);
       jsx.push(<input type="text" style={styles.textField} id="category" onBlur={this.onBlur} autoFocus="true" onKeyPress={this.onKeyPress} placeholder={this.state.ball.category} />);
@@ -227,6 +247,9 @@ export default class AdminItemDetailsComponent extends React.Component{
   render(){
     const ball = this.state.ball;
     let imageSrc = "../../images/items/"+ ball.type + "_" + ball.id + ".png";
+      if(ball.category === null) {
+          imageSrc = "../../images/items/no_image.png";
+      }
     let onStock = "This item is out of stock";
     let ikon = "glyphicon glyphicon-remove-circle";
     let colorId = "red";
@@ -237,7 +260,6 @@ export default class AdminItemDetailsComponent extends React.Component{
       colorId = "green";
       buttonId = "btn btn-success active";
     }
-    console.log(this.state.ball);
     return(
       <section>
         {
@@ -250,9 +272,7 @@ export default class AdminItemDetailsComponent extends React.Component{
                 <h3>{ball.manufacturer} {ball.type}</h3>
                 <h5 id="padBot">{ball.shortDetails}</h5>
                 <h3>{ball.price} €</h3>
-                <div className="section" id="botBad">
-                  <button className={buttonId}><span id="marginR20" className="glyphicon glyphicon-shopping-cart" aria-hidden="true"/> Add to cart</button>
-                </div>
+                  {this.addToCart(buttonId)}
                 <span id={colorId}>
                                     <span className={ikon}/>
                                     <span id="shopItem">{onStock}</span>
@@ -268,6 +288,7 @@ export default class AdminItemDetailsComponent extends React.Component{
                   <ul>
                     {this.generateListItems()}
                   </ul>
+                  <button className="deleteButton" onClick={this.deleteButtonListener} >Delete item</button>
                 </div>
               </div>
             </div>
@@ -276,4 +297,23 @@ export default class AdminItemDetailsComponent extends React.Component{
       </section>
     )
   }
+
+    addToCart(buttonId){
+        if (this.state.ball.amount > 0) {
+            return (
+                <div className="section" id="botBad">
+                    <button className={buttonId} onClick={ () => {this.itemAdded(this.state.ball)} }>
+                        <span id="marginR20" className="glyphicon glyphicon-shopping-cart" aria-hidden="true"/>
+                        Add to cart
+                    </button>
+                </div>
+            )
+        }
+    }
+
+    itemAdded(ball){
+        Storage_addToCart(ball);
+        let handleUpdate = this.props.handleUpdate;
+        return handleUpdate(true);
+    }
 }

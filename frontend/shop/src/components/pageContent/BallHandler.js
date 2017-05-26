@@ -1,16 +1,22 @@
 import React from 'react';
-import Client from '../Client';
-import ReviewsComponent from '../components/ReviewsComponent'
-import ShoppingCartComponent from '../components/ShoppingCartComponent'
+import Client from '../../Client';
+import Reviews from './Reviews'
+import {Storage_addToCart} from '../../Storage'
 
-export default class BallComponent extends React.Component{
+export default class BallHandler extends React.Component{
     constructor(props) {
         super(props);
         this.client = new Client();
 
+        let administrator = false;
+        if (window.location.hash === "#/admin") {
+            administrator = true;
+        }
+
         this.state = {
             balls: [],
-            updated:false
+            updated:false,
+            admin: administrator
         };
 
         this.fetchItems = this.fetchItems.bind(this);
@@ -45,35 +51,29 @@ export default class BallComponent extends React.Component{
         )
     }
 
-    getShoppingCartBtn(ball) {
-        return (
-            <div className="options-cart-round">
-                <button className="btn btn-default" title="Add to cart" onClick={ () => ShoppingCartComponent.addToCart(ball) }>
-                    <span className="fa fa-shopping-cart"/>
-                </button>
-            </div>
-        )
-    }
-
     createContent(ballObject) {
         const propArray = [];
         let imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
+        if(ballObject.category === null) {
+            imageSrc = "../../images/items/no_image.png";
+            ballObject.category = "Net sport";
+        }
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
-        let link = "/#/details/" + category + "/" + ballObject.id;
+        let link;
+
+        if(this.state.admin) {
+            link = "/#/admin/details/" + category + "/" + ballObject.id;
+        } else {
+          link = "/#/details/" + category + "/" + ballObject.id;
+        }
 
         propArray.push(
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
-                        <article className="col-item">
-                            <div className="photo">
-                                {this.getShoppingCartBtn(ballObject)}
-                                <img src={imageSrc} alt="Ball"/>
-                            </div>
-                        </article>
+                    <a href={link}><img id="ballImage" src={imageSrc} className="img-responsive" alt="Ball"/></a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
-
-                    <ReviewsComponent group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
+                    <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>
                     <hr className="item-line"/>
                     <div className="row">
@@ -81,12 +81,33 @@ export default class BallComponent extends React.Component{
                             <p className="item-p item-price">{ballObject.price}€</p>
                         </div>
                         <div className="col-md-4 col-sm-6" id="width100">
-                            <button className="btn btn-info item-right buttonFont" id="btn100" onClick={() => ShoppingCartComponent.addToCart(ballObject)}>BUY ITEM</button>
+                            {this.buyButton(ballObject)}
                         </div>
                     </div>
                 </span>
             </div>
             );
     return propArray;
+    }
+
+    buyButton(ball) {
+        if (ball.amount > 0) {
+            return (
+                <button className="btn btn-success item-right buttonFont padd" id="btn100"
+                        onClick={() => this.itemAdded(ball)}>BUY ITEM
+                </button>
+
+            )
+        } else{
+            return (
+                <button className="btn item-right disabled buttonFont padd" id="btn100">Out of stock</button>
+            )
+        }
+    }
+
+    itemAdded(ball){
+        Storage_addToCart(ball);
+        let handleUpdate = this.props.handleUpdate;
+        return handleUpdate(true);
     }
 }
