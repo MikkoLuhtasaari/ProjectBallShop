@@ -110,7 +110,13 @@ export default class Checkout extends React.Component{
             let category = o.category.replace(/ /g,'').toLowerCase();
             if(!category.includes("game"))category += "sball";
             let link = "/#/details/" + category + "/" + o.id;
-            let imageSrc = "../../images/items/"+ o.type + "_" + o.id + ".png";
+            let imageSrc;
+            const http = new XMLHttpRequest();
+            http.open('HEAD', "../../images/items/"+ o.type + "_" + o.id + ".png", false);
+            http.send();
+            if(http.status !== 404) imageSrc = "../../images/items/"+ o.type + "_" + o.id + ".png";
+            else imageSrc = "../../images/items/no_image.png";
+
             temp.push(
                 <tr key={temp.length}>
                     <td className="col-sm-8 col-md-6">
