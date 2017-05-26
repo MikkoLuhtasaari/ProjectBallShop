@@ -194,12 +194,12 @@ public class MyController implements ApplicationRunner {
      */
     @RequestMapping(value = "/netsportsball/{id}",  method=RequestMethod.PUT)
     public void modifyNetSportsBall(@PathVariable long id, @RequestBody NetSportsBall netsportsball) {
-        
-        if(nsRepository.findOne(id) != null) {
-            nsRepository.delete(nsRepository.findOne(id));
-            
-            NetSportsBall temp = new NetSportsBall(netsportsball.getName(), netsportsball.getColor(), netsportsball.getDiameter(), netsportsball.getWeigth(), netsportsball.getDetails(), netsportsball.getMaterial(), netsportsball.getManufacturer(), netsportsball.getShortDetails(), netsportsball.getType(), netsportsball.getPrice(), netsportsball.getAmount(), id);
-            nsRepository.save(temp);
+        NetSportsBall nsb = nsRepository.findOne(id); 
+
+        if (nsb != null) {
+            nsb = netsportsball;
+            nsb.setId(id);
+            nsb = nsRepository.save(nsb);
         } else {
             System.out.println("Error! Invalid id");
         }
@@ -364,12 +364,12 @@ public class MyController implements ApplicationRunner {
      */
     @RequestMapping(value = "/batandraquetsgame/{id}",  method=RequestMethod.POST)
     public void modifyBatAndRaquetsGame(@PathVariable long id, @RequestBody BatAndRaquetsGames batandraquetsgame) {
-        
-        if(brRepository.findOne(id) != null) {
-            brRepository.delete(brRepository.findOne(id));
-            
-            BatAndRaquetsGames temp = new BatAndRaquetsGames(batandraquetsgame.getName(), batandraquetsgame.getColor(), batandraquetsgame.getDiameter(), batandraquetsgame.getWeigth(), batandraquetsgame.getDetails(), batandraquetsgame.getMaterial(), batandraquetsgame.getManufacturer(), batandraquetsgame.getShortDetails(), batandraquetsgame.getType(), batandraquetsgame.getPrice(), batandraquetsgame.getAmount(), id);
-            brRepository.save(temp);
+        BatAndRaquetsGames nsb = brRepository.findOne(id); 
+
+        if (nsb != null) {
+            nsb = batandraquetsgame;
+            nsb.setId(id);
+            nsb = brRepository.save(nsb);
         } else {
             System.out.println("Error! Invalid id");
         }
@@ -535,13 +535,14 @@ public class MyController implements ApplicationRunner {
      */
     @RequestMapping(value = "/goalsportsball/{id}",  method=RequestMethod.PUT)
     public void modifyGoalSportsBall(@PathVariable long id, @RequestBody GoalSportsBall goalsportsball) {
-        
-        if(gsbRepository.findOne(id) != null) {
-            gsbRepository.delete(gsbRepository.findOne(id));
-            GoalSportsBall temp = new GoalSportsBall(goalsportsball.getName(), goalsportsball.getColor(), goalsportsball.getDiameter(), goalsportsball.getWeigth(), goalsportsball.getDetails(), goalsportsball.getMaterial(), goalsportsball.getManufacturer(), goalsportsball.getShortDetails(), goalsportsball.getType(), goalsportsball.getPrice(), goalsportsball.getAmount(), id);
-            gsbRepository.save(temp);
+         GoalSportsBall nsb = gsbRepository.findOne(id); 
+
+        if (nsb != null) {
+            nsb = goalsportsball;
+            nsb.setId(id);
+            nsb = gsbRepository.save(nsb);
         } else {
-            System.out.println("Error! No balls with that id found!");
+            System.out.println("Error! Invalid id");
         }
     }
     
@@ -704,15 +705,14 @@ public class MyController implements ApplicationRunner {
      */
     @RequestMapping(value = "/targetsportsball/{id}",  method=RequestMethod.PUT)
     public void modifyTargetSportsBall(@PathVariable long id, @RequestBody TargetSportsBall targetsportsball) {
-        
-        if(tsbRepository.findOne(id) != null) {
-            tsbRepository.delete(tsbRepository.findOne(id));
-            
-            TargetSportsBall temp = new TargetSportsBall(targetsportsball.getName(), targetsportsball.getColor(), targetsportsball.getDiameter(), targetsportsball.getWeigth(), targetsportsball.getDetails(), targetsportsball.getMaterial(), targetsportsball.getManufacturer(), targetsportsball.getShortDetails(), targetsportsball.getType(), targetsportsball.getPrice(), targetsportsball.getAmount(), id);
-            
-            tsbRepository.save(temp);
+         TargetSportsBall nsb = tsbRepository.findOne(id); 
+
+        if (nsb != null) {
+            nsb = targetsportsball;
+            nsb.setId(id);
+            nsb = tsbRepository.save(nsb);
         } else {
-            System.out.println("Error, invalid ID!");
+            System.out.println("Error! Invalid id");
         }
     }
     
