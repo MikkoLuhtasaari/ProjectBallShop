@@ -92,7 +92,9 @@ public class NetSportsBall implements Serializable {
     /**
      * Constructor
      */
-    public NetSportsBall(){};
+    public NetSportsBall(){
+        this.category = "Net sport";
+    };
     
     /**
      * Constructor

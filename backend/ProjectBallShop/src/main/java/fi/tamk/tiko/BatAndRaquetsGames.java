@@ -98,7 +98,9 @@ public class BatAndRaquetsGames {
     /**
      * Basic constructor
      */
-    public BatAndRaquetsGames(){};
+    public BatAndRaquetsGames(){
+        category = "Bat and raquets game";
+    };
     
     /**
      * Constructor

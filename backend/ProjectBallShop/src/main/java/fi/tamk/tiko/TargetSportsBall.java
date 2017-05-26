@@ -91,7 +91,9 @@ public class TargetSportsBall {
     /**
      * Constructor
      */
-    public TargetSportsBall(){};
+    public TargetSportsBall(){
+        category = "Target sport";
+    };
     
     /**
      * Constructor
