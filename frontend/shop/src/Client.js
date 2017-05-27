@@ -107,21 +107,12 @@ export default class Client {
      * @returns {Promise}
      */
     getPromise(type, address) {
-        return new Promise((resolve, reject) => {
-            let request = new XMLHttpRequest();
-            request.open(type, address);
-            request.onreadystatechange = () => {
-                try {
-                    if (request.readyState === 4 && request.status === 200) {
-                        let raw = request.responseText;
-                        let objectified = JSON.parse(raw);
-                        resolve(objectified);
-                    }
-                } catch (e) {
-                    reject(e)
-                }
-            };
-            request.send();
+        fetch(address, { method: type})
+            .then(function(response) {
+                return response.json();
+            }).then(function(myJSON) {
+        }).catch(function (error) {
+            console.log(error);
         });
     }
 
@@ -174,20 +165,11 @@ export default class Client {
      * @returns {Promise}
      */
     getImage(id) {
-        return new Promise((resolve, reject) => {
-            let request = new XMLHttpRequest();
-            request.open('GET', window.location.origin + "/" + id);
-            request.responseType = 'blob';
-            request.onreadystatechange = function () {
-                if (request.status === 200) {
-                    if(request.response !== null) {
-                        resolve(request.response);
-                    }
-                } else {
-                    reject(new Error('Image didn\'t load successfully; error code:' + request.statusText));
-                }
-            };
-            request.send();
+        fetch(window.location.origin + "/" + id, { method: 'GET'})
+            .then(function(response) {
+                return response;
+            }).catch(function (error) {
+            console.log(error);
         });
     }
 
