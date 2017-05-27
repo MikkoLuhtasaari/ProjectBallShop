@@ -16,8 +16,10 @@ export default class BallImage extends React.Component {
   }
 
   render() {
+    console.log("render");
+    console.log(this.state.imageSrc)
     return (
-      <img id="ballImage" src={this.state.imageSrc } onError={this.setDefaultImage} className="img-responsive"
+      <img id={this.props.id} src={this.state.imageSrc } onError={this.setDefaultImage} className="img-responsive"
            alt="Ball"/>
     )
   }

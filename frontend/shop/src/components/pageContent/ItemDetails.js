@@ -1,6 +1,7 @@
 import React from 'react';
 import Client from '../../Client';
 import Reviews from './Reviews'
+import BallImage from './BallImage'
 import {Storage_addToCart} from "../../Storage"
 
 /**
@@ -23,6 +24,7 @@ export default class ItemDetails extends React.Component {
             group: props.params.group,
             id: props.params.id,
             ball: '',
+            imageSrc:'',
             test: 1
         };
 
@@ -56,6 +58,11 @@ export default class ItemDetails extends React.Component {
         if(this.state.ball === '' && this.state.mounted) {
             this.setState({test: this.state.test + 1});
         }
+
+      if(this.state.imageSrc === '' && typeof this.state.ball.id !== 'undefined') {
+        console.log(this.state.ball);
+        this.setState({imageSrc: "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png"})
+      }
     }
 
     /**
@@ -64,42 +71,44 @@ export default class ItemDetails extends React.Component {
      * @returns {XML}
      */
     render() {
-        let imageSrc = "../../images/items/no_image.png";
-        if(typeof this.state.ball.id !== "undefined") {
-            const http = new XMLHttpRequest();
-            http.open('HEAD', "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png", false);
-            http.send();
-            if (http.status !== 404) imageSrc = "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png";
-        }
-        return (
+        if(this.state.imageSrc !== '') {
+          return (
             <section className="whiteBg">
-                {
-                    <div>
-                        <div className="row">
-                            <div className="col-xs-1"/>
-                            <div className="col-xs-3 item-photo">
-                                <img alt="item" id="wideImg" src={imageSrc}/>
-                            </div>
-                            <div className="col-xs-1"/>
-                            {this.getItemInfo()}
-                            <div className="col-xs-1"/>
-                            {this.getDetailsList()}
-                                <div className="col-xs-12" id="wideDiv"/>
-                                <div className="col-xs-1"/>
-                                <div className="col-xs-4" id="textCenter">
-                                    <Reviews need={"postReview"} group={this.state.ball.category} ballId={this.state.ball.id} location={"tweaked-margin"}/>
-                                </div>
-                                <div className="col-xs-1"/>
-                            <div className="col-xs-6">
-                                <h3 className="padding10">Customer reviews:</h3>
-                                <br/>
-                                <Reviews need={"wide"} group={this.state.ball.category} ballId={this.state.ball.id} location={"tweaked-margin"}/>
-                            </div>
-                        </div>
-                    </div>
-                }
+              {
+                  <div>
+                      <div className="row">
+                          <div className="col-xs-1"/>
+                          <div className="col-xs-3 item-photo">
+                              <BallImage imageSrc={this.state.imageSrc} id="wideImg"/>
+                          </div>
+                          <div className="col-xs-1"/>
+                        {this.getItemInfo()}
+                          <div className="col-xs-1"/>
+                        {this.getDetailsList()}
+                          <div className="col-xs-12" id="wideDiv"/>
+                          <div className="col-xs-1"/>
+                          <div className="col-xs-4" id="textCenter">
+                              <Reviews need={"postReview"} group={this.state.ball.category} ballId={this.state.ball.id}
+                                       location={"tweaked-margin"}/>
+                          </div>
+                          <div className="col-xs-1"/>
+                          <div className="col-xs-6">
+                              <h3 className="padding10">Customer reviews:</h3>
+                              <br/>
+                              <Reviews need={"wide"} group={this.state.ball.category} ballId={this.state.ball.id}
+                                       location={"tweaked-margin"}/>
+                          </div>
+                      </div>
+                  </div>
+              }
             </section>
-        )
+          )
+
+        } else {
+            return (
+              <p>Loading...</p>
+            )
+        }
     }
 
     /**
