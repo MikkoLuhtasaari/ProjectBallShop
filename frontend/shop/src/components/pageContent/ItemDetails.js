@@ -35,7 +35,7 @@ export default class ItemDetails extends React.Component {
      * Fetches ball of a specific id from database
      */
     componentDidMount() {
-        this.client.ballById(this.state.group, this.state.id).then(b => this.setState({ball: b})).then(this.fetchCompleted);
+        this.client.ballById(this.props.params.group, this.props.params.id).then(b => this.setState({ball: b})).then(this.fetchCompleted);
     }
 
     /**
@@ -45,16 +45,16 @@ export default class ItemDetails extends React.Component {
         this.setState({test: this.state.test + 1});
     }
 
+    componentWillReceiveProps(nextProps){
+        if (nextProps.params.group !== this.props.params.group || nextProps.params.id !== this.props.params.id) {
+            this.client.ballById(nextProps.params.group, nextProps.params.id).then(b => this.updateState(b)).then(this.fetchCompleted);
+        }
+    }
+
     /**
      * Updates page if search is applied in item details page
      */
     componentWillUpdate() {
-        if(window.location.href.substring(23) !== this.props.location.pathname) {
-          let path = window.location.href.substring(32);
-          let category = path.substring(0, path.indexOf('/'));
-          let id = path.substring(path.indexOf('/') + 1);
-          this.client.ballById(category, id).then(b => this.setState({ball: b})).then(this.fetchCompleted);
-        }
         if(this.state.ball === '' && this.state.mounted) {
             this.setState({test: this.state.test + 1});
         }
@@ -198,5 +198,10 @@ export default class ItemDetails extends React.Component {
         Storage_addToCart(ball);
         let handleUpdate = this.props.handleUpdate;
         return handleUpdate(true);
+    }
+
+    updateState(b) {
+        this.setState({imageSrc: "../../images/items/" + b.type + "_" + b.id + ".png"});
+        this.setState({ball: b});
     }
 }

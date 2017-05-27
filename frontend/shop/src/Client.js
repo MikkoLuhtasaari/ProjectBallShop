@@ -7,6 +7,8 @@
 export default class Client {
 
     html = window.location.origin;
+        //"http://localhost:8080";
+    // window.location.origin;
 
     /**
      * Gets all balls from a specific sport type
@@ -50,6 +52,8 @@ export default class Client {
     reviewsByBallId(sporttype, ballId) {
         return this.getPromise("GET", this.html + "/" + sporttype + "/reviews").then(r => this.filterArray(r, ballId));
     }
+//https://ballshop.herokuapp.com/#/admin/details/targetsportsball/2
+//https://ballshop.herokuapp.com//details/goalsportsball/1
 
     /**
      * Filters reviews array to remove unwanted reviews
@@ -84,7 +88,6 @@ export default class Client {
         fetch(targetUrl,
             {
                 method: 'POST',
-                mode: 'cors',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -128,7 +131,6 @@ export default class Client {
         fetch(this.html + "/user",
             {
                 method: 'POST',
-                mode: 'cors',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -160,30 +162,6 @@ export default class Client {
         return this.getPromise("GET", this.html + "/users");
     }
 
-    /**
-     * Gets an image from database
-     *
-     * @param id name of the image file
-     * @returns {Promise}
-     */
-    getImage(id) {
-        return new Promise((resolve, reject) => {
-            let request = new XMLHttpRequest();
-            request.open('GET', this.html + "/image/" + id);
-            request.responseType = 'blob';
-            request.onreadystatechange = function () {
-                if (request.status === 200) {
-                    if(request.response !== null) {
-                        resolve(request.response);
-                    }
-                } else {
-                    reject(new Error('Image didn\'t load successfully; error code:' + request.statusText));
-                }
-            };
-            request.send();
-        });
-    }
-
 
     /**
      * Puts ball to database for updating amount after purchase
@@ -196,7 +174,6 @@ export default class Client {
         fetch(this.html + "/" + category + "/" + id,
             {
                 method: 'PUT',
-                mode: 'cors',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -219,7 +196,6 @@ export default class Client {
         fetch(this.html + "/" + category,
             {
                 method: 'POST',
-                mode: 'cors',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
