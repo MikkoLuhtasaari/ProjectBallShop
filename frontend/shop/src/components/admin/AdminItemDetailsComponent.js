@@ -2,6 +2,8 @@ import React from 'react';
 import Client from '../../Client';
 import { browserHistory } from 'react-router';
 import {Storage_addToCart} from "../../Storage";
+import BallImage from '../pageContent/BallImage'
+
 /**
  * Styles for AdminItemDetailsComponent
  * @type {{isModified: {color: string, display: string, paddingRight: string, margin: string,
@@ -33,6 +35,7 @@ export default class AdminItemDetailsComponent extends React.Component{
     this.client = new Client();
     this.state = {
       ball : '',
+      imageSrc:'',
       editName: false,
       editColor: false,
       editDiameter: false,
@@ -49,6 +52,16 @@ export default class AdminItemDetailsComponent extends React.Component{
     this.deleteButtonListener = this.deleteButtonListener.bind(this);
     this.parseCategory = this.parseCategory.bind(this);
   }
+
+    componentWillUpdate() {
+        if(this.state.ball === '') {
+            this.setState({test: this.state.test + 1});
+        }
+
+        if(this.state.imageSrc === '' && typeof this.state.ball.id !== 'undefined') {
+            this.setState({imageSrc: "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png"})
+        }
+    }
 
     /**
      * Listens if delete is pressed and removes item from database.
@@ -287,14 +300,6 @@ export default class AdminItemDetailsComponent extends React.Component{
      */
   render(){
     const ball = this.state.ball;
-    let imageSrc = "../../images/items/no_image.png";
-    if(typeof ball.id !== "undefined") {
-        imageSrc = "../../images/items/" + ball.type + "_" + ball.id + ".png";
-        const http = new XMLHttpRequest();
-        http.open('HEAD', "../../images/items/" + ball.type + "_" + ball.id + ".png", false);
-        http.send();
-        if (http.status !== 404) imageSrc = "../../images/items/" + ball.type + "_" + ball.id + ".png";
-    }
     let onStock = "This item is out of stock";
     let ikon = "glyphicon glyphicon-remove-circle";
     let colorId = "red";
@@ -305,13 +310,14 @@ export default class AdminItemDetailsComponent extends React.Component{
       colorId = "green";
       buttonId = "btn btn-success active";
     }
+    if(this.state.imageSrc !== '') {
     return(
       <section>
         {
           <div className="container">
             <div className="row" id="centerAll">
               <div className="col-xs-4 item-photo">
-                <img alt="item" id="wideImg" src={imageSrc} />
+                <BallImage imageSrc={this.state.imageSrc} id="wideImg"/>
               </div>
               <div className="col-xs-5">
                 <h3>{ball.manufacturer} {ball.type}</h3>
@@ -319,9 +325,9 @@ export default class AdminItemDetailsComponent extends React.Component{
                 <h3>{ball.price} €</h3>
                   {this.addToCart(buttonId)}
                 <span id={colorId}>
-                                    <span className={ikon}/>
-                                    <span id="shopItem">{onStock}</span>
-                                </span>
+                  <span className={ikon}/>
+                <span id="shopItem">{onStock}</span>
+              </span>
               </div>
               <div className="col-xs-9" id="wideDiv">
                 <div>
@@ -341,6 +347,11 @@ export default class AdminItemDetailsComponent extends React.Component{
         }
       </section>
     )
+    } else {
+        return (
+            <p>Loading...</p>
+        )
+    }
   }
 
     /**

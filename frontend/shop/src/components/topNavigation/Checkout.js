@@ -1,5 +1,6 @@
 import React from 'react';
 import Client from "../../Client";
+import BallImage from '../pageContent/BallImage'
 import {Storage_addToCart, Storage_removeFromCart, Storage_getCart, Storage_setCart, Storage_getUserId} from "../../Storage"
 
 /**
@@ -28,8 +29,19 @@ export default class Checkout extends React.Component{
         this.state = {
             balls: array,
             inputs: values,
+            imageSrc:[],
             updated: false
         };
+    }
+
+    componentWillMount(){
+        let imgArr = [];
+        for(let i = 0; i<this.state.balls.length; i++){
+            if(this.state.balls[i].content.id !== "undefined"){
+                imgArr.push("../../images/items/" + this.state.balls[i].content.type + "_" + this.state.balls[i].content.id + ".png")
+            }
+        }
+        this.setState({imageSrc:imgArr})
     }
 
     /**
@@ -104,44 +116,48 @@ export default class Checkout extends React.Component{
      */
     getProducts() {
         let temp = [];
-        for(let i = 0; i < this.state.balls.length; i++) {
+        for (let i = 0; i < this.state.balls.length; i++) {
             let o = this.state.balls[i].content;
             let n = this.state.balls[i].count;
-            let category = o.category.replace(/ /g,'').toLowerCase();
-            if(!category.includes("game"))category += "sball";
+            let category = o.category.replace(/ /g, '').toLowerCase();
+            if (!category.includes("game")) category += "sball";
             let link = "/#/details/" + category + "/" + o.id;
-            let imageSrc = "../../images/items/no_image.png";
-            if(typeof o.id !== "undefined") {
-                const http = new XMLHttpRequest();
-                http.open('HEAD', "../../images/items/" + o.type + "_" + o.id + ".png", false);
-                http.send();
-                if (http.status !== 404) imageSrc = "../../images/items/" + o.type + "_" + o.id + ".png";
-            }
 
-            temp.push(
-                <tr key={temp.length}>
-                    <td className="col-sm-8 col-md-6">
-                        <div className="media">
-                            <img className="pull-left media-object" id="scaleImg" alt="item" src={imageSrc}/>
-                            <div className="media-body">
-                                <h4 className="media-heading"><a href={link}>{o.name}</a></h4>
-                                <h5 className="media-heading">{o.manufacturer}</h5>
-                                <h5 className="media-heading">{o.type}</h5>
+            if (this.state.imageSrc !== '') {
+                temp.push(
+                    <tr key={temp.length}>
+                        <td className="col-sm-8 col-md-6">
+                            <div className="media">
+                                <BallImage className="pull-left media-object" imageSrc={this.state.imageSrc[i]} alt="item" id="scaleImg"/>
+                                <div className="media-body">
+                                    <h4 className="media-heading"><a href={link}>{o.name}</a></h4>
+                                    <h5 className="media-heading">{o.manufacturer}</h5>
+                                    <h5 className="media-heading">{o.type}</h5>
+                                </div>
                             </div>
-                        </div></td>
-                    <td className="col-sm-1 col-md-1">
-                        <input type="number" className="form-control" min="1" max={o.amount} value={this.state.inputs[i]} onChange={(e)=> this.setValue(e.target.value, i, o, n)} />
-                        <h5/>
-                        <h5 className="media-heading">On stock: {o.amount}</h5>
-                    </td>
-                    <td className="col-sm-1 col-md-1 text-center"><strong>{o.price}€</strong></td>
-                    <td className="col-sm-1 col-md-1 text-center"><strong>{(o.price * n).toFixed(2)}€</strong></td>
-                    <td className="col-sm-1 col-md-1">
-                        <button type="button" className="btn btn-danger" onClick={() => this.addOrRemove(o, n, i, true)}>
-                            <span className="glyphicon glyphicon-remove" id="noMargin"/> Remove
-                        </button></td>
-                </tr>
-            )
+                        </td>
+                        <td className="col-sm-1 col-md-1">
+                            <input type="number" className="form-control" min="1" max={o.amount}
+                                   value={this.state.inputs[i]}
+                                   onChange={(e) => this.setValue(e.target.value, i, o, n)}/>
+                            <h5/>
+                            <h5 className="media-heading">On stock: {o.amount}</h5>
+                        </td>
+                        <td className="col-sm-1 col-md-1 text-center"><strong>{o.price}€</strong></td>
+                        <td className="col-sm-1 col-md-1 text-center"><strong>{(o.price * n).toFixed(2)}€</strong></td>
+                        <td className="col-sm-1 col-md-1">
+                            <button type="button" className="btn btn-danger"
+                                    onClick={() => this.addOrRemove(o, n, i, true)}>
+                                <span className="glyphicon glyphicon-remove" id="noMargin"/> Remove
+                            </button>
+                        </td>
+                    </tr>
+                )
+            } else {
+                return (
+                    <div><p>Loading...</p></div>
+                )
+            }
         }
         return temp;
     }
@@ -157,10 +173,7 @@ export default class Checkout extends React.Component{
     addOrRemove(ball, preCount, value, removeAll) {
         if(removeAll || preCount > value) Storage_removeFromCart(ball, removeAll);
         else Storage_addToCart(ball);
-        console.log(this.state.balls)
         this.setState({balls: Storage_getCart()});
-        console.log(this.state.balls)
-
     }
 
     /**

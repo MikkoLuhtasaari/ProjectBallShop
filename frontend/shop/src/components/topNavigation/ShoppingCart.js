@@ -1,4 +1,5 @@
 import React from 'react';
+import BallImage from '../pageContent/BallImage'
 import {Storage_getCart, Storage_removeFromCart} from '../../Storage'
 
 /**
@@ -20,8 +21,15 @@ export default class ShoppingCart extends React.Component{
         this.state = {
             total: 0,
             cart: [],
+            imageSrc:[],
             updated: updated
         };
+    }
+
+    componentWillMount(){
+        if(this.state.cart.length === 0) {
+            this.setState({cart: Storage_getCart()});
+        }
     }
 
     /**
@@ -41,6 +49,20 @@ export default class ShoppingCart extends React.Component{
             this.setState({cart: Storage_getCart()});
             this.setState({updated: true});
             this.countTotal();
+            this.setState({imageSrc: []})
+        }
+    }
+
+    componentDidUpdate(){
+        if(this.state.imageSrc.length<this.state.cart.length) {
+            let imgArr = [];
+            for (let i = 0; i < this.state.cart.length; i++) {
+                if (this.state.cart[i].content.id !== "undefined") {
+                    imgArr.push("../../images/items/" + this.state.cart[i].content.type + "_" + this.state.cart[i].content.id + ".png")
+                }
+            }
+            this.setState({imageSrc: imgArr});
+            this.setState({updated: false});
         }
     }
 
@@ -104,19 +126,10 @@ export default class ShoppingCart extends React.Component{
             let o = array[i].content;
             let n = array[i].count;
 
-            let imageSrc = "../../images/items/no_image.png";
-            if(typeof o.id !== "undefined") {
-                const http = new XMLHttpRequest();
-                http.open('HEAD', "../../images/items/" + o.type + "_" + o.id + ".png", false);
-                http.send();
-                if (http.status !== 404) imageSrc = "../../images/items/" + o.type + "_" + o.id + ".png";
-            }
-
             temp.push(
                 <span className="item" key={temp.length}>
                     <span className="item-left">
-                        <img src={imageSrc} id="img40" alt="item"/>
-                        <span className="item-info">
+                        <img src={this.state.imageSrc[i]} id="img40" alt="item"/> <span className="item-info">
                             <span>{n}x {o.name}</span>
                             <span>{o.price} €</span>
                         </span>
@@ -138,7 +151,7 @@ export default class ShoppingCart extends React.Component{
      */
     removeItem(o){
         Storage_removeFromCart(o, true);
-        this.setState({updated: !this.state.updated})
+        this.setState({updated: false})
     }
 
     /**
@@ -152,9 +165,10 @@ export default class ShoppingCart extends React.Component{
         for(let i = 0; i < array.length; i++) {
             itemCount += array[i].count;
         }
-
         if (itemCount === 0) itemCount = "Shopping cart";
         else itemCount += " items";
+
+
 
         return (
             <a onClick={() => this.setState({updated: false})} href="#" className="dropdown-toggle" data-toggle="dropdown"
