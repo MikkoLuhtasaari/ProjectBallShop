@@ -82,7 +82,7 @@ export default class Checkout extends React.Component{
                     <tr>
                         <td colSpan={3}/>
                         <td>
-                            <button type="button" className="btn btn-default"><a href="http://localhost:3000/#/">
+                            <button type="button" className="btn btn-default"><a href="#/">
                                 <span className="glyphicon glyphicon-shopping-cart"/> Continue Shopping</a>
                             </button></td>
                         <td>
@@ -110,12 +110,13 @@ export default class Checkout extends React.Component{
             let category = o.category.replace(/ /g,'').toLowerCase();
             if(!category.includes("game"))category += "sball";
             let link = "/#/details/" + category + "/" + o.id;
-            let imageSrc;
-            const http = new XMLHttpRequest();
-            http.open('HEAD', "../../images/items/"+ o.type + "_" + o.id + ".png", false);
-            http.send();
-            if(http.status !== 404) imageSrc = "../../images/items/"+ o.type + "_" + o.id + ".png";
-            else imageSrc = "../../images/items/no_image.png";
+            let imageSrc = "../../images/items/no_image.png";
+            if(typeof o.id !== "undefined") {
+                const http = new XMLHttpRequest();
+                http.open('HEAD', "../../images/items/" + o.type + "_" + o.id + ".png", false);
+                http.send();
+                if (http.status !== 404) imageSrc = "../../images/items/" + o.type + "_" + o.id + ".png";
+            }
 
             temp.push(
                 <tr key={temp.length}>

@@ -46,7 +46,7 @@ export default class ItemForm extends React.Component{
       this.client = new Client();
 
     this.state = {
-        formAction: 'http://localhost:3000/#/group/' + props.category + "s",
+        formAction: '#/group/' + props.category + "s",
         html:'http://localhost:8080/' + props.category
     };
   }

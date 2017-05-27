@@ -85,12 +85,13 @@ export default class BallHandler extends React.Component{
      */
     createContent(ballObject) {
         const propArray = [];
-        let imageSrc;
-        const http = new XMLHttpRequest();
-        http.open('HEAD', "../../images/items/"+ ballObject.type + "_" +ballObject.id+ ".png", false);
-        http.send();
-        if(http.status !== 404) imageSrc = "../../images/items/"+ ballObject.type + "_" + ballObject.id + ".png";
-        else imageSrc = "../../images/items/no_image.png";
+        let imageSrc = "../../images/items/no_image.png";
+        if(typeof ballObject.id !== "undefined") {
+            const http = new XMLHttpRequest();
+            http.open('HEAD', "../../images/items/" + ballObject.type + "_" + ballObject.id + ".png", false);
+            http.send();
+            if (http.status !== 404) imageSrc = "../../images/items/" + ballObject.type + "_" + ballObject.id + ".png";
+        }
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
         let link;

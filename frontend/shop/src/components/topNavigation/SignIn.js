@@ -96,7 +96,7 @@ export default class SignIn extends React.Component {
                             </form>
                         </div>
                         <div className="bottom text-center">
-                            <a href="http://localhost:3000/#/CreateAccount/"><b>Create new account</b></a>
+                            <a href="#/CreateAccount/"><b>Create new account</b></a>
                         </div>
                     </div>
                 </li>

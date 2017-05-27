@@ -238,6 +238,8 @@ export default class Reviews extends React.Component{
         else {
             let formattedGroup = this.state.group.slice(0, this.state.group.length - 1);
             this.client.sendReview(formattedGroup, this.props.ballId, userId, this.state.rating, header, content);
+            alert("Your review has been sent. Thank you!");
+            window.location = '/#/';
         }
     }
 }

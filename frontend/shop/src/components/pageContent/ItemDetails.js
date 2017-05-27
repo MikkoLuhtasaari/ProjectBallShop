@@ -64,12 +64,13 @@ export default class ItemDetails extends React.Component {
      * @returns {XML}
      */
     render() {
-        let imageSrc;
-        const http = new XMLHttpRequest();
-        http.open('HEAD', "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png", false);
-        http.send();
-        if(http.status !== 404) imageSrc = "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png"
-        else imageSrc = "../../images/items/no_image.png";
+        let imageSrc = "../../images/items/no_image.png";
+        if(typeof this.state.ball.id !== "undefined") {
+            const http = new XMLHttpRequest();
+            http.open('HEAD', "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png", false);
+            http.send();
+            if (http.status !== 404) imageSrc = "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png";
+        }
         return (
             <section className="whiteBg">
                 {

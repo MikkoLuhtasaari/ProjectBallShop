@@ -47,9 +47,9 @@ export default class MiddleNavigation extends React.Component{
             <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">Net Sports <span className="caret"/></a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><a href="http://localhost:3000/#/type/netsportsball/Volleyball/">Volleyball</a></li>
-                    <li><a href="http://localhost:3000/#/type/netsportsball/Handball">Handball</a></li>
-                    <li><a href="http://localhost:3000/#/group/netsportsballs">All</a></li>
+                    <li><a href="#/type/netsportsball/Volleyball/">Volleyball</a></li>
+                    <li><a href="#/type/netsportsball/Handball">Handball</a></li>
+                    <li><a href="#/group/netsportsballs">All</a></li>
                 </ul>
             </li>
         )
@@ -64,9 +64,9 @@ export default class MiddleNavigation extends React.Component{
             <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">Bat & Racket Sports <span className="caret"/></a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><a href="http://localhost:3000/#/type/batandraquetsgame/Baseball">Baseball</a></li>
-                    <li><a href="http://localhost:3000/#/type/batandraquetsgame/Tennisball">Tennis</a></li>
-                    <li><a href="http://localhost:3000/#/group/batandraquetsgames">All</a></li>
+                    <li><a href="#/type/batandraquetsgame/Baseball">Baseball</a></li>
+                    <li><a href="#/type/batandraquetsgame/Tennisball">Tennis</a></li>
+                    <li><a href="#/group/batandraquetsgames">All</a></li>
                 </ul>
             </li>
         )
@@ -81,9 +81,9 @@ export default class MiddleNavigation extends React.Component{
             <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">Goal Sports <span className="caret"/></a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><a href="http://localhost:3000/#/type/goalsportsball/Football">Football</a></li>
-                    <li><a href="http://localhost:3000/#/type/goalsportsball/Basketball">Basketball</a></li>
-                    <li><a href="http://localhost:3000/#/group/goalsportsballs">All</a></li>
+                    <li><a href="#/type/goalsportsball/Football">Football</a></li>
+                    <li><a href="#/type/goalsportsball/Basketball">Basketball</a></li>
+                    <li><a href="#/group/goalsportsballs">All</a></li>
                 </ul>
             </li>
         )
@@ -98,9 +98,9 @@ export default class MiddleNavigation extends React.Component{
             <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">Target Sports <span className="caret"/></a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><a href="http://localhost:3000/#/type/targetsportsball/Bowlingball">Bowling</a></li>
-                    <li><a href="http://localhost:3000/#/type/targetsportsball/Golfball">Golf</a></li>
-                    <li><a href="http://localhost:3000/#/group/targetsportsballs">All</a></li>
+                    <li><a href="#/type/targetsportsball/Bowlingball">Bowling</a></li>
+                    <li><a href="#/type/targetsportsball/Golfball">Golf</a></li>
+                    <li><a href="#/group/targetsportsballs">All</a></li>
                 </ul>
             </li>
         )

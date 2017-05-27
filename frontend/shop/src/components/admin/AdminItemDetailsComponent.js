@@ -287,12 +287,14 @@ export default class AdminItemDetailsComponent extends React.Component{
      */
   render(){
     const ball = this.state.ball;
-    let imageSrc = "../../images/items/"+ ball.type + "_" + ball.id + ".png";
-    const http = new XMLHttpRequest();
-    http.open('HEAD', "../../images/items/"+ ball.type + "_" + ball.id + ".png", false);
-    http.send();
-    if(http.status !== 404) imageSrc = "../../images/items/"+ ball.type + "_" + ball.id + ".png";
-    else imageSrc = "../../images/items/no_image.png";
+    let imageSrc = "../../images/items/no_image.png";
+    if(typeof ball.id !== "undefined") {
+        imageSrc = "../../images/items/" + ball.type + "_" + ball.id + ".png";
+        const http = new XMLHttpRequest();
+        http.open('HEAD', "../../images/items/" + ball.type + "_" + ball.id + ".png", false);
+        http.send();
+        if (http.status !== 404) imageSrc = "../../images/items/" + ball.type + "_" + ball.id + ".png";
+    }
     let onStock = "This item is out of stock";
     let ikon = "glyphicon glyphicon-remove-circle";
     let colorId = "red";

@@ -104,12 +104,13 @@ export default class ShoppingCart extends React.Component{
             let o = array[i].content;
             let n = array[i].count;
 
-            let imageSrc;
-            const http = new XMLHttpRequest();
-            http.open('HEAD', "../../images/items/"+ o.type + "_" + o.id + ".png", false);
-            http.send();
-            if(http.status !== 404) imageSrc = "../../images/items/"+ o.type + "_" + o.id + ".png";
-            else imageSrc = "../../images/items/no_image.png";
+            let imageSrc = "../../images/items/no_image.png";
+            if(typeof o.id !== "undefined") {
+                const http = new XMLHttpRequest();
+                http.open('HEAD', "../../images/items/" + o.type + "_" + o.id + ".png", false);
+                http.send();
+                if (http.status !== 404) imageSrc = "../../images/items/" + o.type + "_" + o.id + ".png";
+            }
 
             temp.push(
                 <span className="item" key={temp.length}>
