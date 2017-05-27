@@ -6,8 +6,8 @@
  */
 export default class Client {
 
-    html = "http://localhost:8080";
-    heroku = window.location.origin;
+    html = window.location.origin;
+
     /**
      * Gets all balls from a specific sport type
      *
