@@ -106,7 +106,7 @@ export default class BallHandler extends React.Component{
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
                     <a href={link}>
-                        <BallImage imageSrc={imageSrc} />
+                        <BallImage imageSrc={imageSrc} id="ballImage" />
                     </a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
                     <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
