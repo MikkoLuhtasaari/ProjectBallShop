@@ -13,7 +13,7 @@ export default class Client {
      * @returns {Promise}
      */
     ballsByType(sporttype) {
-        return this.getPromise("GET", "http://localhost:8080/" + sporttype);
+        return this.getPromise("GET", window.location.origin + "/" + sporttype);
     }
 
     /**
@@ -24,7 +24,7 @@ export default class Client {
      * @returns {*}
      */
     ballsByName(sporttype, balltype) {
-        return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/type/" + balltype);
+        return this.getPromise("GET", window.location.origin + "/" + sporttype + "/type/" + balltype);
     }
 
     /**
@@ -35,7 +35,7 @@ export default class Client {
      * @returns {*}
      */
     ballById(sporttype, id) {
-        return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/" + id);
+        return this.getPromise("GET", window.location.origin + "/" + sporttype + "/" + id);
     }
 
     /**
@@ -46,7 +46,7 @@ export default class Client {
      * @returns {Promise}
      */
     reviewsByBallId(sporttype, ballId) {
-        return this.getPromise("GET", "http://localhost:8080/" + sporttype + "/reviews").then(r => this.filterArray(r, ballId));
+        return this.getPromise("GET", window.location.origin + "/" + sporttype + "/reviews").then(r => this.filterArray(r, ballId));
     }
 
     /**
@@ -77,7 +77,7 @@ export default class Client {
      * @param content content of the review
      */
     sendReview(sporttype, ballId, userId, rating, header, content) {
-        let targetUrl = "http://localhost:8080/" + sporttype + "/" + ballId + "/review/user/" + userId;
+        let targetUrl = window.location.origin + "/" + sporttype + "/" + ballId + "/review/user/" + userId;
 
         fetch(targetUrl,
             {
@@ -132,7 +132,7 @@ export default class Client {
      */
     createAccount(obj) {
         obj["accessLevel"] = "User";
-        fetch("http://localhost:8080/user",
+        fetch(window.location.origin + "/user",
             {
                 method: 'POST',
                 mode: 'cors',
@@ -155,7 +155,7 @@ export default class Client {
      * @returns {Promise}
      */
     userLogin(userName) {
-        return this.getPromise("GET", "http://localhost:8080/user/username/" + userName);
+        return this.getPromise("GET", window.location.origin + "/" + userName);
     }
 
     /**
@@ -164,7 +164,7 @@ export default class Client {
      * @returns {Promise}
      */
     getUsers() {
-        return this.getPromise("GET", "http://localhost:8080/users");
+        return this.getPromise("GET", window.location.origin + "/users");
     }
 
     /**
@@ -176,7 +176,7 @@ export default class Client {
     getImage(id) {
         return new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
-            request.open('GET', "http://localhost:8080/image/" + id);
+            request.open('GET', window.location.origin + "/" + id);
             request.responseType = 'blob';
             request.onreadystatechange = function () {
                 if (request.status === 200) {
@@ -200,7 +200,7 @@ export default class Client {
      * @param category category of the object to be updated
      */
     reduceQuantity(obj, id, category) {
-        fetch("http://localhost:8080/" + category + "/" + id,
+        fetch(window.location.origin + "/" + category + "/" + id,
             {
                 method: 'PUT',
                 mode: 'cors',
@@ -223,7 +223,7 @@ export default class Client {
      * @param category
      */
     addItemToDatabase(obj, category) {
-        fetch("http://localhost:8080/" + category,
+        fetch(window.location.origin + "/" + category,
             {
                 method: 'POST',
                 mode: 'cors',

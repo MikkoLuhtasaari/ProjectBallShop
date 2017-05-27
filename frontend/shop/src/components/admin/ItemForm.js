@@ -47,7 +47,7 @@ export default class ItemForm extends React.Component{
 
     this.state = {
         formAction: '#/group/' + props.category + "s",
-        html:'http://localhost:8080/' + props.category
+        html: window.location.origin + "/" + props.category
     };
   }
 

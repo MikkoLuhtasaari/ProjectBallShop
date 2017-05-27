@@ -67,7 +67,7 @@ export default class AdminItemDetailsComponent extends React.Component{
      * Listens if delete is pressed and removes item from database.
      */
   deleteButtonListener() {
-    let targetUrl = 'http://localhost:8080/' + this.parseCategory() + '/' + this.state.ball.id;
+    let targetUrl = window.location.origin + "/" + this.parseCategory() + '/' + this.state.ball.id;
     fetch(targetUrl,
       {
         method: 'delete',
@@ -204,7 +204,7 @@ export default class AdminItemDetailsComponent extends React.Component{
      * Updates data to backend
      */
   updateData() {
-    let targetUrl = 'http://localhost:8080/';
+    let targetUrl = window.location.origin + "/";
     let ball = this.state.ball;
 
     targetUrl += this.parseCategory();
