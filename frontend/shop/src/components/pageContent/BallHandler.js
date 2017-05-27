@@ -1,6 +1,7 @@
 import React from 'react';
 import Client from '../../Client';
 import Reviews from './Reviews'
+import BallImage from './BallImage'
 import {Storage_addToCart} from '../../Storage'
 
 /**
@@ -86,12 +87,11 @@ export default class BallHandler extends React.Component{
     createContent(ballObject) {
         const propArray = [];
         let imageSrc = "../../images/items/no_image.png";
+
         if(typeof ballObject.id !== "undefined") {
-            const http = new XMLHttpRequest();
-            http.open('HEAD', "../../images/items/" + ballObject.type + "_" + ballObject.id + ".png", false);
-            http.send();
-            if (http.status !== 404) imageSrc = "../../images/items/" + ballObject.type + "_" + ballObject.id + ".png";
+            imageSrc = "../../images/items/" + ballObject.type + "_" + ballObject.id + ".png";
         }
+
         let category = ballObject.category.replace(/ /g,'').toLowerCase();
         if(!category.includes("game"))category += "sball";
         let link;
@@ -105,7 +105,9 @@ export default class BallHandler extends React.Component{
         propArray.push(
             <div className="col-md-3 col-sm-6">
                 <span className="thumbnail itemThumb">
-                    <a href={link}><img id="ballImage" src={imageSrc} className="img-responsive" alt="Ball"/></a>
+                    <a href={link}>
+                        <BallImage imageSrc={imageSrc} />
+                    </a>
                     <div><h1 id="twoLines"><a href={link}>{ballObject.manufacturer} {ballObject.type}</a></h1></div>
                     <Reviews group={category} ballId={ballObject.id} need={"light"} location={"frontPage"}/>
                     <p className="item-p" id="twoLines2">{ballObject.shortDetails}</p>
