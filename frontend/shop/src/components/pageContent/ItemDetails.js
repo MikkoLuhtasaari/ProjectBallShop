@@ -60,7 +60,6 @@ export default class ItemDetails extends React.Component {
         }
 
         if(this.state.imageSrc === '' && typeof this.state.ball.id !== 'undefined') {
-            console.log(this.state.ball);
             this.setState({imageSrc: "../../images/items/" + this.state.ball.type + "_" + this.state.ball.id + ".png"})
         }
     }

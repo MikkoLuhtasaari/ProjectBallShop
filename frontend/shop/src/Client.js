@@ -6,6 +6,8 @@
  */
 export default class Client {
 
+    html = "http://localhost:8080";
+    heroku = window.location.origin;
     /**
      * Gets all balls from a specific sport type
      *
@@ -13,7 +15,7 @@ export default class Client {
      * @returns {Promise}
      */
     ballsByType(sporttype) {
-        return this.getPromise("GET", window.location.origin + "/" + sporttype);
+        return this.getPromise("GET", this.html + "/" + sporttype);
     }
 
     /**
@@ -24,7 +26,7 @@ export default class Client {
      * @returns {*}
      */
     ballsByName(sporttype, balltype) {
-        return this.getPromise("GET", window.location.origin + "/" + sporttype + "/type/" + balltype);
+        return this.getPromise("GET", this.html + "/" + sporttype + "/type/" + balltype);
     }
 
     /**
@@ -35,7 +37,7 @@ export default class Client {
      * @returns {*}
      */
     ballById(sporttype, id) {
-        return this.getPromise("GET", window.location.origin + "/" + sporttype + "/" + id);
+        return this.getPromise("GET", this.html + "/" + sporttype + "/" + id);
     }
 
     /**
@@ -46,7 +48,7 @@ export default class Client {
      * @returns {Promise}
      */
     reviewsByBallId(sporttype, ballId) {
-        return this.getPromise("GET", window.location.origin + "/" + sporttype + "/reviews").then(r => this.filterArray(r, ballId));
+        return this.getPromise("GET", this.html + "/" + sporttype + "/reviews").then(r => this.filterArray(r, ballId));
     }
 
     /**
@@ -77,7 +79,7 @@ export default class Client {
      * @param content content of the review
      */
     sendReview(sporttype, ballId, userId, rating, header, content) {
-        let targetUrl = window.location.origin + "/" + sporttype + "/" + ballId + "/review/user/" + userId;
+        let targetUrl = this.html + "/" + sporttype + "/" + ballId + "/review/user/" + userId;
 
         fetch(targetUrl,
             {
@@ -107,13 +109,13 @@ export default class Client {
      * @returns {Promise}
      */
     getPromise(type, address) {
-        fetch(address, { method: type})
+        let returning = fetch(address, { method: type})
             .then(function(response) {
                 return response.json();
             }).then(function(myJSON) {
-        }).catch(function (error) {
-            console.log(error);
+            return myJSON;
         });
+        return returning;
     }
 
     /**
@@ -123,7 +125,7 @@ export default class Client {
      */
     createAccount(obj) {
         obj["accessLevel"] = "User";
-        fetch(window.location.origin + "/user",
+        fetch(this.html + "/user",
             {
                 method: 'POST',
                 mode: 'cors',
@@ -146,7 +148,7 @@ export default class Client {
      * @returns {Promise}
      */
     userLogin(userName) {
-        return this.getPromise("GET", window.location.origin + "/" + userName);
+        return this.getPromise("GET", this.html + "/user/username/" + userName);
     }
 
     /**
@@ -155,7 +157,7 @@ export default class Client {
      * @returns {Promise}
      */
     getUsers() {
-        return this.getPromise("GET", window.location.origin + "/users");
+        return this.getPromise("GET", this.html + "/users");
     }
 
     /**
@@ -165,11 +167,20 @@ export default class Client {
      * @returns {Promise}
      */
     getImage(id) {
-        fetch(window.location.origin + "/" + id, { method: 'GET'})
-            .then(function(response) {
-                return response;
-            }).catch(function (error) {
-            console.log(error);
+        return new Promise((resolve, reject) => {
+            let request = new XMLHttpRequest();
+            request.open('GET', this.html + "/image/" + id);
+            request.responseType = 'blob';
+            request.onreadystatechange = function () {
+                if (request.status === 200) {
+                    if(request.response !== null) {
+                        resolve(request.response);
+                    }
+                } else {
+                    reject(new Error('Image didn\'t load successfully; error code:' + request.statusText));
+                }
+            };
+            request.send();
         });
     }
 
@@ -182,7 +193,7 @@ export default class Client {
      * @param category category of the object to be updated
      */
     reduceQuantity(obj, id, category) {
-        fetch(window.location.origin + "/" + category + "/" + id,
+        fetch(this.html + "/" + category + "/" + id,
             {
                 method: 'PUT',
                 mode: 'cors',
@@ -205,7 +216,7 @@ export default class Client {
      * @param category
      */
     addItemToDatabase(obj, category) {
-        fetch(window.location.origin + "/" + category,
+        fetch(this.html + "/" + category,
             {
                 method: 'POST',
                 mode: 'cors',

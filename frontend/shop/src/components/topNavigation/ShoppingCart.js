@@ -1,5 +1,4 @@
 import React from 'react';
-import BallImage from '../pageContent/BallImage'
 import {Storage_getCart, Storage_removeFromCart} from '../../Storage'
 
 /**
